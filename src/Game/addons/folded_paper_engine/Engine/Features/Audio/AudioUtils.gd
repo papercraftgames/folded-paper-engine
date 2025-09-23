@@ -12,7 +12,7 @@ var PAUSED_SPEAKER_POSITIONS: Dictionary[String, float] = {}
 func play_speaker(name: String) -> void:
 	if name in FPE_GLOBALS.SPEAKER_MAP:
 		if ALL_SPEAKERS_PAUSED:
-			PAUSED_SPEAKERS[name] = true
+			pause_speaker(name)
 		else:
 			var player: AudioStreamPlayer3D = FPE_GLOBALS.SPEAKER_MAP[name]
 			
@@ -63,6 +63,7 @@ func stop_all_speakers() -> void:
 		stop_speaker(name)
 
 func stop_and_clean_up_speakers(destroy: bool = false) -> void:
+	ALL_SPEAKERS_PAUSED = false
 	PAUSED_SPEAKERS = {}
 	PAUSED_SPEAKER_POSITIONS = {}
 	
