@@ -63,7 +63,6 @@ func stop_all_speakers() -> void:
 		stop_speaker(name)
 
 func stop_and_clean_up_speakers(destroy: bool = false) -> void:
-	ALL_SPEAKERS_PAUSED = false
 	PAUSED_SPEAKERS = {}
 	PAUSED_SPEAKER_POSITIONS = {}
 	
