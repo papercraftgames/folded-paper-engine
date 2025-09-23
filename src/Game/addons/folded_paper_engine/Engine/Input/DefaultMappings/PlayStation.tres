@@ -68,7 +68,7 @@ action_map = Dictionary[String, Dictionary]({
 "MOUSE_BUTTON_1": true
 },
 "UI_ACCEPT": {
-"GAME_PAD_BUTTON_3": true,
+"GAME_PAD_BUTTON_0": true,
 "KEY_4194309": true,
 "KEY_69": true,
 "MOUSE_BUTTON_1": true
