@@ -11,7 +11,7 @@ func setup_audio(node: Node3D, audio_path: String, loop: bool = false, volume_db
 		player.unit_size = 1.0  # Good default for Godot 4 3D distance scaling
 		player.attenuation_model = AudioStreamPlayer3D.ATTENUATION_INVERSE_DISTANCE
 		player.stream_paused = false
-		player.autoplay = autoplay
+		player.autoplay = false
 		
 		FEATURE_UTILS.FPE_GLOBALS.SPEAKER_MAP[node.name] = player
 		node.add_child(player)
@@ -29,6 +29,10 @@ func setup_audio(node: Node3D, audio_path: String, loop: bool = false, volume_db
 				stream.set("loop_mode", 1)  # LOOP_FORWARD enum value
 			else:
 				player.finished.connect(func(): player.play())
+		
+		# Handle autoplay
+		if autoplay:
+			FEATURE_UTILS.AUDIO_UTILS.play_speaker(node.name)
 
 func apply(node: Node3D, data: Variant) -> void:
 	if node and data:

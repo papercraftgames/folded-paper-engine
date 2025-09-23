@@ -17,12 +17,13 @@ func play_speaker(name: String) -> void:
 			var player: AudioStreamPlayer3D = FPE_GLOBALS.SPEAKER_MAP[name]
 			
 			if is_instance_valid(player):
-				var pos := PAUSED_SPEAKER_POSITIONS.get(name, 0.0) as float
-				var clean_pos := pos if pos is float else 0.0
-				
-				player.play(clean_pos)
-				PAUSED_SPEAKERS[name] = false
-				PAUSED_SPEAKER_POSITIONS[name] = 0.0
+				if not player.get_stream_playback() or not player.get_stream_playback().is_playing():
+					var pos := PAUSED_SPEAKER_POSITIONS.get(name, 0.0) as float
+					var clean_pos := pos if pos is float else 0.0
+					
+					player.play(clean_pos)
+					PAUSED_SPEAKERS[name] = false
+					PAUSED_SPEAKER_POSITIONS[name] = 0.0
 
 func pause_speaker(name: String) -> void:
 	if name in FPE_GLOBALS.SPEAKER_MAP:
