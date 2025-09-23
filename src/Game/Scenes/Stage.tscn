@@ -27,6 +27,7 @@ shadow_enabled = true
 
 [node name="FoldedPaperEngine" type="Node3D" parent="." node_paths=PackedStringArray("environment")]
 script = ExtResource("1_kww8n")
+capture_pointer = false
 path = "uid://b6vaxnegi4l3a"
 environment = NodePath("../WorldEnvironment")
 metadata/_custom_type_script = "uid://4hmlst3bmv6n"
