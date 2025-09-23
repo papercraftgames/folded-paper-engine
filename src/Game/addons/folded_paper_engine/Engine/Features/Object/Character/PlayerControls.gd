@@ -97,7 +97,7 @@ func setup_camera() -> void:
 		CAMERA = FollowingCamera.new(FEATURE_UTILS.FPE_GLOBALS, self)
 		CAMERA.make_current()
 		
-		FEATURE_UTILS.FPE_GLOBALS.PLAYER_CAMERAS.append(CAMERA)
+		FPEGlobals.PLAYER_CAMERAS.append(CAMERA)
 		
 		if _FIRST_PERSON_MODE:
 			CAMERA.offset = Vector3(0, 0.4, 0)

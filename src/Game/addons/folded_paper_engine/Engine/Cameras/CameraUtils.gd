@@ -8,7 +8,10 @@ func activate_camera(name: String) -> void:
 			cam.make_current()
 
 func reactivate_player_camera() -> void:
-	var cam: Camera3D = FPE_GLOBALS.PLAYER_CAMERAS[FPE_GLOBALS.PLAYER_CAMERAS.size() - 1]
+	var player_cam_list_size := FPEGlobals.PLAYER_CAMERAS.size()
 	
-	if cam is Camera3D:
-		cam.make_current()
+	if player_cam_list_size > 0:
+		var cam: Camera3D = FPEGlobals.PLAYER_CAMERAS[player_cam_list_size - 1]
+		
+		if cam is Camera3D:
+			cam.make_current()
