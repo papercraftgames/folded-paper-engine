@@ -17,7 +17,7 @@ func play_speaker(name: String) -> void:
 			var player: AudioStreamPlayer3D = FPE_GLOBALS.SPEAKER_MAP[name]
 			
 			if is_instance_valid(player):
-				if not player.has_stream_playback() or not player.get_stream_playback().is_playing():
+				if not player.playing:
 					var pos := PAUSED_SPEAKER_POSITIONS.get(name, 0.0) as float
 					var clean_pos := pos if pos is float else 0.0
 					
@@ -43,7 +43,7 @@ func pause_all_playing_speakers() -> void:
 	for name in FPE_GLOBALS.SPEAKER_MAP:
 		var player: AudioStreamPlayer3D = FPE_GLOBALS.SPEAKER_MAP[name]
 		
-		if is_instance_valid(player) and player.has_stream_playback() and player.get_stream_playback().is_playing():
+		if is_instance_valid(player) and player.playing:
 			pause_speaker(name)
 
 func resume_all_paused_speakers() -> void:
