@@ -1,0 +1,40 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://duhvm2nh0g60x"]
+
+[ext_resource type="Shader" uid="uid://c8v5mylra0x57" path="res://addons/folded_paper_engine/Engine/Features/FX/Water/Water.gdshader" id="1_f5h3c"]
+
+[sub_resource type="Gradient" id="Gradient_bbyye"]
+colors = PackedColorArray(0, 0.654902, 0.921569, 1, 0, 0.608128, 0.874035, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_f5h3c"]
+gradient = SubResource("Gradient_bbyye")
+
+[sub_resource type="Gradient" id="Gradient_xh66b"]
+colors = PackedColorArray(0, 0.486594, 0.759018, 1, 0, 0.486275, 0.760784, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nw4xm"]
+gradient = SubResource("Gradient_xh66b")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_f5h3c")
+shader_parameter/water_texture = SubResource("GradientTexture1D_nw4xm")
+shader_parameter/water2_texture = SubResource("GradientTexture1D_f5h3c")
+shader_parameter/water_modulate = Color(1, 1, 1, 1)
+shader_parameter/water2_modulate = Color(1, 1, 1, 1)
+shader_parameter/foam_modulate = Color(0.696834, 0.996277, 1, 1)
+shader_parameter/modulate_intensity = 1.0
+shader_parameter/distortion_speed = 4.0
+shader_parameter/tile = Vector2(10, 10)
+shader_parameter/wave_speed = 2.0
+shader_parameter/wave_amplitude = 0.5
+shader_parameter/wave_frequency = 1.5
+shader_parameter/time_offset = 0.0
+shader_parameter/water_size = Vector2(128, 128)
+shader_parameter/water_transparency = 0.8
+shader_parameter/water_depth_factor = 0.1
+shader_parameter/foam_width = 0.5
+shader_parameter/foam_edge_softness = 0.05
+shader_parameter/foam_smoothness = 0.03
+shader_parameter/foam_distortion_speed = 0.5
+shader_parameter/foam_distortion_amount = 0.1
+shader_parameter/texture_blend_factor = 0.7

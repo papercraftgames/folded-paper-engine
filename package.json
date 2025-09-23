@@ -1,0 +1,24 @@
+{
+  "name": "folded-paper-engine",
+  "version": "1.0.0",
+  "description": "Folded Paper Engine",
+  "scripts": {
+    "deploy": "mkdir -p dist && cp ./CNAME ./dist/CNAME && yarn deploy-addon && yarn deploy-godot-addon && yarn engine-feature-docs",
+    "deploy-addon": "ts-node ./scripts/blender-addon.ts",
+    "deploy-godot-addon": "ts-node ./scripts/godot-addon.ts",
+    "engine-feature-docs": "ts-node ./scripts/engine-feature-docs.ts"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "marked": "^15.0.7"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.7",
+    "@types/node": "^22.13.11",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  },
+  "private": true,
+  "main": "index.js",
+  "license": "MIT"
+}

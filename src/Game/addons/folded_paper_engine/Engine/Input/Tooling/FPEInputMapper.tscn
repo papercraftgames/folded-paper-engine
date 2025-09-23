@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvppp5ga4p2qe"]
+
+[ext_resource type="Script" uid="uid://bbvcg3wih1wds" path="res://addons/folded_paper_engine/Engine/Input/Tooling/FPEInputMapper.gd" id="1_1icqn"]
+
+[node name="FPEInputMapper" type="ScrollContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1icqn")
+metadata/_edit_use_anchors_ = true

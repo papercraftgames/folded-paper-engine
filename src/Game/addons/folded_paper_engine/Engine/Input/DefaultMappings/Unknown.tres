@@ -1,0 +1,117 @@
+[gd_resource type="Resource" script_class="DeviceMapping" load_steps=4 format=3 uid="uid://pi62ypnmjeqe"]
+
+[ext_resource type="Script" uid="uid://dvuq52l8vmjfc" path="res://addons/folded_paper_engine/Engine/Input/DeviceType.gd" id="1_2lwvp"]
+[ext_resource type="Script" uid="uid://bnuj8axelrwjq" path="res://addons/folded_paper_engine/Engine/Input/DeviceMapping.gd" id="2_7cji4"]
+
+[sub_resource type="Resource" id="Resource_3l3nw"]
+script = ExtResource("1_2lwvp")
+id = "-1"
+label = "Unknown Controller"
+type = "UNKNOWN"
+
+[resource]
+script = ExtResource("2_7cji4")
+action_map = Dictionary[String, Dictionary]({
+"PLAYER_DROP": {
+"GAME_PAD_BUTTON_1": true,
+"KEY_82": true,
+"MOUSE_BUTTON_3": true
+},
+"PLAYER_JUMP": {
+"GAME_PAD_BUTTON_0": true,
+"KEY_32": true,
+"MOUSE_BUTTON_2": true
+},
+"PLAYER_MOVE_BACKWARD": {
+"AXIS_1_POSITIVE": true,
+"KEY_4194322": true,
+"KEY_83": true
+},
+"PLAYER_MOVE_FORWARD": {
+"AXIS_1_NEGATIVE": true,
+"KEY_4194320": true,
+"KEY_87": true
+},
+"PLAYER_MOVE_LEFT": {
+"AXIS_0_NEGATIVE": true,
+"KEY_4194319": true,
+"KEY_65": true
+},
+"PLAYER_MOVE_RIGHT": {
+"AXIS_0_POSITIVE": true,
+"KEY_4194321": true,
+"KEY_68": true
+},
+"PLAYER_RUN": {
+"GAME_PAD_BUTTON_2": true,
+"KEY_4194325": true
+},
+"PLAYER_TURN_DOWN": {
+"AXIS_3_POSITIVE": true,
+"AXIS_MOUSE_VELOCITY_Y_POSITIVE": true
+},
+"PLAYER_TURN_LEFT": {
+"AXIS_2_NEGATIVE": true,
+"AXIS_MOUSE_VELOCITY_X_NEGATIVE": true
+},
+"PLAYER_TURN_RIGHT": {
+"AXIS_2_POSITIVE": true,
+"AXIS_MOUSE_VELOCITY_X_POSITIVE": true
+},
+"PLAYER_TURN_UP": {
+"AXIS_3_NEGATIVE": true,
+"AXIS_MOUSE_VELOCITY_Y_NEGATIVE": true
+},
+"PLAYER_USE": {
+"GAME_PAD_BUTTON_3": true,
+"KEY_69": true,
+"MOUSE_BUTTON_1": true
+},
+"UI_ACCEPT": {
+"GAME_PAD_BUTTON_0": true,
+"KEY_4194309": true,
+"KEY_69": true,
+"MOUSE_BUTTON_1": true
+},
+"UI_CANCEL": {
+"GAME_PAD_BUTTON_1": true,
+"KEY_4194305": true
+},
+"UI_DOWN": {
+"AXIS_1_POSITIVE": true,
+"GAME_PAD_BUTTON_12": true,
+"KEY_4194322": true,
+"KEY_83": true
+},
+"UI_LEFT": {
+"AXIS_0_NEGATIVE": true,
+"GAME_PAD_BUTTON_13": true,
+"KEY_4194319": true,
+"KEY_65": true
+},
+"UI_PAGE_DOWN": {
+"GAME_PAD_BUTTON_10": true,
+"KEY_4194324": true
+},
+"UI_PAGE_UP": {
+"GAME_PAD_BUTTON_9": true,
+"KEY_4194323": true
+},
+"UI_PAUSE": {
+"GAME_PAD_BUTTON_6": true,
+"KEY_4194305": true
+},
+"UI_RIGHT": {
+"AXIS_0_POSITIVE": true,
+"GAME_PAD_BUTTON_14": true,
+"KEY_4194321": true,
+"KEY_68": true
+},
+"UI_UP": {
+"AXIS_1_NEGATIVE": true,
+"GAME_PAD_BUTTON_11": true,
+"KEY_4194320": true,
+"KEY_87": true
+}
+})
+device_type = SubResource("Resource_3l3nw")

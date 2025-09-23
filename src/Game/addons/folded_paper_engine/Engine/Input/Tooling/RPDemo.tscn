@@ -1,0 +1,93 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjcjfb5kusab2"]
+
+[sub_resource type="GDScript" id="GDScript_ifh53"]
+script/source = "extends VBoxContainer
+
+var MAPPING: DeviceMapping = DeviceMapping.new()
+
+static func App(k, p = {}, d = {}, c = []) -> Dictionary:
+	return FPEUI.FC(
+		BoxContainer.new,
+		func(n, data, c, i) -> Array:
+			var mapping := data.get(\"mapping\") as DeviceMapping
+			var cl := Color(0xFF0000FF) if data.get(\"text\") == \"error\" else Color(0xFFFFFFFF)
+			var mapping_input0_data := data.get(\"mapping_input0\", {
+				\"ui_locked\": false,
+				\"receiving\": false,
+				\"action\": InputConstants.PLAYER_ACTIONS.PLAYER_MOVE_FORWARD,
+				\"mapping\": mapping,
+			}) as Dictionary
+			var actu_list := mapping.get_actuators_for_action(InputConstants.PLAYER_ACTIONS.PLAYER_MOVE_FORWARD)
+			var actu := actu_list.get(0) as String if not actu_list.is_empty() else \"\"
+			
+			data.set(\"mapping_input0\", mapping_input0_data)
+			
+			return [
+				FPEFC.VBoxContainerFC(
+					\"hbox0\",
+					{
+						\"^separation\": 25,
+					},
+					null,
+					[
+						FPEInputFC.MappingInputFC(
+							\"mapping_input0\",
+							{
+								\"expand_to_text_length\": true,
+							},
+							mapping_input0_data,
+						),
+						FPEFC.LabelFC(
+							\"mapping_label\",
+							{
+								\"text\": actu,
+							},
+						),
+						FPEFC.LineEditFC(
+							\"line-edit0\",
+							{
+								\"placeholder_text\": \"Enter Some Text...\",
+								\"expand_to_text_length\": true,
+								\"text\": data.text,
+								\"$text_changed\": func(t: String) -> void:
+									data[\"text\"] = t
+									i.call(),
+							},
+						),
+						FPEFC.LineEditFC(
+							\"line-edit1\",
+							{
+								\"placeholder_text\": \"Enter Some Text...\",
+								\"expand_to_text_length\": true,
+								\"text\": data.text,
+								\"$text_changed\": func(t: String) -> void:
+									data[\"text\"] = t
+									i.call(),
+							},
+						),
+						FPEFC.LabelFC(
+							\"label0\",
+							{
+								\"text\": data.text,
+								\"theme_override_colors/font_color\": cl
+							},
+						),
+					]
+				)
+			]
+	).call(k, p, d, c)
+
+func _init() -> void:
+	var data: Dictionary = {
+		\"text\": \"\",
+		\"mapping\": MAPPING,
+	}
+	
+	FPEUI.Mount(
+		App(\"app\", {}, data),
+		self,
+	)
+"
+
+[node name="RPDemo" type="VBoxContainer"]
+script = SubResource("GDScript_ifh53")

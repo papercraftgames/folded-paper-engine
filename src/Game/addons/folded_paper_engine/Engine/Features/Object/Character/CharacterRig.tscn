@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://0jj77l26w747"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://tb6y0pjxkutn" path="res://addons/folded_paper_engine/Engine/Features/Object/Character/Character_RigidBody3D_Physics_Material.tres" id="1_fi4vp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3rl84"]
+radius = 0.32
+height = 0.92
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jyc8s"]
+radius = 0.73
+height = 2.05
+
+[node name="CharacterRig" type="RigidBody3D"]
+physics_material_override = ExtResource("1_fi4vp")
+can_sleep = false
+lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_3rl84")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.44, 0, 0, 0, 0.44, 0, 0, 0, 0.44, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_jyc8s")
+skeleton = NodePath("")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, -0.56, 0)
+
+[node name="RayCast3D2" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0)
+target_position = Vector3(0, -0.56, 0)
+
+[node name="RayCast3D3" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0)
+target_position = Vector3(0, -0.56, 0)
+
+[node name="RayCast3D4" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.25)
+target_position = Vector3(0, -0.56, 0)
+
+[node name="RayCast3D5" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
+target_position = Vector3(0, -0.56, 0)
+
+[node name="RayCast3D6" type="RayCast3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0.176777, 0, -0.176777)
+target_position = Vector3(0, -0.56, 0)
+
+[node name="RayCast3D7" type="RayCast3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.176777, 0, 0.176777)
+target_position = Vector3(0, -0.56, 0)
+
+[node name="RayCast3D8" type="RayCast3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0.176777, 0, 0.176777)
+target_position = Vector3(0, -0.56, 0)
+
+[node name="RayCast3D9" type="RayCast3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.176777, 0, -0.176777)
+target_position = Vector3(0, -0.56, 0)
