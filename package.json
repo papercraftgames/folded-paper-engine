@@ -14,9 +14,12 @@
   },
   "devDependencies": {
     "@types/adm-zip": "^0.5.7",
-    "@types/node": "^22.13.11",
+    "@types/node": "^24.5.2",
+    "fast-xml-parser": "^5.2.5",
+    "fs-extra": "^11.3.2",
+    "globby": "^14.1.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.2"
+    "typescript": "^5.9.2"
   },
   "private": true,
   "main": "index.js",
