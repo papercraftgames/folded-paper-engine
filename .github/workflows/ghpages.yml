@@ -2,7 +2,7 @@ name: Build and Deploy
 
 on:
   release:
-    types: [published]
+    types: [ published ]
   workflow_dispatch:
 
 permissions:
@@ -111,9 +111,9 @@ jobs:
 
       - name: Generate Addon Docs (XML)
         run: |
-          mkdir -p dist/site/ref-xml
+          mkdir -p dist/docs/ref-xml
           ~/.local/bin/godot --headless --path src/Game \
-            --doctool ../../dist/site/ref-xml \
+            --doctool ../../dist/docs/ref-xml \
             --no-docbase \
             --gdscript-docs res://addons/folded_paper_engine
 

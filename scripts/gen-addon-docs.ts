@@ -5,9 +5,8 @@ import path from "node:path";
 import fse from "fs-extra";
 import {XMLParser} from "fast-xml-parser";
 
-const XML_DIR = process.env.DOCS_XML_DIR ?? "dist/web-docs/ref-xml";
-const OUT_DIR = process.env.DOCS_HTML_DIR ?? "dist/web-docs/api";
-const SITE_DIR = process.env.DOCS_SITE_ROOT ?? "dist/web-docs";
+const XML_DIR = process.env.DOCS_XML_DIR ?? "dist/docs/ref-xml";
+const WEB_DOCS_DIR = process.env.DOCS_SITE_ROOT ?? "dist/web-docs";
 
 type ClassDoc = {
   class: {
@@ -69,9 +68,8 @@ function arr<T>(x?: T | T[]): T[] {
 
 async function main() {
   await fse.ensureDir(XML_DIR);
-  await fse.emptyDir(OUT_DIR);
-  await fse.ensureDir(SITE_DIR);
-  await fs.writeFile(path.join(SITE_DIR, "style.css"), CSS, "utf8");
+  await fse.emptyDir(WEB_DOCS_DIR);
+  await fs.writeFile(path.join(WEB_DOCS_DIR, "style.css"), CSS, "utf8");
 
   const files = await listXml(XML_DIR);
   const parser = new XMLParser({
