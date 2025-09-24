@@ -39,10 +39,7 @@ var _previous_mouse_mode: int = -1
 func _enter_tree() -> void:
 	_previous_mouse_mode = Input.mouse_mode
 	
-	if OS.has_feature("web"):
-		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-	else:
-		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 func _exit_tree() -> void:
 	Input.mouse_mode = _previous_mouse_mode
@@ -274,7 +271,7 @@ func respond_to_input() -> void:
 		var m_input := Input.get_last_mouse_velocity()
 		var has_m: bool = m_input.length() > 0
 		
-		if has_m and Input.mouse_mode == Input.MOUSE_MODE_CONFINED_HIDDEN:
+		if has_m and Input.mouse_mode == Input.MOUSE_MODE_HIDDEN:
 			move_cursor_in_camera_view_at_depth(_DIST_FROM_CAMERA)
 			select_node(select_by_camera_ray(), false)
 		else:
