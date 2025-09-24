@@ -6,9 +6,9 @@ import fse from "fs-extra";
 import {globby} from "globby";
 import {XMLParser} from "fast-xml-parser";
 
-const XML_DIR = process.env.DOCS_XML_DIR ?? "dist/site/ref-xml";
-const OUT_DIR = process.env.DOCS_HTML_DIR ?? "dist/site/api";
-const SITE_DIR = process.env.DOCS_SITE_ROOT ?? "dist/site";
+const XML_DIR = process.env.DOCS_XML_DIR ?? "dist/web-docs/ref-xml";
+const OUT_DIR = process.env.DOCS_HTML_DIR ?? "dist/web-docs/api";
+const SITE_DIR = process.env.DOCS_SITE_ROOT ?? "dist/web-docs";
 
 type ClassDoc = {
   class: {
