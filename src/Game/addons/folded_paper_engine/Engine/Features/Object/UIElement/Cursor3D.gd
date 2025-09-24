@@ -38,7 +38,11 @@ var _previous_mouse_mode: int = -1
 
 func _enter_tree() -> void:
 	_previous_mouse_mode = Input.mouse_mode
-	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+	
+	if OS.has_feature("web"):
+		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 func _exit_tree() -> void:
 	Input.mouse_mode = _previous_mouse_mode
