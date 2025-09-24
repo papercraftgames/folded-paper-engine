@@ -117,6 +117,9 @@ jobs:
             --no-docbase \
             --gdscript-docs res://addons/folded_paper_engine
 
+      - name: Convert Addon Docs XML → HTML (TS)
+        run: yarn deploy-godot-addon-docs
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
