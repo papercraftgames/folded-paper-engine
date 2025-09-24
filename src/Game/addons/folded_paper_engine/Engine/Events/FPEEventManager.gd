@@ -1,6 +1,7 @@
 @icon("res://addons/folded_paper_engine/Engine/Events/event.svg")
 
 class_name FPEEventManager extends Node
+## Hook into and dispatch events declared in the Scene Events panel in the FPE Blender addon.
 
 static var GLOBAL_INSTANCE: FPEEventManager = FPEEventManager.new()
 

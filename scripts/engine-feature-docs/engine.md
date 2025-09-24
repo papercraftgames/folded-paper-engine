@@ -53,6 +53,8 @@ button {
 ###
 [<button>Download</button>](folded_paper_engine_godot_${VERSION}.zip)
 ###
+### [View The Docs](web-docs)
+###
 ## Blender Addon
 ###
 [<button>Download</button>](folded_paper_engine_${VERSION}.zip)

@@ -6,6 +6,7 @@
     "deploy": "mkdir -p dist && cp ./CNAME ./dist/CNAME && yarn deploy-addon && yarn deploy-godot-addon && yarn engine-feature-docs",
     "deploy-addon": "ts-node ./scripts/blender-addon.ts",
     "deploy-godot-addon": "ts-node ./scripts/godot-addon.ts",
+    "deploy-godot-addon-docs": "ts-node ./scripts/gen-addon-docs.ts",
     "engine-feature-docs": "ts-node ./scripts/engine-feature-docs.ts"
   },
   "dependencies": {
@@ -14,9 +15,13 @@
   },
   "devDependencies": {
     "@types/adm-zip": "^0.5.7",
-    "@types/node": "^22.13.11",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^24.5.2",
+    "fast-xml-parser": "^5.2.5",
+    "fs-extra": "^11.3.2",
+    "globby": "^14.1.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.2"
+    "typescript": "^5.9.2"
   },
   "private": true,
   "main": "index.js",

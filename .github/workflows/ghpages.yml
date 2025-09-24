@@ -109,6 +109,17 @@ jobs:
           ~/.local/bin/godot --headless --path src/Game \
             --export-release "Web" ../../dist/demo-game/index.html
 
+      - name: Generate Addon Docs (XML)
+        run: |
+          mkdir -p dist/site/ref-xml
+          ~/.local/bin/godot --headless --path src/Game \
+            --doctool ../../dist/site/ref-xml \
+            --no-docbase \
+            --gdscript-docs res://addons/folded_paper_engine
+
+      - name: Convert Addon Docs XML → HTML (TS)
+        run: yarn deploy-godot-addon-docs
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
