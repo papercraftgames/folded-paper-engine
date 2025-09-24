@@ -191,7 +191,7 @@ static func get_controller_type(device_index: int) -> String:
 	
 	if has_controllers and device_index > -1:
 		var name = Input.get_joy_name(device_index).to_lower()
-
+		
 		if "xbox" in name or "xinput" in name:
 			controller_type = InputConstants.CONTROLLER_TYPES.XBOX
 		elif "dualsense" in name or "dualshock" in name or "ps4" in name or "ps5" in name:

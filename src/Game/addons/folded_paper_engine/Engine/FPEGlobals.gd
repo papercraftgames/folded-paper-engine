@@ -4,6 +4,7 @@ class_name FPEGlobals
 static var PLAYER_LIST: Array[PlayerControls] = []
 static var DEVICE_PROXY_LIST: Array[DeviceProxy] = []
 static var CURSOR_LIST: Array[Cursor3D] = []
+static var PLAYER_CAMERAS: Array[Camera3D] = []
 
 # Settings
 var WORLD_ENVIRONMENT: WorldEnvironment;
@@ -22,7 +23,6 @@ var DEACTIVATE_UI_CONTROLS: bool = false
 var ANIMATION_PLAYER_MAP: Dictionary[String, AnimationPlayer] = {}
 var ANIMATION_DATA_MAP: Dictionary = {}
 var SPEAKER_MAP: Dictionary[String, AudioStreamPlayer3D] = {}
-var PLAYER_CAMERAS: Array[Camera3D] = []
 var SCENE_CAMERAS: Dictionary[String, Camera3D] = {}
 var UI_OPTIONS: Array[UIOption3D] = []
 var SUB_SCENE_HOST_MAP: Dictionary[String, SubSceneHost] = {}
@@ -47,7 +47,6 @@ func clear_all() -> void:
 	ANIMATION_PLAYER_MAP = {}
 	ANIMATION_DATA_MAP = {}
 	SPEAKER_MAP = {}
-	PLAYER_CAMERAS = []
 	SCENE_CAMERAS = {}
 	UI_OPTIONS = []
 	SUB_SCENE_HOST_MAP = {}
@@ -58,3 +57,4 @@ static func global_clear_all() -> void:
 	PLAYER_LIST = []
 	DEVICE_PROXY_LIST = []
 	CURSOR_LIST = []
+	PLAYER_CAMERAS = []

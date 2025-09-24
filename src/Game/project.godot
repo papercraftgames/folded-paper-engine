@@ -15,10 +15,6 @@ run/main_scene="uid://b11puaf73exq2"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
-[display]
-
-window/size/mode=3
-
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/folded_paper_engine/plugin.cfg")

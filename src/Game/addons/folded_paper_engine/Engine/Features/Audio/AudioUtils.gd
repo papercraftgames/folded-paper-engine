@@ -12,17 +12,21 @@ var PAUSED_SPEAKER_POSITIONS: Dictionary[String, float] = {}
 func play_speaker(name: String) -> void:
 	if name in FPE_GLOBALS.SPEAKER_MAP:
 		if ALL_SPEAKERS_PAUSED:
-			PAUSED_SPEAKERS[name] = true
+			pause_speaker(name)
 		else:
 			var player: AudioStreamPlayer3D = FPE_GLOBALS.SPEAKER_MAP[name]
 			
 			if is_instance_valid(player):
-				var pos := PAUSED_SPEAKER_POSITIONS.get(name, 0.0) as float
-				var clean_pos := pos if pos is float else 0.0
-				
-				player.play(clean_pos)
-				PAUSED_SPEAKERS[name] = false
-				PAUSED_SPEAKER_POSITIONS[name] = 0.0
+				if not player.playing:
+					var pos := PAUSED_SPEAKER_POSITIONS.get(name, 0.0) as float
+					var clean_pos := pos if pos is float else 0.0
+					
+					if not player.is_inside_tree():
+						await player.tree_entered
+					
+					player.play(clean_pos)
+					PAUSED_SPEAKERS[name] = false
+					PAUSED_SPEAKER_POSITIONS[name] = 0.0
 
 func pause_speaker(name: String) -> void:
 	if name in FPE_GLOBALS.SPEAKER_MAP:
@@ -39,7 +43,7 @@ func pause_all_playing_speakers() -> void:
 	for name in FPE_GLOBALS.SPEAKER_MAP:
 		var player: AudioStreamPlayer3D = FPE_GLOBALS.SPEAKER_MAP[name]
 		
-		if is_instance_valid(player) and player.has_stream_playback() and player.get_stream_playback().is_playing():
+		if is_instance_valid(player) and player.playing:
 			pause_speaker(name)
 
 func resume_all_paused_speakers() -> void:
@@ -83,35 +87,36 @@ func _on_music_finished() -> void:
 	play_next_background_music()
 
 func play_next_background_music() -> void:
-	if not BACKGROUND_MUSIC_PAUSED:
-		LAST_BACKGROUND_MUSIC = CURRENT_BACKGROUND_MUSIC
+	LAST_BACKGROUND_MUSIC = CURRENT_BACKGROUND_MUSIC
+	
+	stop_and_clean_up_background_music()
+	
+	if FPE_GLOBALS.BACKGROUND_MUSIC is Array and FPE_GLOBALS.BACKGROUND_MUSIC.size() > 0:
+		var bgm_list_size := FPE_GLOBALS.BACKGROUND_MUSIC.size()
+		var random_index: int = randi_range(0, bgm_list_size - 1)
+		var curr_idx: int = 0
 		
-		stop_and_clean_up_background_music()
-		
-		if FPE_GLOBALS.BACKGROUND_MUSIC is Array and FPE_GLOBALS.BACKGROUND_MUSIC.size() > 0:
-			var bgm_list_size := FPE_GLOBALS.BACKGROUND_MUSIC.size()
-			var random_index: int = randi_range(0, bgm_list_size - 1)
-			var curr_idx: int = 0
+		for bgm: AudioStreamPlayer in FPE_GLOBALS.BACKGROUND_MUSIC:
+			bgm.stop()
 			
-			for bgm: AudioStreamPlayer in FPE_GLOBALS.BACKGROUND_MUSIC:
-				bgm.stop()
+			if bgm.finished.is_connected(_on_music_finished):
+				bgm.finished.disconnect(_on_music_finished)
+			
+			if random_index == curr_idx:
+				if bgm_list_size > 1 and bgm == LAST_BACKGROUND_MUSIC:
+					play_next_background_music()
+					return
 				
-				if bgm.finished.is_connected(_on_music_finished):
-					bgm.finished.disconnect(_on_music_finished)
+				CURRENT_BACKGROUND_MUSIC = bgm
+				CURRENT_BACKGROUND_MUSIC.finished.connect(_on_music_finished, Object.CONNECT_ONE_SHOT)
+				FPE_GLOBALS.STAGE_SCENE.add_child(CURRENT_BACKGROUND_MUSIC)
 				
-				if random_index == curr_idx:
-					if bgm_list_size > 1 and bgm == LAST_BACKGROUND_MUSIC:
-						play_next_background_music()
-						return
-					
-					CURRENT_BACKGROUND_MUSIC = bgm
-					CURRENT_BACKGROUND_MUSIC.finished.connect(_on_music_finished, Object.CONNECT_ONE_SHOT)
-					FPE_GLOBALS.STAGE_SCENE.add_child(CURRENT_BACKGROUND_MUSIC)
-					
-					CURRENT_BACKGROUND_MUSIC.volume_db = FPE_GLOBALS.BACKGROUND_MUSIC_VOLUME
+				CURRENT_BACKGROUND_MUSIC.volume_db = FPE_GLOBALS.BACKGROUND_MUSIC_VOLUME
+				
+				if not BACKGROUND_MUSIC_PAUSED:
 					CURRENT_BACKGROUND_MUSIC.play(0.0)
-				
-				curr_idx += 1
+			
+			curr_idx += 1
 
 func pause_background_music() -> void:
 	BACKGROUND_MUSIC_PAUSED = true
@@ -128,7 +133,6 @@ func resume_background_music() -> void:
 		PAUSED_BACKGROUND_MUSIC_POSITION = 0.0
 
 func stop_and_clean_up_background_music(destroy: bool = false) -> void:
-	BACKGROUND_MUSIC_PAUSED = false
 	PAUSED_BACKGROUND_MUSIC_POSITION = 0.0
 	
 	if CURRENT_BACKGROUND_MUSIC is AudioStreamPlayer:
