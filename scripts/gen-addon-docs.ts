@@ -3,7 +3,6 @@
 import {promises as fs} from "node:fs";
 import path from "node:path";
 import fse from "fs-extra";
-import {globby} from "globby";
 import {XMLParser} from "fast-xml-parser";
 
 const XML_DIR = process.env.DOCS_XML_DIR ?? "dist/web-docs/ref-xml";
@@ -37,6 +36,13 @@ input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #243449;b
 h1{margin:0 0 10px 0}
 `;
 
+async function listXml(dir: string) {
+  const ents = await fs.readdir(dir, {withFileTypes: true});
+  return ents
+    .filter(e => e.isFile() && e.name.endsWith(".xml"))
+    .map(e => path.join(dir, e.name));
+}
+
 function esc(s = ""): string {
   return s.replace(/[&<>"']/g, (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]!));
 }
@@ -67,7 +73,7 @@ async function main() {
   await fse.ensureDir(SITE_DIR);
   await fs.writeFile(path.join(SITE_DIR, "style.css"), CSS, "utf8");
 
-  const files = await globby([path.join(XML_DIR, "*.xml")]);
+  const files = await listXml(XML_DIR);
   const parser = new XMLParser({
     ignoreAttributes: false,
     isArray: (name) => ["member", "method", "signal", "param", "constant"].includes(name),
