@@ -1,13 +1,13 @@
 #!/usr/bin/env ts-node
 
-import { promises as fs } from "node:fs";
+import {promises as fs} from "node:fs";
 import path from "node:path";
 import fse from "fs-extra";
-import globby from "globby";
-import { XMLParser } from "fast-xml-parser";
+import {globby} from "globby";
+import {XMLParser} from "fast-xml-parser";
 
-const XML_DIR  = process.env.DOCS_XML_DIR   ?? "dist/site/ref-xml";
-const OUT_DIR  = process.env.DOCS_HTML_DIR  ?? "dist/site/api";
+const XML_DIR = process.env.DOCS_XML_DIR ?? "dist/site/ref-xml";
+const OUT_DIR = process.env.DOCS_HTML_DIR ?? "dist/site/api";
 const SITE_DIR = process.env.DOCS_SITE_ROOT ?? "dist/site";
 
 type ClassDoc = {
@@ -38,8 +38,9 @@ h1{margin:0 0 10px 0}
 `;
 
 function esc(s = ""): string {
-  return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]!));
+  return s.replace(/[&<>"']/g, (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]!));
 }
+
 function bb(s = ""): string {
   return s
     .replace(/\[codeblock\]([\s\S]*?)\[\/codeblock\]/g, (_, g) => `<pre class="code"><code>${esc(g)}</code></pre>`)
@@ -49,13 +50,16 @@ function bb(s = ""): string {
     .replace(/\[br\]/g, "<br/>")
     .replace(/\[url=([^\]]+)\]([\s\S]*?)\[\/url\]/g, '<a href="$1">$2</a>');
 }
+
 const page = (title: string, body: string) =>
   `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${title}</title><link rel="stylesheet" href="../style.css"><body><div class="container">
 <h1>${title}</h1>${body}
 <div class="small" style="margin-top:16px">Built from addon XML via CI.</div></div></body>`;
 
-function arr<T>(x?: T | T[]): T[] { return x ? (Array.isArray(x) ? x : [x]) : []; }
+function arr<T>(x?: T | T[]): T[] {
+  return x ? (Array.isArray(x) ? x : [x]) : [];
+}
 
 async function main() {
   await fse.ensureDir(XML_DIR);
@@ -77,7 +81,7 @@ async function main() {
     const C = doc.class;
     const name = C["@_name"];
     const inherits = C["@_inherits"];
-    classes.push({ name, inherits });
+    classes.push({name, inherits});
 
     const props = arr((C.members as any)?.member).map((m: any) =>
       `<li><div><code class="code">${esc(m["@_type"] ?? "var")} ${m["@_name"]}${m["@_default"] ? ` = ${esc(m["@_default"])}` : ""}</code></div>
@@ -138,9 +142,12 @@ async function main() {
   );
 
   await fs.writeFile(path.join(OUT_DIR, "index.html"), index, "utf8");
-  await fs.writeFile(path.join(OUT_DIR, "manifest.json"), JSON.stringify({ classes }, null, 2), "utf8");
+  await fs.writeFile(path.join(OUT_DIR, "manifest.json"), JSON.stringify({classes}, null, 2), "utf8");
 
   console.log(`✅ Converted ${classes.length} classes → ${path.join(OUT_DIR, "index.html")}`);
 }
 
-main().catch((e) => { console.error(e); process.exit(1); });
+main().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});
