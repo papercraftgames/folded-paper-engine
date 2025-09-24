@@ -1,4 +1,7 @@
 class_name FoldedPaperEngine extends Node3D
+## Folded Paper Engine
+##
+## Load scenes, exported from Blender, with FPE Properties and Settings.
 
 # Signals
 

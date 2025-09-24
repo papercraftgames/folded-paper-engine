@@ -1,6 +1,7 @@
 @icon("res://addons/folded_paper_engine/Engine/Input/input.svg")
 
 class_name FPEInputManager extends Node
+## Manage input mappings for various types of controllers.
 
 static func get_gamepad_id_list() -> Array[int]:
 	return Input.get_connected_joypads()

@@ -1,6 +1,7 @@
 @icon("res://addons/folded_paper_engine/Engine/Conversation/conversation.svg")
 
 class_name FPEConversationManager extends Node
+## Manage conversations in your RPG game.
 
 signal conversation_started(conversation_instance: ConversationInstance, conversation_manager: FPEConversationManager)
 signal conversation_changed(conversation_instance: ConversationInstance, conversation_manager: FPEConversationManager)
