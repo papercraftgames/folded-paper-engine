@@ -6,8 +6,8 @@
     "deploy": "mkdir -p dist && cp ./CNAME ./dist/CNAME && yarn deploy-addon && yarn deploy-godot-addon && yarn engine-feature-docs",
     "deploy-addon": "ts-node ./scripts/blender-addon.ts",
     "deploy-godot-addon": "ts-node ./scripts/godot-addon.ts",
-    "engine-feature-docs": "ts-node ./scripts/engine-feature-docs.ts",
-    "addon-docs": "ts-node ./scripts/gen-addon-docs.ts"
+    "deploy-godot-addon-docs": "ts-node ./scripts/gen-addon-docs.ts",
+    "engine-feature-docs": "ts-node ./scripts/engine-feature-docs.ts"
   },
   "dependencies": {
     "adm-zip": "^0.5.16",
