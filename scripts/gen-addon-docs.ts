@@ -163,7 +163,7 @@ async function main() {
     </div>
     <script>
       const q=document.getElementById('q');const L=[...document.querySelectorAll('#list li')];
-      q.addEventListener('input',()=>{const s=q.value.toLowerCase();for(const li of L){li.style.display=li.textContent.toLowerCase().includes(s)?'':'';}});
+      q.addEventListener('input',()=>{const s=q.value.toLowerCase();for(const li of L){li.style.display=li.textContent.toLowerCase().includes(s)?'':'none';}});
     </script>`
   );
 
