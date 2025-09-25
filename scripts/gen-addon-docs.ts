@@ -126,7 +126,7 @@ async function main() {
   </div>
 </div>`;
 
-    await fs.writeFile(path.join(OUT_DIR, `${name}.html`), page(`${name} — API`, body), "utf8");
+    await fs.writeFile(path.join(WEB_DOCS_DIR, `${name}.html`), page(`${name} — API`, body), "utf8");
   }
 
   const items = classes.sort((a, b) => a.name.localeCompare(b.name))
@@ -145,10 +145,10 @@ async function main() {
     </script>`
   );
 
-  await fs.writeFile(path.join(OUT_DIR, "index.html"), index, "utf8");
-  await fs.writeFile(path.join(OUT_DIR, "manifest.json"), JSON.stringify({classes}, null, 2), "utf8");
+  await fs.writeFile(path.join(WEB_DOCS_DIR, "index.html"), index, "utf8");
+  await fs.writeFile(path.join(WEB_DOCS_DIR, "manifest.json"), JSON.stringify({classes}, null, 2), "utf8");
 
-  console.log(`✅ Converted ${classes.length} classes → ${path.join(OUT_DIR, "index.html")}`);
+  console.log(`✅ Converted ${classes.length} classes → ${path.join(WEB_DOCS_DIR, "index.html")}`);
 }
 
 main().catch((e) => {
