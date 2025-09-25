@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="Cursor3D" inherits="Area3D" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<param index="0" name="feature_utils" type="FeatureUtils" />
+			<param index="1" name="target" type="Node3D" />
+			<param index="2" name="cursor_depth" type="float" default="10.0" />
+			<param index="3" name="select_animation" type="String" default="&quot;&quot;" />
+			<param index="4" name="look_at_camera" type="bool" default="false" />
+			<description>
+			</description>
+		</method>
+		<method name="_enter_tree">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_exit_tree">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="set_device_proxy">
+			<return type="void" />
+			<param index="0" name="device_proxy" type="DeviceProxy" />
+			<description>
+			</description>
+		</method>
+		<method name="_setup">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_ready">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="get_target">
+			<return type="Node3D" />
+			<description>
+			</description>
+		</method>
+		<method name="fix_animation_paths">
+			<return type="void" />
+			<param index="0" name="from_path" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="setup_target">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="get_camera">
+			<return type="Camera3D" />
+			<description>
+			</description>
+		</method>
+		<method name="get_options">
+			<return type="UIOption3D[]" />
+			<description>
+			</description>
+		</method>
+		<method name="set_motion">
+			<return type="void" />
+			<param index="0" name="instant" type="bool" />
+			<param index="1" name="duration" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="get_selected">
+			<return type="Node3D" />
+			<description>
+			</description>
+		</method>
+		<method name="trigger_on_selection">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="trigger_on_selection_exit">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="select_node">
+			<return type="void" />
+			<param index="0" name="n" type="Node3D" />
+			<param index="1" name="jump" type="bool" default="true" />
+			<description>
+			</description>
+		</method>
+		<method name="extend_point">
+			<return type="Vector3" />
+			<param index="0" name="from" type="Vector3" />
+			<param index="1" name="to" type="Vector3" />
+			<param index="2" name="meters" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="select_by_camera_ray">
+			<return type="UIOption3D" />
+			<description>
+			</description>
+		</method>
+		<method name="select_by_direction">
+			<return type="Node3D" />
+			<param index="0" name="direction" type="Vector3" />
+			<param index="1" name="threshold_degrees" type="float" default="30.0" />
+			<param index="2" name="allow_reverse" type="bool" default="true" />
+			<description>
+			</description>
+		</method>
+		<method name="jump_to_direction">
+			<return type="void" />
+			<param index="0" name="input_dir" type="Vector3" />
+			<description>
+			</description>
+		</method>
+		<method name="jump_to_node_coords">
+			<return type="void" />
+			<param index="0" name="n" type="Node3D" />
+			<description>
+			</description>
+		</method>
+		<method name="_play_select_animation">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="use">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="use_option">
+			<return type="void" />
+			<param index="0" name="target" type="Node3D" />
+			<description>
+			</description>
+		</method>
+		<method name="look_at_camera">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="move_cursor_in_camera_view_at_depth">
+			<return type="void" />
+			<param index="0" name="depth" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="_dir_relative_to_basis">
+			<return type="Vector3" />
+			<param index="0" name="v" type="Vector3" />
+			<param index="1" name="basis" type="Basis" />
+			<description>
+			</description>
+		</method>
+		<method name="get_input_action_value">
+			<return type="ActuatorInfo" />
+			<param index="0" name="action_name" type="StringName" />
+			<description>
+			</description>
+		</method>
+		<method name="respond_to_input">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_physics_process">
+			<return type="void" />
+			<param index="0" name="_dt" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="_sample_direction_from_actions">
+			<return type="Vector3" />
+			<description>
+			</description>
+		</method>
+		<method name="_cam_to_world_dir">
+			<return type="Vector3" />
+			<param index="0" name="cam" type="Camera3D" />
+			<param index="1" name="cam_vec" type="Vector3" />
+			<description>
+			</description>
+		</method>
+		<method name="_jump_to_node">
+			<return type="void" />
+			<param index="0" name="n" type="Node3D" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="FEATURE_UTILS" type="FeatureUtils" setter="" getter="">
+		</member>
+		<member name="DEVICE_PROXY" type="DeviceProxy" setter="" getter="" default="null">
+		</member>
+		<member name="_INPUT_DEBOUNCE" type="Debounce" setter="" getter="" default="&lt;unknown&gt;">
+		</member>
+		<member name="_MOUSE_DEBOUNCE" type="Debounce" setter="" getter="" default="&lt;unknown&gt;">
+		</member>
+		<member name="_USE_DEBOUNCE" type="Debounce" setter="" getter="" default="&lt;unknown&gt;">
+		</member>
+		<member name="_USE_OPTION_DEBOUNCE" type="Debounce" setter="" getter="" default="&lt;unknown&gt;">
+		</member>
+		<member name="_USE_ACTIVATED" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="_TARGET" type="Node3D" setter="" getter="">
+		</member>
+		<member name="_DIST_FROM_CAMERA" type="float" setter="" getter="" default="10.0">
+		</member>
+		<member name="_SELECT_ANIMATION_NAME" type="String" setter="" getter="" default="&quot;&quot;">
+		</member>
+		<member name="_LOOK_AT_CAMERA" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="selected" type="Node3D" setter="" getter="" default="null">
+		</member>
+		<member name="snap_instant" type="bool" setter="" getter="" default="true">
+		</member>
+		<member name="move_time" type="float" setter="" getter="" default="0.08">
+		</member>
+		<member name="_tween" type="Tween" setter="" getter="" default="null">
+		</member>
+		<member name="_previous_mouse_mode" type="int" setter="" getter="" default="-1">
+		</member>
+	</members>
+</class>

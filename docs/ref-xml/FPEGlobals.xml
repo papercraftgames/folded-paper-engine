@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="FPEGlobals" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="clear_all">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="global_clear_all" qualifiers="static">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="PLAYER_LIST" type="PlayerControls[]" setter="" getter="" default="[]">
+		</member>
+		<member name="DEVICE_PROXY_LIST" type="DeviceProxy[]" setter="" getter="" default="[]">
+		</member>
+		<member name="CURSOR_LIST" type="Cursor3D[]" setter="" getter="" default="[]">
+		</member>
+		<member name="PLAYER_CAMERAS" type="Camera3D[]" setter="" getter="" default="[]">
+		</member>
+		<member name="WORLD_ENVIRONMENT" type="WorldEnvironment" setter="" getter="">
+		</member>
+		<member name="BACKGROUND_MUSIC" type="AudioStreamPlayer[]" setter="" getter="" default="[]">
+		</member>
+		<member name="BACKGROUND_MUSIC_VOLUME" type="float" setter="" getter="" default="-10.0">
+		</member>
+		<member name="GRAVITY" type="float" setter="" getter="" default="20.0">
+		</member>
+		<member name="STAGE_SCENE" type="Node3D" setter="" getter="">
+		</member>
+		<member name="SCENE_EVENT_DATA" type="Dictionary" setter="" getter="" default="{}">
+		</member>
+		<member name="CURRENT_LOADED_ROOT" type="Node" setter="" getter="">
+		</member>
+		<member name="DEACTIVATE_PLAYER_CONTROLS" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="DEACTIVATE_CHARACTER_MOVEMENT" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="DEACTIVATE_TRIGGERS" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="DEACTIVATE_UI_CONTROLS" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="ANIMATION_PLAYER_MAP" type="Dictionary[String, AnimationPlayer]" setter="" getter="" default="{}">
+		</member>
+		<member name="ANIMATION_DATA_MAP" type="Dictionary" setter="" getter="" default="{}">
+		</member>
+		<member name="SPEAKER_MAP" type="Dictionary[String, AudioStreamPlayer3D]" setter="" getter="" default="{}">
+		</member>
+		<member name="SCENE_CAMERAS" type="Dictionary[String, Camera3D]" setter="" getter="" default="{}">
+		</member>
+		<member name="UI_OPTIONS" type="UIOption3D[]" setter="" getter="" default="[]">
+		</member>
+		<member name="SUB_SCENE_HOST_MAP" type="Dictionary[String, SubSceneHost]" setter="" getter="" default="{}">
+		</member>
+		<member name="RIGID_BODY_LIST" type="RigidBody3D[]" setter="" getter="" default="[]">
+		</member>
+		<member name="SPRITE_ANIMATION_MAP" type="Dictionary[String, FrameTicker]" setter="" getter="" default="{}">
+		</member>
+	</members>
+</class>

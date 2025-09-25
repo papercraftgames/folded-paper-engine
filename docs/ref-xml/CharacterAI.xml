@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="CharacterAI" inherits="CharacterControls" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_ready">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_physics_process">
+			<return type="void" />
+			<param index="0" name="delta" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="_move_towards_current_target">
+			<return type="void" />
+			<param index="0" name="delta" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="_pick_new_path">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_find_next_waypoint_in_range">
+			<return type="Vector3" />
+			<param index="0" name="from_point" type="Vector3" />
+			<param index="1" name="candidates" type="Vector3[]" />
+			<description>
+			</description>
+		</method>
+		<method name="_analyze_bounds_mesh">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_extract_vertices_and_edges_from_mesh">
+			<return type="void" />
+			<param index="0" name="mesh_instance" type="MeshInstance3D" />
+			<description>
+			</description>
+		</method>
+		<method name="_add_edge">
+			<return type="void" />
+			<param index="0" name="v1" type="int" />
+			<param index="1" name="v2" type="int" />
+			<description>
+			</description>
+		</method>
+		<method name="_detect_perimeter_boundary">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_count_edge_usage">
+			<return type="void" />
+			<param index="0" name="edge_count" type="Dictionary" />
+			<param index="1" name="v1" type="int" />
+			<param index="2" name="v2" type="int" />
+			<description>
+			</description>
+		</method>
+		<method name="_generate_pathfinding_waypoints">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_is_point_inside_shape">
+			<return type="bool" />
+			<param index="0" name="point" type="Vector2" />
+			<description>
+			</description>
+		</method>
+		<method name="_is_point_inside_perimeter_polygon">
+			<return type="bool" />
+			<param index="0" name="point" type="Vector2" />
+			<description>
+			</description>
+		</method>
+		<method name="_get_ordered_perimeter_points">
+			<return type="Vector2[]" />
+			<description>
+			</description>
+		</method>
+		<method name="_is_point_safely_inside_perimeter">
+			<return type="bool" />
+			<param index="0" name="point" type="Vector2" />
+			<param index="1" name="safety_margin" type="float" default="0.5" />
+			<description>
+			</description>
+		</method>
+		<method name="_distance_point_to_line_segment">
+			<return type="float" />
+			<param index="0" name="point" type="Vector2" />
+			<param index="1" name="line_start" type="Vector2" />
+			<param index="2" name="line_end" type="Vector2" />
+			<description>
+			</description>
+		</method>
+		<method name="_path_crosses_perimeter">
+			<return type="bool" />
+			<param index="0" name="point1" type="Vector3" />
+			<param index="1" name="point2" type="Vector3" />
+			<description>
+			</description>
+		</method>
+		<method name="_line_segments_intersect_robust">
+			<return type="bool" />
+			<param index="0" name="p1" type="Vector2" />
+			<param index="1" name="q1" type="Vector2" />
+			<param index="2" name="p2" type="Vector2" />
+			<param index="3" name="q2" type="Vector2" />
+			<description>
+			</description>
+		</method>
+		<method name="_orientation">
+			<return type="int" />
+			<param index="0" name="p" type="Vector2" />
+			<param index="1" name="q" type="Vector2" />
+			<param index="2" name="r" type="Vector2" />
+			<description>
+			</description>
+		</method>
+		<method name="_point_on_segment_robust">
+			<return type="bool" />
+			<param index="0" name="p" type="Vector2" />
+			<param index="1" name="q" type="Vector2" />
+			<param index="2" name="r" type="Vector2" />
+			<description>
+			</description>
+		</method>
+		<method name="_find_nearest_waypoint_to_position">
+			<return type="Vector3" />
+			<param index="0" name="position" type="Vector3" />
+			<description>
+			</description>
+		</method>
+		<method name="_find_node_by_name">
+			<return type="Node" />
+			<param index="0" name="node" type="Node" />
+			<param index="1" name="name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="_pick_new_direction">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="BOUNDS" type="Node3D" setter="" getter="">
+		</member>
+		<member name="path_points" type="Vector3[]" setter="" getter="" default="[]">
+		</member>
+		<member name="current_path_index" type="int" setter="" getter="" default="0">
+		</member>
+		<member name="path_timer" type="float" setter="" getter="" default="0.0">
+		</member>
+		<member name="path_update_interval" type="float" setter="" getter="" default="10.0">
+		</member>
+		<member name="visit_distance" type="float" setter="" getter="" default="0.2">
+		</member>
+		<member name="distance_threshold" type="float" setter="" getter="" default="4.0">
+		</member>
+		<member name="available_waypoints" type="Vector3[]" setter="" getter="" default="[]">
+		</member>
+		<member name="perimeter_boundary" type="Array[]" setter="" getter="" default="[]">
+		</member>
+		<member name="bounds_vertices" type="PackedVector3Array" setter="" getter="" default="[]">
+		</member>
+		<member name="bounds_edges" type="Array[]" setter="" getter="" default="[]">
+		</member>
+		<member name="bounds_min" type="Vector2" setter="" getter="">
+		</member>
+		<member name="bounds_max" type="Vector2" setter="" getter="">
+		</member>
+		<member name="max_speed" type="float" setter="" getter="" default="0.5">
+		</member>
+		<member name="min_speed" type="float" setter="" getter="" default="0.1">
+		</member>
+		<member name="speed_distance_threshold" type="float" setter="" getter="" default="2.0">
+		</member>
+		<member name="current_movement_direction" type="Vector2" setter="" getter="" default="Vector2(0, 0)">
+		</member>
+		<member name="direction_change_threshold" type="float" setter="" getter="" default="0.3">
+		</member>
+		<member name="stuck_detection_timer" type="float" setter="" getter="" default="0.0">
+		</member>
+		<member name="stuck_check_interval" type="float" setter="" getter="" default="2.0">
+		</member>
+		<member name="last_position" type="Vector2" setter="" getter="" default="Vector2(0, 0)">
+		</member>
+		<member name="min_expected_movement" type="float" setter="" getter="" default="0.1">
+		</member>
+		<member name="is_idling_between_points" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="idle_timer" type="float" setter="" getter="" default="0.0">
+		</member>
+		<member name="idle_duration" type="float" setter="" getter="" default="3.0">
+		</member>
+		<member name="direction_change_timer" type="float" setter="" getter="" default="0.0">
+		</member>
+		<member name="direction_change_interval" type="float" setter="" getter="" default="2.0">
+		</member>
+		<member name="current_input" type="Vector2" setter="" getter="" default="Vector2(0, 0)">
+		</member>
+		<member name="stuck_threshold_time" type="float" setter="" getter="" default="3.0">
+		</member>
+	</members>
+</class>

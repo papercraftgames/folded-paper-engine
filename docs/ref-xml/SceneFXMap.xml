@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="SceneFXMap" inherits="FeatureConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<param index="0" name="feature_utils" type="FeatureUtils" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="SkyColor" type="SceneFeatureBase" setter="" getter="">
+		</member>
+		<member name="BackgroundMusic" type="SceneFeatureBase" setter="" getter="">
+		</member>
+		<member name="BackgroundMusicVolume" type="SceneFeatureBase" setter="" getter="">
+		</member>
+		<member name="Gravity" type="SceneFeatureBase" setter="" getter="">
+		</member>
+	</members>
+</class>

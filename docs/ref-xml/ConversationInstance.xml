@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="ConversationInstance" inherits="Resource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<members>
+		<member name="instance_id" type="String" setter="" getter="" default="&quot;&quot;">
+		</member>
+		<member name="conversation_id" type="String" setter="" getter="" default="&quot;&quot;">
+		</member>
+		<member name="owner_name" type="String" setter="" getter="">
+		</member>
+		<member name="owner_sidekick_names" type="String[]" setter="" getter="">
+		</member>
+		<member name="initializer_name" type="String" setter="" getter="">
+		</member>
+		<member name="initializer_sidekick_names" type="String[]" setter="" getter="">
+		</member>
+		<member name="current_comment" type="Comment" setter="" getter="">
+		</member>
+		<member name="complete" type="bool" setter="" getter="" default="false">
+		</member>
+	</members>
+</class>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="CommandConstants" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<constants>
+		<constant name="COMMAND_TYPES" value="Dictionary[String, String]({&quot;ActivateCamera&quot;: &quot;ActivateCamera&quot;, &quot;Animations&quot;: &quot;Animations&quot;, &quot;DeactivatePlayerControls&quot;: &quot;DeactivatePlayerControls&quot;, &quot;DeleteByGroup&quot;: &quot;DeleteByGroup&quot;, &quot;DispatchEvent&quot;: &quot;DispatchEvent&quot;, &quot;LoadLevel&quot;: &quot;LoadLevel&quot;, &quot;LoadSubScene&quot;: &quot;LoadSubScene&quot;, &quot;PauseSpecificActivities&quot;: &quot;PauseSpecificActivities&quot;, &quot;ReactivatePlayerCamera&quot;: &quot;ReactivatePlayerCamera&quot;, &quot;ReactivatePlayerControls&quot;: &quot;ReactivatePlayerControls&quot;, &quot;ResumeSpecificActivities&quot;: &quot;ResumeSpecificActivities&quot;, &quot;SpeakerTrigger&quot;: &quot;SpeakerTrigger&quot;, &quot;SpeakerTriggerSelf&quot;: &quot;SpeakerTriggerSelf&quot;, &quot;StartConversation&quot;: &quot;StartConversation&quot;, &quot;StopAnimations&quot;: &quot;StopAnimations&quot;, &quot;UnloadSubScene&quot;: &quot;UnloadSubScene&quot;, &quot;UnloadThisSubScene&quot;: &quot;UnloadThisSubScene&quot;})">
+		</constant>
+	</constants>
+</class>

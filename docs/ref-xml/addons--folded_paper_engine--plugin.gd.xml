@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="&quot;addons/folded_paper_engine/plugin.gd&quot;" inherits="EditorPlugin" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_enter_tree">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_exit_tree">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="_icon" type="CompressedTexture2D" setter="" getter="" default="&lt;Object&gt;">
+		</member>
+		<member name="_inventory_icon" type="CompressedTexture2D" setter="" getter="" default="&lt;Object&gt;">
+		</member>
+		<member name="_conversation_icon" type="CompressedTexture2D" setter="" getter="" default="&lt;Object&gt;">
+		</member>
+		<member name="_event_icon" type="CompressedTexture2D" setter="" getter="" default="&lt;Object&gt;">
+		</member>
+		<member name="_ext" type="GLBMetaInclude" setter="" getter="">
+		</member>
+	</members>
+</class>

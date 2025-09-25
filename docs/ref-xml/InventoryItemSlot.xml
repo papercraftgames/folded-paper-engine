@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="InventoryItemSlot" inherits="DataItem" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="add_quantity">
+			<return type="void" />
+			<param index="0" name="qnty" type="int" />
+			<param index="1" name="overflow" type="Callable" />
+			<description>
+			</description>
+		</method>
+		<method name="from_dict">
+			<return type="void" />
+			<param index="0" name="dict" type="Dictionary" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="kind" type="InventoryItemKind" setter="" getter="">
+		</member>
+		<member name="quantity" type="int" setter="" getter="" default="0">
+		</member>
+	</members>
+</class>

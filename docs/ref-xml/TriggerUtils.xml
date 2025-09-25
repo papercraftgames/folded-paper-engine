@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="TriggerUtils" inherits="FeatureConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="wait_for_triggers_to_complete" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="node" type="Node" />
+			<description>
+			</description>
+		</method>
+		<method name="trigger_events">
+			<return type="void" />
+			<param index="0" name="trigger" type="Node" />
+			<param index="1" name="initiator" type="Node" />
+			<param index="2" name="trigger_type" type="String" />
+			<description>
+			</description>
+		</method>
+	</methods>
+</class>

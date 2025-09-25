@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="HoldZone" inherits="Area3D" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<param index="0" name="feature_utils" type="FeatureUtils" />
+			<param index="1" name="player" type="PlayerControls" />
+			<param index="2" name="distance" type="float" />
+			<param index="3" name="zone_size" type="Vector3" />
+			<param index="4" name="zone_scene" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="_process">
+			<return type="void" />
+			<param index="0" name="delta" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="apply_pickup_force">
+			<return type="void" />
+			<param index="0" name="delta" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="apply_rotation_and_sway">
+			<return type="void" />
+			<param index="0" name="delta" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="_setup_zone_scene">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_setup_underneath_area">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_on_add_underneath_item">
+			<return type="void" />
+			<param index="0" name="b" type="Node" />
+			<description>
+			</description>
+		</method>
+		<method name="_on_remove_underneath_item">
+			<return type="void" />
+			<param index="0" name="b" type="Node" />
+			<description>
+			</description>
+		</method>
+		<method name="_trigger_deposite_areas">
+			<return type="void" />
+			<param index="0" name="was_held" type="RigidBody3D" />
+			<description>
+			</description>
+		</method>
+		<method name="_set_withdraw_areas">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_on_tracking_area_entered">
+			<return type="void" />
+			<param index="0" name="a" type="Area3D" />
+			<description>
+			</description>
+		</method>
+		<method name="_on_tracking_area_exited">
+			<return type="void" />
+			<param index="0" name="a" type="Area3D" />
+			<description>
+			</description>
+		</method>
+		<method name="_trigger_hold_zone_interact">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_on_hold_candidate_entered">
+			<return type="void" />
+			<param index="0" name="b" type="Node3D" />
+			<description>
+			</description>
+		</method>
+		<method name="_on_hold_candidate_exited">
+			<return type="void" />
+			<param index="0" name="b" type="Node3D" />
+			<description>
+			</description>
+		</method>
+		<method name="_drop_on_floor_raycast_collision">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="hold_items_available">
+			<return type="bool" />
+			<description>
+			</description>
+		</method>
+		<method name="holding">
+			<return type="bool" />
+			<description>
+			</description>
+		</method>
+		<method name="get_holdable_items">
+			<return type="RigidBody3D[]" />
+			<description>
+			</description>
+		</method>
+		<method name="get_held_item">
+			<return type="RigidBody3D" />
+			<description>
+			</description>
+		</method>
+		<method name="hold_item">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="drop_item">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_start_hold_cooldown">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_start_hold">
+			<return type="void" />
+			<param index="0" name="b" type="RigidBody3D" />
+			<description>
+			</description>
+		</method>
+		<method name="_stop_hold">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="_FEATURE_UTILS" type="FeatureUtils" setter="" getter="">
+		</member>
+		<member name="_PLAYER" type="PlayerControls" setter="" getter="">
+		</member>
+		<member name="_DISTANCE" type="float" setter="" getter="" default="1.0">
+		</member>
+		<member name="_ZONE_SIZE" type="Vector3" setter="" getter="" default="Vector3(0.25, 0.25, 0.25)">
+		</member>
+		<member name="_ZONE_SCENE" type="String" setter="" getter="" default="&quot;&quot;">
+		</member>
+		<member name="_ZONE_SCENE_HOST" type="SubSceneHost" setter="" getter="">
+		</member>
+		<member name="_UNDERNEATH_AREA" type="Area3D" setter="" getter="">
+		</member>
+		<member name="_UNDERNEATH_ITEMS" type="RigidBody3D[]" setter="" getter="" default="[]">
+		</member>
+		<member name="_HOLD_FORCE" type="float" setter="" getter="" default="275.0">
+		</member>
+		<member name="_MAX_HOLD_FORCE" type="float" setter="" getter="" default="300.0">
+		</member>
+		<member name="_DAMPING_FORCE" type="float" setter="" getter="" default="8.0">
+		</member>
+		<member name="_SWAY_STRENGTH" type="float" setter="" getter="" default="0.3">
+		</member>
+		<member name="_ROTATION_SPEED" type="Variant" setter="" getter="" default="1.0">
+		</member>
+		<member name="_MAX_HELD_DISTANCE" type="float" setter="" getter="" default="5.5">
+		</member>
+		<member name="_HELD_INITIAL_ROTATION" type="Vector3" setter="" getter="" default="Vector3(0, 0, 0)">
+		</member>
+		<member name="_HELD_GRAVITY_SCALE" type="float" setter="" getter="" default="0.0">
+		</member>
+		<member name="_HELD_LINEAR_DAMP" type="float" setter="" getter="" default="0.0">
+		</member>
+		<member name="_HELD_ANGULAR_DAMP" type="float" setter="" getter="" default="0.0">
+		</member>
+		<member name="_HELD_CCD" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="_HELD" type="RigidBody3D" setter="" getter="">
+		</member>
+		<member name="_HOLD_CANDIDATES" type="RigidBody3D[]" setter="" getter="" default="[]">
+		</member>
+		<member name="_TRIGGERS" type="TrackingArea3D[]" setter="" getter="" default="[]">
+		</member>
+		<member name="_DEPOSITE_CANDIDATE_TRIGGERS" type="TrackingArea3D[]" setter="" getter="" default="[]">
+		</member>
+		<member name="_WITHDRAW_CANDIDATE_TRIGGERS" type="TrackingArea3D[]" setter="" getter="" default="[]">
+		</member>
+		<member name="_HOLD_COOLDOWN_DEBOUNCE" type="Debounce" setter="" getter="" default="&lt;unknown&gt;">
+		</member>
+	</members>
+	<signals>
+		<signal name="holdable_items_available_change">
+			<description>
+			</description>
+		</signal>
+		<signal name="held_item_changed">
+			<description>
+			</description>
+		</signal>
+	</signals>
+</class>

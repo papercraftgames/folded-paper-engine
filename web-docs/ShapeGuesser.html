@@ -1,0 +1,26 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ShapeGuesser — API</title><link rel="stylesheet" href="./style.css"><body><div class="container">
+<h1>ShapeGuesser — API</h1>
+<div class="grid">
+  <div>
+    <div class="card">
+      <div><strong>Class:</strong> ShapeGuesser</div>
+      <div class="small">Inherits: RefCounted</div>
+      
+    </div>
+  </div>
+  <div>
+    
+    
+    <div class="card"><h2>Methods</h2><ul class="list"><li><div><code class="code">PackedVector3Array _collect_samples(Mesh mesh)</code></div>
+      <div class="small"></div></li><li><div><code class="code">float _approx_mesh_volume(Mesh mesh)</code></div>
+      <div class="small"></div></li><li><div><code class="code">float _stdev(PackedFloat32Array values)</code></div>
+      <div class="small"></div></li><li><div><code class="code">float _min3(float a, float b, float c)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Vector3 get_mesh_offset(MeshInstance3D mi)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Shape3D build_collision_for(Node target, bool allow_trimesh_when_thin = true, float min_axis_epsilon = 0.01, bool prefer_simple_box = false)</code></div>
+      <div class="small"></div></li></ul></div>
+    
+    <div class="card"><h2>Constants / Enums</h2><ul class="list"><li><code class="code">ROUND_STDDEV_THRESHOLD = 0.14</code></li><li><code class="code">ELONGATION_RATIO = 1.5</code></li><li><code class="code">AXIS_SIMILARITY = 1.15</code></li><li><code class="code">BOX_VOLUME_RATIO_THRESHOLD = 0.7</code></li></ul></div>
+  </div>
+</div>
+<div class="small" style="margin-top:16px">Built from addon XML via CI.</div></div></body>

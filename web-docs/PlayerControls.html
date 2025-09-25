@@ -1,0 +1,46 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PlayerControls — API</title><link rel="stylesheet" href="./style.css"><body><div class="container">
+<h1>PlayerControls — API</h1>
+<div class="grid">
+  <div>
+    <div class="card">
+      <div><strong>Class:</strong> PlayerControls</div>
+      <div class="small">Inherits: CharacterControls</div>
+      
+    </div>
+  </div>
+  <div>
+    
+    <div class="card"><h2>Properties</h2><ul class="list"><li><div><code class="code">TrackingArea3D[] _INTERSECTING_TRACKING_AREAS = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">FollowingCamera CAMERA</code></div>
+       <div class="small"></div></li><li><div><code class="code">DeviceProxy DEVICE_PROXY</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool _THIRD_PERSON_MODE = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool _FIRST_PERSON_MODE = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">HoldZone _HOLD_ZONE</code></div>
+       <div class="small"></div></li><li><div><code class="code">float turn_speed = 0.075</code></div>
+       <div class="small"></div></li><li><div><code class="code">float mouse_axis_ratio = 0.075</code></div>
+       <div class="small"></div></li></ul></div>
+    <div class="card"><h2>Methods</h2><ul class="list"><li><div><code class="code">void _ready()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void apply_hold_zone(float distance, Vector3 zone_size, String zone_scene)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _held_item_changed()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _holdable_items_available_change()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void set_device_proxy(DeviceProxy device_proxy)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void set_player_controls_config(Dictionary config)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void setup_camera()</code></div>
+      <div class="small"></div></li><li><div><code class="code">ActuatorInfo get_input_action_value(StringName action_name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void steer(float amount, PhysicsDirectBodyState3D state)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void pitch_camera(float amount)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void turn_mesh(Vector2 input)</code></div>
+      <div class="small"></div></li><li><div><code class="code">float _get_turn_value(ActuatorInfo info)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _integrate_forces(PhysicsDirectBodyState3D state)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _physics_process(float delta)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void on_trigger_entered(TrackingArea3D trigger, Callable on_triggered)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void on_use()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void add_tracking_area(TrackingArea3D tracking_area)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void remove_tracking_area(TrackingArea3D tracking_area)</code></div>
+      <div class="small"></div></li></ul></div>
+    
+    
+  </div>
+</div>
+<div class="small" style="margin-top:16px">Built from addon XML via CI.</div></div></body>

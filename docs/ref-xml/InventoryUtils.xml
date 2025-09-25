@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="InventoryUtils" inherits="FPEGlobalsConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="clean_up" qualifiers="static">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="register_item_kind" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="kind" type="InventoryItemKind" />
+			<description>
+			</description>
+		</method>
+		<method name="get_item_kind" qualifiers="static">
+			<return type="InventoryItemKind" />
+			<param index="0" name="kind_id" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="register_inventory_type_size" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="inventory_type_id" type="String" />
+			<param index="1" name="size" type="InventorySize" />
+			<description>
+			</description>
+		</method>
+		<method name="get_inventory_type_size" qualifiers="static">
+			<return type="InventorySize" />
+			<param index="0" name="inventory_type_id" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="set_keep_player_inventory" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="value" type="bool" default="true" />
+			<description>
+			</description>
+		</method>
+		<method name="get_keep_player_inventory" qualifiers="static">
+			<return type="bool" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="INVENTORY_ITEM_KIND_REGISTRY" type="Dictionary[String, InventoryItemKind]" setter="" getter="" default="{}">
+		</member>
+		<member name="INVENTORY_SIZE_REGISTRY" type="Dictionary[String, InventorySize]" setter="" getter="" default="{}">
+		</member>
+		<member name="KEEP_PLAYER_INVENTORY" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="PLAYER_INVENTORY" type="Inventory" setter="" getter="">
+		</member>
+	</members>
+</class>

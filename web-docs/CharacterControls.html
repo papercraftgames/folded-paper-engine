@@ -1,0 +1,68 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CharacterControls — API</title><link rel="stylesheet" href="./style.css"><body><div class="container">
+<h1>CharacterControls — API</h1>
+<div class="grid">
+  <div>
+    <div class="card">
+      <div><strong>Class:</strong> CharacterControls</div>
+      <div class="small">Inherits: AdvancedRigidBody3D</div>
+      
+    </div>
+  </div>
+  <div>
+    
+    <div class="card"><h2>Properties</h2><ul class="list"><li><div><code class="code">FeatureUtils FEATURE_UTILS</code></div>
+       <div class="small"></div></li><li><div><code class="code">String inventory_type_id = &quot;CHARACTER&quot;</code></div>
+       <div class="small"></div></li><li><div><code class="code">Inventory inventory = &lt;unknown&gt;</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool _DISABLE_FLIP = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">Node3D TEMP_MESH = &lt;unknown&gt;</code></div>
+       <div class="small"></div></li><li><div><code class="code">Node3D CHARACTER_MESH</code></div>
+       <div class="small"></div></li><li><div><code class="code">CharacterConfig CHARACTER_CONFIG</code></div>
+       <div class="small"></div></li><li><div><code class="code">String LAST_ANIM_PLAYED = &quot;&quot;</code></div>
+       <div class="small"></div></li><li><div><code class="code">float LINEAR_VELOCITY_THRESHOLD = 0.0001</code></div>
+       <div class="small"></div></li><li><div><code class="code">float ROTATION_SNAP_THRESHOLD = 0.01</code></div>
+       <div class="small"></div></li><li><div><code class="code">float TURN_SPEED = 6.28</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool LEFT = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool FORWARD = true</code></div>
+       <div class="small"></div></li><li><div><code class="code">float TURN_DEGREES_PER_SECOND = 360.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">CharacterControls[] _SIDEKICKS = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">RayCast3D[] RAY_CASTERS = [...]</code></div>
+       <div class="small"></div></li><li><div><code class="code">float SPEED = 3.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">float AIR_CONTROL = 1.5</code></div>
+       <div class="small"></div></li><li><div><code class="code">float RUN_SPEED = 1.4</code></div>
+       <div class="small"></div></li><li><div><code class="code">float JUMP_POWER = 2.5</code></div>
+       <div class="small"></div></li><li><div><code class="code">Variant ACCEL_TIME = 0.25</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool _had_motivation = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool _had_downward_momentum = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">Variant _orignal_friction = null</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool _had_input = false</code></div>
+       <div class="small"></div></li></ul></div>
+    <div class="card"><h2>Methods</h2><ul class="list"><li><div><code class="code">void _ready()</code></div>
+      <div class="small"></div></li><li><div><code class="code">String get_character_name()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void set_feature_utils(FeatureUtils feature_utils)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void set_flip_disabled(bool value)</code></div>
+      <div class="small"></div></li><li><div><code class="code">float flatness_from_raycast(RayCast3D ray)</code></div>
+      <div class="small"></div></li><li><div><code class="code">float get_ground_traction_ratio()</code></div>
+      <div class="small"></div></li><li><div><code class="code">bool is_on_floor()</code></div>
+      <div class="small"></div></li><li><div><code class="code">bool has_downward_momentum()</code></div>
+      <div class="small"></div></li><li><div><code class="code">bool has_motivation()</code></div>
+      <div class="small"></div></li><li><div><code class="code">Vector3 approach_velocity_force(Vector3 target_velocity, float max_force)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void set_animation(Vector2 input, bool has_input, bool running)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _process(float delta)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _physics_process(float delta)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Vector2 rotated_velocity(Vector2 local_vel)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _apply_linear_velocity(Vector3 new_linear_velocity)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void move(Vector2 input, float run_amount, float jump_amount)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void set_character_mesh(Node3D node)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void fix_character_animation_paths(String from_path)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void setup_character_mesh()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void setup_character_config(Dictionary data)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void add_sidekick(CharacterControls sidekick)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void remove_sidekick(CharacterControls sidekick)</code></div>
+      <div class="small"></div></li><li><div><code class="code">CharacterControls[] get_sidekicks()</code></div>
+      <div class="small"></div></li></ul></div>
+    
+    
+  </div>
+</div>
+<div class="small" style="margin-top:16px">Built from addon XML via CI.</div></div></body>

@@ -1,0 +1,38 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FPEUI — API</title><link rel="stylesheet" href="./style.css"><body><div class="container">
+<h1>FPEUI — API</h1>
+<div class="grid">
+  <div>
+    <div class="card">
+      <div><strong>Class:</strong> FPEUI</div>
+      <div class="small">Inherits: RefCounted</div>
+      
+    </div>
+  </div>
+  <div>
+    
+    <div class="card"><h2>Properties</h2><ul class="list"><li><div><code class="code">Dictionary _wired = {}</code></div>
+       <div class="small"></div></li></ul></div>
+    <div class="card"><h2>Methods</h2><ul class="list"><li><div><code class="code">void update_children(Node node, Node[] wanted)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Callable Mount(Dictionary entry, Node parent)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Callable FC(Callable construct, Variant render = null)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _flat_into(Array arr, Array out, int level, int depth)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Array ComposeChildren(Array arr, int depth = -1)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _dispose_all_id(int id)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void wire_once(Object node, String key, Callable setup, Variant cleanup)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Dictionary _bucket(int id)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Variant _stable_repr(Variant v)</code></div>
+      <div class="small"></div></li><li><div><code class="code">int _deps_hash(Array deps)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void on_dep(Object node, StringName signal_name, StringName key, Array deps, Callable cb)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void on(Object node, StringName signal_name, StringName key, Callable cb)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void off(Object node, StringName key)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void dispose(Object node, String key)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void dispose_all(Object node)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void rewire(Object node, String key, Callable setup, Variant cleanup = null)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void effect(Object node, String key, Callable setup, Callable cleanup)</code></div>
+      <div class="small"></div></li></ul></div>
+    
+    
+  </div>
+</div>
+<div class="small" style="margin-top:16px">Built from addon XML via CI.</div></div></body>

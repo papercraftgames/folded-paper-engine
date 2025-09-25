@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="NodeWatcher" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<param index="0" name="node" type="Node" />
+			<param index="1" name="tree_entered" type="Callable" />
+			<param index="2" name="tree_exited" type="Callable" />
+			<description>
+			</description>
+		</method>
+		<method name="_on_node_tree_entered">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_on_node_tree_exited">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="_NODE" type="Node" setter="" getter="" default="null">
+		</member>
+		<member name="_TREE_ENTERED" type="Callable" setter="" getter="">
+		</member>
+		<member name="_TREE_EXITED" type="Callable" setter="" getter="">
+		</member>
+		<member name="node" type="Node" setter="@node_setter" getter="@node_getter">
+		</member>
+	</members>
+</class>

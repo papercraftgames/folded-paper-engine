@@ -1,0 +1,39 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AudioUtils — API</title><link rel="stylesheet" href="./style.css"><body><div class="container">
+<h1>AudioUtils — API</h1>
+<div class="grid">
+  <div>
+    <div class="card">
+      <div><strong>Class:</strong> AudioUtils</div>
+      <div class="small">Inherits: FPEGlobalsConfig</div>
+      
+    </div>
+  </div>
+  <div>
+    
+    <div class="card"><h2>Properties</h2><ul class="list"><li><div><code class="code">bool BACKGROUND_MUSIC_PAUSED = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">AudioStreamPlayer CURRENT_BACKGROUND_MUSIC</code></div>
+       <div class="small"></div></li><li><div><code class="code">AudioStreamPlayer LAST_BACKGROUND_MUSIC</code></div>
+       <div class="small"></div></li><li><div><code class="code">float PAUSED_BACKGROUND_MUSIC_POSITION = 0.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool ALL_SPEAKERS_PAUSED = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">Dictionary[String, bool] PAUSED_SPEAKERS = {}</code></div>
+       <div class="small"></div></li><li><div><code class="code">Dictionary[String, float] PAUSED_SPEAKER_POSITIONS = {}</code></div>
+       <div class="small"></div></li></ul></div>
+    <div class="card"><h2>Methods</h2><ul class="list"><li><div><code class="code">void play_speaker(String name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void pause_speaker(String name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void pause_all_playing_speakers()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void resume_all_paused_speakers()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void stop_speaker(String name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void stop_all_speakers()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void stop_and_clean_up_speakers(bool destroy = false)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _on_music_finished()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void play_next_background_music()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void pause_background_music()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void resume_background_music()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void stop_and_clean_up_background_music(bool destroy = false)</code></div>
+      <div class="small"></div></li></ul></div>
+    
+    
+  </div>
+</div>
+<div class="small" style="margin-top:16px">Built from addon XML via CI.</div></div></body>

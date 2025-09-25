@@ -1,0 +1,72 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CharacterAI — API</title><link rel="stylesheet" href="./style.css"><body><div class="container">
+<h1>CharacterAI — API</h1>
+<div class="grid">
+  <div>
+    <div class="card">
+      <div><strong>Class:</strong> CharacterAI</div>
+      <div class="small">Inherits: CharacterControls</div>
+      
+    </div>
+  </div>
+  <div>
+    
+    <div class="card"><h2>Properties</h2><ul class="list"><li><div><code class="code">Node3D BOUNDS</code></div>
+       <div class="small"></div></li><li><div><code class="code">Vector3[] path_points = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">int current_path_index = 0</code></div>
+       <div class="small"></div></li><li><div><code class="code">float path_timer = 0.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">float path_update_interval = 10.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">float visit_distance = 0.2</code></div>
+       <div class="small"></div></li><li><div><code class="code">float distance_threshold = 4.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">Vector3[] available_waypoints = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">Array[] perimeter_boundary = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">PackedVector3Array bounds_vertices = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">Array[] bounds_edges = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">Vector2 bounds_min</code></div>
+       <div class="small"></div></li><li><div><code class="code">Vector2 bounds_max</code></div>
+       <div class="small"></div></li><li><div><code class="code">float max_speed = 0.5</code></div>
+       <div class="small"></div></li><li><div><code class="code">float min_speed = 0.1</code></div>
+       <div class="small"></div></li><li><div><code class="code">float speed_distance_threshold = 2.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">Vector2 current_movement_direction = Vector2(0, 0)</code></div>
+       <div class="small"></div></li><li><div><code class="code">float direction_change_threshold = 0.3</code></div>
+       <div class="small"></div></li><li><div><code class="code">float stuck_detection_timer = 0.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">float stuck_check_interval = 2.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">Vector2 last_position = Vector2(0, 0)</code></div>
+       <div class="small"></div></li><li><div><code class="code">float min_expected_movement = 0.1</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool is_idling_between_points = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">float idle_timer = 0.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">float idle_duration = 3.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">float direction_change_timer = 0.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">float direction_change_interval = 2.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">Vector2 current_input = Vector2(0, 0)</code></div>
+       <div class="small"></div></li><li><div><code class="code">float stuck_threshold_time = 3.0</code></div>
+       <div class="small"></div></li></ul></div>
+    <div class="card"><h2>Methods</h2><ul class="list"><li><div><code class="code">void _ready()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _physics_process(float delta)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _move_towards_current_target(float delta)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _pick_new_path()</code></div>
+      <div class="small"></div></li><li><div><code class="code">Vector3 _find_next_waypoint_in_range(Vector3 from_point, Vector3[] candidates)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _analyze_bounds_mesh()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _extract_vertices_and_edges_from_mesh(MeshInstance3D mesh_instance)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _add_edge(int v1, int v2)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _detect_perimeter_boundary()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _count_edge_usage(Dictionary edge_count, int v1, int v2)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _generate_pathfinding_waypoints()</code></div>
+      <div class="small"></div></li><li><div><code class="code">bool _is_point_inside_shape(Vector2 point)</code></div>
+      <div class="small"></div></li><li><div><code class="code">bool _is_point_inside_perimeter_polygon(Vector2 point)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Vector2[] _get_ordered_perimeter_points()</code></div>
+      <div class="small"></div></li><li><div><code class="code">bool _is_point_safely_inside_perimeter(Vector2 point, float safety_margin = 0.5)</code></div>
+      <div class="small"></div></li><li><div><code class="code">float _distance_point_to_line_segment(Vector2 point, Vector2 line_start, Vector2 line_end)</code></div>
+      <div class="small"></div></li><li><div><code class="code">bool _path_crosses_perimeter(Vector3 point1, Vector3 point2)</code></div>
+      <div class="small"></div></li><li><div><code class="code">bool _line_segments_intersect_robust(Vector2 p1, Vector2 q1, Vector2 p2, Vector2 q2)</code></div>
+      <div class="small"></div></li><li><div><code class="code">int _orientation(Vector2 p, Vector2 q, Vector2 r)</code></div>
+      <div class="small"></div></li><li><div><code class="code">bool _point_on_segment_robust(Vector2 p, Vector2 q, Vector2 r)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Vector3 _find_nearest_waypoint_to_position(Vector3 position)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Node _find_node_by_name(Node node, String name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _pick_new_direction()</code></div>
+      <div class="small"></div></li></ul></div>
+    
+    
+  </div>
+</div>
+<div class="small" style="margin-top:16px">Built from addon XML via CI.</div></div></body>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="FPEEventManager" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Hook into and dispatch events declared in the Scene Events panel in the FPE Blender addon.
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_get_event_utils" qualifiers="static">
+			<return type="EventUtils" />
+			<description>
+			</description>
+		</method>
+		<method name="dispatch_event" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="event" type="FPEEvent" />
+			<description>
+			</description>
+		</method>
+		<method name="add_event_handler" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="type" type="String" />
+			<param index="1" name="handler" type="EventHandler" />
+			<description>
+			</description>
+		</method>
+		<method name="remove_event_handler" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="type" type="String" />
+			<param index="1" name="handler" type="EventHandler" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="GLOBAL_INSTANCE" type="FPEEventManager" setter="" getter="" default="&lt;unknown&gt;">
+		</member>
+		<member name="EVENT_UTILS" type="EventUtils" setter="" getter="">
+		</member>
+	</members>
+	<signals>
+		<signal name="fpe_event">
+			<param index="0" name="event" type="FPEEvent" />
+			<description>
+			</description>
+		</signal>
+	</signals>
+</class>

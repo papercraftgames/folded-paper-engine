@@ -1,0 +1,45 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FPEGlobals — API</title><link rel="stylesheet" href="./style.css"><body><div class="container">
+<h1>FPEGlobals — API</h1>
+<div class="grid">
+  <div>
+    <div class="card">
+      <div><strong>Class:</strong> FPEGlobals</div>
+      <div class="small">Inherits: RefCounted</div>
+      
+    </div>
+  </div>
+  <div>
+    
+    <div class="card"><h2>Properties</h2><ul class="list"><li><div><code class="code">PlayerControls[] PLAYER_LIST = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">DeviceProxy[] DEVICE_PROXY_LIST = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">Cursor3D[] CURSOR_LIST = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">Camera3D[] PLAYER_CAMERAS = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">WorldEnvironment WORLD_ENVIRONMENT</code></div>
+       <div class="small"></div></li><li><div><code class="code">AudioStreamPlayer[] BACKGROUND_MUSIC = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">float BACKGROUND_MUSIC_VOLUME = -10.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">float GRAVITY = 20.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">Node3D STAGE_SCENE</code></div>
+       <div class="small"></div></li><li><div><code class="code">Dictionary SCENE_EVENT_DATA = {}</code></div>
+       <div class="small"></div></li><li><div><code class="code">Node CURRENT_LOADED_ROOT</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool DEACTIVATE_PLAYER_CONTROLS = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool DEACTIVATE_CHARACTER_MOVEMENT = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool DEACTIVATE_TRIGGERS = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool DEACTIVATE_UI_CONTROLS = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">Dictionary[String, AnimationPlayer] ANIMATION_PLAYER_MAP = {}</code></div>
+       <div class="small"></div></li><li><div><code class="code">Dictionary ANIMATION_DATA_MAP = {}</code></div>
+       <div class="small"></div></li><li><div><code class="code">Dictionary[String, AudioStreamPlayer3D] SPEAKER_MAP = {}</code></div>
+       <div class="small"></div></li><li><div><code class="code">Dictionary[String, Camera3D] SCENE_CAMERAS = {}</code></div>
+       <div class="small"></div></li><li><div><code class="code">UIOption3D[] UI_OPTIONS = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">Dictionary[String, SubSceneHost] SUB_SCENE_HOST_MAP = {}</code></div>
+       <div class="small"></div></li><li><div><code class="code">RigidBody3D[] RIGID_BODY_LIST = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">Dictionary[String, FrameTicker] SPRITE_ANIMATION_MAP = {}</code></div>
+       <div class="small"></div></li></ul></div>
+    <div class="card"><h2>Methods</h2><ul class="list"><li><div><code class="code">void clear_all()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void global_clear_all()</code></div>
+      <div class="small"></div></li></ul></div>
+    
+    
+  </div>
+</div>
+<div class="small" style="margin-top:16px">Built from addon XML via CI.</div></div></body>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="InventoryConstants" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<constants>
+		<constant name="INVENTORY_TYPES" value="Dictionary[String, String]({&quot;CHARACTER&quot;: &quot;CHARACTER&quot;, &quot;PLAYER&quot;: &quot;PLAYER&quot;})">
+		</constant>
+		<constant name="ITEM_SLOT_DATA" value="Dictionary[String, String]({&quot;InventoryItemKind&quot;: &quot;InventoryItemKind&quot;, &quot;InventoryItemQuantity&quot;: &quot;InventoryItemQuantity&quot;})">
+		</constant>
+	</constants>
+</class>

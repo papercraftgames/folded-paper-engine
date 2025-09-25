@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="FoldedPaperEngine" inherits="Node3D" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Folded Paper Engine
+	</brief_description>
+	<description>
+		Load scenes, exported from Blender, with FPE Properties and Settings.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_ready">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="global_load_level" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="file_path" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="global_unload_level" qualifiers="static">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="add_load_proceedure" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="proceedure" type="Callable" />
+			<description>
+			</description>
+		</method>
+		<method name="remove_load_proceedure" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="proceedure" type="Callable" />
+			<description>
+			</description>
+		</method>
+		<method name="add_unload_proceedure" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="proceedure" type="Callable" />
+			<description>
+			</description>
+		</method>
+		<method name="remove_unload_proceedure" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="proceedure" type="Callable" />
+			<description>
+			</description>
+		</method>
+		<method name="call_load_proceedures" qualifiers="static">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="call_unload_proceedures" qualifiers="static">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_setup">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_teardown">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_on_joy_change">
+			<return type="void" />
+			<param index="0" name="_device" type="int" />
+			<param index="1" name="_connected" type="bool" />
+			<description>
+			</description>
+		</method>
+		<method name="_enter_tree">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_exit_tree">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="FPE_GLOBAL_INSTANCE" type="FoldedPaperEngine" setter="" getter="">
+		</member>
+		<member name="GLOBAL_FEATURE_UTILS" type="FeatureUtils" setter="" getter="">
+		</member>
+		<member name="GLOBAL_STAGE" type="Node3D" setter="" getter="">
+		</member>
+		<member name="GLOBAL_ENVIRONMENT" type="WorldEnvironment" setter="" getter="">
+		</member>
+		<member name="LOAD_PROCEEDURES" type="Callable[]" setter="" getter="" default="[]">
+		</member>
+		<member name="UNLOAD_PROCEEDURES" type="Callable[]" setter="" getter="" default="[]">
+		</member>
+		<member name="capture_pointer" type="bool" setter="" getter="" default="true">
+			Should the pointer be captured.
+		</member>
+		<member name="path" type="String" setter="" getter="">
+			Path to the GLB/GLTF file to load at runtime.
+		</member>
+		<member name="environment" type="WorldEnvironment" setter="" getter="">
+			WorldEnvironment providing environment/lighting settings used during the load.
+		</member>
+		<member name="_previous_input_mouse_mode" type="int" setter="" getter="" enum="Input.MouseMode" default="&lt;unknown&gt;">
+		</member>
+		<member name="_listening_for_joy_change" type="bool" setter="" getter="" default="false">
+		</member>
+	</members>
+	<signals>
+		<signal name="global_feature_utils_change">
+			<description>
+			</description>
+		</signal>
+	</signals>
+</class>

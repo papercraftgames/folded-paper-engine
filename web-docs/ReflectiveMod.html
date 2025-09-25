@@ -1,0 +1,26 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ReflectiveMod — API</title><link rel="stylesheet" href="./style.css"><body><div class="container">
+<h1>ReflectiveMod — API</h1>
+<div class="grid">
+  <div>
+    <div class="card">
+      <div><strong>Class:</strong> ReflectiveMod</div>
+      <div class="small">Inherits: MaterialFeatureBase</div>
+      <hr class="small"><div>ReflectiveMod.gd</div>
+    </div>
+  </div>
+  <div>
+    
+    
+    <div class="card"><h2>Methods</h2><ul class="list"><li><div><code class="code">bool _has_prop(Object obj, StringName name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">ReflectionProbe _get_or_create_probe(Node3D host)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Vector3 _compute_cube(Vector3 aabb_size)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _apply_probe_settings(ReflectionProbe probe, Vector3 center_local, Vector3 cube_size, float intensity, int reflection_mask, int capture_mask)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _tune_standard_level(StandardMaterial3D stdm, float level)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void apply(Material material, Variant data, MeshInstance3D mesh_instance)</code></div>
+      <div class="small"></div></li></ul></div>
+    
+    <div class="card"><h2>Constants / Enums</h2><ul class="list"><li><code class="code">PROBE_NAME = &amp;&quot;_EnvProbe&quot;</code></li><li><code class="code">PRIVATE_LAYER_BIT = 19</code></li><li><code class="code">PRIVATE_LAYER_MASK = 524288</code></li><li><code class="code">ALL_LAYERS_MASK = 1048575</code></li><li><code class="code">BASE_CAPTURE_EDGE = 2.0</code></li><li><code class="code">CAPTURE_MULT = 4.0</code></li><li><code class="code">MIN_EDGE = 0.25</code></li><li><code class="code">PROBE_RESOLUTION = 128</code></li></ul></div>
+  </div>
+</div>
+<div class="small" style="margin-top:16px">Built from addon XML via CI.</div></div></body>

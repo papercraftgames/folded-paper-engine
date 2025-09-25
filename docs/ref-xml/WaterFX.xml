@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="WaterFX" inherits="FeatureBase" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="apply">
+			<return type="void" />
+			<param index="0" name="node" type="Node3D" />
+			<param index="1" name="_data" type="Variant" />
+			<description>
+			</description>
+		</method>
+		<method name="_apply_recursive">
+			<return type="void" />
+			<param index="0" name="n" type="Node" />
+			<description>
+			</description>
+		</method>
+		<method name="_apply_to_mesh">
+			<return type="void" />
+			<param index="0" name="mi" type="MeshInstance3D" />
+			<description>
+			</description>
+		</method>
+		<method name="_shader_uniform_names" qualifiers="static">
+			<return type="Dictionary" />
+			<param index="0" name="sh" type="Shader" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<constants>
+		<constant name="MAT_FALLBACK" value="&lt;Object&gt;">
+		</constant>
+		<constant name="SH_WOBBLE" value="&lt;Object&gt;">
+		</constant>
+	</constants>
+</class>

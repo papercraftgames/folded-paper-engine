@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="SpeakerMod" inherits="FeatureBase" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="setup_audio">
+			<return type="void" />
+			<param index="0" name="node" type="Node3D" />
+			<param index="1" name="audio_path" type="String" />
+			<param index="2" name="loop" type="bool" default="false" />
+			<param index="3" name="volume_db" type="float" default="0.0" />
+			<param index="4" name="max_distance" type="float" default="50.0" />
+			<param index="5" name="autoplay" type="bool" default="false" />
+			<description>
+			</description>
+		</method>
+		<method name="apply">
+			<return type="void" />
+			<param index="0" name="node" type="Node3D" />
+			<param index="1" name="data" type="Variant" />
+			<description>
+			</description>
+		</method>
+	</methods>
+</class>

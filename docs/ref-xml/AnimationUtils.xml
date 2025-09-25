@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="AnimationUtils" inherits="FPEGlobalsConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_is_transform3d_type" qualifiers="static">
+			<return type="bool" />
+			<param index="0" name="t" type="int" />
+			<description>
+			</description>
+		</method>
+		<method name="_clone_animation_track" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="from_anim" type="Animation" />
+			<param index="1" name="to_anim" type="Animation" />
+			<param index="2" name="track_idx" type="int" />
+			<description>
+			</description>
+		</method>
+		<method name="_clone_filtered_animation" qualifiers="static">
+			<return type="Animation" />
+			<param index="0" name="source_anim" type="Animation" />
+			<description>
+			</description>
+		</method>
+		<method name="fix_animation_path">
+			<return type="void" />
+			<param index="0" name="anim_name" type="String" />
+			<param index="1" name="parent_from_path" type="String" />
+			<param index="2" name="parent_to_path" type="String" />
+			<param index="3" name="include_parent" type="bool" default="false" />
+			<description>
+			</description>
+		</method>
+		<method name="fix_paths_for_all_animations">
+			<return type="void" />
+			<param index="0" name="parent_from_path" type="String" />
+			<param index="1" name="parent_to_path" type="String" />
+			<param index="2" name="include_parent" type="bool" default="false" />
+			<description>
+			</description>
+		</method>
+		<method name="_get_animation_player_map_from_node" qualifiers="static">
+			<return type="Dictionary[String, AnimationPlayer]" />
+			<param index="0" name="node" type="Node" />
+			<param index="1" name="root" type="Node3D" />
+			<param index="2" name="animation_player_map" type="Dictionary[String, AnimationPlayer]" default="{}" />
+			<description>
+			</description>
+		</method>
+		<method name="get_animation_player_map_from_root" qualifiers="static">
+			<return type="Dictionary[String, AnimationPlayer]" />
+			<param index="0" name="root" type="Node3D" />
+			<description>
+			</description>
+		</method>
+		<method name="apply_rest_pose_to_skeleton" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="skeleton" type="Skeleton3D" />
+			<description>
+			</description>
+		</method>
+		<method name="initialize_skeletons" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="root" type="Node3D" />
+			<description>
+			</description>
+		</method>
+		<method name="_initialize_skeletons_recursive" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="node" type="Node" />
+			<description>
+			</description>
+		</method>
+		<method name="get_animation_player">
+			<return type="AnimationPlayer" />
+			<param index="0" name="anim_name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="is_animation">
+			<return type="bool" />
+			<param index="0" name="anim_name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="play_animation">
+			<return type="void" />
+			<param index="0" name="anim_name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="pause_animation">
+			<return type="void" />
+			<param index="0" name="anim_name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="pause_playing_animations">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="resume_paused_animations">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="stop_animation">
+			<return type="void" />
+			<param index="0" name="anim_name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="stop_all_animations">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="initialize_animations">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="ALL_ANIMATIONS_PAUSED" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="PAUSED_ANIMATION_NAMES" type="Dictionary[String, bool]" setter="" getter="" default="{}">
+		</member>
+	</members>
+</class>

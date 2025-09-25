@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="FPEEvent" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<param index="0" name="event_type" type="String" />
+			<param index="1" name="event_owner" type="Node" />
+			<param index="2" name="event_initiator" type="Node" />
+			<param index="3" name="event_data" type="Variant" default="null" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="type" type="String" setter="" getter="">
+		</member>
+		<member name="owner" type="Node" setter="" getter="">
+		</member>
+		<member name="initiator" type="Node" setter="" getter="">
+		</member>
+		<member name="data" type="Variant" setter="" getter="">
+		</member>
+	</members>
+</class>

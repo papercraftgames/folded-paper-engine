@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="ReflectiveMod" inherits="MaterialFeatureBase" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		ReflectiveMod.gd
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_has_prop" qualifiers="static">
+			<return type="bool" />
+			<param index="0" name="obj" type="Object" />
+			<param index="1" name="name" type="StringName" />
+			<description>
+			</description>
+		</method>
+		<method name="_get_or_create_probe" qualifiers="static">
+			<return type="ReflectionProbe" />
+			<param index="0" name="host" type="Node3D" />
+			<description>
+			</description>
+		</method>
+		<method name="_compute_cube" qualifiers="static">
+			<return type="Vector3" />
+			<param index="0" name="aabb_size" type="Vector3" />
+			<description>
+			</description>
+		</method>
+		<method name="_apply_probe_settings" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="probe" type="ReflectionProbe" />
+			<param index="1" name="center_local" type="Vector3" />
+			<param index="2" name="cube_size" type="Vector3" />
+			<param index="3" name="intensity" type="float" />
+			<param index="4" name="reflection_mask" type="int" />
+			<param index="5" name="capture_mask" type="int" />
+			<description>
+			</description>
+		</method>
+		<method name="_tune_standard_level" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="stdm" type="StandardMaterial3D" />
+			<param index="1" name="level" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="apply">
+			<return type="void" />
+			<param index="0" name="material" type="Material" />
+			<param index="1" name="data" type="Variant" />
+			<param index="2" name="mesh_instance" type="MeshInstance3D" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<constants>
+		<constant name="PROBE_NAME" value="&amp;&quot;_EnvProbe&quot;">
+		</constant>
+		<constant name="PRIVATE_LAYER_BIT" value="19">
+		</constant>
+		<constant name="PRIVATE_LAYER_MASK" value="524288">
+		</constant>
+		<constant name="ALL_LAYERS_MASK" value="1048575">
+		</constant>
+		<constant name="BASE_CAPTURE_EDGE" value="2.0">
+		</constant>
+		<constant name="CAPTURE_MULT" value="4.0">
+		</constant>
+		<constant name="MIN_EDGE" value="0.25">
+		</constant>
+		<constant name="PROBE_RESOLUTION" value="128">
+		</constant>
+	</constants>
+</class>

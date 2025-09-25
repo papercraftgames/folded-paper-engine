@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="FrameEventRunner" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<param index="0" name="feature_utils" type="FeatureUtils" />
+			<description>
+			</description>
+		</method>
+		<method name="_ready">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_load_frame_commands">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_sort_frame_events">
+			<return type="bool" />
+			<param index="0" name="a" type="Dictionary" />
+			<param index="1" name="b" type="Dictionary" />
+			<description>
+			</description>
+		</method>
+		<method name="_process">
+			<return type="void" />
+			<param index="0" name="_delta" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="_trigger_frame_event">
+			<return type="void" />
+			<param index="0" name="anim_target" type="NodePath" />
+			<param index="1" name="event" type="Dictionary" />
+			<param index="2" name="anim_name" type="String" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="FEATURE_UTILS" type="FeatureUtils" setter="" getter="">
+		</member>
+		<member name="_frame_events_by_anim" type="Dictionary" setter="" getter="" default="{}">
+		</member>
+		<member name="_last_checked_frame_by_anim" type="Dictionary" setter="" getter="" default="{}">
+		</member>
+	</members>
+	<constants>
+		<constant name="FRAME_TOLERANCE" value="0.02">
+		</constant>
+	</constants>
+</class>

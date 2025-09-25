@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="CommandUtils" inherits="FeatureConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="get_command_execution_map">
+			<return type="Dictionary[String, Callable]" />
+			<description>
+			</description>
+		</method>
+		<method name="_execute_command_by_type">
+			<return type="void" />
+			<param index="0" name="node" type="Node" />
+			<param index="1" name="type" type="String" />
+			<param index="2" name="config" type="Dictionary" />
+			<param index="3" name="triggered_by" type="Node" />
+			<description>
+			</description>
+		</method>
+		<method name="execute_commands_with_config">
+			<return type="void" />
+			<param index="0" name="node" type="Node" />
+			<param index="1" name="config" type="Dictionary" />
+			<param index="2" name="triggered_by" type="Node" />
+			<description>
+			</description>
+		</method>
+	</methods>
+</class>

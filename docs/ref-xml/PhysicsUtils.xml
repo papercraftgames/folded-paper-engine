@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="PhysicsUtils" inherits="FeatureConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="enhance_static_body" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="node" type="Node" />
+			<description>
+			</description>
+		</method>
+		<method name="enhance_rigid_body" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="node" type="Node" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<constants>
+		<constant name="MOVING_PLATFORM_STATIC_SCRIPT" value="&lt;Object&gt;">
+		</constant>
+		<constant name="ADVANCED_RIGID_BODY_SCRIPT" value="&lt;Object&gt;">
+		</constant>
+	</constants>
+</class>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DeviceMapping" inherits="Resource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="set_device_type">
+			<return type="void" />
+			<param index="0" name="type" type="DeviceType" />
+			<description>
+			</description>
+		</method>
+		<method name="get_device_type">
+			<return type="DeviceType" />
+			<description>
+			</description>
+		</method>
+		<method name="_get_action_map">
+			<return type="Dictionary" />
+			<param index="0" name="action" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="add_action">
+			<return type="void" />
+			<param index="0" name="action" type="String" />
+			<param index="1" name="actuator" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="remove_action_actuator">
+			<return type="void" />
+			<param index="0" name="action" type="String" />
+			<param index="1" name="actuator" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="remove_action">
+			<return type="void" />
+			<param index="0" name="action" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="has_action">
+			<return type="bool" />
+			<param index="0" name="action" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="get_actuators_for_action">
+			<return type="Array" />
+			<param index="0" name="action" type="String" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="action_map" type="Dictionary[String, Dictionary]" setter="" getter="" default="{}">
+		</member>
+		<member name="device_type" type="DeviceType" setter="" getter="" default="&lt;unknown&gt;">
+		</member>
+	</members>
+</class>

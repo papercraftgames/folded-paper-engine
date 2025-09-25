@@ -1,0 +1,27 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Inventory — API</title><link rel="stylesheet" href="./style.css"><body><div class="container">
+<h1>Inventory — API</h1>
+<div class="grid">
+  <div>
+    <div class="card">
+      <div><strong>Class:</strong> Inventory</div>
+      <div class="small">Inherits: DataItem</div>
+      
+    </div>
+  </div>
+  <div>
+    
+    <div class="card"><h2>Properties</h2><ul class="list"><li><div><code class="code">Dictionary[int, InventorySlotRow] slot_rows = {}</code></div>
+       <div class="small"></div></li><li><div><code class="code">InventorySize size = &lt;unknown&gt;</code></div>
+       <div class="small"></div></li></ul></div>
+    <div class="card"><h2>Methods</h2><ul class="list"><li><div><code class="code">void _init(Dictionary[String, Variant] data = {})</code></div>
+      <div class="small"></div></li><li><div><code class="code">void from_dict(Dictionary dict)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void add_quantity_to_row_at_position(InventoryItemSlot slot_info, int row_number, int position, Callable ejected)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void auto_add_quantity(InventoryItemSlot slot_info, Callable overflow)</code></div>
+      <div class="small"></div></li><li><div><code class="code">InventoryItemSlot pick_up_quantity_from_slot(int quantity, int row_number, int position)</code></div>
+      <div class="small"></div></li></ul></div>
+    
+    
+  </div>
+</div>
+<div class="small" style="margin-top:16px">Built from addon XML via CI.</div></div></body>

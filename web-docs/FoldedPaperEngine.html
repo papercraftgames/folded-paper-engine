@@ -1,0 +1,47 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FoldedPaperEngine — API</title><link rel="stylesheet" href="./style.css"><body><div class="container">
+<h1>FoldedPaperEngine — API</h1>
+<div class="grid">
+  <div>
+    <div class="card">
+      <div><strong>Class:</strong> FoldedPaperEngine</div>
+      <div class="small">Inherits: Node3D</div>
+      <hr class="small"><div>Folded Paper Engine</div>
+    </div>
+  </div>
+  <div>
+    <div class="card">Load scenes, exported from Blender, with FPE Properties and Settings.</div>
+    <div class="card"><h2>Properties</h2><ul class="list"><li><div><code class="code">FoldedPaperEngine FPE_GLOBAL_INSTANCE</code></div>
+       <div class="small"></div></li><li><div><code class="code">FeatureUtils GLOBAL_FEATURE_UTILS</code></div>
+       <div class="small"></div></li><li><div><code class="code">Node3D GLOBAL_STAGE</code></div>
+       <div class="small"></div></li><li><div><code class="code">WorldEnvironment GLOBAL_ENVIRONMENT</code></div>
+       <div class="small"></div></li><li><div><code class="code">Callable[] LOAD_PROCEEDURES = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">Callable[] UNLOAD_PROCEEDURES = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool capture_pointer = true</code></div>
+       <div class="small"></div></li><li><div><code class="code">String path</code></div>
+       <div class="small"></div></li><li><div><code class="code">WorldEnvironment environment</code></div>
+       <div class="small"></div></li><li><div><code class="code">int _previous_input_mouse_mode = &lt;unknown&gt;</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool _listening_for_joy_change = false</code></div>
+       <div class="small"></div></li></ul></div>
+    <div class="card"><h2>Methods</h2><ul class="list"><li><div><code class="code">void _init()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _ready()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void global_load_level(String file_path)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void global_unload_level()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void add_load_proceedure(Callable proceedure)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void remove_load_proceedure(Callable proceedure)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void add_unload_proceedure(Callable proceedure)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void remove_unload_proceedure(Callable proceedure)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void call_load_proceedures()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void call_unload_proceedures()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _setup()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _teardown()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _on_joy_change(int _device, bool _connected)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _enter_tree()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _exit_tree()</code></div>
+      <div class="small"></div></li></ul></div>
+    <div class="card"><h2>Signals</h2><ul class="list"><li><div><code class="code">signal global_feature_utils_change()</code></div>
+      <div class="small"></div></li></ul></div>
+    
+  </div>
+</div>
+<div class="small" style="margin-top:16px">Built from addon XML via CI.</div></div></body>

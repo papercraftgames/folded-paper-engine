@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="FPEUI" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="update_children" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="node" type="Node" />
+			<param index="1" name="wanted" type="Node[]" />
+			<description>
+			</description>
+		</method>
+		<method name="Mount" qualifiers="static">
+			<return type="Callable" />
+			<param index="0" name="entry" type="Dictionary" />
+			<param index="1" name="parent" type="Node" />
+			<description>
+			</description>
+		</method>
+		<method name="FC" qualifiers="static">
+			<return type="Callable" />
+			<param index="0" name="construct" type="Callable" />
+			<param index="1" name="render" type="Variant" default="null" />
+			<description>
+			</description>
+		</method>
+		<method name="_flat_into" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="arr" type="Array" />
+			<param index="1" name="out" type="Array" />
+			<param index="2" name="level" type="int" />
+			<param index="3" name="depth" type="int" />
+			<description>
+			</description>
+		</method>
+		<method name="ComposeChildren" qualifiers="static">
+			<return type="Array" />
+			<param index="0" name="arr" type="Array" />
+			<param index="1" name="depth" type="int" default="-1" />
+			<description>
+			</description>
+		</method>
+		<method name="_dispose_all_id" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="id" type="int" />
+			<description>
+			</description>
+		</method>
+		<method name="wire_once" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="node" type="Object" />
+			<param index="1" name="key" type="String" />
+			<param index="2" name="setup" type="Callable" />
+			<param index="3" name="cleanup" type="Variant" />
+			<description>
+			</description>
+		</method>
+		<method name="_bucket" qualifiers="static">
+			<return type="Dictionary" />
+			<param index="0" name="id" type="int" />
+			<description>
+			</description>
+		</method>
+		<method name="_stable_repr" qualifiers="static">
+			<return type="Variant" />
+			<param index="0" name="v" type="Variant" />
+			<description>
+			</description>
+		</method>
+		<method name="_deps_hash" qualifiers="static">
+			<return type="int" />
+			<param index="0" name="deps" type="Array" />
+			<description>
+			</description>
+		</method>
+		<method name="on_dep" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="node" type="Object" />
+			<param index="1" name="signal_name" type="StringName" />
+			<param index="2" name="key" type="StringName" />
+			<param index="3" name="deps" type="Array" />
+			<param index="4" name="cb" type="Callable" />
+			<description>
+			</description>
+		</method>
+		<method name="on" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="node" type="Object" />
+			<param index="1" name="signal_name" type="StringName" />
+			<param index="2" name="key" type="StringName" />
+			<param index="3" name="cb" type="Callable" />
+			<description>
+			</description>
+		</method>
+		<method name="off" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="node" type="Object" />
+			<param index="1" name="key" type="StringName" />
+			<description>
+			</description>
+		</method>
+		<method name="dispose" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="node" type="Object" />
+			<param index="1" name="key" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="dispose_all" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="node" type="Object" />
+			<description>
+			</description>
+		</method>
+		<method name="rewire" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="node" type="Object" />
+			<param index="1" name="key" type="String" />
+			<param index="2" name="setup" type="Callable" />
+			<param index="3" name="cleanup" type="Variant" default="null" />
+			<description>
+			</description>
+		</method>
+		<method name="effect" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="node" type="Object" />
+			<param index="1" name="key" type="String" />
+			<param index="2" name="setup" type="Callable" />
+			<param index="3" name="cleanup" type="Callable" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="_wired" type="Dictionary" setter="" getter="" default="{}">
+		</member>
+	</members>
+</class>

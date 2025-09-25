@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="AudioUtils" inherits="FPEGlobalsConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="play_speaker">
+			<return type="void" />
+			<param index="0" name="name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="pause_speaker">
+			<return type="void" />
+			<param index="0" name="name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="pause_all_playing_speakers">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="resume_all_paused_speakers">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="stop_speaker">
+			<return type="void" />
+			<param index="0" name="name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="stop_all_speakers">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="stop_and_clean_up_speakers">
+			<return type="void" />
+			<param index="0" name="destroy" type="bool" default="false" />
+			<description>
+			</description>
+		</method>
+		<method name="_on_music_finished">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="play_next_background_music">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="pause_background_music">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="resume_background_music">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="stop_and_clean_up_background_music">
+			<return type="void" />
+			<param index="0" name="destroy" type="bool" default="false" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="BACKGROUND_MUSIC_PAUSED" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="CURRENT_BACKGROUND_MUSIC" type="AudioStreamPlayer" setter="" getter="">
+		</member>
+		<member name="LAST_BACKGROUND_MUSIC" type="AudioStreamPlayer" setter="" getter="">
+		</member>
+		<member name="PAUSED_BACKGROUND_MUSIC_POSITION" type="float" setter="" getter="" default="0.0">
+		</member>
+		<member name="ALL_SPEAKERS_PAUSED" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="PAUSED_SPEAKERS" type="Dictionary[String, bool]" setter="" getter="" default="{}">
+		</member>
+		<member name="PAUSED_SPEAKER_POSITIONS" type="Dictionary[String, float]" setter="" getter="" default="{}">
+		</member>
+	</members>
+</class>

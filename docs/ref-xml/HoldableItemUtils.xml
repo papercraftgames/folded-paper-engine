@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="HoldableItemUtils" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="get_hold_zone_distance" qualifiers="static">
+			<return type="float" />
+			<param index="0" name="config" type="Dictionary" />
+			<description>
+			</description>
+		</method>
+		<method name="get_hold_zone_size" qualifiers="static">
+			<return type="float" />
+			<param index="0" name="config" type="Dictionary" />
+			<description>
+			</description>
+		</method>
+		<method name="get_hold_zone_scene" qualifiers="static">
+			<return type="String" />
+			<param index="0" name="config" type="Dictionary" />
+			<description>
+			</description>
+		</method>
+		<method name="can_hold_items" qualifiers="static">
+			<return type="bool" />
+			<param index="0" name="config" type="Dictionary" />
+			<description>
+			</description>
+		</method>
+		<method name="is_item_holdable" qualifiers="static">
+			<return type="bool" />
+			<param index="0" name="node" type="Node" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<constants>
+		<constant name="HOLDABLE_SETTINGS" value="Dictionary[String, String]({&quot;CanHoldItems&quot;: &quot;CanHoldItems&quot;, &quot;HoldZoneDistance&quot;: &quot;HoldZoneDistance&quot;, &quot;HoldZoneScene&quot;: &quot;HoldZoneScene&quot;, &quot;HoldZoneSize&quot;: &quot;HoldZoneSize&quot;, &quot;Holdable&quot;: &quot;Holdable&quot;})">
+		</constant>
+	</constants>
+</class>

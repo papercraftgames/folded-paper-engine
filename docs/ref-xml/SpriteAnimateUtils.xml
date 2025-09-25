@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="SpriteAnimateUtils" inherits="FeatureConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="is_sprite_animate">
+			<return type="bool" />
+			<param index="0" name="name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="play_by_name">
+			<return type="void" />
+			<param index="0" name="name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="pause_by_name">
+			<return type="void" />
+			<param index="0" name="name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="stop_by_name">
+			<return type="void" />
+			<param index="0" name="name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="play_all">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="pause_all">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="resume_all">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="stop_all">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="_WAS_PLAYING_LIST" type="String[]" setter="" getter="" default="[]">
+		</member>
+	</members>
+</class>

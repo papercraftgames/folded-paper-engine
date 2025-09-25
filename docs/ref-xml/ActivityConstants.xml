@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="ActivityConstants" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="get_activity_type_by_numeric_value" qualifiers="static">
+			<return type="String" />
+			<param index="0" name="value" type="Variant" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<constants>
+		<constant name="ACTIVITY_TYPES" value="Dictionary[String, String]({&quot;ALL&quot;: &quot;ALL&quot;, &quot;ANIMATIONS&quot;: &quot;ANIMATIONS&quot;, &quot;BACKGROUND_MUSIC&quot;: &quot;BACKGROUND_MUSIC&quot;, &quot;CHARACTER_MOVEMENT&quot;: &quot;CHARACTER_MOVEMENT&quot;, &quot;PHYSICS&quot;: &quot;PHYSICS&quot;, &quot;PLAYER_CONTROLS&quot;: &quot;PLAYER_CONTROLS&quot;, &quot;SOUNDS&quot;: &quot;SOUNDS&quot;, &quot;SPRITE_ANIMATIONS&quot;: &quot;SPRITE_ANIMATIONS&quot;, &quot;TRIGGERS&quot;: &quot;TRIGGERS&quot;, &quot;UI_CONTROLS&quot;: &quot;UI_CONTROLS&quot;})">
+		</constant>
+		<constant name="ACTIVTIY_TYPE_INDICES" value="Array[String]([&quot;ALL&quot;, &quot;UI_CONTROLS&quot;, &quot;PLAYER_CONTROLS&quot;, &quot;CHARACTER_MOVEMENT&quot;, &quot;TRIGGERS&quot;, &quot;ANIMATIONS&quot;, &quot;SOUNDS&quot;, &quot;BACKGROUND_MUSIC&quot;, &quot;PHYSICS&quot;, &quot;SPRITE_ANIMATIONS&quot;])">
+		</constant>
+	</constants>
+</class>

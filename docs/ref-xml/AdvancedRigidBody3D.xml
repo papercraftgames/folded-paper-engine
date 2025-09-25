@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="AdvancedRigidBody3D" inherits="RigidBody3D" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_ready">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_physics_process">
+			<return type="void" />
+			<param index="0" name="_delta" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="_integrate_forces">
+			<return type="void" />
+			<param index="0" name="state" type="PhysicsDirectBodyState3D" />
+			<description>
+			</description>
+		</method>
+		<method name="_static_point_velocity">
+			<return type="Vector3" />
+			<param index="0" name="body" type="StaticBody3D" />
+			<param index="1" name="world_point" type="Vector3" />
+			<param index="2" name="dt" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="_static_angular_velocity">
+			<return type="Vector3" />
+			<param index="0" name="body" type="StaticBody3D" />
+			<param index="1" name="dt" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="set_being_held">
+			<return type="void" />
+			<param index="0" name="value" type="bool" />
+			<description>
+			</description>
+		</method>
+		<method name="get_being_held">
+			<return type="bool" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="_BEING_HELD" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="ground_normal_dot_thresh" type="float" setter="" getter="" default="0.6">
+		</member>
+		<member name="max_platform_history" type="int" setter="" getter="" default="64">
+		</member>
+		<member name="auto_enable_contact_monitoring" type="bool" setter="" getter="" default="true">
+		</member>
+		<member name="contacts_to_report" type="int" setter="" getter="" default="8">
+		</member>
+		<member name="contact_linear_velocity" type="Vector3" setter="" getter="" default="Vector3(0, 0, 0)">
+		</member>
+		<member name="contact_angular_velocity" type="Vector3" setter="" getter="" default="Vector3(0, 0, 0)">
+		</member>
+		<member name="contact_valid" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="contact_up_dot" type="float" setter="" getter="" default="0.0">
+		</member>
+		<member name="_prev_xform" type="Dictionary" setter="" getter="" default="{}">
+		</member>
+	</members>
+	<signals>
+		<signal name="being_held_changed">
+			<description>
+			</description>
+		</signal>
+	</signals>
+</class>

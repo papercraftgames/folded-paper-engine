@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="ActivityControlUtils" inherits="FeatureConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<param index="0" name="feature_utils" type="FeatureUtils" />
+			<description>
+			</description>
+		</method>
+		<method name="deactivate_ui_controls">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="reactivate_ui_controls">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="deactivate_player_controls">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="reactivate_player_controls">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="deactivate_character_movement">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="reactivate_character_movement">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="deactivate_triggers">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="reactivate_triggers">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="deactivate_animations">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="reactivate_animations">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="deactivate_sounds">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="reactivate_sounds">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="deactivate_background_music">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="reactivate_background_music">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="deactivate_physics">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="reactivate_physics">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="deactivate_sprite_animations">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="reactivate_sprite_animations">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="pause">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="resume">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="deactivate_by_types">
+			<return type="void" />
+			<param index="0" name="types" type="String[]" />
+			<description>
+			</description>
+		</method>
+		<method name="reactivate_by_types">
+			<return type="void" />
+			<param index="0" name="types" type="String[]" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="_DEACT_FUNC_MAP" type="Dictionary[String, Callable]" setter="" getter="" default="{}">
+		</member>
+		<member name="_REACT_FUNC_MAP" type="Dictionary[String, Callable]" setter="" getter="" default="{}">
+		</member>
+	</members>
+</class>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="FPEConversationManager" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Manage conversations in your RPG game.
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_process_conversation_event">
+			<return type="void" />
+			<param index="0" name="conversation_instance" type="ConversationInstance" />
+			<param index="1" name="conversation_owner" type="Node" />
+			<param index="2" name="conversation_initializer" type="Node" />
+			<description>
+			</description>
+		</method>
+		<method name="start">
+			<return type="void" />
+			<param index="0" name="conversation_owner" type="Node" />
+			<param index="1" name="conversation_initializer" type="Node" />
+			<param index="2" name="conversation_options" type="Array" />
+			<description>
+			</description>
+		</method>
+		<method name="select_reply">
+			<return type="void" />
+			<param index="0" name="reply_index" type="int" />
+			<param index="1" name="end_on_complete" type="bool" default="true" />
+			<description>
+			</description>
+		</method>
+		<method name="end">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="GLOBAL_CONVERSATION_MANAGER" type="FPEConversationManager" setter="" getter="">
+		</member>
+		<member name="CURRENT_CONVERSATION_INSTANCE" type="ConversationInstance" setter="" getter="">
+		</member>
+		<member name="CURRENT_CONVERSATION_OWNER" type="Node" setter="" getter="">
+		</member>
+		<member name="CURRENT_CONVERSATION_INITIALIZER" type="Node" setter="" getter="">
+		</member>
+	</members>
+	<signals>
+		<signal name="conversation_started">
+			<param index="0" name="conversation_instance" type="ConversationInstance" />
+			<param index="1" name="conversation_manager" type="FPEConversationManager" />
+			<description>
+			</description>
+		</signal>
+		<signal name="conversation_changed">
+			<param index="0" name="conversation_instance" type="ConversationInstance" />
+			<param index="1" name="conversation_manager" type="FPEConversationManager" />
+			<description>
+			</description>
+		</signal>
+		<signal name="conversation_ended">
+			<param index="0" name="conversation_instance" type="ConversationInstance" />
+			<param index="1" name="conversation_manager" type="FPEConversationManager" />
+			<description>
+			</description>
+		</signal>
+	</signals>
+</class>

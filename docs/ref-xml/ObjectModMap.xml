@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="ObjectModMap" inherits="FeatureConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<param index="0" name="feature_utils" type="FeatureUtils" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="Player" type="FeatureBase" setter="" getter="">
+		</member>
+		<member name="Character" type="FeatureBase" setter="" getter="">
+		</member>
+		<member name="Invisible" type="FeatureBase" setter="" getter="">
+		</member>
+		<member name="Physics" type="FeatureBase" setter="" getter="">
+		</member>
+		<member name="SpriteAnimate" type="FeatureBase" setter="" getter="">
+		</member>
+		<member name="Trigger" type="FeatureBase" setter="" getter="">
+		</member>
+		<member name="Speaker" type="FeatureBase" setter="" getter="">
+		</member>
+		<member name="UIElement" type="FeatureBase" setter="" getter="">
+		</member>
+		<member name="SubScene" type="FeatureBase" setter="" getter="">
+		</member>
+		<member name="Groups" type="FeatureBase" setter="" getter="">
+		</member>
+		<member name="ScriptPath" type="FeatureBase" setter="" getter="">
+		</member>
+	</members>
+</class>

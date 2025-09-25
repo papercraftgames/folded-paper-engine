@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="InputUtils" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="get_raw_standard_actuator_value" qualifiers="static">
+			<return type="float" />
+			<param index="0" name="event" type="InputEvent" />
+			<description>
+			</description>
+		</method>
+		<method name="get_prefix_for_event" qualifiers="static">
+			<return type="String" />
+			<param index="0" name="event" type="InputEvent" />
+			<description>
+			</description>
+		</method>
+		<method name="get_standard_actuator_name" qualifiers="static">
+			<return type="String" />
+			<param index="0" name="event" type="InputEvent" />
+			<description>
+			</description>
+		</method>
+		<method name="get_postfix_for_value" qualifiers="static">
+			<return type="String" />
+			<param index="0" name="value" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="get_full_actuator_name" qualifiers="static">
+			<return type="String" />
+			<param index="0" name="prefix" type="String" />
+			<param index="1" name="actuator_name" type="String" />
+			<param index="2" name="postfix" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="get_counterpart_postfix" qualifiers="static">
+			<return type="String" />
+			<param index="0" name="postfix" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="get_mouse_delta_by_actuator" qualifiers="static">
+			<return type="float" />
+			<param index="0" name="actuator" type="String" />
+			<param index="1" name="delta_vector" type="Vector2" />
+			<description>
+			</description>
+		</method>
+		<method name="get_joy_axis_value" qualifiers="static">
+			<return type="float" />
+			<param index="0" name="device_index" type="int" />
+			<param index="1" name="actuator_name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="get_actuator_values" qualifiers="static">
+			<return type="Dictionary[String, float]" />
+			<param index="0" name="event" type="InputEvent" />
+			<description>
+			</description>
+		</method>
+		<method name="apply_input_to_device" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="event" type="InputEvent" />
+			<param index="1" name="device" type="Device" />
+			<description>
+			</description>
+		</method>
+		<method name="apply_input_to_device_list" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="event" type="InputEvent" />
+			<param index="1" name="device_list" type="Device[]" />
+			<description>
+			</description>
+		</method>
+		<method name="apply_input_to_mapping_action" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="event" type="InputEvent" />
+			<param index="1" name="mapping" type="DeviceMapping" />
+			<param index="2" name="action" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="get_controller_type" qualifiers="static">
+			<return type="String" />
+			<param index="0" name="device_index" type="int" />
+			<description>
+			</description>
+		</method>
+		<method name="get_controller_mapping" qualifiers="static">
+			<return type="DeviceMapping" />
+			<param index="0" name="device_index" type="int" />
+			<description>
+			</description>
+		</method>
+		<method name="get_device_proxy" qualifiers="static">
+			<return type="DeviceProxy" />
+			<param index="0" name="device_index" type="int" />
+			<param index="1" name="mapping" type="DeviceMapping" />
+			<param index="2" name="mouse_enabled" type="bool" default="false" />
+			<description>
+			</description>
+		</method>
+		<method name="get_device_index_for_player_index" qualifiers="static">
+			<return type="int" />
+			<param index="0" name="player_index" type="int" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="DEFAULT_MAPPINGS" type="Dictionary[String, DeviceMapping]" setter="" getter="" default="{...}">
+		</member>
+	</members>
+</class>

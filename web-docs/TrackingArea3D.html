@@ -1,0 +1,41 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TrackingArea3D — API</title><link rel="stylesheet" href="./style.css"><body><div class="container">
+<h1>TrackingArea3D — API</h1>
+<div class="grid">
+  <div>
+    <div class="card">
+      <div><strong>Class:</strong> TrackingArea3D</div>
+      <div class="small">Inherits: Area3D</div>
+      
+    </div>
+  </div>
+  <div>
+    
+    <div class="card"><h2>Properties</h2><ul class="list"><li><div><code class="code">Node3D _TARGET_NODE</code></div>
+       <div class="small"></div></li><li><div><code class="code">Callable _TRIGGER_HANDLER</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool _PREFER_SIMPLE_BOX_SHAPE = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">InventoryItemSlot _ITEM_SLOT</code></div>
+       <div class="small"></div></li><li><div><code class="code">Vector3 _POSITION_OFFSET = Vector3(0, 0, 0)</code></div>
+       <div class="small"></div></li></ul></div>
+    <div class="card"><h2>Methods</h2><ul class="list"><li><div><code class="code">void _init(Node3D target_node, Callable trigger_handler, bool prefer_simple_box_shape = false)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _ready()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _setup()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _move_to_target()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _setup_inventory_item_slot()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void trigger(Node3D triggered_by, String trigger_type)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _body_entered_triggered(Node3D body)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _body_exit_triggered(Node3D body)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _physics_process(float _delta)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Vector3 get_position_offset()</code></div>
+      <div class="small"></div></li><li><div><code class="code">Node3D get_target_node()</code></div>
+      <div class="small"></div></li><li><div><code class="code">Dictionary get_user_data()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _destroy(bool include_target_node = false)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void destroy(bool include_target_node = false, bool immediately = false)</code></div>
+      <div class="small"></div></li><li><div><code class="code">InventoryItemSlot get_item_slot()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void set_item_slot(InventoryItemSlot new_item_slot)</code></div>
+      <div class="small"></div></li></ul></div>
+    
+    
+  </div>
+</div>
+<div class="small" style="margin-top:16px">Built from addon XML via CI.</div></div></body>

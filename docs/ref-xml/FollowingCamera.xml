@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="FollowingCamera" inherits="Camera3D" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<param index="0" name="fpe_globals" type="FPEGlobals" />
+			<param index="1" name="node" type="Node3D" />
+			<description>
+			</description>
+		</method>
+		<method name="get_rotation_around_pivot_x">
+			<return type="float" />
+			<param index="0" name="point" type="Vector3" />
+			<param index="1" name="pivot" type="Vector3" />
+			<description>
+			</description>
+		</method>
+		<method name="rotate_around_pivot_x">
+			<return type="Vector3" />
+			<param index="0" name="point" type="Vector3" />
+			<param index="1" name="pivot" type="Vector3" />
+			<param index="2" name="rads" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="rotate_around_pivot_y">
+			<return type="Vector3" />
+			<param index="0" name="point" type="Vector3" />
+			<param index="1" name="pivot" type="Vector3" />
+			<param index="2" name="src_basis" type="Basis" />
+			<description>
+			</description>
+		</method>
+		<method name="_process">
+			<return type="void" />
+			<param index="0" name="_delta" type="Variant" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="FPE_GLOBALS" type="FPEGlobals" setter="" getter="">
+		</member>
+		<member name="target" type="Node3D" setter="" getter="">
+		</member>
+		<member name="offset" type="Vector3" setter="" getter="" default="Vector3(0, 1.5, 3)">
+		</member>
+		<member name="angular_offset_degrees" type="float" setter="" getter="" default="0.0">
+		</member>
+		<member name="align" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="face" type="bool" setter="" getter="" default="false">
+		</member>
+	</members>
+</class>

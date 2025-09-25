@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="GLBMetaInclude" inherits="GLTFDocumentExtension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_get_name">
+			<return type="StringName" />
+			<description>
+			</description>
+		</method>
+		<method name="_import_preflight">
+			<return type="int" />
+			<param index="0" name="state" type="GLTFState" />
+			<param index="1" name="_extensions" type="PackedStringArray" />
+			<description>
+			</description>
+		</method>
+		<method name="_import_post_parse">
+			<return type="int" />
+			<param index="0" name="state" type="GLTFState" />
+			<description>
+			</description>
+		</method>
+		<method name="_import_post">
+			<return type="int" />
+			<param index="0" name="state" type="GLTFState" />
+			<param index="1" name="root" type="Node" />
+			<description>
+			</description>
+		</method>
+		<method name="_extract_scene_extras">
+			<return type="Dictionary" />
+			<param index="0" name="parsed" type="Dictionary" />
+			<description>
+			</description>
+		</method>
+		<method name="_extract_animation_extras">
+			<return type="Dictionary[String, Dictionary]" />
+			<param index="0" name="parsed" type="Dictionary" />
+			<description>
+			</description>
+		</method>
+		<method name="_clean_anim_name">
+			<return type="String" />
+			<param index="0" name="n" type="String" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="DEBUG" type="bool" setter="" getter="" default="false">
+		</member>
+	</members>
+	<constants>
+		<constant name="EXT_NAME" value="&amp;&quot;fpe.gltf_extras&quot;">
+		</constant>
+	</constants>
+</class>

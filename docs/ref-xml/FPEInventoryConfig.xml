@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="FPEInventoryConfig" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_setup">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_clean_up">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_enter_tree">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_exit_tree">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="inventory_kinds" type="InventoryItemKind[]" setter="" getter="" default="[]">
+			The types of supported inventory items.
+		</member>
+		<member name="player_inventory_size" type="InventorySize" setter="" getter="" default="&lt;unknown&gt;">
+			The initial player inventory size.
+		</member>
+		<member name="keep_player_inventory" type="bool" setter="" getter="" default="false">
+			Should the player keep their inventory initially.
+		</member>
+	</members>
+</class>

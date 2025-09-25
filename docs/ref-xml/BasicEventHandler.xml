@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="BasicEventHandler" inherits="EventHandler" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<param index="0" name="handler_function" type="Callable" />
+			<description>
+			</description>
+		</method>
+		<method name="handle_event">
+			<return type="void" />
+			<param index="0" name="event" type="FPEEvent" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="HANDLER_FUNCTION" type="Callable" setter="" getter="">
+		</member>
+	</members>
+</class>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="SceneEventHandler" inherits="EventHandler" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<param index="0" name="command_utils" type="CommandUtils" />
+			<param index="1" name="command_config" type="Dictionary" />
+			<description>
+			</description>
+		</method>
+		<method name="handle_event">
+			<return type="void" />
+			<param index="0" name="event" type="FPEEvent" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="COMMAND_UTILS" type="CommandUtils" setter="" getter="">
+		</member>
+		<member name="COMMAND_CONFIG" type="Dictionary" setter="" getter="">
+		</member>
+	</members>
+</class>

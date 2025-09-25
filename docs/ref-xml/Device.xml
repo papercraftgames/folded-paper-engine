@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="Device" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+			<param index="1" name="mouse_enabled" type="bool" default="false" />
+			<description>
+			</description>
+		</method>
+		<method name="actuator_is_mouse_axis">
+			<return type="bool" />
+			<param index="0" name="name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="actuator_is_gamepad_axis">
+			<return type="bool" />
+			<param index="0" name="name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="actuator_is_axis">
+			<return type="bool" />
+			<param index="0" name="name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="_set_last_actuator_level">
+			<return type="void" />
+			<param index="0" name="name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="activate_actuator">
+			<return type="void" />
+			<param index="0" name="name" type="String" />
+			<param index="1" name="amount" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="deactivate_actuator">
+			<return type="void" />
+			<param index="0" name="name" type="Variant" />
+			<description>
+			</description>
+		</method>
+		<method name="_clear_last_actuator_level">
+			<return type="void" />
+			<param index="0" name="name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="clear">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="just_had_specific_actuator_activity">
+			<return type="bool" />
+			<param index="0" name="name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="has_specific_actuator_activity">
+			<return type="bool" />
+			<param index="0" name="name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="_get_actuator_level_from_data">
+			<return type="ActuatorInfo" />
+			<param index="0" name="name" type="String" />
+			<param index="1" name="actuator_levels_data" type="Dictionary[String, float]" />
+			<param index="2" name="mouse_delta_data" type="Vector2" />
+			<param index="3" name="live_gamepad_axis" type="bool" default="true" />
+			<description>
+			</description>
+		</method>
+		<method name="get_last_actuator_level">
+			<return type="ActuatorInfo" />
+			<param index="0" name="name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="get_actuator_level">
+			<return type="ActuatorInfo" />
+			<param index="0" name="name" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="set_mouse_position">
+			<return type="void" />
+			<param index="0" name="position" type="Vector2" />
+			<description>
+			</description>
+		</method>
+		<method name="get_mouse_position">
+			<return type="Vector2" />
+			<description>
+			</description>
+		</method>
+		<method name="set_mouse_delta">
+			<return type="void" />
+			<param index="0" name="delta" type="Vector2" />
+			<description>
+			</description>
+		</method>
+		<method name="get_mouse_delta">
+			<return type="Vector2" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="device_index" type="int" setter="" getter="" default="-1">
+		</member>
+		<member name="_mouse_enabled" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="last_actuator_levels" type="Dictionary[String, float]" setter="" getter="" default="{}">
+		</member>
+		<member name="actuator_levels" type="Dictionary[String, float]" setter="" getter="" default="{}">
+		</member>
+		<member name="mouse_position" type="Vector2" setter="" getter="" default="Vector2(0, 0)">
+		</member>
+		<member name="last_mouse_delta" type="Vector2" setter="" getter="" default="Vector2(0, 0)">
+		</member>
+		<member name="mouse_delta" type="Vector2" setter="" getter="" default="Vector2(0, 0)">
+		</member>
+	</members>
+</class>

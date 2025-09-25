@@ -1,0 +1,69 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cursor3D — API</title><link rel="stylesheet" href="./style.css"><body><div class="container">
+<h1>Cursor3D — API</h1>
+<div class="grid">
+  <div>
+    <div class="card">
+      <div><strong>Class:</strong> Cursor3D</div>
+      <div class="small">Inherits: Area3D</div>
+      
+    </div>
+  </div>
+  <div>
+    
+    <div class="card"><h2>Properties</h2><ul class="list"><li><div><code class="code">FeatureUtils FEATURE_UTILS</code></div>
+       <div class="small"></div></li><li><div><code class="code">DeviceProxy DEVICE_PROXY = null</code></div>
+       <div class="small"></div></li><li><div><code class="code">Debounce _INPUT_DEBOUNCE = &lt;unknown&gt;</code></div>
+       <div class="small"></div></li><li><div><code class="code">Debounce _MOUSE_DEBOUNCE = &lt;unknown&gt;</code></div>
+       <div class="small"></div></li><li><div><code class="code">Debounce _USE_DEBOUNCE = &lt;unknown&gt;</code></div>
+       <div class="small"></div></li><li><div><code class="code">Debounce _USE_OPTION_DEBOUNCE = &lt;unknown&gt;</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool _USE_ACTIVATED = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">Node3D _TARGET</code></div>
+       <div class="small"></div></li><li><div><code class="code">float _DIST_FROM_CAMERA = 10.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">String _SELECT_ANIMATION_NAME = &quot;&quot;</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool _LOOK_AT_CAMERA = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">Node3D selected = null</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool snap_instant = true</code></div>
+       <div class="small"></div></li><li><div><code class="code">float move_time = 0.08</code></div>
+       <div class="small"></div></li><li><div><code class="code">Tween _tween = null</code></div>
+       <div class="small"></div></li><li><div><code class="code">int _previous_mouse_mode = -1</code></div>
+       <div class="small"></div></li></ul></div>
+    <div class="card"><h2>Methods</h2><ul class="list"><li><div><code class="code">void _init(FeatureUtils feature_utils, Node3D target, float cursor_depth = 10.0, String select_animation = &amp;quot;&amp;quot;, bool look_at_camera = false)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _enter_tree()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _exit_tree()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void set_device_proxy(DeviceProxy device_proxy)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _setup()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _ready()</code></div>
+      <div class="small"></div></li><li><div><code class="code">Node3D get_target()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void fix_animation_paths(String from_path)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void setup_target()</code></div>
+      <div class="small"></div></li><li><div><code class="code">Camera3D get_camera()</code></div>
+      <div class="small"></div></li><li><div><code class="code">UIOption3D[] get_options()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void set_motion(bool instant, float duration)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Node3D get_selected()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void trigger_on_selection()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void trigger_on_selection_exit()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void select_node(Node3D n, bool jump = true)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Vector3 extend_point(Vector3 from, Vector3 to, float meters)</code></div>
+      <div class="small"></div></li><li><div><code class="code">UIOption3D select_by_camera_ray()</code></div>
+      <div class="small"></div></li><li><div><code class="code">Node3D select_by_direction(Vector3 direction, float threshold_degrees = 30.0, bool allow_reverse = true)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void jump_to_direction(Vector3 input_dir)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void jump_to_node_coords(Node3D n)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _play_select_animation()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void use()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void use_option(Node3D target)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void look_at_camera()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void move_cursor_in_camera_view_at_depth(float depth)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Vector3 _dir_relative_to_basis(Vector3 v, Basis basis)</code></div>
+      <div class="small"></div></li><li><div><code class="code">ActuatorInfo get_input_action_value(StringName action_name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void respond_to_input()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _physics_process(float _dt)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Vector3 _sample_direction_from_actions()</code></div>
+      <div class="small"></div></li><li><div><code class="code">Vector3 _cam_to_world_dir(Camera3D cam, Vector3 cam_vec)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _jump_to_node(Node3D n)</code></div>
+      <div class="small"></div></li></ul></div>
+    
+    
+  </div>
+</div>
+<div class="small" style="margin-top:16px">Built from addon XML via CI.</div></div></body>

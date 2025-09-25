@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="Comment" inherits="Resource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<members>
+		<member name="content" type="String" setter="" getter="" default="&quot;&quot;">
+		</member>
+		<member name="possible_replies" type="Reply[]" setter="" getter="" default="[]">
+		</member>
+		<member name="event_type" type="String" setter="" getter="" default="&quot;&quot;">
+		</member>
+		<member name="event_data" type="Dictionary" setter="" getter="" default="{}">
+		</member>
+	</members>
+</class>

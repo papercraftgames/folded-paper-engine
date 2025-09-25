@@ -1,0 +1,230 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+<style>
+body {
+  padding: 2em;
+  background-color: #222;
+  color: #eee;
+  font-family: sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "ZCOOL KuaiLe", sans-serif;
+}
+button {
+  font-size: 1.5em;
+  appearance: none;
+  border: none;
+  padding: 1em;
+  border-radius: 0.5em;
+  background-color: #005D07;
+  color: #eee;
+  cursor: pointer;
+  &:hover {
+    background-color: #3eac47;
+  }
+}
+</style>
+
+<h1>Folded Paper Engine (0.0.10)</h1>
+<svg width="10em" height="10em" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(3.6395,0,0,3.6395,-4163.11,-3176.03)">
+        <g transform="matrix(0.608811,0,0,0.608811,863.689,506.478)">
+            <path d="M579.986,744.99L498.353,779.979L573.911,826.276L653.129,775.945L579.986,744.99Z" style="fill:rgb(196,162,135);"/>
+            <path d="M573.911,826.276L532.597,800.961L576.173,778.945L616.311,799.337L573.911,826.276Z" style="fill:rgb(178,143,114);"/>
+            <path d="M576.173,778.945L613.52,759.182L579.986,744.99L540.731,761.815L576.173,778.945Z" style="fill:rgb(213,182,157);"/>
+        </g>
+        <g transform="matrix(0.56184,0,0,0.56184,932.327,525.663)">
+            <g transform="matrix(1,0,0,1,87.0268,-21.2691)">
+                <path d="M346.598,722.642C344.576,719.245 343.421,715.325 343.421,711.151C343.421,698.21 354.517,687.704 368.184,687.704C369.319,687.704 370.437,687.777 371.532,687.917C371.318,686.678 371.207,685.405 371.207,684.109C371.207,671.168 382.302,660.662 395.969,660.662C397.783,660.662 399.551,660.847 401.254,661.198C404.68,652.137 413.833,645.648 424.574,645.648C436.75,645.648 446.886,653.987 448.951,664.958C449.056,664.957 449.161,664.956 449.266,664.956C462.932,664.956 474.028,675.463 474.028,688.404C474.028,692.203 473.072,695.792 471.375,698.967C481.353,701.994 488.584,710.855 488.584,721.302C488.584,726.018 487.111,730.41 484.577,734.088C485.35,736.356 485.768,738.775 485.768,741.285C485.768,753.804 475.383,764.045 462.332,764.699C457.978,771.43 450.139,775.925 441.2,775.925C435.762,775.925 430.732,774.262 426.645,771.444C422.118,777.04 414.989,780.652 406.976,780.652C399.135,780.652 392.141,777.194 387.602,771.802C384.107,773.59 380.107,774.605 375.859,774.605C362.193,774.605 351.097,764.099 351.097,751.158C351.097,750.631 351.116,750.109 351.152,749.59C346.728,745.354 343.996,739.531 343.996,733.109C343.996,729.349 344.933,725.793 346.598,722.642Z" style="fill:rgb(0,93,7);"/>
+            </g>
+            <g transform="matrix(0.862297,0,0,0.862297,-126.127,41.3353)">
+                <path d="M741.789,763.568C741.789,763.568 736.774,880.347 771.84,902.191L747.947,893.82L732.789,922.494L715.662,900.039L687.186,905.249C687.186,905.249 717.73,844.149 715.327,771.131L741.789,763.568Z" style="fill:rgb(162,101,54);"/>
+            </g>
+            <g transform="matrix(0.251385,0,0,0.251385,286.962,512.615)">
+                <path d="M704.128,789.139L804.344,763.384L806.137,742.776L897.21,718.511L912.437,726.878L987.817,672.244L985.186,697.465L991.219,766.061L1009.29,794.725L915.623,824.114L898.147,811.488L813.685,835.767L801.842,857.123L712.086,895.147L719.507,864.878L704.128,789.139Z" style="fill:rgb(205,205,205);fill-opacity:0.52;"/>
+            </g>
+        </g>
+    </g>
+</svg>
+
+<h2>Godot Addon</h2>
+<h3></h3>
+<p><a href="folded_paper_engine_godot_0.0.10.zip"><button>Download</button></a></p>
+<h3></h3>
+<h3><a href="web-docs">View The Docs</a></h3>
+<h3></h3>
+<h2>Blender Addon</h2>
+<h3></h3>
+<p><a href="folded_paper_engine_0.0.10.zip"><button>Download</button></a></p>
+<h3></h3>
+<h2>Blender Panels</h2>
+<h3>Activity Property Group</h3>
+<ul>
+<li>Activity Type: (Enum) The type of activity.</li>
+</ul>
+<h3>Event Property Group</h3>
+<ul>
+<li>Event Name: (String) The name of the event.</li>
+</ul>
+<h3>Scene</h3>
+<ul>
+<li>Sky Color: (Color) Select the sky color for the scene.</li>
+<li>Background Music: (Files) Select the background music for the scene.</li>
+<li>Background Music Volume: (Float) The volume of the background music in decibels.</li>
+<li>Gravity: (Float) The gravity of the scene in meters per second squared.</li>
+<li>Scene Load Events: (Collection) Execute commands when the scene is loaded.</li>
+<li>Scene Unload Events: (Collection) Execute commands when the scene is unloaded.</li>
+</ul>
+<h3>Folded Paper Engine</h3>
+<ul>
+<li>Player: (Boolean) Create a player.</li>
+<li>Character: (Boolean) Create a character.</li>
+<li>Physics: (Boolean) Apply physics to this object.</li>
+<li>Invisible: (Boolean) Set to true to make the object invisible.</li>
+<li>Water: (Boolean) Set to true to make the object a water plane.</li>
+<li>Sprite Animate: (Float) Set the sprite animation speed. All child node will be cycled through to create a sprite animation.</li>
+<li>Trigger: (Boolean) Set to true to trigger the configured commands (from the command palette) on interaction.</li>
+<li>Speaker: (Boolean) Make this item a 3D speaker.</li>
+<li>UI Element: (Boolean) Make this item a UI element.</li>
+<li>Sub Scene: (Boolean) Load a sub scene in this item.</li>
+<li>Holdable: (Boolean) Make this item holdable.</li>
+<li>Groups: (String) CSV: The groups for this item. Used in your own custom code.</li>
+<li>Script Path: (File) Set the script for this item. WARNING: Only use this if you know what you are doing, this will overwrite any existing script/functionality.</li>
+</ul>
+<h3>Commands Property Group</h3>
+<ul>
+<li>Dispatch Event: (String) The name of the event to dispatch.</li>
+<li>Load Level: (File) Load a level on trigger.</li>
+<li>Animations: (String) CSV: Play animations on trigger.</li>
+<li>Stop Animations: (String) CSV: Stop animations on trigger.</li>
+<li>Speaker Trigger: (String) True to play this item as a speaker when intersecting with it. Or the name of a specific speaker to play.</li>
+<li>Speaker Trigger Self: (Boolean) Play this item as a speaker when intersecting with it.</li>
+<li>Activate Camera: (Node) Activate the selected camera.</li>
+<li>Reactivate Player Camera: (Boolean) Reactivate the player&#39;s camera.</li>
+<li>Deactivate Player Controls: (Boolean) Deactivate the player&#39;s controls.</li>
+<li>Reactivate Player Controls: (Boolean) Reactivate the player&#39;s controls.</li>
+<li>Load Sub Scene: (Node) Load a specific sub scene by item name.</li>
+<li>Unload Sub Scene: (Node) Unload a specific sub scene by item name.</li>
+<li>Unload This Sub Scene: (Boolean) Unload this scene as a sub scene.</li>
+<li>Start Conversation: (Files) Start one of the specified conversations. The conversation is selected by the names of the characters involved and the required characters list in the conversation.</li>
+<li>Pause Specific Activities: (Collection) Pause the specified game activities.</li>
+<li>Resume Specific Activities: (Collection) Resume the specified game activities.</li>
+<li>Delete By Group: (String) Delete items in the specified group.</li>
+</ul>
+<h3>Scene Event Property Group</h3>
+<ul>
+<li>Event Name: (String) The name of the event.</li>
+<li>Commands: (Object) The commands to execute when the event occurs.</li>
+</ul>
+<h3>Trigger Event Property Group</h3>
+<ul>
+<li>Trigger Type: (Enum) The type of trigger (When/why the event is triggered).</li>
+<li>Event Name: (String) The name of the event.</li>
+</ul>
+<h3>Frame Event Property Group</h3>
+<ul>
+<li>Event Name: (String) The name of the event.</li>
+</ul>
+<h3>Scene Events</h3>
+<ul>
+<li>Scene Events: (Collection) Execute commands when a scene event occurs.</li>
+</ul>
+<h3>Trigger Events</h3>
+<ul>
+<li>Trigger Groups: (String) The trigger groups for this item.</li>
+<li>Trigger Events: (Collection) The Scene Events that will be triggered when this item is a trigger.</li>
+</ul>
+<h3>Inventory Item</h3>
+<ul>
+<li>Inventory Item Kind: (String) The Inventory Item Kind.</li>
+<li>Inventory Item Quantity: (Integer) The Inventory Item Quantity.</li>
+</ul>
+<h3>Speaker Settings</h3>
+<ul>
+<li>Speaker File: (File) Path to the audio file for this speaker.</li>
+<li>Speaker Loop: (Boolean) Loop the speaker audio.</li>
+<li>Speaker Volume: (Float) Volume of the speaker in decibels.</li>
+<li>Speaker Max Distance: (Float) Maximum distance for the speaker to be heard.</li>
+<li>Speaker Autoplay: (Boolean) Autoplay the speaker audio immediately.</li>
+</ul>
+<h3>Character</h3>
+<ul>
+<li>Walk Speed Multiplier: (Float) A multiplier for the character&#39;s walk speed.</li>
+<li>Run Speed Multiplier: (Float) A multiplier for the character&#39;s run speed (Which is already affected by the Walk Speed Multiplier).</li>
+<li>Jump Force Multiplier: (Float) A multiplier for the character&#39;s jump force.</li>
+<li>Idle Animation: (String) The name of the idle animation.</li>
+<li>Walk Animation: (String) The name of the walk animation.</li>
+<li>Run Animation: (String) The name of the run animation.</li>
+<li>Jump Animation: (String) The name of the jump animation.</li>
+<li>Talk Animation: (String) The name of the talk animation.</li>
+<li>Wandering Bounds: (Node) The object representing the area where the character can wander.</li>
+<li>Face Motion Direction: (Boolean) Face the motion direction.</li>
+</ul>
+<h3>Physics</h3>
+<ul>
+<li>Mass: (Float) Set the collision object mass.</li>
+<li>Friction: (Float) Set the collision object friction.</li>
+<li>Bounciness: (Float) Set the collision object bounciness.</li>
+<li>Continuous Collision Detection: (Boolean) Enable continuous collision detection.</li>
+</ul>
+<h3>Folded Paper Engine (Animation)</h3>
+<ul>
+<li>Autoplay: (Boolean) Set to true to play this animation automatically.</li>
+<li>Loop: (Boolean) Set to true to loop this animation.</li>
+</ul>
+<h3>Folded Paper Engine (Frame Events)</h3>
+<ul>
+<li>Frame Events: (Collection) Frames that trigger events.</li>
+</ul>
+<h3>Folded Paper Engine (Material)</h3>
+<ul>
+<li>Render Priority: (Integer) Set the render priority for this material.</li>
+<li>Reflective: (Float) Set the reflectivity of this material.</li>
+<li>Replace With Material: (File) Replace this material with the specified material.</li>
+</ul>
+<h3>UI Element</h3>
+<ul>
+<li>UI Cursor: (Boolean) Make this item a UI cursor.</li>
+<li>UI Cursor Depth: (Float) Set the UI cursor depth.</li>
+<li>UI Cursor Select Animation: (String) The name of the UI cursor select animation.</li>
+<li>UI Cursor Look At Camera: (Boolean) Make the UI cursor always look at the camera.</li>
+<li>UI Option: (Boolean) Make this item a UI option.</li>
+<li>UI Option Command Delay: (Float) Set the UI option command delay in milliseconds.</li>
+</ul>
+<h3>Sub Scene</h3>
+<ul>
+<li>Scene File: (File) Path to the scene file for this sub scene.</li>
+<li>Auto Load: (Boolean) Automatically load the sub scene when the parent scene loads.</li>
+<li>Pause: (Boolean) Pause the parent scene when the sub scene is loaded.</li>
+<li>Resume On Unload: (Boolean) Resume the parent scene when the sub scene is unloaded.</li>
+<li>Unload Delay: (Float) Delay in milliseconds before unloading the sub scene.</li>
+</ul>
+<h3>Player Controls</h3>
+<ul>
+<li>Third Person: (Boolean) Enable full third person controls.</li>
+<li>First Person: (Boolean) Enable first person controls.</li>
+<li>Can Hold Items: (Boolean) Enable holding items.</li>
+<li>Hold Zone Distance: (Float) The distance from the player to the area where items can/will be held.</li>
+<li>Hold Zone Size: (Float) The size of the area where items can/will be held.</li>
+<li>Hold Zone Scene: (File) A scene to load into the player&#39;s hold zone. The parent of this scene will be a <code>HoldZone</code> with holdable item related signals.</li>
+<li>Standard Camera Height: (Float) The standard height of the camera.</li>
+<li>Standard Camera Distance: (Float) The standard distance of the camera.</li>
+</ul>
+<h3>Type Legend</h3>
+<ul>
+<li>String: <code>Hi there!</code></li>
+<li>Integer: <code>1</code>, <code>2</code>, <code>3</code>, ...</li>
+<li>Float: <code>1.0</code>, <code>2.0</code>, <code>3.0</code>, ...</li>
+<li>Boolean: <code>true</code> or <code>false</code></li>
+<li>Node: <code>MyCube</code></li>
+<li>File: <code>res://...</code></li>
+<li>Files: <code>res://...</code>,<code>res://...</code>,<code>res://...</code></li>
+<li>Image: <code>res://.../texture.png</code></li>
+<li>Images: <code>res://.../texture.png</code>,<code>res://.../texture.png</code>,<code>res://.../texture.png</code></li>
+<li>Collection: Multiple items</li>
+<li>Object: An item with a set of settings and values</li>
+<li>Enum: <code>One</code>, <code>Two</code> or <code>Three</code></li>
+<li>Color: <code>#FFFFFFFF</code></li>
+<li>CSV: <code>One,Two,Three</code></li>
+</ul>

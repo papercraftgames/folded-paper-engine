@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="Inventory" inherits="DataItem" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<param index="0" name="data" type="Dictionary[String, Variant]" default="{}" />
+			<description>
+			</description>
+		</method>
+		<method name="from_dict">
+			<return type="void" />
+			<param index="0" name="dict" type="Dictionary" />
+			<description>
+			</description>
+		</method>
+		<method name="add_quantity_to_row_at_position">
+			<return type="void" />
+			<param index="0" name="slot_info" type="InventoryItemSlot" />
+			<param index="1" name="row_number" type="int" />
+			<param index="2" name="position" type="int" />
+			<param index="3" name="ejected" type="Callable" />
+			<description>
+			</description>
+		</method>
+		<method name="auto_add_quantity">
+			<return type="void" />
+			<param index="0" name="slot_info" type="InventoryItemSlot" />
+			<param index="1" name="overflow" type="Callable" />
+			<description>
+			</description>
+		</method>
+		<method name="pick_up_quantity_from_slot">
+			<return type="InventoryItemSlot" />
+			<param index="0" name="quantity" type="int" />
+			<param index="1" name="row_number" type="int" />
+			<param index="2" name="position" type="int" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="slot_rows" type="Dictionary[int, InventorySlotRow]" setter="" getter="" default="{}">
+		</member>
+		<member name="size" type="InventorySize" setter="" getter="" default="&lt;unknown&gt;">
+		</member>
+	</members>
+</class>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="FPEInputMapper" inherits="ScrollContainer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="App" qualifiers="static">
+			<return type="Dictionary" />
+			<param index="0" name="k" type="Variant" />
+			<param index="1" name="p" type="Variant" default="{}" />
+			<param index="2" name="d" type="Variant" default="{}" />
+			<param index="3" name="c" type="Variant" default="[]" />
+			<description>
+			</description>
+		</method>
+		<method name="_init">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_render">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="MAPPING" type="DeviceMapping" setter="" getter="" default="&lt;unknown&gt;">
+		</member>
+		<member name="_unmount" type="Callable" setter="" getter="">
+		</member>
+	</members>
+</class>

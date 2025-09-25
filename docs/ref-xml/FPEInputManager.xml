@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="FPEInputManager" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Manage input mappings for various types of controllers.
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="get_gamepad_id_list" qualifiers="static">
+			<return type="int[]" />
+			<description>
+			</description>
+		</method>
+		<method name="get_gamepads" qualifiers="static">
+			<return type="GamepadInfo[]" />
+			<description>
+			</description>
+		</method>
+		<method name="set_gamepad_id_for_player_index" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="player_index" type="int" />
+			<param index="1" name="gamepad_id" type="int" />
+			<description>
+			</description>
+		</method>
+		<method name="set_player_device_mapping" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="mapping" type="DeviceMapping" />
+			<param index="1" name="player_index" type="int" />
+			<description>
+			</description>
+		</method>
+		<method name="setup_device_mappings" qualifiers="static">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+	</methods>
+</class>

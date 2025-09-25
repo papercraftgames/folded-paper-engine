@@ -1,0 +1,544 @@
+{
+  "classes": [
+    {
+      "name": "ActivityConstants",
+      "inherits": "RefCounted",
+      "file": "ActivityConstants.html"
+    },
+    {
+      "name": "ActivityControlUtils",
+      "inherits": "FeatureConfig",
+      "file": "ActivityControlUtils.html"
+    },
+    {
+      "name": "ActuatorInfo",
+      "inherits": "RefCounted",
+      "file": "ActuatorInfo.html"
+    },
+    {
+      "name": "addons/folded_paper_engine/plugin.gd",
+      "inherits": "EditorPlugin",
+      "file": "addons__folded_paper_engine__plugin.gd.html"
+    },
+    {
+      "name": "AdvancedRigidBody3D",
+      "inherits": "RigidBody3D",
+      "file": "AdvancedRigidBody3D.html"
+    },
+    {
+      "name": "AnimationConstants",
+      "inherits": "RefCounted",
+      "file": "AnimationConstants.html"
+    },
+    {
+      "name": "AnimationUtils",
+      "inherits": "FPEGlobalsConfig",
+      "file": "AnimationUtils.html"
+    },
+    {
+      "name": "AudioUtils",
+      "inherits": "FPEGlobalsConfig",
+      "file": "AudioUtils.html"
+    },
+    {
+      "name": "BackgroundMusicFX",
+      "inherits": "SceneFeatureBase",
+      "file": "BackgroundMusicFX.html"
+    },
+    {
+      "name": "BackgroundMusicVolumeFX",
+      "inherits": "SceneFeatureBase",
+      "file": "BackgroundMusicVolumeFX.html"
+    },
+    {
+      "name": "BasicEventHandler",
+      "inherits": "EventHandler",
+      "file": "BasicEventHandler.html"
+    },
+    {
+      "name": "CameraUtils",
+      "inherits": "FPEGlobalsConfig",
+      "file": "CameraUtils.html"
+    },
+    {
+      "name": "CharacterAI",
+      "inherits": "CharacterControls",
+      "file": "CharacterAI.html"
+    },
+    {
+      "name": "CharacterAnimationConfig",
+      "inherits": "RefCounted",
+      "file": "CharacterAnimationConfig.html"
+    },
+    {
+      "name": "CharacterConfig",
+      "inherits": "RefCounted",
+      "file": "CharacterConfig.html"
+    },
+    {
+      "name": "CharacterControls",
+      "inherits": "AdvancedRigidBody3D",
+      "file": "CharacterControls.html"
+    },
+    {
+      "name": "CharacterMod",
+      "inherits": "FeatureBase",
+      "file": "CharacterMod.html"
+    },
+    {
+      "name": "CommandConstants",
+      "inherits": "RefCounted",
+      "file": "CommandConstants.html"
+    },
+    {
+      "name": "CommandUtils",
+      "inherits": "FeatureConfig",
+      "file": "CommandUtils.html"
+    },
+    {
+      "name": "Comment",
+      "inherits": "Resource",
+      "file": "Comment.html"
+    },
+    {
+      "name": "Conversation",
+      "inherits": "Resource",
+      "file": "Conversation.html"
+    },
+    {
+      "name": "ConversationInstance",
+      "inherits": "Resource",
+      "file": "ConversationInstance.html"
+    },
+    {
+      "name": "ConversationUtils",
+      "inherits": "RefCounted",
+      "file": "ConversationUtils.html"
+    },
+    {
+      "name": "Cursor3D",
+      "inherits": "Area3D",
+      "file": "Cursor3D.html"
+    },
+    {
+      "name": "DataItem",
+      "inherits": "Resource",
+      "file": "DataItem.html"
+    },
+    {
+      "name": "Debounce",
+      "inherits": "RefCounted",
+      "file": "Debounce.html"
+    },
+    {
+      "name": "Device",
+      "inherits": "RefCounted",
+      "file": "Device.html"
+    },
+    {
+      "name": "DeviceMapping",
+      "inherits": "Resource",
+      "file": "DeviceMapping.html"
+    },
+    {
+      "name": "DeviceProxy",
+      "inherits": "Node",
+      "file": "DeviceProxy.html"
+    },
+    {
+      "name": "DeviceType",
+      "inherits": "Resource",
+      "file": "DeviceType.html"
+    },
+    {
+      "name": "EventConstants",
+      "inherits": "RefCounted",
+      "file": "EventConstants.html"
+    },
+    {
+      "name": "EventHandler",
+      "inherits": "RefCounted",
+      "file": "EventHandler.html"
+    },
+    {
+      "name": "EventUtils",
+      "inherits": "RefCounted",
+      "file": "EventUtils.html"
+    },
+    {
+      "name": "FeatureBase",
+      "inherits": "FeatureConfig",
+      "file": "FeatureBase.html"
+    },
+    {
+      "name": "FeatureConfig",
+      "inherits": "RefCounted",
+      "file": "FeatureConfig.html"
+    },
+    {
+      "name": "FeatureConstants",
+      "inherits": "RefCounted",
+      "file": "FeatureConstants.html"
+    },
+    {
+      "name": "FeatureUtils",
+      "inherits": "RefCounted",
+      "file": "FeatureUtils.html"
+    },
+    {
+      "name": "FoldedPaperEngine",
+      "inherits": "Node3D",
+      "file": "FoldedPaperEngine.html"
+    },
+    {
+      "name": "FollowingCamera",
+      "inherits": "Camera3D",
+      "file": "FollowingCamera.html"
+    },
+    {
+      "name": "FPEConversationManager",
+      "inherits": "Node",
+      "file": "FPEConversationManager.html"
+    },
+    {
+      "name": "FPEEvent",
+      "inherits": "RefCounted",
+      "file": "FPEEvent.html"
+    },
+    {
+      "name": "FPEEventManager",
+      "inherits": "Node",
+      "file": "FPEEventManager.html"
+    },
+    {
+      "name": "FPEFC",
+      "inherits": "RefCounted",
+      "file": "FPEFC.html"
+    },
+    {
+      "name": "FPEGlobals",
+      "inherits": "RefCounted",
+      "file": "FPEGlobals.html"
+    },
+    {
+      "name": "FPEGlobalsConfig",
+      "inherits": "RefCounted",
+      "file": "FPEGlobalsConfig.html"
+    },
+    {
+      "name": "FPEInputFC",
+      "inherits": "RefCounted",
+      "file": "FPEInputFC.html"
+    },
+    {
+      "name": "FPEInputManager",
+      "inherits": "Node",
+      "file": "FPEInputManager.html"
+    },
+    {
+      "name": "FPEInputMapper",
+      "inherits": "ScrollContainer",
+      "file": "FPEInputMapper.html"
+    },
+    {
+      "name": "FPEInventoryConfig",
+      "inherits": "Node",
+      "file": "FPEInventoryConfig.html"
+    },
+    {
+      "name": "FPEUI",
+      "inherits": "RefCounted",
+      "file": "FPEUI.html"
+    },
+    {
+      "name": "FrameEventRunner",
+      "inherits": "Node",
+      "file": "FrameEventRunner.html"
+    },
+    {
+      "name": "FrameTicker",
+      "inherits": "Node",
+      "file": "FrameTicker.html"
+    },
+    {
+      "name": "FXMap",
+      "inherits": "FeatureConfig",
+      "file": "FXMap.html"
+    },
+    {
+      "name": "GamepadInfo",
+      "inherits": "DataItem",
+      "file": "GamepadInfo.html"
+    },
+    {
+      "name": "GLBMetaInclude",
+      "inherits": "GLTFDocumentExtension",
+      "file": "GLBMetaInclude.html"
+    },
+    {
+      "name": "GLTFModelUtils",
+      "inherits": "RefCounted",
+      "file": "GLTFModelUtils.html"
+    },
+    {
+      "name": "GravityFX",
+      "inherits": "SceneFeatureBase",
+      "file": "GravityFX.html"
+    },
+    {
+      "name": "GroupsMod",
+      "inherits": "FeatureBase",
+      "file": "GroupsMod.html"
+    },
+    {
+      "name": "HoldableItemUtils",
+      "inherits": "RefCounted",
+      "file": "HoldableItemUtils.html"
+    },
+    {
+      "name": "HoldZone",
+      "inherits": "Area3D",
+      "file": "HoldZone.html"
+    },
+    {
+      "name": "InputConstants",
+      "inherits": "RefCounted",
+      "file": "InputConstants.html"
+    },
+    {
+      "name": "InputUtils",
+      "inherits": "RefCounted",
+      "file": "InputUtils.html"
+    },
+    {
+      "name": "Inventory",
+      "inherits": "DataItem",
+      "file": "Inventory.html"
+    },
+    {
+      "name": "InventoryConstants",
+      "inherits": "RefCounted",
+      "file": "InventoryConstants.html"
+    },
+    {
+      "name": "InventoryItemKind",
+      "inherits": "DataItem",
+      "file": "InventoryItemKind.html"
+    },
+    {
+      "name": "InventoryItemSlot",
+      "inherits": "DataItem",
+      "file": "InventoryItemSlot.html"
+    },
+    {
+      "name": "InventorySize",
+      "inherits": "DataItem",
+      "file": "InventorySize.html"
+    },
+    {
+      "name": "InventorySlotRow",
+      "inherits": "DataItem",
+      "file": "InventorySlotRow.html"
+    },
+    {
+      "name": "InventoryUtils",
+      "inherits": "FPEGlobalsConfig",
+      "file": "InventoryUtils.html"
+    },
+    {
+      "name": "InvisibleMod",
+      "inherits": "FeatureBase",
+      "file": "InvisibleMod.html"
+    },
+    {
+      "name": "MaterialFeatureBase",
+      "inherits": "FeatureConfig",
+      "file": "MaterialFeatureBase.html"
+    },
+    {
+      "name": "MaterialModMap",
+      "inherits": "FeatureConfig",
+      "file": "MaterialModMap.html"
+    },
+    {
+      "name": "MovingPlatformStatic",
+      "inherits": "StaticBody3D",
+      "file": "MovingPlatformStatic.html"
+    },
+    {
+      "name": "NodeUtils",
+      "inherits": "RefCounted",
+      "file": "NodeUtils.html"
+    },
+    {
+      "name": "NodeWatcher",
+      "inherits": "RefCounted",
+      "file": "NodeWatcher.html"
+    },
+    {
+      "name": "ObjectModMap",
+      "inherits": "FeatureConfig",
+      "file": "ObjectModMap.html"
+    },
+    {
+      "name": "PhysicsMod",
+      "inherits": "FeatureBase",
+      "file": "PhysicsMod.html"
+    },
+    {
+      "name": "PhysicsUtils",
+      "inherits": "FeatureConfig",
+      "file": "PhysicsUtils.html"
+    },
+    {
+      "name": "PlayerControls",
+      "inherits": "CharacterControls",
+      "file": "PlayerControls.html"
+    },
+    {
+      "name": "ReflectiveMod",
+      "inherits": "MaterialFeatureBase",
+      "file": "ReflectiveMod.html"
+    },
+    {
+      "name": "RenderPriorityMod",
+      "inherits": "MaterialFeatureBase",
+      "file": "RenderPriorityMod.html"
+    },
+    {
+      "name": "ReplaceWithMaterialMod",
+      "inherits": "MaterialFeatureBase",
+      "file": "ReplaceWithMaterialMod.html"
+    },
+    {
+      "name": "Reply",
+      "inherits": "Resource",
+      "file": "Reply.html"
+    },
+    {
+      "name": "RigidBodyUtils",
+      "inherits": "FeatureConfig",
+      "file": "RigidBodyUtils.html"
+    },
+    {
+      "name": "SceneEventHandler",
+      "inherits": "EventHandler",
+      "file": "SceneEventHandler.html"
+    },
+    {
+      "name": "SceneEventUtils",
+      "inherits": "FeatureConfig",
+      "file": "SceneEventUtils.html"
+    },
+    {
+      "name": "SceneFeatureBase",
+      "inherits": "FeatureConfig",
+      "file": "SceneFeatureBase.html"
+    },
+    {
+      "name": "SceneFXMap",
+      "inherits": "FeatureConfig",
+      "file": "SceneFXMap.html"
+    },
+    {
+      "name": "ScriptPathMod",
+      "inherits": "FeatureBase",
+      "file": "ScriptPathMod.html"
+    },
+    {
+      "name": "ShapeGuesser",
+      "inherits": "RefCounted",
+      "file": "ShapeGuesser.html"
+    },
+    {
+      "name": "SkyColorFX",
+      "inherits": "SceneFeatureBase",
+      "file": "SkyColorFX.html"
+    },
+    {
+      "name": "SpeakerMod",
+      "inherits": "FeatureBase",
+      "file": "SpeakerMod.html"
+    },
+    {
+      "name": "SpeakerUtils",
+      "inherits": "RefCounted",
+      "file": "SpeakerUtils.html"
+    },
+    {
+      "name": "SpriteAnimateMod",
+      "inherits": "FeatureBase",
+      "file": "SpriteAnimateMod.html"
+    },
+    {
+      "name": "SpriteAnimateUtils",
+      "inherits": "FeatureConfig",
+      "file": "SpriteAnimateUtils.html"
+    },
+    {
+      "name": "StringUtils",
+      "inherits": "RefCounted",
+      "file": "StringUtils.html"
+    },
+    {
+      "name": "SubSceneHost",
+      "inherits": "FeatureConfig",
+      "file": "SubSceneHost.html"
+    },
+    {
+      "name": "SubSceneMod",
+      "inherits": "FeatureBase",
+      "file": "SubSceneMod.html"
+    },
+    {
+      "name": "SubSceneUtils",
+      "inherits": "FeatureConfig",
+      "file": "SubSceneUtils.html"
+    },
+    {
+      "name": "TrackingArea3D",
+      "inherits": "Area3D",
+      "file": "TrackingArea3D.html"
+    },
+    {
+      "name": "TriggerConstants",
+      "inherits": "RefCounted",
+      "file": "TriggerConstants.html"
+    },
+    {
+      "name": "TriggerGroupUtils",
+      "inherits": "RefCounted",
+      "file": "TriggerGroupUtils.html"
+    },
+    {
+      "name": "TriggerMod",
+      "inherits": "FeatureBase",
+      "file": "TriggerMod.html"
+    },
+    {
+      "name": "TriggerUtils",
+      "inherits": "FeatureConfig",
+      "file": "TriggerUtils.html"
+    },
+    {
+      "name": "UIElementMode",
+      "inherits": "FeatureBase",
+      "file": "UIElementMode.html"
+    },
+    {
+      "name": "UIOption3D",
+      "inherits": "TrackingArea3D",
+      "file": "UIOption3D.html"
+    },
+    {
+      "name": "UserDataUtils",
+      "inherits": "RefCounted",
+      "file": "UserDataUtils.html"
+    },
+    {
+      "name": "WaterFX",
+      "inherits": "FeatureBase",
+      "file": "WaterFX.html"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="FeatureUtils" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<param index="0" name="sub_scene_name" type="String" default="&quot;&quot;" />
+			<param index="1" name="parent_feature_utils" type="FeatureUtils" default="null" />
+			<description>
+			</description>
+		</method>
+		<method name="clean_up">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="applySceneFX">
+			<return type="void" />
+			<param index="0" name="env" type="WorldEnvironment" />
+			<param index="1" name="user_data" type="Dictionary" />
+			<description>
+			</description>
+		</method>
+		<method name="applySceneEvents">
+			<return type="void" />
+			<param index="0" name="scene" type="Node" />
+			<description>
+			</description>
+		</method>
+		<method name="applyFX">
+			<return type="void" />
+			<param index="0" name="node" type="Node3D" />
+			<param index="1" name="user_data" type="Dictionary" />
+			<description>
+			</description>
+		</method>
+		<method name="applyMaterialMods">
+			<return type="void" />
+			<param index="0" name="node" type="Node" />
+			<description>
+			</description>
+		</method>
+		<method name="applyObjectMods">
+			<return type="void" />
+			<param index="0" name="node" type="Node3D" />
+			<param index="1" name="user_data" type="Dictionary" />
+			<description>
+			</description>
+		</method>
+		<method name="applyPhysics">
+			<return type="void" />
+			<param index="0" name="node" type="Node3D" />
+			<description>
+			</description>
+		</method>
+		<method name="trackRigidBodies">
+			<return type="void" />
+			<param index="0" name="node" type="Node3D" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="SUB_SCENE_NAME" type="String" setter="" getter="" default="&quot;&quot;">
+		</member>
+		<member name="PARENT_FEATURE_UTILS" type="FeatureUtils" setter="" getter="" default="null">
+		</member>
+		<member name="FPE_GLOBALS" type="FPEGlobals" setter="" getter="" default="&lt;unknown&gt;">
+		</member>
+		<member name="EVENT_UTILS" type="EventUtils" setter="" getter="">
+		</member>
+		<member name="ANIMATION_UTILS" type="AnimationUtils" setter="" getter="">
+		</member>
+		<member name="AUDIO_UTILS" type="AudioUtils" setter="" getter="">
+		</member>
+		<member name="COMMAND_UTILS" type="CommandUtils" setter="" getter="">
+		</member>
+		<member name="CAMERA_UTILS" type="CameraUtils" setter="" getter="">
+		</member>
+		<member name="ACTIVITY_CONTROL_UTILS" type="ActivityControlUtils" setter="" getter="">
+		</member>
+		<member name="SUB_SCENE_UTILS" type="SubSceneUtils" setter="" getter="">
+		</member>
+		<member name="RIGID_BODY_UTILS" type="RigidBodyUtils" setter="" getter="">
+		</member>
+		<member name="SPRITE_ANIMATE_UTILS" type="SpriteAnimateUtils" setter="" getter="">
+		</member>
+		<member name="PHYSICS_UTILS" type="PhysicsUtils" setter="" getter="">
+		</member>
+		<member name="TRIGGER_UTILS" type="TriggerUtils" setter="" getter="">
+		</member>
+		<member name="SCENE_EVENT_UTILS" type="SceneEventUtils" setter="" getter="">
+		</member>
+		<member name="SCENE_FX_MAP" type="SceneFXMap" setter="" getter="">
+		</member>
+		<member name="FX_MAP" type="FXMap" setter="" getter="">
+		</member>
+		<member name="MATERIAL_MOD_MAP" type="MaterialModMap" setter="" getter="">
+		</member>
+		<member name="OBJECT_MOD_MAP" type="ObjectModMap" setter="" getter="">
+		</member>
+	</members>
+</class>

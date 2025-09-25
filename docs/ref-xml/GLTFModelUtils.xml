@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="GLTFModelUtils" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="clear_scene" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="feature_utils" type="FeatureUtils" />
+			<param index="1" name="stage" type="Node3D" />
+			<param index="2" name="global" type="bool" default="false" />
+			<description>
+			</description>
+		</method>
+		<method name="load_gltf_scene" qualifiers="static">
+			<return type="FeatureUtils" />
+			<param index="0" name="file_path" type="String" />
+			<param index="1" name="stage" type="Node3D" />
+			<param index="2" name="env" type="WorldEnvironment" />
+			<param index="3" name="sub_scene_name" type="String" default="&quot;&quot;" />
+			<param index="4" name="parent_feature_utils" type="FeatureUtils" default="null" />
+			<description>
+			</description>
+		</method>
+		<method name="process_scene_load_events" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="feature_utils" type="FeatureUtils" />
+			<description>
+			</description>
+		</method>
+		<method name="process_scene_unload_events" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="feature_utils" type="FeatureUtils" />
+			<description>
+			</description>
+		</method>
+		<method name="process_scene" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="feature_utils" type="FeatureUtils" />
+			<param index="1" name="env" type="WorldEnvironment" />
+			<param index="2" name="scene" type="Node" />
+			<description>
+			</description>
+		</method>
+		<method name="map_camera" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="fpe_globals" type="FPEGlobals" />
+			<param index="1" name="node" type="Node" />
+			<description>
+			</description>
+		</method>
+		<method name="process_node" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="feature_utils" type="FeatureUtils" />
+			<param index="1" name="node" type="Node3D" />
+			<description>
+			</description>
+		</method>
+	</methods>
+</class>

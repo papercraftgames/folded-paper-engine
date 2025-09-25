@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="FrameTicker" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<param index="0" name="node" type="Node3D" />
+			<param index="1" name="data" type="Variant" />
+			<param index="2" name="fpe_globals" type="FPEGlobals" />
+			<description>
+			</description>
+		</method>
+		<method name="destroy">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_notification">
+			<return type="void" />
+			<param index="0" name="what" type="int" />
+			<description>
+			</description>
+		</method>
+		<method name="_process">
+			<return type="void" />
+			<param index="0" name="_delta" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="is_playing">
+			<return type="bool" />
+			<description>
+			</description>
+		</method>
+		<method name="play">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="pause">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="stop">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="FPE_GLOBALS" type="FPEGlobals" setter="" getter="">
+		</member>
+		<member name="_NODE" type="Node" setter="" getter="">
+		</member>
+		<member name="_SPEED" type="float" setter="" getter="" default="1.0">
+		</member>
+		<member name="_LAST_FRAME" type="int" setter="" getter="" default="1">
+		</member>
+		<member name="_current_frame" type="float" setter="" getter="" default="1.0">
+		</member>
+		<member name="_PLAYING" type="bool" setter="" getter="" default="true">
+		</member>
+	</members>
+</class>

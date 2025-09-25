@@ -1,0 +1,37 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>InputUtils — API</title><link rel="stylesheet" href="./style.css"><body><div class="container">
+<h1>InputUtils — API</h1>
+<div class="grid">
+  <div>
+    <div class="card">
+      <div><strong>Class:</strong> InputUtils</div>
+      <div class="small">Inherits: RefCounted</div>
+      
+    </div>
+  </div>
+  <div>
+    
+    <div class="card"><h2>Properties</h2><ul class="list"><li><div><code class="code">Dictionary[String, DeviceMapping] DEFAULT_MAPPINGS = {...}</code></div>
+       <div class="small"></div></li></ul></div>
+    <div class="card"><h2>Methods</h2><ul class="list"><li><div><code class="code">float get_raw_standard_actuator_value(InputEvent event)</code></div>
+      <div class="small"></div></li><li><div><code class="code">String get_prefix_for_event(InputEvent event)</code></div>
+      <div class="small"></div></li><li><div><code class="code">String get_standard_actuator_name(InputEvent event)</code></div>
+      <div class="small"></div></li><li><div><code class="code">String get_postfix_for_value(float value)</code></div>
+      <div class="small"></div></li><li><div><code class="code">String get_full_actuator_name(String prefix, String actuator_name, String postfix)</code></div>
+      <div class="small"></div></li><li><div><code class="code">String get_counterpart_postfix(String postfix)</code></div>
+      <div class="small"></div></li><li><div><code class="code">float get_mouse_delta_by_actuator(String actuator, Vector2 delta_vector)</code></div>
+      <div class="small"></div></li><li><div><code class="code">float get_joy_axis_value(int device_index, String actuator_name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Dictionary[String, float] get_actuator_values(InputEvent event)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void apply_input_to_device(InputEvent event, Device device)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void apply_input_to_device_list(InputEvent event, Device[] device_list)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void apply_input_to_mapping_action(InputEvent event, DeviceMapping mapping, String action)</code></div>
+      <div class="small"></div></li><li><div><code class="code">String get_controller_type(int device_index)</code></div>
+      <div class="small"></div></li><li><div><code class="code">DeviceMapping get_controller_mapping(int device_index)</code></div>
+      <div class="small"></div></li><li><div><code class="code">DeviceProxy get_device_proxy(int device_index, DeviceMapping mapping, bool mouse_enabled = false)</code></div>
+      <div class="small"></div></li><li><div><code class="code">int get_device_index_for_player_index(int player_index)</code></div>
+      <div class="small"></div></li></ul></div>
+    
+    
+  </div>
+</div>
+<div class="small" style="margin-top:16px">Built from addon XML via CI.</div></div></body>

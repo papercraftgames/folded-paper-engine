@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="InputConstants" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<constants>
+		<constant name="ACTIVITY_THRESHOLD" value="0.2">
+		</constant>
+		<constant name="MAPPING_THRESHOLD" value="0.5">
+		</constant>
+		<constant name="CONTROLLER_TYPES" value="Dictionary[String, String]({&quot;DEFAULT&quot;: &quot;DEFAULT&quot;, &quot;NINTENDO&quot;: &quot;NINTENDO&quot;, &quot;PLAYSTATION&quot;: &quot;PLAYSTATION&quot;, &quot;UNKNOWN&quot;: &quot;UNKNOWN&quot;, &quot;XBOX&quot;: &quot;XBOX&quot;})">
+		</constant>
+		<constant name="ACTUATOR_ID_DELIMITER" value="&quot;_&quot;">
+		</constant>
+		<constant name="ACTUATOR_PREFIXES" value="Dictionary[String, String]({&quot;AXIS&quot;: &quot;AXIS&quot;, &quot;GAME_PAD_BUTTON&quot;: &quot;GAME_PAD_BUTTON&quot;, &quot;KEY&quot;: &quot;KEY&quot;, &quot;MOUSE_BUTTON&quot;: &quot;MOUSE_BUTTON&quot;, &quot;UNKNOWN&quot;: &quot;UNKNOWN&quot;})">
+		</constant>
+		<constant name="ACTUATOR_POSTFIXES" value="Dictionary[String, String]({&quot;NEGATIVE&quot;: &quot;NEGATIVE&quot;, &quot;POSITIVE&quot;: &quot;POSITIVE&quot;})">
+		</constant>
+		<constant name="ACTUATOR_NAMES" value="Dictionary[String, String]({&quot;ACTUATOR&quot;: &quot;ACTUATOR&quot;, &quot;MOUSE_VELOCITY_X&quot;: &quot;MOUSE_VELOCITY_X&quot;, &quot;MOUSE_VELOCITY_Y&quot;: &quot;MOUSE_VELOCITY_Y&quot;})">
+		</constant>
+		<constant name="MOUSE_VELOCITY_AXES" value="Dictionary[String, String]({&quot;AXIS_MOUSE_VELOCITY_X_NEGATIVE&quot;: &quot;AXIS_MOUSE_VELOCITY_X_NEGATIVE&quot;, &quot;AXIS_MOUSE_VELOCITY_X_POSITIVE&quot;: &quot;AXIS_MOUSE_VELOCITY_X_POSITIVE&quot;, &quot;AXIS_MOUSE_VELOCITY_Y_NEGATIVE&quot;: &quot;AXIS_MOUSE_VELOCITY_Y_NEGATIVE&quot;, &quot;AXIS_MOUSE_VELOCITY_Y_POSITIVE&quot;: &quot;AXIS_MOUSE_VELOCITY_Y_POSITIVE&quot;})">
+		</constant>
+		<constant name="GAMEPAD_AXES" value="Dictionary[String, String]({&quot;AXIS_0_NEGATIVE&quot;: &quot;AXIS_0_NEGATIVE&quot;, &quot;AXIS_0_POSITIVE&quot;: &quot;AXIS_0_POSITIVE&quot;, &quot;AXIS_10_NEGATIVE&quot;: &quot;AXIS_10_NEGATIVE&quot;, &quot;AXIS_10_POSITIVE&quot;: &quot;AXIS_10_POSITIVE&quot;, &quot;AXIS_1_NEGATIVE&quot;: &quot;AXIS_1_NEGATIVE&quot;, &quot;AXIS_1_POSITIVE&quot;: &quot;AXIS_1_POSITIVE&quot;, &quot;AXIS_2_NEGATIVE&quot;: &quot;AXIS_2_NEGATIVE&quot;, &quot;AXIS_2_POSITIVE&quot;: &quot;AXIS_2_POSITIVE&quot;, &quot;AXIS_3_NEGATIVE&quot;: &quot;AXIS_3_NEGATIVE&quot;, &quot;AXIS_3_POSITIVE&quot;: &quot;AXIS_3_POSITIVE&quot;, &quot;AXIS_4_NEGATIVE&quot;: &quot;AXIS_4_NEGATIVE&quot;, &quot;AXIS_4_POSITIVE&quot;: &quot;AXIS_4_POSITIVE&quot;, &quot;AXIS_5_NEGATIVE&quot;: &quot;AXIS_5_NEGATIVE&quot;, &quot;AXIS_5_POSITIVE&quot;: &quot;AXIS_5_POSITIVE&quot;, &quot;AXIS_6_NEGATIVE&quot;: &quot;AXIS_6_NEGATIVE&quot;, &quot;AXIS_6_POSITIVE&quot;: &quot;AXIS_6_POSITIVE&quot;, &quot;AXIS_7_NEGATIVE&quot;: &quot;AXIS_7_NEGATIVE&quot;, &quot;AXIS_7_POSITIVE&quot;: &quot;AXIS_7_POSITIVE&quot;, &quot;AXIS_8_NEGATIVE&quot;: &quot;AXIS_8_NEGATIVE&quot;, &quot;AXIS_8_POSITIVE&quot;: &quot;AXIS_8_POSITIVE&quot;, &quot;AXIS_9_NEGATIVE&quot;: &quot;AXIS_9_NEGATIVE&quot;, &quot;AXIS_9_POSITIVE&quot;: &quot;AXIS_9_POSITIVE&quot;})">
+		</constant>
+		<constant name="PLAYER_ACTIONS" value="Dictionary[String, String]({&quot;PLAYER_DROP&quot;: &quot;PLAYER_DROP&quot;, &quot;PLAYER_JUMP&quot;: &quot;PLAYER_JUMP&quot;, &quot;PLAYER_MOVE_BACKWARD&quot;: &quot;PLAYER_MOVE_BACKWARD&quot;, &quot;PLAYER_MOVE_FORWARD&quot;: &quot;PLAYER_MOVE_FORWARD&quot;, &quot;PLAYER_MOVE_LEFT&quot;: &quot;PLAYER_MOVE_LEFT&quot;, &quot;PLAYER_MOVE_RIGHT&quot;: &quot;PLAYER_MOVE_RIGHT&quot;, &quot;PLAYER_RUN&quot;: &quot;PLAYER_RUN&quot;, &quot;PLAYER_TURN_DOWN&quot;: &quot;PLAYER_TURN_DOWN&quot;, &quot;PLAYER_TURN_LEFT&quot;: &quot;PLAYER_TURN_LEFT&quot;, &quot;PLAYER_TURN_RIGHT&quot;: &quot;PLAYER_TURN_RIGHT&quot;, &quot;PLAYER_TURN_UP&quot;: &quot;PLAYER_TURN_UP&quot;, &quot;PLAYER_USE&quot;: &quot;PLAYER_USE&quot;})">
+		</constant>
+		<constant name="UI_ACTIONS" value="Dictionary[String, String]({&quot;UI_ACCEPT&quot;: &quot;UI_ACCEPT&quot;, &quot;UI_CANCEL&quot;: &quot;UI_CANCEL&quot;, &quot;UI_DOWN&quot;: &quot;UI_DOWN&quot;, &quot;UI_LEFT&quot;: &quot;UI_LEFT&quot;, &quot;UI_PAGE_DOWN&quot;: &quot;UI_PAGE_DOWN&quot;, &quot;UI_PAGE_UP&quot;: &quot;UI_PAGE_UP&quot;, &quot;UI_PAUSE&quot;: &quot;UI_PAUSE&quot;, &quot;UI_RIGHT&quot;: &quot;UI_RIGHT&quot;, &quot;UI_UP&quot;: &quot;UI_UP&quot;})">
+		</constant>
+	</constants>
+</class>

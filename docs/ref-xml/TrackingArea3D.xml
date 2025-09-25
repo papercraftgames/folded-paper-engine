@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="TrackingArea3D" inherits="Area3D" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<param index="0" name="target_node" type="Node3D" />
+			<param index="1" name="trigger_handler" type="Callable" />
+			<param index="2" name="prefer_simple_box_shape" type="bool" default="false" />
+			<description>
+			</description>
+		</method>
+		<method name="_ready">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_setup">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_move_to_target">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_setup_inventory_item_slot">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="trigger">
+			<return type="void" />
+			<param index="0" name="triggered_by" type="Node3D" />
+			<param index="1" name="trigger_type" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="_body_entered_triggered">
+			<return type="void" />
+			<param index="0" name="body" type="Node3D" />
+			<description>
+			</description>
+		</method>
+		<method name="_body_exit_triggered">
+			<return type="void" />
+			<param index="0" name="body" type="Node3D" />
+			<description>
+			</description>
+		</method>
+		<method name="_physics_process">
+			<return type="void" />
+			<param index="0" name="_delta" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="get_position_offset">
+			<return type="Vector3" />
+			<description>
+			</description>
+		</method>
+		<method name="get_target_node">
+			<return type="Node3D" />
+			<description>
+			</description>
+		</method>
+		<method name="get_user_data">
+			<return type="Dictionary" />
+			<description>
+			</description>
+		</method>
+		<method name="_destroy">
+			<return type="void" />
+			<param index="0" name="include_target_node" type="bool" default="false" />
+			<description>
+			</description>
+		</method>
+		<method name="destroy">
+			<return type="void" />
+			<param index="0" name="include_target_node" type="bool" default="false" />
+			<param index="1" name="immediately" type="bool" default="false" />
+			<description>
+			</description>
+		</method>
+		<method name="get_item_slot">
+			<return type="InventoryItemSlot" />
+			<description>
+			</description>
+		</method>
+		<method name="set_item_slot">
+			<return type="void" />
+			<param index="0" name="new_item_slot" type="InventoryItemSlot" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="_TARGET_NODE" type="Node3D" setter="" getter="">
+		</member>
+		<member name="_TRIGGER_HANDLER" type="Callable" setter="" getter="">
+		</member>
+		<member name="_PREFER_SIMPLE_BOX_SHAPE" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="_ITEM_SLOT" type="InventoryItemSlot" setter="" getter="">
+		</member>
+		<member name="_POSITION_OFFSET" type="Vector3" setter="" getter="" default="Vector3(0, 0, 0)">
+		</member>
+	</members>
+</class>

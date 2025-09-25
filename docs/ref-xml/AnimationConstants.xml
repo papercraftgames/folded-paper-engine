@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="AnimationConstants" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<constants>
+		<constant name="ANIMATION_CONFIG_PROPERTY_NAMES" value="Dictionary[String, String]({&quot;Autoplay&quot;: &quot;Autoplay&quot;, &quot;Loop&quot;: &quot;Loop&quot;})">
+		</constant>
+		<constant name="ANIMATION_DATA_PROPERTY_NAMES" value="Dictionary[String, String]({&quot;FrameNumber&quot;: &quot;FrameNumber&quot;, &quot;FrameTime&quot;: &quot;FrameTime&quot;})">
+		</constant>
+	</constants>
+</class>

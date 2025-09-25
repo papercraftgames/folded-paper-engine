@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="CharacterControls" inherits="AdvancedRigidBody3D" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_ready">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="get_character_name">
+			<return type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="set_feature_utils">
+			<return type="void" />
+			<param index="0" name="feature_utils" type="FeatureUtils" />
+			<description>
+			</description>
+		</method>
+		<method name="set_flip_disabled">
+			<return type="void" />
+			<param index="0" name="value" type="bool" />
+			<description>
+			</description>
+		</method>
+		<method name="flatness_from_raycast">
+			<return type="float" />
+			<param index="0" name="ray" type="RayCast3D" />
+			<description>
+			</description>
+		</method>
+		<method name="get_ground_traction_ratio">
+			<return type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="is_on_floor">
+			<return type="bool" />
+			<description>
+			</description>
+		</method>
+		<method name="has_downward_momentum">
+			<return type="bool" />
+			<description>
+			</description>
+		</method>
+		<method name="has_motivation">
+			<return type="bool" />
+			<description>
+			</description>
+		</method>
+		<method name="approach_velocity_force">
+			<return type="Vector3" />
+			<param index="0" name="target_velocity" type="Vector3" />
+			<param index="1" name="max_force" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="set_animation">
+			<return type="void" />
+			<param index="0" name="input" type="Vector2" />
+			<param index="1" name="has_input" type="bool" />
+			<param index="2" name="running" type="bool" />
+			<description>
+			</description>
+		</method>
+		<method name="_process">
+			<return type="void" />
+			<param index="0" name="delta" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="_physics_process">
+			<return type="void" />
+			<param index="0" name="delta" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="rotated_velocity">
+			<return type="Vector2" />
+			<param index="0" name="local_vel" type="Vector2" />
+			<description>
+			</description>
+		</method>
+		<method name="_apply_linear_velocity">
+			<return type="void" />
+			<param index="0" name="new_linear_velocity" type="Vector3" />
+			<description>
+			</description>
+		</method>
+		<method name="move">
+			<return type="void" />
+			<param index="0" name="input" type="Vector2" />
+			<param index="1" name="run_amount" type="float" />
+			<param index="2" name="jump_amount" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="set_character_mesh">
+			<return type="void" />
+			<param index="0" name="node" type="Node3D" />
+			<description>
+			</description>
+		</method>
+		<method name="fix_character_animation_paths">
+			<return type="void" />
+			<param index="0" name="from_path" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="setup_character_mesh">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="setup_character_config">
+			<return type="void" />
+			<param index="0" name="data" type="Dictionary" />
+			<description>
+			</description>
+		</method>
+		<method name="add_sidekick">
+			<return type="void" />
+			<param index="0" name="sidekick" type="CharacterControls" />
+			<description>
+			</description>
+		</method>
+		<method name="remove_sidekick">
+			<return type="void" />
+			<param index="0" name="sidekick" type="CharacterControls" />
+			<description>
+			</description>
+		</method>
+		<method name="get_sidekicks">
+			<return type="CharacterControls[]" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="FEATURE_UTILS" type="FeatureUtils" setter="" getter="">
+		</member>
+		<member name="inventory_type_id" type="String" setter="" getter="" default="&quot;CHARACTER&quot;">
+		</member>
+		<member name="inventory" type="Inventory" setter="" getter="" default="&lt;unknown&gt;">
+		</member>
+		<member name="_DISABLE_FLIP" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="TEMP_MESH" type="Node3D" setter="" getter="" default="&lt;unknown&gt;">
+		</member>
+		<member name="CHARACTER_MESH" type="Node3D" setter="" getter="">
+		</member>
+		<member name="CHARACTER_CONFIG" type="CharacterConfig" setter="" getter="">
+		</member>
+		<member name="LAST_ANIM_PLAYED" type="String" setter="" getter="" default="&quot;&quot;">
+		</member>
+		<member name="LINEAR_VELOCITY_THRESHOLD" type="float" setter="" getter="" default="0.0001">
+		</member>
+		<member name="ROTATION_SNAP_THRESHOLD" type="float" setter="" getter="" default="0.01">
+		</member>
+		<member name="TURN_SPEED" type="float" setter="" getter="" default="6.28">
+		</member>
+		<member name="LEFT" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="FORWARD" type="bool" setter="" getter="" default="true">
+		</member>
+		<member name="TURN_DEGREES_PER_SECOND" type="float" setter="" getter="" default="360.0">
+		</member>
+		<member name="_SIDEKICKS" type="CharacterControls[]" setter="" getter="" default="[]">
+		</member>
+		<member name="RAY_CASTERS" type="RayCast3D[]" setter="" getter="" default="[...]">
+		</member>
+		<member name="SPEED" type="float" setter="" getter="" default="3.0">
+		</member>
+		<member name="AIR_CONTROL" type="float" setter="" getter="" default="1.5">
+		</member>
+		<member name="RUN_SPEED" type="float" setter="" getter="" default="1.4">
+		</member>
+		<member name="JUMP_POWER" type="float" setter="" getter="" default="2.5">
+		</member>
+		<member name="ACCEL_TIME" type="Variant" setter="" getter="" default="0.25">
+		</member>
+		<member name="_had_motivation" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="_had_downward_momentum" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="_orignal_friction" type="Variant" setter="" getter="" default="null">
+		</member>
+		<member name="_had_input" type="bool" setter="" getter="" default="false">
+		</member>
+	</members>
+</class>

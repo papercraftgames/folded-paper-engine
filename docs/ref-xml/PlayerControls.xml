@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="PlayerControls" inherits="CharacterControls" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_ready">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="apply_hold_zone">
+			<return type="void" />
+			<param index="0" name="distance" type="float" />
+			<param index="1" name="zone_size" type="Vector3" />
+			<param index="2" name="zone_scene" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="_held_item_changed">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_holdable_items_available_change">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="set_device_proxy">
+			<return type="void" />
+			<param index="0" name="device_proxy" type="DeviceProxy" />
+			<description>
+			</description>
+		</method>
+		<method name="set_player_controls_config">
+			<return type="void" />
+			<param index="0" name="config" type="Dictionary" />
+			<description>
+			</description>
+		</method>
+		<method name="setup_camera">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="get_input_action_value">
+			<return type="ActuatorInfo" />
+			<param index="0" name="action_name" type="StringName" />
+			<description>
+			</description>
+		</method>
+		<method name="steer">
+			<return type="void" />
+			<param index="0" name="amount" type="float" />
+			<param index="1" name="state" type="PhysicsDirectBodyState3D" />
+			<description>
+			</description>
+		</method>
+		<method name="pitch_camera">
+			<return type="void" />
+			<param index="0" name="amount" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="turn_mesh">
+			<return type="void" />
+			<param index="0" name="input" type="Vector2" />
+			<description>
+			</description>
+		</method>
+		<method name="_get_turn_value">
+			<return type="float" />
+			<param index="0" name="info" type="ActuatorInfo" />
+			<description>
+			</description>
+		</method>
+		<method name="_integrate_forces">
+			<return type="void" />
+			<param index="0" name="state" type="PhysicsDirectBodyState3D" />
+			<description>
+			</description>
+		</method>
+		<method name="_physics_process">
+			<return type="void" />
+			<param index="0" name="delta" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="on_trigger_entered">
+			<return type="void" />
+			<param index="0" name="trigger" type="TrackingArea3D" />
+			<param index="1" name="on_triggered" type="Callable" />
+			<description>
+			</description>
+		</method>
+		<method name="on_use">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="add_tracking_area">
+			<return type="void" />
+			<param index="0" name="tracking_area" type="TrackingArea3D" />
+			<description>
+			</description>
+		</method>
+		<method name="remove_tracking_area">
+			<return type="void" />
+			<param index="0" name="tracking_area" type="TrackingArea3D" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="_INTERSECTING_TRACKING_AREAS" type="TrackingArea3D[]" setter="" getter="" default="[]">
+		</member>
+		<member name="CAMERA" type="FollowingCamera" setter="" getter="">
+		</member>
+		<member name="DEVICE_PROXY" type="DeviceProxy" setter="" getter="">
+		</member>
+		<member name="_THIRD_PERSON_MODE" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="_FIRST_PERSON_MODE" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="_HOLD_ZONE" type="HoldZone" setter="" getter="">
+		</member>
+		<member name="turn_speed" type="float" setter="" getter="" default="0.075">
+		</member>
+		<member name="mouse_axis_ratio" type="float" setter="" getter="" default="0.075">
+		</member>
+	</members>
+</class>

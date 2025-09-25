@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="ShapeGuesser" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_collect_samples" qualifiers="static">
+			<return type="PackedVector3Array" />
+			<param index="0" name="mesh" type="Mesh" />
+			<description>
+			</description>
+		</method>
+		<method name="_approx_mesh_volume" qualifiers="static">
+			<return type="float" />
+			<param index="0" name="mesh" type="Mesh" />
+			<description>
+			</description>
+		</method>
+		<method name="_stdev" qualifiers="static">
+			<return type="float" />
+			<param index="0" name="values" type="PackedFloat32Array" />
+			<description>
+			</description>
+		</method>
+		<method name="_min3" qualifiers="static">
+			<return type="float" />
+			<param index="0" name="a" type="float" />
+			<param index="1" name="b" type="float" />
+			<param index="2" name="c" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="get_mesh_offset" qualifiers="static">
+			<return type="Vector3" />
+			<param index="0" name="mi" type="MeshInstance3D" />
+			<description>
+			</description>
+		</method>
+		<method name="build_collision_for" qualifiers="static">
+			<return type="Shape3D" />
+			<param index="0" name="target" type="Node" />
+			<param index="1" name="allow_trimesh_when_thin" type="bool" default="true" />
+			<param index="2" name="min_axis_epsilon" type="float" default="0.01" />
+			<param index="3" name="prefer_simple_box" type="bool" default="false" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<constants>
+		<constant name="ROUND_STDDEV_THRESHOLD" value="0.14">
+		</constant>
+		<constant name="ELONGATION_RATIO" value="1.5">
+		</constant>
+		<constant name="AXIS_SIMILARITY" value="1.15">
+		</constant>
+		<constant name="BOX_VOLUME_RATIO_THRESHOLD" value="0.7">
+		</constant>
+	</constants>
+</class>

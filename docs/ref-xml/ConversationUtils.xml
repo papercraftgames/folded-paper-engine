@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="ConversationUtils" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="get_conversation_instance_id" qualifiers="static">
+			<return type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="select_conversation" qualifiers="static">
+			<return type="Conversation" />
+			<param index="0" name="conversations" type="Conversation[]" />
+			<param index="1" name="characters" type="String[]" />
+			<description>
+			</description>
+		</method>
+		<method name="conversation_is_complete" qualifiers="static">
+			<return type="bool" />
+			<param index="0" name="conversation_instance" type="ConversationInstance" />
+			<description>
+			</description>
+		</method>
+		<method name="create_conversation" qualifiers="static">
+			<return type="ConversationInstance" />
+			<param index="0" name="conversation" type="Conversation" />
+			<param index="1" name="conversation_owner" type="Node" />
+			<param index="2" name="conversation_initializer" type="Node" />
+			<description>
+			</description>
+		</method>
+		<method name="select_reply" qualifiers="static">
+			<return type="ConversationInstance" />
+			<param index="0" name="conversation_instance" type="ConversationInstance" />
+			<param index="1" name="reply_index" type="int" />
+			<description>
+			</description>
+		</method>
+		<method name="get_character_name_from_node" qualifiers="static">
+			<return type="String" />
+			<param index="0" name="node" type="Node" />
+			<description>
+			</description>
+		</method>
+		<method name="get_sidekick_character_names_from_node" qualifiers="static">
+			<return type="String[]" />
+			<param index="0" name="node" type="Node" />
+			<description>
+			</description>
+		</method>
+		<method name="get_all_character_names_from_node" qualifiers="static">
+			<return type="String[]" />
+			<param index="0" name="node" type="Node" />
+			<description>
+			</description>
+		</method>
+		<method name="get_all_character_names_from_all_nodes" qualifiers="static">
+			<return type="String[]" />
+			<param index="0" name="nodes" type="Node[]" />
+			<description>
+			</description>
+		</method>
+		<method name="load_conversation_from_file_item" qualifiers="static">
+			<return type="Conversation" />
+			<param index="0" name="file_item" type="Dictionary" />
+			<description>
+			</description>
+		</method>
+		<method name="load_conversations_from_file_item_list" qualifiers="static">
+			<return type="Conversation[]" />
+			<param index="0" name="file_item_list" type="Array" />
+			<description>
+			</description>
+		</method>
+	</methods>
+</class>

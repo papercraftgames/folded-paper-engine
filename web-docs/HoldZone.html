@@ -1,0 +1,72 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HoldZone — API</title><link rel="stylesheet" href="./style.css"><body><div class="container">
+<h1>HoldZone — API</h1>
+<div class="grid">
+  <div>
+    <div class="card">
+      <div><strong>Class:</strong> HoldZone</div>
+      <div class="small">Inherits: Area3D</div>
+      
+    </div>
+  </div>
+  <div>
+    
+    <div class="card"><h2>Properties</h2><ul class="list"><li><div><code class="code">FeatureUtils _FEATURE_UTILS</code></div>
+       <div class="small"></div></li><li><div><code class="code">PlayerControls _PLAYER</code></div>
+       <div class="small"></div></li><li><div><code class="code">float _DISTANCE = 1.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">Vector3 _ZONE_SIZE = Vector3(0.25, 0.25, 0.25)</code></div>
+       <div class="small"></div></li><li><div><code class="code">String _ZONE_SCENE = &quot;&quot;</code></div>
+       <div class="small"></div></li><li><div><code class="code">SubSceneHost _ZONE_SCENE_HOST</code></div>
+       <div class="small"></div></li><li><div><code class="code">Area3D _UNDERNEATH_AREA</code></div>
+       <div class="small"></div></li><li><div><code class="code">RigidBody3D[] _UNDERNEATH_ITEMS = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">float _HOLD_FORCE = 275.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">float _MAX_HOLD_FORCE = 300.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">float _DAMPING_FORCE = 8.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">float _SWAY_STRENGTH = 0.3</code></div>
+       <div class="small"></div></li><li><div><code class="code">Variant _ROTATION_SPEED = 1.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">float _MAX_HELD_DISTANCE = 5.5</code></div>
+       <div class="small"></div></li><li><div><code class="code">Vector3 _HELD_INITIAL_ROTATION = Vector3(0, 0, 0)</code></div>
+       <div class="small"></div></li><li><div><code class="code">float _HELD_GRAVITY_SCALE = 0.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">float _HELD_LINEAR_DAMP = 0.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">float _HELD_ANGULAR_DAMP = 0.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool _HELD_CCD = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">RigidBody3D _HELD</code></div>
+       <div class="small"></div></li><li><div><code class="code">RigidBody3D[] _HOLD_CANDIDATES = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">TrackingArea3D[] _TRIGGERS = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">TrackingArea3D[] _DEPOSITE_CANDIDATE_TRIGGERS = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">TrackingArea3D[] _WITHDRAW_CANDIDATE_TRIGGERS = []</code></div>
+       <div class="small"></div></li><li><div><code class="code">Debounce _HOLD_COOLDOWN_DEBOUNCE = &lt;unknown&gt;</code></div>
+       <div class="small"></div></li></ul></div>
+    <div class="card"><h2>Methods</h2><ul class="list"><li><div><code class="code">void _init(FeatureUtils feature_utils, PlayerControls player, float distance, Vector3 zone_size, String zone_scene)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _process(float delta)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void apply_pickup_force(float delta)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void apply_rotation_and_sway(float delta)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _setup_zone_scene()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _setup_underneath_area()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _on_add_underneath_item(Node b)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _on_remove_underneath_item(Node b)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _trigger_deposite_areas(RigidBody3D was_held)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _set_withdraw_areas()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _on_tracking_area_entered(Area3D a)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _on_tracking_area_exited(Area3D a)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _trigger_hold_zone_interact()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _on_hold_candidate_entered(Node3D b)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _on_hold_candidate_exited(Node3D b)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _drop_on_floor_raycast_collision()</code></div>
+      <div class="small"></div></li><li><div><code class="code">bool hold_items_available()</code></div>
+      <div class="small"></div></li><li><div><code class="code">bool holding()</code></div>
+      <div class="small"></div></li><li><div><code class="code">RigidBody3D[] get_holdable_items()</code></div>
+      <div class="small"></div></li><li><div><code class="code">RigidBody3D get_held_item()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void hold_item()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void drop_item()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _start_hold_cooldown()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _start_hold(RigidBody3D b)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _stop_hold()</code></div>
+      <div class="small"></div></li></ul></div>
+    <div class="card"><h2>Signals</h2><ul class="list"><li><div><code class="code">signal holdable_items_available_change()</code></div>
+      <div class="small"></div></li><li><div><code class="code">signal held_item_changed()</code></div>
+      <div class="small"></div></li></ul></div>
+    
+  </div>
+</div>
+<div class="small" style="margin-top:16px">Built from addon XML via CI.</div></div></body>

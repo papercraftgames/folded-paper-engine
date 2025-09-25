@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="InventoryItemKind" inherits="DataItem" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<param index="0" name="data" type="Variant" default="null" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="id" type="String" setter="" getter="">
+		</member>
+		<member name="label" type="String" setter="" getter="">
+		</member>
+		<member name="plural_label" type="String" setter="" getter="">
+		</member>
+		<member name="stack_limit" type="int" setter="" getter="">
+		</member>
+	</members>
+</class>

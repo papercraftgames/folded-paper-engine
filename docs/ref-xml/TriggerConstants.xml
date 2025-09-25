@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="TriggerConstants" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="get_trigger_type_by_numeric_value" qualifiers="static">
+			<return type="String" />
+			<param index="0" name="value" type="Variant" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<constants>
+		<constant name="TRIGGER_GROUPS_DATA_PROPERTY_NAME" value="&quot;TriggerGroups&quot;">
+		</constant>
+		<constant name="TRIGGER_EVENTS_DATA_PROPERTY_NAME" value="&quot;TriggerEvents&quot;">
+		</constant>
+		<constant name="TRIGGER_TYPE_DATA_PROPERTY_NAME" value="&quot;TriggerType&quot;">
+		</constant>
+		<constant name="TRIGGER_TYPES" value="Dictionary[String, String]({&quot;DEPOSIT&quot;: &quot;DEPOSIT&quot;, &quot;ENTER&quot;: &quot;ENTER&quot;, &quot;EXIT&quot;: &quot;EXIT&quot;, &quot;HOLD&quot;: &quot;HOLD&quot;, &quot;HOLDABLE_ITEMS_AVAILABLE&quot;: &quot;HOLDABLE_ITEMS_AVAILABLE&quot;, &quot;HOLDABLE_ITEMS_UNAVAILABLE&quot;: &quot;HOLDABLE_ITEMS_UNAVAILABLE&quot;, &quot;HOLD_ZONE_INTERACTION&quot;: &quot;HOLD_ZONE_INTERACTION&quot;, &quot;INTERACTION&quot;: &quot;INTERACTION&quot;, &quot;RELEASE&quot;: &quot;RELEASE&quot;, &quot;WITHDRAW&quot;: &quot;WITHDRAW&quot;})">
+		</constant>
+		<constant name="TRIGGER_TYPE_INDICES" value="Array[String]([&quot;ENTER&quot;, &quot;EXIT&quot;, &quot;INTERACTION&quot;, &quot;DEPOSIT&quot;, &quot;WITHDRAW&quot;, &quot;HOLD&quot;, &quot;RELEASE&quot;, &quot;HOLDABLE_ITEMS_AVAILABLE&quot;, &quot;HOLDABLE_ITEMS_UNAVAILABLE&quot;, &quot;HOLD_ZONE_INTERACTION&quot;])">
+		</constant>
+	</constants>
+</class>

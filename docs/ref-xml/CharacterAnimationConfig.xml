@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="CharacterAnimationConfig" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<members>
+		<member name="Idle" type="String" setter="" getter="" default="&quot;&quot;">
+		</member>
+		<member name="Walk" type="String" setter="" getter="" default="&quot;&quot;">
+		</member>
+		<member name="Run" type="String" setter="" getter="" default="&quot;&quot;">
+		</member>
+		<member name="Jump" type="String" setter="" getter="" default="&quot;&quot;">
+		</member>
+		<member name="Talk" type="String" setter="" getter="" default="&quot;&quot;">
+		</member>
+	</members>
+</class>

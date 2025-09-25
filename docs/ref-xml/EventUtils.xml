@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="EventUtils" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="get_event_data_from_participant_data" qualifiers="static">
+			<return type="Dictionary" />
+			<param index="0" name="owner_data" type="Dictionary" />
+			<param index="1" name="initiator_data" type="Dictionary" />
+			<description>
+			</description>
+		</method>
+		<method name="_event_router">
+			<return type="void" />
+			<param index="0" name="event" type="FPEEvent" />
+			<description>
+			</description>
+		</method>
+		<method name="setup_scene_event_commands">
+			<return type="void" />
+			<param index="0" name="scene_event_data" type="Dictionary" />
+			<param index="1" name="feature_utils" type="FeatureUtils" />
+			<description>
+			</description>
+		</method>
+		<method name="dispatch_event">
+			<return type="void" />
+			<param index="0" name="event" type="FPEEvent" />
+			<description>
+			</description>
+		</method>
+		<method name="add_event_handler">
+			<return type="void" />
+			<param index="0" name="type" type="String" />
+			<param index="1" name="handler" type="EventHandler" />
+			<description>
+			</description>
+		</method>
+		<method name="remove_event_handler">
+			<return type="void" />
+			<param index="0" name="type" type="String" />
+			<param index="1" name="handler" type="EventHandler" />
+			<description>
+			</description>
+		</method>
+		<method name="clean_up">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="EVENT_HANDLER_MAP" type="Dictionary[String, Array]" setter="" getter="" default="{}">
+		</member>
+	</members>
+</class>

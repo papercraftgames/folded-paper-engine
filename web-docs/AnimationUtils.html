@@ -1,0 +1,41 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AnimationUtils — API</title><link rel="stylesheet" href="./style.css"><body><div class="container">
+<h1>AnimationUtils — API</h1>
+<div class="grid">
+  <div>
+    <div class="card">
+      <div><strong>Class:</strong> AnimationUtils</div>
+      <div class="small">Inherits: FPEGlobalsConfig</div>
+      
+    </div>
+  </div>
+  <div>
+    
+    <div class="card"><h2>Properties</h2><ul class="list"><li><div><code class="code">bool ALL_ANIMATIONS_PAUSED = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">Dictionary[String, bool] PAUSED_ANIMATION_NAMES = {}</code></div>
+       <div class="small"></div></li></ul></div>
+    <div class="card"><h2>Methods</h2><ul class="list"><li><div><code class="code">bool _is_transform3d_type(int t)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _clone_animation_track(Animation from_anim, Animation to_anim, int track_idx)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Animation _clone_filtered_animation(Animation source_anim)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void fix_animation_path(String anim_name, String parent_from_path, String parent_to_path, bool include_parent = false)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void fix_paths_for_all_animations(String parent_from_path, String parent_to_path, bool include_parent = false)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Dictionary[String, AnimationPlayer] _get_animation_player_map_from_node(Node node, Node3D root, Dictionary[String, AnimationPlayer] animation_player_map = {})</code></div>
+      <div class="small"></div></li><li><div><code class="code">Dictionary[String, AnimationPlayer] get_animation_player_map_from_root(Node3D root)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void apply_rest_pose_to_skeleton(Skeleton3D skeleton)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void initialize_skeletons(Node3D root)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _initialize_skeletons_recursive(Node node)</code></div>
+      <div class="small"></div></li><li><div><code class="code">AnimationPlayer get_animation_player(String anim_name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">bool is_animation(String anim_name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void play_animation(String anim_name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void pause_animation(String anim_name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void pause_playing_animations()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void resume_paused_animations()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void stop_animation(String anim_name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void stop_all_animations()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void initialize_animations()</code></div>
+      <div class="small"></div></li></ul></div>
+    
+    
+  </div>
+</div>
+<div class="small" style="margin-top:16px">Built from addon XML via CI.</div></div></body>

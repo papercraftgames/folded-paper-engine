@@ -1,0 +1,39 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AdvancedRigidBody3D — API</title><link rel="stylesheet" href="./style.css"><body><div class="container">
+<h1>AdvancedRigidBody3D — API</h1>
+<div class="grid">
+  <div>
+    <div class="card">
+      <div><strong>Class:</strong> AdvancedRigidBody3D</div>
+      <div class="small">Inherits: RigidBody3D</div>
+      
+    </div>
+  </div>
+  <div>
+    
+    <div class="card"><h2>Properties</h2><ul class="list"><li><div><code class="code">bool _BEING_HELD = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">float ground_normal_dot_thresh = 0.6</code></div>
+       <div class="small"></div></li><li><div><code class="code">int max_platform_history = 64</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool auto_enable_contact_monitoring = true</code></div>
+       <div class="small"></div></li><li><div><code class="code">int contacts_to_report = 8</code></div>
+       <div class="small"></div></li><li><div><code class="code">Vector3 contact_linear_velocity = Vector3(0, 0, 0)</code></div>
+       <div class="small"></div></li><li><div><code class="code">Vector3 contact_angular_velocity = Vector3(0, 0, 0)</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool contact_valid = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">float contact_up_dot = 0.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">Dictionary _prev_xform = {}</code></div>
+       <div class="small"></div></li></ul></div>
+    <div class="card"><h2>Methods</h2><ul class="list"><li><div><code class="code">void _init()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _ready()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _physics_process(float _delta)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _integrate_forces(PhysicsDirectBodyState3D state)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Vector3 _static_point_velocity(StaticBody3D body, Vector3 world_point, float dt)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Vector3 _static_angular_velocity(StaticBody3D body, float dt)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void set_being_held(bool value)</code></div>
+      <div class="small"></div></li><li><div><code class="code">bool get_being_held()</code></div>
+      <div class="small"></div></li></ul></div>
+    <div class="card"><h2>Signals</h2><ul class="list"><li><div><code class="code">signal being_held_changed()</code></div>
+      <div class="small"></div></li></ul></div>
+    
+  </div>
+</div>
+<div class="small" style="margin-top:16px">Built from addon XML via CI.</div></div></body>

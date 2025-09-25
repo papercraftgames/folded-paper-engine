@@ -1,0 +1,45 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Device — API</title><link rel="stylesheet" href="./style.css"><body><div class="container">
+<h1>Device — API</h1>
+<div class="grid">
+  <div>
+    <div class="card">
+      <div><strong>Class:</strong> Device</div>
+      <div class="small">Inherits: RefCounted</div>
+      
+    </div>
+  </div>
+  <div>
+    
+    <div class="card"><h2>Properties</h2><ul class="list"><li><div><code class="code">int device_index = -1</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool _mouse_enabled = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">Dictionary[String, float] last_actuator_levels = {}</code></div>
+       <div class="small"></div></li><li><div><code class="code">Dictionary[String, float] actuator_levels = {}</code></div>
+       <div class="small"></div></li><li><div><code class="code">Vector2 mouse_position = Vector2(0, 0)</code></div>
+       <div class="small"></div></li><li><div><code class="code">Vector2 last_mouse_delta = Vector2(0, 0)</code></div>
+       <div class="small"></div></li><li><div><code class="code">Vector2 mouse_delta = Vector2(0, 0)</code></div>
+       <div class="small"></div></li></ul></div>
+    <div class="card"><h2>Methods</h2><ul class="list"><li><div><code class="code">void _init(int index, bool mouse_enabled = false)</code></div>
+      <div class="small"></div></li><li><div><code class="code">bool actuator_is_mouse_axis(String name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">bool actuator_is_gamepad_axis(String name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">bool actuator_is_axis(String name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _set_last_actuator_level(String name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void activate_actuator(String name, float amount)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void deactivate_actuator(Variant name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _clear_last_actuator_level(String name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void clear()</code></div>
+      <div class="small"></div></li><li><div><code class="code">bool just_had_specific_actuator_activity(String name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">bool has_specific_actuator_activity(String name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">ActuatorInfo _get_actuator_level_from_data(String name, Dictionary[String, float] actuator_levels_data, Vector2 mouse_delta_data, bool live_gamepad_axis = true)</code></div>
+      <div class="small"></div></li><li><div><code class="code">ActuatorInfo get_last_actuator_level(String name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">ActuatorInfo get_actuator_level(String name)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void set_mouse_position(Vector2 position)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Vector2 get_mouse_position()</code></div>
+      <div class="small"></div></li><li><div><code class="code">void set_mouse_delta(Vector2 delta)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Vector2 get_mouse_delta()</code></div>
+      <div class="small"></div></li></ul></div>
+    
+    
+  </div>
+</div>
+<div class="small" style="margin-top:16px">Built from addon XML via CI.</div></div></body>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DeviceProxy" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<param index="0" name="device" type="Device" />
+			<param index="1" name="mapping" type="DeviceMapping" />
+			<description>
+			</description>
+		</method>
+		<method name="_ready">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="_input">
+			<return type="void" />
+			<param index="0" name="event" type="InputEvent" />
+			<description>
+			</description>
+		</method>
+		<method name="_physics_process">
+			<return type="void" />
+			<param index="0" name="_delta" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="just_had_action_activity">
+			<return type="bool" />
+			<param index="0" name="action" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="has_action_activity">
+			<return type="bool" />
+			<param index="0" name="action" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="get_action_value">
+			<return type="ActuatorInfo" />
+			<param index="0" name="action" type="String" />
+			<description>
+			</description>
+		</method>
+		<method name="get_mouse_position">
+			<return type="Vector2" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="DEVICE" type="Device" setter="" getter="">
+		</member>
+		<member name="MAPPING" type="DeviceMapping" setter="" getter="">
+		</member>
+	</members>
+</class>

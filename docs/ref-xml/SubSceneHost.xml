@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="SubSceneHost" inherits="FeatureConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_init">
+			<return type="void" />
+			<param index="0" name="feature_utils" type="FeatureUtils" />
+			<param index="1" name="target_node" type="Node3D" />
+			<param index="2" name="file_path" type="String" />
+			<param index="3" name="auto_load" type="bool" />
+			<param index="4" name="pause" type="bool" />
+			<param index="5" name="resume_on_unload" type="bool" />
+			<param index="6" name="unload_delay_ms" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="_setup">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="load_scene">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="unload_scene">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="_TARGET_NODE" type="Node3D" setter="" getter="">
+		</member>
+		<member name="_FILE_PATH" type="String" setter="" getter="">
+		</member>
+		<member name="_AUTO_LOAD" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="_PAUSE" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="_RESUME_ON_UNLOAD" type="bool" setter="" getter="" default="false">
+		</member>
+		<member name="_UNLOAD_DELAY_MS" type="float" setter="" getter="" default="0.0">
+		</member>
+		<member name="_SUB_FEATURE_UTILS" type="FeatureUtils" setter="" getter="">
+		</member>
+	</members>
+</class>

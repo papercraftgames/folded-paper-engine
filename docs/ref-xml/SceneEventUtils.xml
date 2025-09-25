@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="SceneEventUtils" inherits="FeatureConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="process_scene_events">
+			<return type="void" />
+			<param index="0" name="unload" type="bool" default="false" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<constants>
+		<constant name="SCENE_LOAD_EVENTS" value="&quot;SceneLoadEvents&quot;">
+		</constant>
+		<constant name="SCENE_UNLOAD_EVENTS" value="&quot;SceneUnloadEvents&quot;">
+		</constant>
+	</constants>
+</class>

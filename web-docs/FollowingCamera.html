@@ -1,0 +1,31 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FollowingCamera — API</title><link rel="stylesheet" href="./style.css"><body><div class="container">
+<h1>FollowingCamera — API</h1>
+<div class="grid">
+  <div>
+    <div class="card">
+      <div><strong>Class:</strong> FollowingCamera</div>
+      <div class="small">Inherits: Camera3D</div>
+      
+    </div>
+  </div>
+  <div>
+    
+    <div class="card"><h2>Properties</h2><ul class="list"><li><div><code class="code">FPEGlobals FPE_GLOBALS</code></div>
+       <div class="small"></div></li><li><div><code class="code">Node3D target</code></div>
+       <div class="small"></div></li><li><div><code class="code">Vector3 offset = Vector3(0, 1.5, 3)</code></div>
+       <div class="small"></div></li><li><div><code class="code">float angular_offset_degrees = 0.0</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool align = false</code></div>
+       <div class="small"></div></li><li><div><code class="code">bool face = false</code></div>
+       <div class="small"></div></li></ul></div>
+    <div class="card"><h2>Methods</h2><ul class="list"><li><div><code class="code">void _init(FPEGlobals fpe_globals, Node3D node)</code></div>
+      <div class="small"></div></li><li><div><code class="code">float get_rotation_around_pivot_x(Vector3 point, Vector3 pivot)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Vector3 rotate_around_pivot_x(Vector3 point, Vector3 pivot, float rads)</code></div>
+      <div class="small"></div></li><li><div><code class="code">Vector3 rotate_around_pivot_y(Vector3 point, Vector3 pivot, Basis src_basis)</code></div>
+      <div class="small"></div></li><li><div><code class="code">void _process(Variant _delta)</code></div>
+      <div class="small"></div></li></ul></div>
+    
+    
+  </div>
+</div>
+<div class="small" style="margin-top:16px">Built from addon XML via CI.</div></div></body>
