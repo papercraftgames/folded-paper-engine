@@ -5,8 +5,8 @@ import path from "node:path";
 import fse from "fs-extra";
 import {XMLParser} from "fast-xml-parser";
 
-const XML_DIR = process.env.DOCS_XML_DIR ?? "dist/docs/ref-xml";
-const WEB_DOCS_DIR = process.env.DOCS_SITE_ROOT ?? "dist/web-docs";
+const XML_DIR = "dist/docs/ref-xml";
+const WEB_DOCS_DIR = "dist/web-docs";
 
 type ClassDoc = {
   class: {
