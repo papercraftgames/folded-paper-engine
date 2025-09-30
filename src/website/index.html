@@ -12,6 +12,23 @@
     <meta name="apple-mobile-web-app-title" content="Folded Paper Engine"/>
     <link rel="manifest" href="./icons/site.webmanifest.json"/>
     <link rel="stylesheet" href="./index.css">
+    <script src="./godot-embed.js"></script>
+    <script type="module">
+      import {loadGodot} from "./godot-embed.js";
+
+      loadGodot({
+        basePath: "./demo-game",        // where index.{js,wasm,pck} live
+        executable: "index",
+        canvas: document.getElementById("godot-canvas"),
+        onProgress: (c, t) => {
+          // hook into your site’s loader/progress UI if you want
+          // console.log(c, t);
+        },
+        // config: { canvasResizePolicy: 2, focusCanvas: false } // example overrides
+      }).catch(err => {
+        console.error("Godot failed to start:", err);
+      });
+    </script>
 </head>
 <body>
 <header
