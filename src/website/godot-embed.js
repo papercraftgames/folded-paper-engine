@@ -2,7 +2,7 @@ export async function loadGodot(
   {
     basePath = "./demo-game",         // folder that contains index.{js,wasm,pck,png}
     executable = "index",       // Godot export name
-    canvas = document.querySelector("#godot-canvas"),
+    canvas = document.querySelector(".web-splash-inner"),
     config = {},                // optional GODOT_CONFIG overrides
     onProgress = null,          // (current, total) => void
   } = {},

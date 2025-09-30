@@ -19,7 +19,7 @@
       loadGodot({
         basePath: "./demo-game",        // where index.{js,wasm,pck} live
         executable: "index",
-        canvas: document.getElementById("godot-canvas"),
+        canvas: document.querySelector(".web-splash-inner"),
         onProgress: (c, t) => {
           // hook into your site’s loader/progress UI if you want
           // console.log(c, t);
