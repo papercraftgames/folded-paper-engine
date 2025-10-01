@@ -14,7 +14,29 @@
     <link rel="stylesheet" href="./index.css">
     <style>
         .web-splash-loading {
-            background: none;
+            /* smooth looping diagonal gradient */
+            background: linear-gradient(
+                    -45deg,
+                    #9fb837,
+                    #b9d94a,
+                    #87a62e,
+                    #d5f567
+            );
+            background-size: 400% 400%;
+            animation: web-splash-gradient 10s ease infinite;
+        }
+
+        /* keyframes for shifting gradient */
+        @keyframes web-splash-gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
     </style>
     <script type="module">
