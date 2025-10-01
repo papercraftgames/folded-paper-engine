@@ -18,7 +18,6 @@
                 position: relative;
                 overflow: hidden;
 
-                /* tuneables */
                 --stripe: 28px;
                 --speed: 3s;
                 --c1: #9fb837;
@@ -27,7 +26,7 @@
                 &::before {
                     content: "";
                     position: absolute;
-                    inset: -25%; /* overscan to avoid edges while moving */
+                    inset: -25%;
                     background: repeating-linear-gradient(
                             45deg,
                             var(--c1) 0 calc(var(--stripe)),
@@ -40,8 +39,6 @@
                     z-index: 1;
                 }
             }
-
-            /* keep UI above the stripes while loading */
 
             & > .apple-sticker,
             & > .star-sticker,
