@@ -19,9 +19,9 @@
                 background: url('./web-splash-bg.png') center / cover no-repeat;
 
                 &.web-splash-loading {
-                    --stripe: 28px;
-                    --tile-ratio-x: 2;
-                    --tile-ratio-y: 2;
+                    --stripe: 50px;
+                    --tile-ratio-x: 2.8;
+                    --tile-ratio-y: 2.8;
                     --speed: 1.6s;
                     --c1: #9fb837;
                     --c2: #b9d94a;
@@ -40,7 +40,7 @@
         /* must be top-level */
         @keyframes web-splash-candy {
             to {
-                background-position: calc(var(--stripe) * var(--tile-ratio-x)) calc(var(--stripe) * var(--tile-ratio-y));
+                background-position: calc(var(--stripe) * var(--tile-ratio-x)) 0;
             }
         }
     </style>
