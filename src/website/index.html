@@ -15,45 +15,25 @@
     <style>
         .web-splash-inner {
             &.web-splash-loading {
-                position: relative;
-                overflow: hidden;
-
                 --stripe: 28px;
-                --speed: 3s;
                 --c1: #9fb837;
                 --c2: #b9d94a;
 
-                &::before {
-                    content: "";
-                    position: absolute;
-                    inset: -25%;
-                    background: repeating-linear-gradient(
-                            45deg,
-                            var(--c1) 0 calc(var(--stripe)),
-                            var(--c2) calc(var(--stripe)) calc(var(--stripe) * 2)
-                    );
-                    transform: translate3d(0, 0, 0);
-                    animation: web-splash-candy var(--speed) linear infinite;
-                    will-change: transform;
-                    pointer-events: none;
-                    z-index: 1;
-                }
-            }
-
-            & > .apple-sticker,
-            & > .star-sticker,
-            & > .demo-button {
-                position: relative;
-                z-index: 2;
+                background: repeating-linear-gradient(
+                        45deg,
+                        var(--c1) 0 calc(var(--stripe)),
+                        var(--c2) calc(var(--stripe)) calc(var(--stripe) * 2)
+                );
+                background-size: calc(var(--stripe) * 4) calc(var(--stripe) * 4);
+                animation: web-splash-stripes-move 1.6s linear infinite;
+                will-change: background-position;
+                transform: translateZ(0);
             }
         }
 
-        @keyframes web-splash-candy {
-            from {
-                transform: translate3d(0, 0, 0);
-            }
+        @keyframes web-splash-stripes-move {
             to {
-                transform: translate3d(calc(var(--stripe) * 2), calc(var(--stripe) * 2), 0);
+                background-position: calc(var(--stripe) * 4) 0;
             }
         }
     </style>
