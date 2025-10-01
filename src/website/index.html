@@ -25,9 +25,6 @@
           basePath: "./demo-game",
           executable: "index",
           canvas: webSplashInner,
-          onProgress: (c, t) => {
-            console.log(c, t);
-          },
         }).catch(err => {
           console.error("Godot failed to start:", err);
         });
