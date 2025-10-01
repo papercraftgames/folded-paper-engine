@@ -12,22 +12,30 @@
     <meta name="apple-mobile-web-app-title" content="Folded Paper Engine"/>
     <link rel="manifest" href="./icons/site.webmanifest.json"/>
     <link rel="stylesheet" href="./index.css">
+    <style>
+        .web-splash-loading {
+            background: none;
+        }
+    </style>
     <script type="module">
       import {loadGodot} from "./godot-embed.js";
 
       const demoButton = document.querySelector('.demo-button');
-      const loadDemoGame = () => {
+      const loadDemoGame = async () => {
         const webSplashInner = document.querySelector(".web-splash-inner");
 
         webSplashInner.innerHTML = "";
+        webSplashInner.classList.add('web-splash-loading');
 
-        loadGodot({
+        await loadGodot({
           basePath: "./demo-game",
           executable: "index",
           canvas: webSplashInner,
         }).catch(err => {
           console.error("Godot failed to start:", err);
         });
+
+        webSplashInner.classList.remove('web-splash-loading');
       };
 
       demoButton.addEventListener('click', loadDemoGame);
