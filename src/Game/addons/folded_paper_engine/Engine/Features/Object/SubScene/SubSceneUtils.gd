@@ -5,9 +5,10 @@ func add(name: String, sub_scene_host: SubSceneHost) -> void:
 	FEATURE_UTILS.FPE_GLOBALS.SUB_SCENE_HOST_MAP[name] = sub_scene_host
 
 func remove(name: String) -> void:
-	unload_scene(name)
-	
-	FEATURE_UTILS.FPE_GLOBALS.SUB_SCENE_HOST_MAP.erase(name)
+	if FEATURE_UTILS.FPE_GLOBALS.SUB_SCENE_HOST_MAP.has(name):
+		unload_scene(name)
+		
+		FEATURE_UTILS.FPE_GLOBALS.SUB_SCENE_HOST_MAP.erase(name)
 
 func load_scene(name: String) -> void:
 	if FEATURE_UTILS.FPE_GLOBALS.SUB_SCENE_HOST_MAP.has(name):

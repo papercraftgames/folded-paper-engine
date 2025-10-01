@@ -1,6 +1,6 @@
 class_name FrameEventRunner extends Node
 
-const FRAME_TOLERANCE: float = 0.02  # 20 ms = about 1 frame at 50 FPS
+const FRAME_TOLERANCE: float = 1.0  # 1 frame tolerance
 
 var FEATURE_UTILS: FeatureUtils
 
@@ -58,9 +58,10 @@ func _process(_delta: float) -> void:
 
 			for te in trigger_events:
 				if AnimationConstants.ANIMATION_DATA_PROPERTY_NAMES.FrameTime in te:
-					var frame_time = te[AnimationConstants.ANIMATION_DATA_PROPERTY_NAMES.FrameTime]
-
-					if (last_checked < frame_time) and (frame_time <= current_time + FRAME_TOLERANCE):
+					var frame_time := te[AnimationConstants.ANIMATION_DATA_PROPERTY_NAMES.FrameTime] as float
+					var frame_tolerance_seconds := (1.0 / Engine.get_frames_per_second()) * FRAME_TOLERANCE
+					
+					if (last_checked < frame_time) and (frame_time <= current_time + frame_tolerance_seconds):
 						_trigger_frame_event(anim_target, te, anim_name)
 
 				_last_checked_frame_by_anim[anim_name] = current_time if current_time > 0.0 else -1.0
