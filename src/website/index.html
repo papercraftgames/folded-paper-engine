@@ -15,7 +15,6 @@
     <style>
         .web-splash {
             & > .web-splash-inner {
-                /* default (when not loading) */
                 background: url('./web-splash-bg.png') center / cover no-repeat;
 
                 &.web-splash-loading {
@@ -36,7 +35,6 @@
             }
         }
 
-        /* must be top-level */
         @keyframes web-splash-candy {
             to {
                 background-position: calc(var(--stripe) * var(--tile-ratio)) 0;
