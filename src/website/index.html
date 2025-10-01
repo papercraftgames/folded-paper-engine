@@ -13,27 +13,32 @@
     <link rel="manifest" href="./icons/site.webmanifest.json"/>
     <link rel="stylesheet" href="./index.css">
     <style>
-        .web-splash-inner {
-            &.web-splash-loading {
-                --stripe: 28px;
-                --c1: #9fb837;
-                --c2: #b9d94a;
+        .web-splash {
+            & > .web-splash-inner {
+                /* default (when not loading) */
+                background: url('./web-splash-bg.png') center / cover no-repeat;
 
-                background: repeating-linear-gradient(
-                        45deg,
-                        var(--c1) 0 calc(var(--stripe)),
-                        var(--c2) calc(var(--stripe)) calc(var(--stripe) * 2)
-                );
-                background-size: calc(var(--stripe) * 4) calc(var(--stripe) * 4);
-                animation: web-splash-stripes-move 1.6s linear infinite;
-                will-change: background-position;
-                transform: translateZ(0);
+                &.web-splash-loading {
+                    --stripe: 28px;
+                    --speed: 1.6s;
+                    --c1: #9fb837;
+                    --c2: #b9d94a;
+
+                    background: repeating-linear-gradient(
+                            45deg,
+                            var(--c1) 0 var(--stripe),
+                            var(--c2) var(--stripe) calc(var(--stripe) * 2)
+                    );
+                    background-size: calc(var(--stripe) * 4) calc(var(--stripe) * 1.5);
+                    animation: web-splash-candy var(--speed) linear infinite;
+                }
             }
         }
 
-        @keyframes web-splash-stripes-move {
+        /* must be top-level */
+        @keyframes web-splash-candy {
             to {
-                background-position: calc(var(--stripe) * 4) 0;
+                background-position: calc(var(--stripe) * 2) calc(var(--stripe) * 2);
             }
         }
     </style>
