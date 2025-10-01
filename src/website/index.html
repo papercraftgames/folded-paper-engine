@@ -15,30 +15,52 @@
     <style>
         .web-splash-inner {
             &.web-splash-loading {
-                background: repeating-linear-gradient(
-                        45deg,
-                        #9fb837 0,
-                        #9fb837 20px,
-                        #b9d94a 20px,
-                        #b9d94a 40px
-                );
-                background-size: 200% 200%;
-                animation: web-splash-stripes 2s linear infinite;
+                position: relative;
+                overflow: hidden;
+
+                /* tuneables */
+                --stripe: 28px;
+                --speed: 3s;
+                --c1: #9fb837;
+                --c2: #b9d94a;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    inset: -25%; /* overscan to avoid edges while moving */
+                    background: repeating-linear-gradient(
+                            45deg,
+                            var(--c1) 0 calc(var(--stripe)),
+                            var(--c2) calc(var(--stripe)) calc(var(--stripe) * 2)
+                    );
+                    transform: translate3d(0, 0, 0);
+                    animation: web-splash-candy var(--speed) linear infinite;
+                    will-change: transform;
+                    pointer-events: none;
+                    z-index: 1;
+                }
+            }
+
+            /* keep UI above the stripes while loading */
+
+            & > .apple-sticker,
+            & > .star-sticker,
+            & > .demo-button {
+                position: relative;
+                z-index: 2;
             }
         }
 
-        /* keyframes for sliding the stripes */
-        @keyframes web-splash-stripes {
-            0% {
-                background-position: 0 0;
+        @keyframes web-splash-candy {
+            from {
+                transform: translate3d(0, 0, 0);
             }
-            100% {
-                background-position: 40px 40px;
+            to {
+                transform: translate3d(calc(var(--stripe) * 2), calc(var(--stripe) * 2), 0);
             }
         }
     </style>
     <script type="module">
-      import {loadGodot} from "./godot-embed.js";
 
       const demoButton = document.querySelector('.demo-button');
       const loadDemoGame = async () => {
@@ -47,15 +69,15 @@
         webSplashInner.innerHTML = "";
         webSplashInner.classList.add('web-splash-loading');
 
-        await loadGodot({
-          basePath: "./demo-game",
-          executable: "index",
-          canvas: webSplashInner,
-        }).catch(err => {
-          console.error("Godot failed to start:", err);
-        });
-
-        webSplashInner.classList.remove('web-splash-loading');
+        // await loadGodot({
+        //   basePath: "./demo-game",
+        //   executable: "index",
+        //   canvas: webSplashInner,
+        // }).catch(err => {
+        //   console.error("Godot failed to start:", err);
+        // });
+        //
+        // webSplashInner.classList.remove('web-splash-loading');
       };
 
       demoButton.addEventListener('click', loadDemoGame);
