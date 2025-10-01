@@ -19,7 +19,8 @@ export async function loadGodot({
   }
 
   // HiDPI scaler: makes backing store match CSS size × DPR
-  let teardownHiDPI = () => {};
+  let teardownHiDPI = () => {
+  };
   if (enableHiDPI) {
     teardownHiDPI = attachHiDPIScaler(targetCanvas);
   }
@@ -29,7 +30,10 @@ export async function loadGodot({
 
   // Load engine script
   await new Promise((resolve, reject) => {
-    if (window.Engine) { resolve(); return; }
+    if (window.Engine) {
+      resolve();
+      return;
+    }
     const s = document.createElement("script");
     s.src = `${exeBase}.js`;
     s.async = true;
@@ -59,7 +63,9 @@ export async function loadGodot({
   }
 
   await engine.startGame({
-    onProgress: (c, t) => { if (onProgress) onProgress(c, t); },
+    onProgress: (c, t) => {
+      if (onProgress) onProgress(c, t);
+    },
   });
 
   // Unveil the canvas: hide the frame overlay
@@ -69,8 +75,14 @@ export async function loadGodot({
   // Return helpers in case you need to toggle HiDPI dynamically
   return {
     engine,
-    enableHiDPI: () => { if (!enableHiDPI) { teardownHiDPI = attachHiDPIScaler(targetCanvas); } },
-    disableHiDPI: () => { teardownHiDPI(); },
+    enableHiDPI: () => {
+      if (!enableHiDPI) {
+        teardownHiDPI = attachHiDPIScaler(targetCanvas);
+      }
+    },
+    disableHiDPI: () => {
+      teardownHiDPI();
+    },
   };
 }
 
@@ -91,7 +103,9 @@ function attachHiDPIScaler(canvas) {
     if (pxW !== lastW || pxH !== lastH || dpr !== lastDPR) {
       canvas.width = pxW;
       canvas.height = pxH;
-      lastW = pxW; lastH = pxH; lastDPR = dpr;
+      lastW = pxW;
+      lastH = pxH;
+      lastDPR = dpr;
     }
   };
 
@@ -104,7 +118,7 @@ function attachHiDPIScaler(canvas) {
   if (dprMedia.addEventListener) dprMedia.addEventListener("change", onDPR);
   else if (dprMedia.addListener) dprMedia.addListener(onDPR);
 
-  window.addEventListener("resize", scale, { passive: true });
+  window.addEventListener("resize", scale, {passive: true});
   scale();
 
   return () => {
