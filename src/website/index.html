@@ -50,15 +50,15 @@
         webSplashInner.innerHTML = "";
         webSplashInner.classList.add('web-splash-loading');
 
-        // await loadGodot({
-        //   basePath: "./demo-game",
-        //   executable: "index",
-        //   canvas: webSplashInner,
-        // }).catch(err => {
-        //   console.error("Godot failed to start:", err);
-        // });
-        //
-        // webSplashInner.classList.remove('web-splash-loading');
+        await loadGodot({
+          basePath: "./demo-game",
+          executable: "index",
+          canvas: webSplashInner,
+        }).catch(err => {
+          console.error("Godot failed to start:", err);
+        });
+
+        webSplashInner.classList.remove('web-splash-loading');
       };
 
       demoButton.addEventListener('click', loadDemoGame);
