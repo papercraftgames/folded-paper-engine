@@ -20,8 +20,7 @@
 
                 &.web-splash-loading {
                     --stripe: 50px;
-                    --tile-ratio-x: 2.8;
-                    --tile-ratio-y: 2.8;
+                    --tile-ratio: calc(2 / cos(45deg));
                     --speed: 1.6s;
                     --c1: #9fb837;
                     --c2: #b9d94a;
@@ -31,7 +30,7 @@
                             var(--c1) 0 var(--stripe),
                             var(--c2) var(--stripe) calc(var(--stripe) * 2)
                     );
-                    background-size: calc(var(--stripe) * var(--tile-ratio-x)) calc(var(--stripe) * var(--tile-ratio-y));
+                    background-size: calc(var(--stripe) * var(--tile-ratio)) calc(var(--stripe) * var(--tile-ratio));
                     animation: web-splash-candy var(--speed) linear infinite;
                 }
             }
@@ -40,7 +39,7 @@
         /* must be top-level */
         @keyframes web-splash-candy {
             to {
-                background-position: calc(var(--stripe) * var(--tile-ratio-x)) 0;
+                background-position: calc(var(--stripe) * var(--tile-ratio)) 0;
             }
         }
     </style>
