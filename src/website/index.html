@@ -15,18 +15,19 @@
     <script type="module">
       import {loadGodot} from "./godot-embed.js";
 
-      loadGodot({
-        basePath: "./demo-game",        // where index.{js,wasm,pck} live
-        executable: "index",
-        canvas: document.querySelector(".web-splash-inner"),
-        onProgress: (c, t) => {
-          // hook into your site’s loader/progress UI if you want
-          // console.log(c, t);
-        },
-        // config: { canvasResizePolicy: 2, focusCanvas: false } // example overrides
-      }).catch(err => {
-        console.error("Godot failed to start:", err);
-      });
+      const loadDemoGame = () => {
+        const webSplashInner = document.querySelector(".web-splash-inner");
+
+        webSplashInner.innerHTML = "";
+
+        loadGodot({
+          basePath: "./demo-game",
+          executable: "index",
+          canvas: webSplashInner,
+        }).catch(err => {
+          console.error("Godot failed to start:", err);
+        });
+      };
     </script>
 </head>
 <body>
@@ -55,10 +56,10 @@
             <img class="web-splash-img index-web-splash" src="./web-splash.png" alt="Splash">
             <img class="apple-sticker" src="./apple-sticker.png" alt="Apple Sticker">
             <img class="star-sticker" src="./splash-star.png" alt="Star Sticker">
-            <a class="demo-button button red" href="./demo-game">
+            <button class="demo-button button red" onclick="loadDemoGame()">
                 Play the Demo!
                 <img class="button-icon" src="./mug-icon.png" alt="A latte in a small, white coffee mug">
-            </a>
+            </button>
         </div>
     </section>
     <section
