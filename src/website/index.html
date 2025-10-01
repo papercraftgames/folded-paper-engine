@@ -13,29 +13,27 @@
     <link rel="manifest" href="./icons/site.webmanifest.json"/>
     <link rel="stylesheet" href="./index.css">
     <style>
-        .web-splash-loading {
-            /* smooth looping diagonal gradient */
-            background: linear-gradient(
-                    -45deg,
-                    #9fb837,
-                    #b9d94a,
-                    #87a62e,
-                    #d5f567
-            );
-            background-size: 400% 400%;
-            animation: web-splash-gradient 10s ease infinite;
+        .web-splash-inner {
+            &.web-splash-loading {
+                background: repeating-linear-gradient(
+                        45deg,
+                        #9fb837 0,
+                        #9fb837 20px,
+                        #b9d94a 20px,
+                        #b9d94a 40px
+                );
+                background-size: 200% 200%;
+                animation: web-splash-stripes 2s linear infinite;
+            }
         }
 
-        /* keyframes for shifting gradient */
-        @keyframes web-splash-gradient {
+        /* keyframes for sliding the stripes */
+        @keyframes web-splash-stripes {
             0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
+                background-position: 0 0;
             }
             100% {
-                background-position: 0% 50%;
+                background-position: 40px 40px;
             }
         }
     </style>
