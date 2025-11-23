@@ -1,0 +1,274 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Folded Paper Engine">
+    <title>Folded Paper Engine</title>
+    <link rel="icon" type="image/png" href="./icons/favicon-96x96.png" sizes="96x96"/>
+    <link rel="icon" type="image/svg+xml" href="./icons/favicon.svg"/>
+    <link rel="shortcut icon" href="./icons/favicon.ico"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png"/>
+    <meta name="apple-mobile-web-app-title" content="Folded Paper Engine"/>
+    <link rel="manifest" href="./icons/site.webmanifest.json"/>
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./docs.css">
+</head>
+<body>
+<header
+        class="header"
+>
+    <a href="https://fpe.papercraft.games">
+        <img class="logo" src="./logo.png" alt="Logo">
+    </a>
+    <div class="spacer"></div>
+    <a
+            class="button"
+            href="./index.html#download"
+    >
+        Download
+        <img class="dl-icon" src="./dl-icon.png" alt="Download">
+    </a>
+</header>
+<main>
+    <section
+            class="web-splash"
+    >
+        <div
+                class="web-splash-inner base-background"
+        >
+            <img class="web-splash-img" src="./doc-owl.png" alt="Folded Paper Engine docs owl">
+        </div>
+    </section>
+    <section
+            class="section top-section"
+    >
+        <header>
+            <div
+                    class="section-title"
+            >
+                Folded Paper Engine Guide
+                <div class="section-subtitle">
+                    Blender → Godot workflows without the guesswork
+                </div>
+            </div>
+        </header>
+        <main>
+            <p>
+                This is the companion to the Blender and Godot add-on docs. It explains the pieces of Folded Paper
+                Engine that are easy to miss, with concrete steps you can follow while building a small adventure.
+            </p>
+
+            <h2>Before you start</h2>
+            <ul>
+                <li>Install the <a href="./blender-panel-docs.html">Blender add-on</a> and the
+                    <a href="./godot-feature-docs.html">Godot add-on</a> first.</li>
+                <li>Keep <code>Custom Properties</code> enabled in your Blender <code>glTF</code> export so metadata makes
+                    it into Godot.</li>
+                <li>Add a <code>FoldedPaperEngine</code> node to your Godot scene and point its <code>Path</code>
+                    property at your exported <code>GLB/GLTF</code>.</li>
+            </ul>
+
+            <h2>Core gameplay setup</h2>
+            <h3>Player and NPCs</h3>
+            <ol>
+                <li>Select a mesh in Blender and open the Folded Paper Engine panel (<kbd>N</kbd> → <strong>Item</strong>
+                    tab).</li>
+                <li>Check <strong>Player</strong> to get the first-person controller, camera, and input bindings on import
+                    to Godot. Size the mesh to roughly <code>1m</code> tall.</li>
+                <li>For non-player characters, check <strong>Character</strong>. They import without the player camera so
+                    you can attach conversations, animations, or custom scripts in Godot.</li>
+            </ol>
+
+            <h3>Physics objects</h3>
+            <ol>
+                <li>Pick meshes that should move (crates, debris) and enable <strong>Physics</strong> in the panel.</li>
+                <li>Apply scale/rotation in Blender (<kbd>Ctrl</kbd> + <kbd>A</kbd>) before export to prevent offset or
+                    jittery collisions in Godot.</li>
+                <li>Leave the toggle off for static floors and walls. If you prefer, append <code>-col</code> to the name
+                    of static meshes to let Godot create collision shapes automatically.</li>
+            </ol>
+
+            <h3>Holdable items &amp; inventory</h3>
+            <ol>
+                <li>Tag a mesh as <strong>Holdable Item</strong> to make it pick-up ready.</li>
+                <li>Set its slot/size options so the player inventory can enforce limits.</li>
+                <li>In Godot, the player can swap or drop items using the built-in Inventory script. Add your own UI on
+                    top, or surface the included item prompts in your HUD.</li>
+            </ol>
+
+            <h3>Speakers for dialogue and audio</h3>
+            <ol>
+                <li>Enable <strong>Speaker</strong> on an NPC or scene prop to mark it as a dialogue participant and/or a
+                    3D audio source.</li>
+                <li>Provide a voice line ID or audio clip name so the Godot importer hooks up an
+                    <code>AudioStreamPlayer3D</code>.</li>
+                <li>Combine with the conversation system (below) to attach branching dialogue without extra wiring.</li>
+            </ol>
+
+            <h2>Events and interactions</h2>
+            <h3>Triggers (interaction zones)</h3>
+            <ol>
+                <li>Create an empty or simple mesh in Blender and enable <strong>Trigger</strong>.</li>
+                <li>Resize it to cover the interaction volume (door sensor, puzzle pad, cutscene area).</li>
+                <li>Optionally assign a trigger group to listen for multiple zones together.</li>
+                <li>In Godot, connect the trigger to commands (below) or your own scripts to open doors, start dialogue,
+                    or award items.</li>
+            </ol>
+
+            <h3>Frame events on animations</h3>
+            <ol>
+                <li>While editing an animation in Blender, add <strong>Frame Events</strong> in the Folded Paper Engine
+                    panel on the action.</li>
+                <li>Name the event and pick the frame where it should fire.</li>
+                <li>After import, the Godot <code>AnimationPlayer</code> will emit callbacks at those frames—use them to
+                    play sounds, unlock doors, or spawn effects.</li>
+            </ol>
+
+            <h3>Command system</h3>
+            <ol>
+                <li>Use commands when you want to chain logic without writing new scripts.</li>
+                <li>Attach commands to triggers, frame events, or UI interactions to do things like start conversations,
+                    toggle visibility, or load the next level.</li>
+                <li>For custom logic, pair a command with <strong>Script Path</strong> (see Extensibility) so your
+                    GDScript runs at the right moment.</li>
+            </ol>
+
+            <h2>Level flow and scene metadata</h2>
+            <h3>Load the next level</h3>
+            <ol>
+                <li>Pick a doorway or exit mesh in Blender and set its <strong>Load Level</strong> target to another
+                    <code>GLB/GLTF</code> path.</li>
+                <li>Combine with a trigger so the new level loads when the player enters the zone or interacts.</li>
+                <li>In Godot, the <code>FoldedPaperEngine</code> node will handle the transition and keep your player
+                    controller alive between scenes.</li>
+            </ol>
+
+            <h3>Sub-scenes and modular spaces</h3>
+            <ol>
+                <li>Use <strong>Sub Scene</strong> to place a placeholder mesh that points to another scene file.</li>
+                <li>Ideal for streaming interiors or reusable rooms; the importer swaps the placeholder with the referenced
+                    content.</li>
+                <li>Keep origins aligned so the sub-scene drops into the right spot.</li>
+            </ol>
+
+            <h3>Environment settings</h3>
+            <ol>
+                <li>Set <strong>Sky Color</strong> (and other environment props) in Blender so Godot picks them up on
+                    import.</li>
+                <li>Assign <strong>Background Music</strong> to give the level a looping track without extra nodes.</li>
+                <li>If your project needs altered gravity, look for the gravity settings in the panel so they come through
+                    with the level.</li>
+            </ol>
+
+            <h3>Water and reflective materials</h3>
+            <ol>
+                <li>Mark surfaces that should use the engine water shader with the provided material toggle.</li>
+                <li>Use the reflective/shiny toggle for mirrors or polished floors; replace materials in Godot if you need
+                    a custom shader.</li>
+            </ol>
+
+            <h2>User interface</h2>
+            <h3>Crosshair and cursor</h3>
+            <ol>
+                <li>FPE ships with a default crosshair. Use the UI cursor options in the panel to swap the graphic or turn
+                    it off.</li>
+                <li>When showing menus, unlock the mouse with the add-on’s cursor toggle so players can click UI without
+                    losing first-person controls when they resume.</li>
+            </ol>
+
+            <h3>HUD and UI elements</h3>
+            <ol>
+                <li>Mark meshes as <strong>UI Element</strong> to render them as screen-space overlays (great for health
+                    bars, prompts, or icons).</li>
+                <li>Parent HUD elements to the camera in Blender if you want them to follow the view; the importer keeps
+                    that relationship intact.</li>
+            </ol>
+
+            <h3>Options and pause menu</h3>
+            <ol>
+                <li>Wire your pause or options UI to the same cursor toggle above.</li>
+                <li>Bind the pause action in Godot’s input map (e.g., <kbd>Esc</kbd>) to display your menu and release the
+                    mouse, then hide it and lock the mouse again when resuming.</li>
+            </ol>
+
+            <h3>Conversations</h3>
+            <ol>
+                <li>Pair a <strong>Speaker</strong> NPC with conversation data (lines, replies, comments) using the panel
+                    fields.</li>
+                <li>Start conversations from triggers or commands—common patterns include talking when the player looks at
+                    an NPC or enters a dialogue zone.</li>
+                <li>Use replies to build branches; the UI provided by FPE will list choices automatically.</li>
+            </ol>
+
+            <h2>Extensibility and advanced workflows</h2>
+            <h3>Script path</h3>
+            <ol>
+                <li>Set <strong>Script Path</strong> on any object when you need custom behavior beyond the built-ins.</li>
+                <li>Point to a GDScript relative to your Godot project (for example,
+                    <code>res://scripts/door_controller.gd</code>).</li>
+                <li>Combine with triggers, frame events, or commands to call into your script at the right time.</li>
+            </ol>
+
+            <h3>Groups and tags</h3>
+            <ol>
+                <li>Assign groups in Blender so objects arrive in Godot already organized (e.g.,
+                    <code>Enemies</code>, <code>Interactables</code>).</li>
+                <li>Use <code>get_nodes_in_group</code> or signals in Godot to manipulate whole categories without extra
+                    setup.</li>
+            </ol>
+
+            <h3>Material replacement</h3>
+            <ol>
+                <li>Use the material replacement options to swap placeholder Blender materials with Godot materials on
+                    import.</li>
+                <li>Great for pairing simple authoring materials with more advanced Godot shaders (PBR, reflective, water,
+                    etc.).</li>
+            </ol>
+
+            <h2>Troubleshooting checklist</h2>
+            <ul>
+                <li>Player too small/large or floating: apply transforms in Blender and keep approximate real-world scale
+                    (1 unit = 1 meter).</li>
+                <li>Missing metadata in Godot: verify <code>Custom Properties</code> was checked during glTF export and the
+                    Godot plug-in is enabled.</li>
+                <li>Triggers not firing: confirm the trigger volume surrounds the player path and that the command or
+                    script attached to it is assigned.</li>
+                <li>Animation events not running: ensure the frame event names are unique per action and re-export after
+                    editing the animation.</li>
+                <li>Audio not playing: double-check the Speaker’s audio clip name/ID matches a file available in your Godot
+                    project.</li>
+            </ul>
+        </main>
+    </section>
+</main>
+<footer class="footer">
+    <a href="https://papercraft.games" target="_blank">
+        <img class="papercraft-logo" src="./papercraft-games-logo.png" alt="Papercraft Games">
+    </a>
+    <div class="social">
+        <a href="https://github.com/papercraftgames/folded-paper-engine" target="_blank">
+            <img src="./github-logo.png" alt="GitHub">
+        </a>
+        <a href="https://www.youtube.com/@PapercraftGamesOfficial" target="_blank">
+            <img src="./youtube-logo.png" alt="GitHub">
+        </a>
+        <a href="https://bsky.app/profile/papercraftgames.bsky.social" target="_blank">
+            <img src="./bluesky-logo.png" alt="GitHub">
+        </a>
+    </div>
+</footer>
+<footer class="pickle-footer">
+    <div>
+        © 2025 Folded Paper Engine. All rights reserved.
+    </div>
+    <div class="pickle-box">
+        <img src="./pickle-icon.png" alt="A green pickle">
+        <img src="./pickle-icon.png" alt="A green pickle">
+        <img src="./pickle-icon.png" alt="A green pickle">
+        <img src="./pickle-icon.png" alt="A green pickle">
+        <img src="./pickle-icon.png" alt="A green pickle">
+    </div>
+</footer>
+</body>
+</html>
