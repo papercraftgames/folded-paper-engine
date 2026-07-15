@@ -1,0 +1,197 @@
+---
+/**
+  * FeaturedOnSection
+  */
+---
+
+<section class="press-coverage-section" aria-label="Press coverage">
+    <div class="press-coverage-inner">
+        <div class="press-heading">
+            <p class="eyebrow">Community Media</p>
+            <h2>Featured On...</h2>
+        </div>
+
+        <div class="press-card-grid">
+            <article class="gfs-card">
+                <header class="gfs-header">
+                    <span aria-hidden="true">
+                        <img alt="Code It All" width="90" src="/assets/images/featured/CodeItAll.jpg"/>
+                    </span>
+
+                    <div class="gfs-text">
+                        <h3>Code It All</h3>
+                        <p>A fun and very informative video tutorial covering a number of FPE topics</p>
+                    </div>
+                </header>
+
+                <nav class="gfs-actions" aria-label="Code It All coverage links">
+                    <a
+                            href="https://www.youtube.com/watch?v=EpQFuLRavv4"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="button medium red"
+                    >
+                        Watch the video
+                    </a>
+                </nav>
+            </article>
+
+            <article class="gfs-card">
+                <header class="gfs-header">
+                    <span aria-hidden="true">
+                        <img alt="GameFromScratch" width="90" src="/assets/images/featured/GameFromScratch.jpg"/>
+                    </span>
+
+                    <div class="gfs-text">
+                        <h3>GameFromScratch</h3>
+                        <p>A full tutorial video and write-up</p>
+                    </div>
+                </header>
+
+                <nav class="gfs-actions" aria-label="GameFromScratch coverage links">
+                    <a
+                            href="https://youtu.be/YW5N8ANrm9c?si=cr1RFxQvIf4vPdPf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="button medium red"
+                    >
+                        Watch the video
+                    </a>
+
+                    <a
+                            href="https://gamefromscratch.com/folded-paper-engine-blender-to-godot"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="button medium"
+                    >
+                        Read the article
+                    </a>
+                </nav>
+            </article>
+        </div>
+    </div>
+</section>
+
+<style>
+    .press-coverage-section {
+        background: radial-gradient(circle at 14% 20%, rgba(255, 255, 255, 0.38), transparent 18rem),
+        linear-gradient(135deg, rgba(255, 193, 0, 0.95), rgba(255, 244, 206, 0.92) 48%, rgba(120, 168, 194, 0.56)),
+        #ffc100;
+        margin: 0 0 0 0;
+        padding: clamp(1.25rem, 4vw, 2rem);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+    }
+
+    .press-coverage-inner {
+        width: min(100%, 68rem);
+        margin: 2em auto;
+    }
+
+    .press-heading {
+        color: var(--ink);
+        margin: 0 0 1rem;
+        text-align: center;
+    }
+
+    .press-heading .eyebrow {
+        margin: 0 0 0.25rem;
+    }
+
+    .press-heading h2 {
+        margin: 0;
+        font-size: clamp(2rem, 4vw, 3rem);
+    }
+
+    .press-card-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+    }
+
+    .gfs-card {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: stretch;
+        justify-content: stretch;
+        gap: 1rem;
+
+        padding: clamp(1rem, 3vw, 1.4rem);
+
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 244, 206, 0.86)),
+        #ffc100;
+        border: 1px solid rgba(255, 255, 255, 0.58);
+        border-radius: 0.5rem;
+
+        box-shadow: 0 1rem 2.4rem rgba(37, 49, 58, 0.18);
+    }
+
+    .gfs-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75em;
+        margin-bottom: 0;
+        color: var(--ink);
+        font-size: clamp(1.25rem, 3vw, 2rem);
+
+        @media screen and (max-width: 768px) {
+            font-size: 1.5em;
+        }
+    }
+
+    .gfs-icon {
+        width: 2.2em;
+        height: 2.2em;
+        border-radius: 0.75em;
+
+        display: grid;
+        place-items: center;
+
+        background: rgba(0, 0, 0, 0.18);
+        font-size: 1.1em;
+    }
+
+    .gfs-text h3 {
+        margin: 0;
+        font-size: 1em;
+        overflow-wrap: anywhere;
+    }
+
+    .gfs-text p {
+        font-family: sans-serif;
+        margin: 0.25em 0 0;
+        font-size: 0.75em;
+        color: var(--muted-ink);
+        opacity: 1;
+    }
+
+    .gfs-actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.6em;
+
+    }
+
+    @media screen and (max-width: 768px) {
+        .gfs-card {
+            grid-template-columns: 1fr;
+        }
+
+        .press-card-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .gfs-actions {
+            justify-content: flex-start;
+        }
+
+        .gfs-actions .button {
+            width: 100%;
+        }
+    }
+</style>
