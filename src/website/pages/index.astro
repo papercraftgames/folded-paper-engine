@@ -59,9 +59,9 @@ const supportUrls = {
     </section>
     <section class="setup-strip" aria-labelledby="setup-strip-title">
         <div class="setup-strip-copy">
-            <p class="eyebrow">Your first Blender-to-Godot round trip</p>
-            <h2 id="setup-strip-title">Downloaded FPE? Connect Blender and Godot.</h2>
-            <p>Enable the Blender addon where you author mechanics, then enable the Godot plugin that brings them to life.</p>
+            <p class="eyebrow">Setup</p>
+            <h2 id="setup-strip-title">Set up FPE</h2>
+            <p>Install the Blender addon, then enable the Godot plugin.</p>
         </div>
         <div class="setup-actions" aria-label="Folded Paper Engine setup guides">
             <a class="button blue" href="/blender-panel-docs.html">
@@ -151,13 +151,7 @@ const supportUrls = {
         <p>Turn the places, props, animation, and atmosphere you already create into playable Godot mechanics. Start
             with artist-friendly Blender recipes, then follow the engineering path as your game grows.</p>
         <nav class="home-guide-links" aria-label="Artist-first Blender-to-Godot game development guides">
-          {learningGuides.filter((guide) => guide.path === "artist").map((guide) => (
-                  <a href={`/guides/${guide.slug}.html`} data-guide-title={guide.shortTitle}>{guide.title}</a>
-          ))}
-        </nav>
-        <p class="eyebrow">Ready to extend your game in Godot?</p>
-        <nav class="home-guide-links" aria-label="Godot engineering guides">
-          {learningGuides.filter((guide) => guide.path === "engineer").map((guide) => (
+          {learningGuides.map((guide) => (
                   <a href={`/guides/${guide.slug}.html`} data-guide-title={guide.shortTitle}>{guide.title}</a>
           ))}
         </nav>
