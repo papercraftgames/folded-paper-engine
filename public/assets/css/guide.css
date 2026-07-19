@@ -298,16 +298,6 @@
     transform-origin: center;
 }
 
-.doc-card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border: 1px solid rgba(255, 255, 255, 0.55);
-    border-radius: inherit;
-    pointer-events: none;
-    z-index: 3;
-}
-
 .doc-card:hover,
 .doc-card:focus-visible {
     transform: translateY(-0.24rem);
@@ -328,18 +318,7 @@
     background-position: center center;
     overflow: hidden;
     text-shadow: 0 0.14rem 0.45rem rgba(0, 0, 0, 0.58);
-    transition: background-size 780ms cubic-bezier(0.16, 1, 0.3, 1), filter 520ms ease;
-}
-
-.doc-card-title::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-            linear-gradient(180deg, rgba(37, 49, 58, 0.04), rgba(37, 49, 58, 0.78)),
-            linear-gradient(135deg, rgba(255, 193, 0, 0.22), rgba(76, 115, 121, 0.12));
-    pointer-events: none;
-    z-index: 0;
+    transition: background-size 500ms ease-out;
 }
 
 .doc-card-title > * {
@@ -369,7 +348,6 @@
 
 .doc-card:hover > .doc-card-title {
     background-size: 156%;
-    filter: saturate(1.08) contrast(1.03);
 }
 
 .doc-card:hover > .doc-card-title::before {
