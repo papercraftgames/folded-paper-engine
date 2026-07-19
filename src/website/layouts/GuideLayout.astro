@@ -2,7 +2,6 @@
 import SiteLayout from "./SiteLayout.astro";
 
 const {title, hideGuideIndexBreadcrumb} = Astro.props;
-const isGuideIndex = Astro.url.pathname === "/docs/folded-paper-engine-guide" || Astro.url.pathname === "/docs/folded-paper-engine-guide.html";
 const isLearningGuide = Astro.url.pathname === "/guides" || Astro.url.pathname === "/guides.html" || Astro.url.pathname.startsWith("/guides/");
 const showDocsSupportBanner = Astro.url.pathname.startsWith("/docs/");
 const supportUrls = {
@@ -20,22 +19,9 @@ const supportUrls = {
 
   {!isLearningGuide && <nav class="section section-breadcrumbs" aria-label="Breadcrumb">
         <a href="/">Home</a>
-      {!isGuideIndex && (
-              <>
-                  <span>/</span>
-                {!hideGuideIndexBreadcrumb ? (
-                        <a href="/docs/folded-paper-engine-guide.html">Engine Guide</a>
-                        <span>/</span>
-                ) : undefined}
-                  <span aria-current="page">{title}</span>
-              </>
-      )}
-      {isGuideIndex && (
-              <>
-                  <span>/</span>
-                  <span aria-current="page">Engine Guide</span>
-              </>
-      )}
+      <span>/</span>
+      {!hideGuideIndexBreadcrumb && <><a href="/guides.html">Guides</a><span>/</span></>}
+      <span aria-current="page">{title}</span>
     </nav>}
 
     <slot/>

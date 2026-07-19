@@ -10,17 +10,20 @@ import GuideLayout from "../../layouts/GuideLayout.astro";
             </div>
         </header>
         <div class="section-body">
-            <h2>Rigid bodies</h2>
+            <h2>Choose the Godot body type in Blender</h2>
             <ul>
-                <li>Objects tagged with physics data become <code>RigidBody3D</code> instances. Movement and jump forces are applied in the physics step.</li>
+                <li>The FPE <strong>Physics</strong> checkbox does not change an ordinary mesh into a physics body. Use Godot's standard glTF import suffixes in the Blender object name.</li>
+                <li>Add <code>-rigid</code> for a movable prop that should import as <code>RigidBody3D</code>. Use <code>-col</code> for visible static level geometry, or <code>-convcol</code>, <code>-colonly</code>, and <code>-convcolonly</code> for the corresponding collider variants.</li>
+                <li>After choosing the body type, enable FPE <strong>Physics</strong> to author mass, friction, bounciness, and continuous collision detection in Blender.</li>
                 <li>Characters use the advanced rigid body base to support jump forgiveness, run toggles, and dampening.</li>
                 <li>Player controls gate physics input when global deactivation flags are set (used during cutscenes or menus).</li>
             </ul>
             <h2>Collision shapes</h2>
             <ul>
-                <li><code>ShapeGuesser</code> builds colliders from imported meshes; opt into simplified boxes for triggers and hold zones to keep performance predictable.</li>
+                <li>Godot's glTF importer generates the body/collider requested by the name suffix. <code>ShapeGuesser</code> supplies simple shapes for FPE features such as triggers and hold zones.</li>
                 <li>Holdable objects keep their rigid body properties; gravity scales and damping are saved/restored when picked up.</li>
             </ul>
+            <p><a href="https://docs.godotengine.org/en/4.5/tutorials/assets_pipeline/importing_3d_scenes/node_type_customization.html" target="_blank" rel="noopener noreferrer">See Godot's official node-type suffix reference</a>.</p>
             <h2>Gravity and movement</h2>
             <ul>
                 <li>Scene-level gravity overrides affect all rigid bodies. Characters read the global default gravity when applying forces.</li>

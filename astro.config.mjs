@@ -14,7 +14,7 @@ export default defineConfig({
     react(),
     sitemap({
       filter(page) {
-        return !page.includes("/godot-api-docs/");
+        return !page.includes("/godot-api-docs/") && !page.includes("/docs/folded-paper-engine-guide");
       },
       serialize(item) {
         if (item.url === "https://foldedpaperengine.com/") {

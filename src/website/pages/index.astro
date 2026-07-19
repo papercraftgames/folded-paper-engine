@@ -40,10 +40,15 @@ const supportUrls = {
                     <img class="button-icon" src="/assets/images/godot-logo-icon.png" alt="">
                 </a>
             </div>
-            <div class="hero-links" aria-label="Documentation shortcuts">
-                <a href="/docs/folded-paper-engine-guide.html">Engine guide</a>
-                <a href="/blender-panel-docs.html">Blender panels</a>
-                <a href="/godot-feature-docs.html">Godot features</a>
+            <div class="hero-actions" aria-label="Set up Folded Paper Engine">
+                <a class="button blue" href="/blender-panel-docs.html">
+                    Set Up FPE in Blender
+                    <img class="button-icon" src="/assets/images/blender-logo-icon.png" alt="">
+                </a>
+                <a class="button" href="/godot-feature-docs.html">
+                    Set Up FPE in Godot
+                    <img class="button-icon" src="/assets/images/godot-logo-icon.png" alt="">
+                </a>
             </div>
         </div>
 
@@ -138,8 +143,14 @@ const supportUrls = {
         </div>
         <p>Turn the places, props, animation, and atmosphere you already create into playable Godot mechanics. Start
             with artist-friendly Blender recipes, then follow the engineering path as your game grows.</p>
-        <nav class="home-guide-links" aria-label="Godot game development guides">
-          {learningGuides.map((guide) => (
+        <nav class="home-guide-links" aria-label="Artist-first Blender-to-Godot game development guides">
+          {learningGuides.filter((guide) => guide.path === "artist").map((guide) => (
+                  <a href={`/guides/${guide.slug}.html`} data-guide-title={guide.shortTitle}>{guide.title}</a>
+          ))}
+        </nav>
+        <p class="eyebrow">Ready to extend your game in Godot?</p>
+        <nav class="home-guide-links" aria-label="Godot engineering guides">
+          {learningGuides.filter((guide) => guide.path === "engineer").map((guide) => (
                   <a href={`/guides/${guide.slug}.html`} data-guide-title={guide.shortTitle}>{guide.title}</a>
           ))}
         </nav>
