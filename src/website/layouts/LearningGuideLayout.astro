@@ -1,8 +1,8 @@
 ---
 import GuideLayout from "./GuideLayout.astro";
 import {learningGuides} from "../learningGuides";
-const { title, description, summary, relatedSlugs = [], godotSource } = Astro.props as {
-  title: string; description: string; summary: string; relatedSlugs?: string[]; godotSource?: {label: string; href: string};
+const { title, description, summary, relatedSlugs = [], godotSource, fpeHeading = "The Folded Paper Engine path" } = Astro.props as {
+  title: string; description: string; summary: string; relatedSlugs?: string[]; godotSource?: {label: string; href: string}; fpeHeading?: string;
 };
 const relatedGuides = relatedSlugs.map((slug) => learningGuides.find((guide) => guide.slug === slug)).filter((guide) => guide !== undefined);
 const structuredData = { "@context": "https://schema.org", "@type": "TechArticle", headline: title, description,
@@ -15,7 +15,7 @@ const structuredData = { "@context": "https://schema.org", "@type": "TechArticle
         <header class="learning-guide-hero"><nav aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/guides.html">Guides</a></nav><h1>{title}</h1><p>{summary}</p></header>
         <div class="learning-guide-body">
             <slot/>
-            <aside class="fpe-path"><h2>The Folded Paper Engine path</h2><slot name="fpe"/><div class="guide-actions"><a class="button small" href="/#download">Download FPE</a><a href="/docs/folded-paper-engine-guide.html">Open the FPE engine guide</a></div></aside>
+            <aside class="fpe-path"><h2>{fpeHeading}</h2><slot name="fpe"/><div class="guide-actions"><a class="button small" href="/#download">Download FPE</a><a href="/docs/folded-paper-engine-guide.html">Open the FPE engine guide</a></div></aside>
             {godotSource && <p class="source-note">Godot reference: <a href={godotSource.href} target="_blank" rel="noopener noreferrer">{godotSource.label}</a></p>}
             {relatedGuides.length > 0 && <nav class="related-guides" aria-labelledby="related-guides-title"><h2 id="related-guides-title">Keep building</h2><ul>{relatedGuides.map((guide) => <li><a href={`/guides/${guide.slug}.html`}>{guide.title}</a></li>)}</ul></nav>}
         </div>
