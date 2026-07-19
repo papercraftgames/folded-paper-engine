@@ -704,9 +704,15 @@ body {
 }
 
 @keyframes pickle-party {
-    0%, 100% { transform: translateY(0) rotate(0); }
-    30% { transform: translateY(-0.45rem) rotate(-10deg) scale(1.08); }
-    65% { transform: translateY(-0.2rem) rotate(8deg) scale(1.05); }
+    0%, 100% {
+        transform: translateY(0) rotate(0);
+    }
+    30% {
+        transform: translateY(-0.45rem) rotate(-10deg) scale(1.08);
+    }
+    65% {
+        transform: translateY(-0.2rem) rotate(8deg) scale(1.05);
+    }
 }
 
 /* Game Screen Setup */
@@ -989,7 +995,6 @@ body {
     display: flex;
     min-height: 14rem;
     flex-direction: column;
-    gap: 0.8rem;
     justify-content: flex-start;
     padding: 1.15rem;
     color: var(--ink);
@@ -1007,7 +1012,7 @@ body {
     object-fit: contain;
 }
 
-.doc-card span,
+.doc-card,
 .feature-grid h3,
 .workflow-steps h3 {
     color: var(--ink);
