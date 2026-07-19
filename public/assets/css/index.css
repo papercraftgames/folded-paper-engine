@@ -1482,6 +1482,19 @@ body {
 }
 
 @media screen and (max-width: 640px) {
+    .pickle-footer {
+        padding-inline: 1rem;
+    }
+
+    .pickle-footer > .pickle-box {
+        gap: 0;
+        min-height: 5.5rem;
+    }
+
+    .pickle-footer > .pickle-box > img {
+        width: clamp(3.25rem, 15vw, 4.25rem);
+    }
+
     .home-hero {
         padding-top: 2rem;
     }
