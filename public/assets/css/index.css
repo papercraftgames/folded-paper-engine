@@ -1037,6 +1037,10 @@ body {
 
 .learning-section {
     background: linear-gradient(180deg, #f4f8d9 0%, #fffdf5 100%);
+
+    .home-section-heading {
+        max-width: unset;
+    }
 }
 
 .learning-section > p {
