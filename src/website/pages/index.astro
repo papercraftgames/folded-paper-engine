@@ -4,10 +4,10 @@ import FeaturedOnSection from "../components/index/FeaturedOnSection.astro";
 import {learningGuides} from "../learningGuides";
 
 const supportUrls = {
-    kofiHome: "https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=home_support_section&utm_campaign=fpe_support",
-    githubHome: "https://github.com/sponsors/papercraftgames?utm_source=fpe_site&utm_medium=home_support_section&utm_campaign=fpe_support",
-    kofiDownload: "https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=download_section&utm_campaign=fpe_support",
-    githubDownload: "https://github.com/sponsors/papercraftgames?utm_source=fpe_site&utm_medium=download_section&utm_campaign=fpe_support",
+  kofiHome: "https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=home_support_section&utm_campaign=fpe_support",
+  githubHome: "https://github.com/sponsors/papercraftgames?utm_source=fpe_site&utm_medium=home_support_section&utm_campaign=fpe_support",
+  kofiDownload: "https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=download_section&utm_campaign=fpe_support",
+  githubDownload: "https://github.com/sponsors/papercraftgames?utm_source=fpe_site&utm_medium=download_section&utm_campaign=fpe_support",
 };
 ---
 
@@ -15,7 +15,9 @@ const supportUrls = {
         title="Instant Game Mechanics from Blender to Godot"
         description="Folded Paper Engine creates instant game mechanics from Blender to Godot. Tag players, triggers, physics, audio, inventory items, scene metadata, and animation events in Blender, then export playable Godot scenes."
 >
-    <Fragment slot="head"><link rel="stylesheet" href="/assets/css/learning-guides.css"/></Fragment>
+    <Fragment slot="head">
+        <link rel="stylesheet" href="/assets/css/learning-guides.css"/>
+    </Fragment>
     <section class="home-hero" aria-labelledby="home-hero-title">
         <div class="home-hero-copy">
             <p class="eyebrow">Instant Game Mechanics from Blender to Godot</p>
@@ -48,7 +50,8 @@ const supportUrls = {
         <div class="hero-stage">
             <div class="web-splash">
                 <div class="web-splash-inner base-background">
-                    <img class="web-splash-img index-web-splash" src="/assets/images/web-splash.png" alt="Folded Paper Engine demo scene preview">
+                    <img class="web-splash-img index-web-splash" src="/assets/images/web-splash.png"
+                         alt="Folded Paper Engine demo scene preview">
                     <img class="apple-sticker" src="/assets/images/apple-sticker.png" alt="">
                     <img class="star-sticker" src="/assets/images/splash-star.png" alt="">
                     <a class="demo-button button red" href="/demo.html">
@@ -87,7 +90,8 @@ const supportUrls = {
                 </a>
             </div>
             <p class="support-note">
-                Ko-fi is the easiest way to support FPE. GitHub Sponsors is available for open-source/dev-focused support.
+                Ko-fi is the easiest way to support FPE. GitHub Sponsors is available for open-source/dev-focused
+                support.
             </p>
         </div>
     </section>
@@ -132,11 +136,12 @@ const supportUrls = {
                 <h2 id="learning-title">Start building game mechanics in Blender</h2>
             </div>
         </div>
-        <p>Turn the places, props, animation, and atmosphere you already create into playable Godot mechanics. Start with artist-friendly Blender recipes, then follow the engineering path as your game grows.</p>
+        <p>Turn the places, props, animation, and atmosphere you already create into playable Godot mechanics. Start
+            with artist-friendly Blender recipes, then follow the engineering path as your game grows.</p>
         <nav class="home-guide-links" aria-label="Godot game development guides">
-            {learningGuides.map((guide) => (
-                <a href={`/guides/${guide.slug}.html`} data-guide-title={guide.shortTitle}>{guide.title}</a>
-            ))}
+          {learningGuides.map((guide) => (
+                  <a href={`/guides/${guide.slug}.html`} data-guide-title={guide.shortTitle}>{guide.title}</a>
+          ))}
         </nav>
         <a class="button gold learning-more" href="/guides.html">Browse All Blender-to-Godot Guides</a>
     </section>
@@ -162,7 +167,8 @@ const supportUrls = {
             <article>
                 <span>03</span>
                 <h3>Import to Godot</h3>
-                <p>Add the FoldedPaperEngine node and let the addon enhance imported nodes with the behaviors you tagged.</p>
+                <p>Add the FoldedPaperEngine node and let the addon enhance imported nodes with the behaviors you
+                    tagged.</p>
             </article>
         </div>
     </section>
@@ -208,11 +214,13 @@ const supportUrls = {
             <article>
                 <h3>Characters & Players</h3>
                 <p>Configure rigs, NPCs, camera behavior, and player-facing metadata directly on scene objects.</p>
-                <p><a href="/docs/fpe-characters-players-and-cameras.html">Read the Folded Paper Engine character guide.</a></p>
+                <p><a href="/docs/fpe-characters-players-and-cameras.html">Read the Folded Paper Engine character
+                    guide.</a></p>
             </article>
             <article>
                 <h3>Triggers & Events</h3>
-                <p>Define area triggers, command catalogs, scene events, and animation frame events in the authoring file.</p>
+                <p>Define area triggers, command catalogs, scene events, and animation frame events in the authoring
+                    file.</p>
                 <p><a href="/docs/fpe-triggers-commands.html">Read the Folded Paper Engine trigger guide.</a></p>
             </article>
             <article>
@@ -227,12 +235,14 @@ const supportUrls = {
             </article>
             <article>
                 <h3>Audio</h3>
-                <p>Set up music imports, looping, autoplay, background tracks, and speakers as part of level authoring.</p>
+                <p>Set up music imports, looping, autoplay, background tracks, and speakers as part of level
+                    authoring.</p>
                 <p><a href="/docs/fpe-audio.html">Read the Folded Paper Engine audio guide.</a></p>
             </article>
             <article>
                 <h3>Escape Hatches</h3>
-                <p>Override generated behavior, add custom scripts, or extend FPE's modular runtime when a scene needs more.</p>
+                <p>Override generated behavior, add custom scripts, or extend FPE's modular runtime when a scene needs
+                    more.</p>
                 <p><a href="/godot-api-docs.html">Browse the Folded Paper Engine Godot API index.</a></p>
             </article>
         </div>
@@ -285,7 +295,8 @@ const supportUrls = {
                     <img class="button-icon" src="/assets/images/mug-icon.png" alt="">
                     Support FPE
                 </a>
-                <a class="button blue medium" href={supportUrls.githubDownload} target="_blank" rel="noopener noreferrer">
+                <a class="button blue medium" href={supportUrls.githubDownload} target="_blank"
+                   rel="noopener noreferrer">
                     <img class="button-icon" src="/assets/images/github-logo.png" alt="">
                     Sponsor on GitHub
                 </a>

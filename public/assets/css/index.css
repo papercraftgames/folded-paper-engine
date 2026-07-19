@@ -1055,9 +1055,6 @@ body {
     color: var(--ink);
     font-weight: 750;
     line-height: 1.35;
-    text-decoration-color: var(--sun);
-    text-decoration-thickness: 0.16rem;
-    text-underline-offset: 0.2rem;
 }
 
 .learning-more {
