@@ -1,0 +1,21 @@
+---
+import LearningGuideLayout from "../../layouts/LearningGuideLayout.astro";
+---
+<LearningGuideLayout title="How to Make Interactive Objects in Godot" description="Choose and implement proximity, ray-cast, or direct-input interactions for doors, switches, pickups, and props in Godot 4." summary="Doors, buttons, notes, and pickups all need the same small contract: can the player interact, what prompt should appear, and what happens when they use it? Detection should be replaceable without rewriting the object." relatedSlugs={["godot-trigger-system","holdable-items-godot","dialogue-triggers-godot"]} godotSource={{label:"Ray casting",href:"https://docs.godotengine.org/en/stable/tutorials/physics/ray-casting.html"}}>
+    <div class="guide-summary"><strong>Pick the detector by intent:</strong> use an area for proximity, a <code>RayCast3D</code> for a first-person crosshair, and <code>CollisionObject3D.input_event</code> for mouse or touch selection.</div>
+    <h2>Define a tiny interaction contract</h2><p>An interactable should answer whether it is currently usable, provide prompt text, and perform one action. Keep player input out of the door script; the player finds a target and asks it to interact.</p>
+    <pre><code>class_name Interactable
+extends Node3D
+
+@export var prompt := "Use"
+
+func can_interact(_actor: Node) -&gt; bool:
+    return true
+
+func interact(_actor: Node) -&gt; void:
+    pass</code></pre>
+    <h2>Three useful detection patterns</h2><h3>Proximity</h3><p>An <code>Area3D</code> tracks nearby candidates. This is forgiving and works well for cozy games, controller input, and objects that should announce themselves. Pick the closest or highest-priority candidate when several overlap.</p><h3>View-centered ray cast</h3><p>A <code>RayCast3D</code> from the camera gives precise first-person selection. Configure it to collide with the layers used by interactive physics bodies or areas, and walk from the collider to its interaction component.</p><h3>Direct pointer input</h3><p>Godot can deliver input events to a <code>CollisionObject3D</code> when object picking is enabled. This is a good fit for point-and-click scenes, but less convenient for keyboard or controller navigation.</p>
+    <h2>Step-by-step implementation</h2><ol><li>Create the interaction contract and implement it on one simple switch.</li><li>Add one detector to the player and keep its current target in a single property.</li><li>Show prompt text from that current target.</li><li>Map a project input action named <code>use</code> and call the target only on the pressed edge.</li><li>Make state changes idempotent: an already-open door should not start five overlapping animations.</li></ol>
+    <h2>Common mistakes</h2><ul><li>Putting bespoke ray-cast logic in every object instead of one player-side detector.</li><li>Assuming the ray collider is the scripted root; imported meshes often have collider children.</li><li>Leaving prompts visible after the target is freed or disabled.</li><li>Hard-coding key names instead of using an Input Map action.</li></ul>
+    <Fragment slot="fpe"><p>FPE already turns Blender-authored objects into players, triggers, speakers, inventory items, and holdable props. For common interactions, connect a trigger to named Scene Event commands. For a unique mechanic, keep the imported FPE setup and add your own Godot interaction component or script to the resulting node. FPE handles the repeated setup; your code owns what makes the object special.</p><p><a href="/docs/fpe-triggers-commands.html">See the FPE command catalog</a>.</p></Fragment>
+</LearningGuideLayout>

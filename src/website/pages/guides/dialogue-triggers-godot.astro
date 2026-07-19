@@ -1,0 +1,21 @@
+---
+import LearningGuideLayout from "../../layouts/LearningGuideLayout.astro";
+---
+<LearningGuideLayout title="How to Trigger Dialogue in Godot" description="Structure dialogue data, trigger conditions, UI, branching replies, and gameplay effects in Godot 4 and Folded Paper Engine." summary="Dialogue becomes much easier to extend when four jobs stay separate: detecting the conversation, choosing the dialogue data, presenting it, and applying the result to the game." relatedSlugs={["godot-trigger-system","interactive-objects-godot","animation-frame-events-godot"]} godotSource={{label:"Using signals",href:"https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html"}}>
+    <div class="guide-summary"><strong>A clean conversation flow:</strong> a trigger requests a conversation ID; a manager validates its conditions and creates an instance; the UI renders the current line and replies; selected replies advance data and emit gameplay events.</div>
+    <h2>When should dialogue start?</h2><p>Common choices are automatic proximity, a deliberate Use action, a scripted event, or an interaction after a quest condition becomes true. Treat the trigger as a request—not proof that the conversation may start. The conversation manager should still check required characters, prior state, and whether another dialogue is open.</p>
+    <h2>Model dialogue as data</h2><p>Give every conversation and comment a stable ID. Each comment contains a speaker, text, and zero or more reply options. A reply points to the next comment and may include conditions or effects. Ending is simply reaching a comment with no valid replies or selecting a reply with no next ID.</p>
+    <pre><code>signal conversation_started(instance)
+signal conversation_ended(conversation_id: StringName)
+
+func request_start(id: StringName, actor: Node) -&gt; bool:
+    var definition = catalog.get(id)
+    if definition == null or not definition.can_start(actor):
+        return false
+    active = definition.create_instance(actor)
+    conversation_started.emit(active)
+    return true</code></pre>
+    <h2>Step-by-step implementation</h2><ol><li>Create conversation, comment, and reply resource types or another serializable data format.</li><li>Create a manager that owns the active conversation instance and current comment ID.</li><li>Let trigger areas and interactable NPCs call <code>request_start()</code> with an ID.</li><li>Have the UI subscribe to manager signals and send back only the selected reply ID.</li><li>Dispatch reply effects as named gameplay events, then advance to the next comment.</li><li>Save completed conversation IDs and durable choices—not UI nodes.</li></ol>
+    <h2>Common mistakes</h2><ul><li>Embedding long dialogue trees directly in an NPC script.</li><li>Making the UI the authority for the current comment.</li><li>Referring to speakers only by scene paths, which change as levels are reorganized.</li><li>Coupling reply text to effects; localizing text should not change gameplay behavior.</li></ul>
+    <Fragment slot="fpe"><p>Author conversations as comments and replies in Godot, then start them from an FPE Scene Event command. Triggers, animation frame events, and other commands can all dispatch the same named start event. The <code>FPEConversationManager</code> owns the current comment and advances when your UI calls <code>select_reply</code>. This leaves presentation customizable while FPE manages progression.</p><p><a href="/docs/fpe-conversations.html">Read the conversations reference</a>.</p></Fragment>
+</LearningGuideLayout>

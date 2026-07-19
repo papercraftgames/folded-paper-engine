@@ -1,0 +1,9 @@
+---
+import GuideLayout from "../../layouts/GuideLayout.astro";
+import LearningGuideGrid from "../../components/LearningGuideGrid.astro";
+import {learningGuides} from "../../learningGuides";
+---
+<GuideLayout title="Godot Game Development Guides" description="Practical guides to Godot inventory, triggers, interactive objects, animation events, dialogue, holdable items, and Blender level workflows." hideGuideIndexBreadcrumb={true}>
+    <Fragment slot="head"><link rel="stylesheet" href="/assets/css/learning-guides.css"/></Fragment>
+    <section class="section top-section"><header><img class="title-graphic" src="/assets/images/guide-icon.png" alt="Folded Paper Engine guide owl"><div class="section-title">Game Development Guides<div class="section-subtitle">Learn the Godot pattern. Then make it faster with FPE.</div></div></header><div class="section-body"><p>These are problem-first guides for building real gameplay in Godot 4. Each one explains the ordinary engine workflow before showing how Folded Paper Engine can carry the same intent from Blender into Godot. You can use the Godot approach, the FPE approach, or mix them.</p><LearningGuideGrid guides={learningGuides}/></div></section>
+</GuideLayout>

@@ -1,0 +1,17 @@
+---
+import LearningGuideLayout from "../../layouts/LearningGuideLayout.astro";
+---
+<LearningGuideLayout title="How to Use Scene Metadata in Godot" description="Use Godot metadata for authored level settings, event IDs, roles, and imported Blender custom properties without creating a hidden second database." summary="Metadata is useful when data belongs to a particular authored scene object but does not deserve a custom script property. The trick is keeping the vocabulary small, typed at the boundary, and visible to your tools." relatedSlugs={["blender-to-godot-gameplay-import","build-levels-in-blender-for-godot","godot-trigger-system"]} godotSource={{label:"Node class reference",href:"https://docs.godotengine.org/en/stable/classes/class_node.html"}}>
+    <div class="guide-summary"><strong>Good metadata:</strong> a stable item kind, event ID, spawn role, sky color, or authored tag. <strong>Bad metadata:</strong> mutable health, current quest progress, or values your runtime changes every frame.</div>
+    <h2>When should you use metadata?</h2><p>Use metadata for sparse annotations that travel with a scene or node, especially values imported from another authoring tool. If most instances of a scripted class need the value, an exported typed property is clearer. If the data belongs to the whole game rather than this scene object, use a resource or save model instead.</p>
+    <h2>The traditional Godot workflow</h2><p>Nodes support <code>set_meta()</code>, <code>get_meta()</code>, and <code>has_meta()</code>. Treat the result as untrusted input: metadata stores Variant values, so read it through a typed adapter instead of scattering string keys and casts throughout the game.</p>
+    <pre><code>const EVENT_ID := &amp;"gameplay_event_id"
+
+static func event_id(node: Node) -&gt; StringName:
+    if not node.has_meta(EVENT_ID):
+        return &amp;""
+    return StringName(node.get_meta(EVENT_ID))</code></pre>
+    <h2>Build a small metadata boundary</h2><ol><li>Document each supported key, type, default, owner, and version.</li><li>Centralize reads in adapter functions or a configuration object.</li><li>Validate imported data once when the scene loads.</li><li>Translate metadata into typed runtime configuration, then let normal nodes own changing state.</li><li>Warn with the node path and bad key when validation fails.</li></ol>
+    <h2>Common mistakes</h2><ul><li>Using metadata as a global key-value store.</li><li>Repeating literal keys across dozens of scripts.</li><li>Assuming an imported numeric value has the exact integer or float type you expected.</li><li>Hiding important editor-facing settings where a typed exported property would communicate better.</li></ul>
+    <Fragment slot="fpe"><p>FPE uses a defined metadata contract to carry Blender custom properties through glTF extras. Its importer preserves scene and animation extras, and its runtime turns those values into concrete features. Authors work with named panels and fields—not raw metadata keys—while programmers can still inspect the standard Godot nodes and extend the feature pipeline.</p><p><a href="/docs/fpe-scene-settings.html">See scene settings</a> and <a href="/docs/fpe-pipeline.html">the technical pipeline</a>.</p></Fragment>
+</LearningGuideLayout>

@@ -692,14 +692,21 @@ body {
         justify-content: center;
 
         & > img {
-            width: 2.4em;
+            width: 2.8em;
             transition: transform 0.2s ease;
+            transform-origin: 50% 85%;
 
             &:hover {
-                transform: translateY(-0.2rem) rotate(-5deg);
+                animation: pickle-party 0.55s ease-in-out both;
             }
         }
     }
+}
+
+@keyframes pickle-party {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    30% { transform: translateY(-0.45rem) rotate(-10deg) scale(1.08); }
+    65% { transform: translateY(-0.2rem) rotate(8deg) scale(1.05); }
 }
 
 /* Game Screen Setup */
@@ -1021,6 +1028,20 @@ body {
 
 .workflow-section {
     background: linear-gradient(180deg, #fff 0%, #fffaf0 100%);
+}
+
+.learning-section {
+    background: linear-gradient(180deg, #f4f8d9 0%, #fffdf5 100%);
+}
+
+.learning-section > p {
+    color: var(--muted-ink);
+    line-height: 1.55;
+}
+
+.learning-more {
+    margin: 1.25rem 0 0;
+    font-weight: 800;
 }
 
 .workflow-steps {

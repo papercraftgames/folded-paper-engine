@@ -1,6 +1,8 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
 import FeaturedOnSection from "../components/index/FeaturedOnSection.astro";
+import LearningGuideGrid from "../components/LearningGuideGrid.astro";
+import {learningGuides} from "../learningGuides";
 
 const supportUrls = {
     kofiHome: "https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=home_support_section&utm_campaign=fpe_support",
@@ -14,6 +16,7 @@ const supportUrls = {
         title="Instant Game Mechanics from Blender to Godot"
         description="Folded Paper Engine creates instant game mechanics from Blender to Godot. Tag players, triggers, physics, audio, inventory items, scene metadata, and animation events in Blender, then export playable Godot scenes."
 >
+    <Fragment slot="head"><link rel="stylesheet" href="/assets/css/learning-guides.css"/></Fragment>
     <section class="home-hero" aria-labelledby="home-hero-title">
         <div class="home-hero-copy">
             <p class="eyebrow">Instant Game Mechanics from Blender to Godot</p>
@@ -24,11 +27,13 @@ const supportUrls = {
             </p>
             <div class="hero-actions" aria-label="Primary actions">
                 <a class="button blue blender-download"
+                   data-download-platform="blender" data-download-version="latest"
                    href="https://github.com/papercraftgames/folded-paper-engine/releases/latest/download/folded_paper_engine_blender.zip">
                     Download for Blender 4.4+
                     <img class="button-icon" src="/assets/images/blender-logo-icon.png" alt="">
                 </a>
                 <a class="button godot-download"
+                   data-download-platform="godot" data-download-version="latest"
                    href="https://github.com/papercraftgames/folded-paper-engine/releases/latest/download/folded_paper_engine_godot.zip">
                     Download for Godot 4.4+
                     <img class="button-icon" src="/assets/images/godot-logo-icon.png" alt="">
@@ -118,6 +123,19 @@ const supportUrls = {
                 <small>Follow guided videos for practical Blender-to-Godot workflows.</small>
             </a>
         </div>
+    </section>
+
+    <section class="home-section learning-section" aria-labelledby="learning-title">
+        <div class="section-heading">
+            <img src="/assets/images/guide-icon.png" alt="">
+            <div>
+                <p class="eyebrow">Solve a gameplay problem</p>
+                <h2 id="learning-title">Practical Godot guides</h2>
+            </div>
+        </div>
+        <p>Learn the ordinary Godot pattern first, then see how Folded Paper Engine can carry the same gameplay intent from Blender.</p>
+        <LearningGuideGrid guides={learningGuides.slice(0, 4)} compact={true}/>
+        <p class="learning-more"><a href="/guides.html">Browse all game development guides</a></p>
     </section>
 
     <section class="home-section workflow-section" aria-labelledby="workflow-title">
@@ -239,11 +257,13 @@ const supportUrls = {
         </div>
         <div class="download-actions">
             <a class="button blue blender-download"
+               data-download-platform="blender" data-download-version="latest"
                href="https://github.com/papercraftgames/folded-paper-engine/releases/latest/download/folded_paper_engine_blender.zip">
                 Download for Blender 4.4+
                 <img class="button-icon" src="/assets/images/blender-logo-icon.png" alt="">
             </a>
             <a class="button blue godot-download"
+               data-download-platform="godot" data-download-version="latest"
                href="https://github.com/papercraftgames/folded-paper-engine/releases/latest/download/folded_paper_engine_godot.zip">
                 Download for Godot 4.4+
                 <img class="button-icon" src="/assets/images/godot-logo-icon.png" alt="">

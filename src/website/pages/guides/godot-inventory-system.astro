@@ -1,0 +1,19 @@
+---
+import LearningGuideLayout from "../../layouts/LearningGuideLayout.astro";
+---
+<LearningGuideLayout title="How to Build an Inventory System in Godot" description="A practical Godot 4 inventory guide covering item data, slots, stacking, pickups, UI, and the Folded Paper Engine workflow." summary="A durable inventory is a data model first and a UI second. Keep item definitions separate from the physical pickups in your level, and the system stays useful when you add saving, shops, crafting, or multiplayer later." relatedSlugs={["interactive-objects-godot","holdable-items-godot","godot-trigger-system"]} godotSource={{label:"Resources",href:"https://docs.godotengine.org/en/stable/tutorials/scripting/resources.html"}}>
+    <div class="guide-summary"><strong>Build these four pieces:</strong> an item definition, an inventory entry with a quantity, an inventory container, and a pickup that asks the container to add an item. The UI should only display container state.</div>
+    <h2>When should you use this pattern?</h2><p>Use a slot-and-stack inventory when the player owns abstract quantities: three apples, one brass key, twelve seeds. If the player is physically carrying one visible object in front of them, use a holdable-item system instead. A game can support both without forcing them into the same representation.</p>
+    <h2>The traditional Godot workflow</h2><p>Define reusable item data as a custom <code>Resource</code>. Resources are saved data containers, so the same apple definition can be referenced by pickups, UI, recipes, and shops without copying its name and icon into every scene.</p>
+    <pre><code>class_name ItemDefinition
+extends Resource
+
+@export var id: StringName
+@export var display_name: String
+@export var icon: Texture2D
+@export_range(1, 999) var max_stack := 1</code></pre>
+    <p>Store inventory entries separately as an item reference plus quantity. Give the inventory a single <code>add_item()</code> operation that fills existing stacks before opening new slots. Emit a <code>changed</code> signal only after the mutation succeeds; your UI can rebuild from that signal without owning gameplay state.</p>
+    <h2>Step-by-step implementation</h2><ol><li>Create one <code>ItemDefinition</code> resource per kind of item and give every kind a stable ID.</li><li>Create an inventory node or resource that owns a fixed array of slots.</li><li>Implement add, remove, count, and contains operations against that array.</li><li>Make each world pickup reference an item definition and quantity.</li><li>When a player enters the pickup area, call <code>add_item()</code>. Delete the pickup only if the full transfer succeeds.</li><li>Connect the UI to the inventory's <code>changed</code> signal and render the current slots.</li></ol>
+    <h2>Common mistakes</h2><ul><li><strong>Using node names as IDs:</strong> renaming a scene then breaks saves and recipes. Store an explicit stable ID.</li><li><strong>Letting the UI edit arrays directly:</strong> all mutations should pass through inventory operations.</li><li><strong>Deleting pickups too early:</strong> a full inventory should leave the remainder in the world.</li><li><strong>Saving nodes:</strong> save item IDs and quantities, then reconstruct references from your item catalog.</li></ul>
+    <Fragment slot="fpe"><p>In Blender, mark the object as a <strong>Trigger</strong>, then assign its <strong>Inventory Item Kind</strong> and <strong>Quantity</strong>. In Godot, add an <strong>FPE Inventory Config</strong>, register the same stable item-kind IDs, and choose the player's slot count. FPE turns the authored object into a pickup and moves its quantity into the player's inventory when collected.</p><p><a href="/docs/fpe-inventory-and-holdables.html">Read the inventory and holdables reference</a>.</p></Fragment>
+</LearningGuideLayout>
