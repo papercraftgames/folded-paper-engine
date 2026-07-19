@@ -35,7 +35,7 @@
     overflow-wrap: anywhere;
 }
 
-.section > .section-body > h3 {
+.section > .section-body > h2, h3, h4, h5, h6 {
     font-family: 'ZCOOLKuaiLe-Regular', sans-serif;
 }
 
