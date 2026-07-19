@@ -38,7 +38,18 @@ function assertCanonical(filePath: string): void {
     return;
   }
 
+  const html = FS.readFileSync(filePath, "utf8");
   const canonical = readCanonical(filePath);
+  const redirectTarget = html.match(/<meta http-equiv="refresh" content="0;url=([^"]+)"/)?.[1];
+  if (redirectTarget) {
+    const expectedRedirectCanonical = new URL(redirectTarget, SITE_URL).toString();
+    if (canonical !== expectedRedirectCanonical) {
+      throw new Error(
+        `Redirect canonical mismatch for ${normalizedRelativePath}: expected ${expectedRedirectCanonical}, received ${canonical}`
+      );
+    }
+    return;
+  }
   const expectedCanonical = toExpectedCanonical(filePath);
   const relativePath = Path.relative(DIST_ROOT, filePath);
 

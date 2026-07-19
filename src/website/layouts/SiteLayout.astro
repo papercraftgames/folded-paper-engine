@@ -62,27 +62,59 @@ const supportUrls = {
         document.querySelectorAll(".pickle-box img").forEach((p, i) => {
           p.addEventListener("mouseenter", () => {
             gtag('event', 'pickle_hover', {
-              pickle_index: i + 1
+              pickle_index: i + 1,
+              source_path: window.location.pathname
             });
           });
         });
 
-        document.querySelectorAll(".blender-download").forEach((blenderDownloadButton) => {
-          blenderDownloadButton.addEventListener("click", () => {
-            gtag('event', 'download_blender', {
+        document.querySelectorAll(".pickle-box").forEach((pickleBox) => {
+          const pickles = Array.from(pickleBox.querySelectorAll("img"));
+          const resetPickles = () => pickles.forEach((pickle) => {
+            pickle.style.removeProperty("--pickle-scale");
+            pickle.style.removeProperty("--pickle-lift");
+          });
+
+          pickleBox.addEventListener("pointermove", (event) => {
+            pickles.forEach((pickle) => {
+              const bounds = pickle.getBoundingClientRect();
+              const center = bounds.left + bounds.width / 2;
+              const influence = Math.max(0, 1 - Math.abs(event.clientX - center) / (bounds.width * 1.55));
+              pickle.style.setProperty("--pickle-scale", String(1 + influence * 0.55));
+              pickle.style.setProperty("--pickle-lift", `${-influence * 1.65}rem`);
+            });
+          });
+          pickleBox.addEventListener("pointerleave", resetPickles);
+        });
+
+        document.querySelectorAll("[data-download-platform]").forEach((downloadButton) => {
+          if (!(downloadButton instanceof HTMLElement)) return;
+          downloadButton.addEventListener("click", () => {
+            gtag('event', 'download_fpe', {
               event_category: 'download',
-              event_label: 'blender_plugin'
+              platform: downloadButton.dataset.downloadPlatform,
+              version: downloadButton.dataset.downloadVersion || 'unknown',
+              source_path: window.location.pathname
             });
           });
         });
 
-        document.querySelectorAll(".godot-download").forEach((godotDownloadButton) => {
-          godotDownloadButton.addEventListener("click", () => {
-            gtag('event', 'download_godot', {
-              event_category: 'download',
-              event_label: 'godot_plugin'
+        document.querySelectorAll('a[href^="http"]').forEach((link) => {
+          if (!(link instanceof HTMLAnchorElement)) return;
+          if (link.hostname !== window.location.hostname) link.addEventListener('click', () => {
+            gtag('event', 'outbound_click', {
+              destination_host: link.hostname,
+              source_path: window.location.pathname
             });
           });
+        });
+
+        document.querySelectorAll('[data-guide-title]').forEach((link) => {
+          if (!(link instanceof HTMLElement)) return;
+          link.addEventListener('click', () => gtag('event', 'guide_open', {
+            guide_title: link.dataset.guideTitle,
+            source_path: window.location.pathname
+          }));
         });
       });
     </script>
@@ -130,7 +162,7 @@ const supportUrls = {
         <img class="logo" src="/assets/images/logo.png" alt="Folded Paper Engine logo"/>
     </a>
     <nav class="header-nav" aria-label="Primary navigation">
-        <a href="/docs/folded-paper-engine-guide.html">Guide</a>
+        <a href="/guides.html">Guides</a>
         <a href="/blender-panel-docs.html">Blender</a>
         <a href="/godot-feature-docs.html">Godot</a>
         <a href="/godot-api-docs.html">API</a>
@@ -173,7 +205,7 @@ const supportUrls = {
         <a href="/blender-panel-docs.html">Blender Panels</a>
         <a href="/godot-feature-docs.html">Godot Features</a>
         <a href="/godot-api-docs.html">Godot API Docs</a>
-        <a href="/docs/folded-paper-engine-guide.html">Engine Guide</a>
+        <a href="/guides.html">Guides and FPE Reference</a>
         <a href="/youtube-tutorials.html">Tutorials</a>
     </nav>
 

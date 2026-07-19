@@ -30,10 +30,11 @@ const PAGE_SEO: Record<string, PageSeo> = {
       "Watch Folded Paper Engine tutorials covering Blender-to-Godot workflows, trigger setups, runtime features, and practical level-building techniques.",
     image: "/assets/images/guide-splash.png",
   },
-  "/docs/folded-paper-engine-guide": {
+  "/guides": {
     description:
-      "Browse the Folded Paper Engine guide for Blender-to-Godot workflows covering scene settings, characters, audio, triggers, UI, input, physics, and troubleshooting.",
+      "Solve real Blender-to-Godot game development problems with artist-first Folded Paper Engine guides, then explore the complete FPE feature reference.",
     image: "/assets/images/guide-splash.png",
+    heading: "Blender-to-Godot Game Development Guides",
   },
   "/docs/fpe-animation-and-events": {
     description:
@@ -107,7 +108,7 @@ const PAGE_SEO: Record<string, PageSeo> = {
   },
   "/godot-api-docs": {
     description:
-      "Browse the Folded Paper Engine Godot addon API reference, including classes, properties, methods, signals, and runtime helpers used by the Blender-to-Godot pipeline.",
+      "Browse the Folded Paper Engine Godot addon API reference, including classes, properties, methods, signals, and runtime helpers used by the Blender-to-Godot workflow.",
     image: "/assets/images/godot-feature-splash.png",
   },
 };

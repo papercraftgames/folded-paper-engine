@@ -1,0 +1,56 @@
+---
+import LearningGuideLayout from "../../layouts/LearningGuideLayout.astro";
+---
+<LearningGuideLayout title="How to Connect Blender Triggers to Dialogue in Godot"
+                     description="Start Godot-authored FPE conversations from Blender triggers while keeping dialogue data, UI, branching replies, and gameplay effects separate."
+                     summary="The artist can decide where and when a conversation begins in Blender; Godot owns the conversation resource and presentation. Dialogue stays easier to extend when detection, data, UI, and gameplay effects remain separate."
+                     relatedSlugs={["create-triggers-in-blender-for-godot", "interactive-objects-godot", "animation-frame-events-godot"]}
+                     godotSource={{
+                       label: "Using signals",
+                       href: "https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html"
+                     }}>
+    <div class="guide-summary"><strong>A clean conversation flow:</strong> a trigger requests a conversation by ID; a
+        manager validates its conditions and creates an instance; the UI renders the current line and replies; selected
+        replies advance data and emit gameplay events.
+    </div>
+    <h2>When should dialogue start?</h2>
+    <p>Common choices are automatic proximity, a deliberate Use action, a scripted event, or an interaction after a
+        quest condition becomes true. Treat the trigger as a request—not proof that the conversation may start. The
+        conversation manager should still check required characters, prior state, and whether another dialogue is
+        open.</p>
+    <h2>Model dialogue as data</h2>
+    <p>Give every conversation and comment a stable ID. Each comment contains a speaker, text, and zero or more reply
+        options. A reply points to the next comment and may include conditions or effects. Ending is simply reaching a
+        comment with no valid replies or selecting a reply with no next ID.</p>
+    <pre><code>signal conversation_started(instance)
+signal conversation_ended(conversation_id: StringName)
+
+func request_start(id: StringName, actor: Node) -&gt; bool:
+    var definition = catalog.get(id)
+    if definition == null or not definition.can_start(actor):
+        return false
+    active = definition.create_instance(actor)
+    conversation_started.emit(active)
+    return true</code></pre>
+    <h2>Build the conversation in Godot and connect it in Blender</h2>
+    <ol>
+        <li>In Godot, create the conversation, comment, and reply resources. Give the conversation a stable ID and connect each reply to the next comment.</li>
+        <li>In Godot, add the conversation to the catalog used by <code>FPEConversationManager</code>, and make a dialogue UI that reads the active comment and reply choices.</li>
+        <li>In Blender, create or select the trigger volume where the conversation begins. Follow the <a href="/guides/create-triggers-in-blender-for-godot.html">Blender trigger guide</a> if that step is new.</li>
+        <li>In Blender's Trigger Events panel, add the appropriate trigger type—usually <strong>Interaction</strong> for deliberate dialogue or <strong>Enter</strong> for automatic dialogue—and give it a clear event name.</li>
+        <li>In Blender's Scene Events panel, create the matching event and add <strong>Start Conversation</strong> with the exact Godot conversation ID.</li>
+        <li>Export the GLB, run the scene in Godot, and verify start, reply selection, ending, repeated activation, and missing-character behavior.</li>
+    </ol>
+    <h2>Common mistakes</h2>
+    <ul>
+        <li>Embedding long dialogue trees directly in an NPC script.</li>
+        <li>Making the UI the authority for the current comment.</li>
+        <li>Referring to speakers only by scene paths, which change as levels are reorganized.</li>
+        <li>Coupling reply text to effects; localizing text should not change gameplay behavior.</li>
+    </ul>
+    <Fragment slot="fpe"><p>Author conversations as comments and replies in Godot, then start them from an FPE Scene
+        Event command. Triggers, animation frame events, and other commands can all dispatch the same named start event.
+        The <code>FPEConversationManager</code> owns the current comment and advances when your UI calls <code>select_reply</code>.
+        This leaves presentation customizable while FPE manages progression.</p>
+        <p><a href="https://www.youtube.com/watch?v=f7AZxrfeK9c&list=PLM1XlwxBilobr6XVs-7H6O_mMXAiHZEcz" target="_blank" rel="noopener noreferrer">Watch the Conversations tutorial</a> or <a href="/docs/fpe-conversations.html">read the conversations reference</a>.</p></Fragment>
+</LearningGuideLayout>

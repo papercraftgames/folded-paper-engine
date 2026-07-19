@@ -16,7 +16,7 @@ import GuideLayout from "../../layouts/GuideLayout.astro";
             </ul>
             <h2>One-Click Whole Level Transitions</h2>
             <ol>
-                <li>Place a trigger near your doorway or portal (see Triggers guide).</li>
+                <li>Place a trigger near your doorway or portal. Follow the <a href="/guides/create-triggers-in-blender-for-godot.html">Blender trigger guide</a> or <a href="https://www.youtube.com/watch?v=yGIMhpo312M&list=PLM1XlwxBilobr6XVs-7H6O_mMXAiHZEcz" target="_blank" rel="noopener noreferrer">Triggers video tutorial</a> if you have not made one yet.</li>
                 <li>Add a <strong>Load Level</strong> command and point it at the next GLB path (relative to your project).</li>
                 <li>When fired, FPE unloads the current level, clears global registries (speakers, cameras, animations), and loads the new GLB cleanly.</li>
                 <li>Tip: pair with a quick fade or loading screen sub-scene so the player sees a smooth handoff.</li>

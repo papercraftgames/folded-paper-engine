@@ -1,0 +1,89 @@
+---
+import GuideLayout from "../../layouts/GuideLayout.astro";
+import LearningGuideGrid from "../../components/LearningGuideGrid.astro";
+import {learningGuides} from "../../learningGuides";
+const artistGuides = learningGuides.filter((guide) => guide.path === "artist");
+const engineerGuides = learningGuides.filter((guide) => guide.path === "engineer");
+const referenceGuides = [
+  ["Scene Settings", "Sky color, gravity, music, and scene-level events.", "fpe-scene-settings", "scene-settings"],
+  ["Characters, Players and Cameras", "Player rigs, NPCs, cameras, and control styles.", "fpe-characters-players-and-cameras", "characters"],
+  ["Animation and Frame Events", "Imported animation, timed events, and playback control.", "fpe-animation-and-events", "animation"],
+  ["Audio", "Speakers, ambience, looping, and background music.", "fpe-audio", "audio"],
+  ["Triggers and Commands", "Trigger filters, scene events, and the command catalog.", "fpe-triggers-commands", "triggers"],
+  ["Inventory and Holdables", "Item kinds, quantities, slots, and physical held objects.", "fpe-inventory-and-holdables", "inventory"],
+  ["Conversations", "Dialogue resources, replies, progression, and events.", "fpe-conversations", "conversations"],
+  ["UI and Cursors", "Menus, overlays, UI elements, and pointer behavior.", "fpe-ui", "ui-elements"],
+  ["Input", "Default actions, controllers, and runtime remapping.", "fpe-input", "input"],
+  ["Cameras", "Player cameras, fixed views, switching, and cutscenes.", "fpe-cameras", "cameras"],
+  ["Sub-scenes and Level Loading", "Interiors, streamed regions, fades, and full level changes.", "fpe-subscenes-and-levels", "sub-scene"],
+  ["Troubleshooting", "Export, import, runtime, trigger, and level-flow checks.", "fpe-troubleshooting", "troubleshooting"],
+  ["Physics and Colliders", "Rigid bodies, collider generation, and movement settings.", "fpe-physics-and-colliders", "physics"],
+  ["Import and Runtime", "GLB import, feature registration, loading, and cleanup.", "fpe-pipeline", "pipeline"],
+];
+---
+
+<style>
+    .advanced-section-body {
+        padding-bottom: 4em;
+    }
+</style>
+
+<GuideLayout title="Blender-to-Godot Game Development Guides"
+             description="Problem-first guides for turning Blender art into playable Godot levels with FPE, then understanding and extending the resulting game mechanics."
+             hideGuideIndexBreadcrumb={true}>
+    <Fragment slot="head">
+        <link rel="stylesheet" href="/assets/css/learning-guides.css"/>
+    </Fragment>
+    <section class="web-splash">
+        <div class="web-splash-inner base-background"><img class="web-splash-img" src="/assets/images/guide-splash.png"
+                                                           alt="Folded Paper Engine guide owl"></div>
+    </section>
+    <section class="section top-section">
+        <header><img class="title-graphic" src="/assets/images/guide-icon.png" alt="">
+            <div class="section-title">Make Pretty Art Into Pretty Games
+                <div class="section-subtitle">Start in Blender. Click to make real mechanics. Grow into Godot
+                    engineering.
+                </div>
+            </div>
+        </header>
+        <div class="section-body">
+            <h2>Instant Game Mechanics</h2>
+            Your level already lives in Blender: the doorway, the camera angle, the spot where
+            music should change, and the prop that begs to be picked up. These guides help you turn those artistic
+            decisions into playable Godot mechanics with FPE. Begin with one satisfying result, then follow the
+            engineering guides when you are ready to inspect, customize, and invent.
+            <br/>
+            <br/>
+            Friendly, exact recipes using the real Folded Paper Engine panels. No programming is required for the
+                first success, and every guide explains what arrives in Godot.
+            <LearningGuideGrid guides={artistGuides}/>
+        </div>
+    </section>
+    <section class="section">
+        <header>
+            <div class="section-title">Understand and Extend in Godot
+                <div class="section-subtitle">Keep the artist's intent; add the systems only your game needs</div>
+            </div>
+        </header>
+        <div class="section-body advanced-section-body"><p>FPE removes repeated wiring without hiding the engine. These guides open the
+            generated patterns, connect custom code safely, and help artists become confident technical creators without
+            asking them to stop thinking like artists.</p>
+            <LearningGuideGrid guides={engineerGuides}/>
+        </div>
+    </section>
+    <section class="section" id="fpe-reference">
+        <header>
+            <div class="section-title">Folded Paper Engine Reference
+                <div class="section-subtitle">Exact settings, commands, and runtime behavior</div>
+            </div>
+        </header>
+        <div class="section-body advanced-section-body"><p>Already using FPE and need the precise feature documentation? These references
+            contain the complete authoring and runtime details behind the problem-first guides.</p>
+            <div class="doc-grid">{referenceGuides.map(([title, description, slug, image]) => <a class="doc-card"
+                                                                                                 href={`/docs/${slug}.html`}><span
+                    class="doc-card-title"
+                    style={`background-image:url('/docs/thumbs/${image}.png')`}>{title}</span><span
+                    class="doc-card-body">{description}</span></a>)}</div>
+        </div>
+    </section>
+</GuideLayout>
