@@ -8,7 +8,7 @@ export type LearningGuide = {
 };
 
 export const learningGuides = [
-  { slug: "build-levels-in-blender-for-godot", title: "How to Make a Playable Godot Level in Blender", shortTitle: "Make a Playable Level", description: "Turn Blender geometry into a correctly scaled, collidable level and prove the complete GLB-to-Godot pipeline.", image: "/docs/thumbs/sub-scene.png", path: "artist" },
+  { slug: "build-levels-in-blender-for-godot", title: "How to Make a Playable Godot Level in Blender", shortTitle: "Make a Playable Level", description: "Turn Blender geometry into a correctly scaled, collidable level and prove the complete GLB-to-Godot workflow.", image: "/docs/thumbs/sub-scene.png", path: "artist" },
   { slug: "create-player-in-blender-for-godot", title: "How to Add a Player in Blender for Godot", shortTitle: "Add a Player in Blender", description: "Create a correctly scaled player and choose first-person, third-person, camera, and hold-zone settings.", image: "/docs/thumbs/characters.png", path: "artist" },
   { slug: "create-triggers-in-blender-for-godot", title: "How to Create Triggers in Blender for Godot", shortTitle: "Create Blender Triggers", description: "Draw trigger volumes where the action belongs, filter participants, and dispatch named gameplay events.", image: "/docs/thumbs/triggers.png", path: "artist" },
   { slug: "make-doors-switches-in-blender", title: "How to Make Doors and Switches Work from Blender", shortTitle: "Make Doors and Switches", description: "Combine Blender animations, triggers, speakers, and Scene Event commands into a satisfying interaction.", image: "/docs/thumbs/animation.png", path: "artist" },

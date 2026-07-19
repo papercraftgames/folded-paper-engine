@@ -108,7 +108,7 @@ const PAGE_SEO: Record<string, PageSeo> = {
   },
   "/godot-api-docs": {
     description:
-      "Browse the Folded Paper Engine Godot addon API reference, including classes, properties, methods, signals, and runtime helpers used by the Blender-to-Godot pipeline.",
+      "Browse the Folded Paper Engine Godot addon API reference, including classes, properties, methods, signals, and runtime helpers used by the Blender-to-Godot workflow.",
     image: "/assets/images/godot-feature-splash.png",
   },
 };
