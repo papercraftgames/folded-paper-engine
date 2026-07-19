@@ -2,11 +2,11 @@
 import type {LearningGuide} from "../learningGuides";
 const { guides, compact = false } = Astro.props as { guides: LearningGuide[]; compact?: boolean };
 ---
-<div class:list={["learning-guide-grid", {compact}]}>
+<div class:list={["doc-grid", "learning-guide-grid", {compact}]}>
     {guides.map((guide) => (
-        <a class="learning-guide-card" href={`/guides/${guide.slug}.html`} data-guide-title={guide.shortTitle}>
-            <img src={guide.image} alt="" loading="lazy"/>
-            <span class="learning-guide-card-content"><strong>{guide.shortTitle}</strong><span>{guide.description}</span></span>
+        <a class="doc-card learning-guide-card" href={`/guides/${guide.slug}.html`} data-guide-title={guide.shortTitle}>
+            <span class="doc-card-title" style={`background-image:url('${guide.image}')`}>{guide.shortTitle}</span>
+            <span class="doc-card-body">{guide.description}</span>
         </a>
     ))}
 </div>

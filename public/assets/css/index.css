@@ -1039,9 +1039,24 @@ body {
     line-height: 1.55;
 }
 
+.home-guide-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem 2rem;
+    margin: 1.5rem 0;
+}
+
+.home-guide-links a {
+    color: var(--ink);
+    font-weight: 750;
+    line-height: 1.35;
+    text-decoration-color: var(--sun);
+    text-decoration-thickness: 0.16rem;
+    text-underline-offset: 0.2rem;
+}
+
 .learning-more {
-    margin: 1.25rem 0 0;
-    font-weight: 800;
+    margin-top: 0.5rem;
 }
 
 .workflow-steps {
@@ -1476,6 +1491,10 @@ body {
 
     .doc-grid,
     .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .home-guide-links {
         grid-template-columns: 1fr;
     }
 

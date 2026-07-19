@@ -1,7 +1,6 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
 import FeaturedOnSection from "../components/index/FeaturedOnSection.astro";
-import LearningGuideGrid from "../components/LearningGuideGrid.astro";
 import {learningGuides} from "../learningGuides";
 
 const supportUrls = {
@@ -133,9 +132,13 @@ const supportUrls = {
                 <h2 id="learning-title">Practical Godot guides</h2>
             </div>
         </div>
-        <p>Learn the ordinary Godot pattern first, then see how Folded Paper Engine can carry the same gameplay intent from Blender.</p>
-        <LearningGuideGrid guides={learningGuides.slice(0, 4)} compact={true}/>
-        <p class="learning-more"><a href="/guides.html">Browse all game development guides</a></p>
+        <p>Clear, problem-first instructions for common Godot work, followed by the faster Folded Paper Engine workflow when it fits.</p>
+        <nav class="home-guide-links" aria-label="Godot game development guides">
+            {learningGuides.map((guide) => (
+                <a href={`/guides/${guide.slug}.html`} data-guide-title={guide.shortTitle}>{guide.title}</a>
+            ))}
+        </nav>
+        <a class="button gold learning-more" href="/guides.html">Browse All Godot Guides</a>
     </section>
 
     <section class="home-section workflow-section" aria-labelledby="workflow-title">
