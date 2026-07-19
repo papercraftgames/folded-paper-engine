@@ -68,6 +68,25 @@ const supportUrls = {
           });
         });
 
+        document.querySelectorAll(".pickle-box").forEach((pickleBox) => {
+          const pickles = Array.from(pickleBox.querySelectorAll("img"));
+          const resetPickles = () => pickles.forEach((pickle) => {
+            pickle.style.removeProperty("--pickle-scale");
+            pickle.style.removeProperty("--pickle-lift");
+          });
+
+          pickleBox.addEventListener("pointermove", (event) => {
+            pickles.forEach((pickle) => {
+              const bounds = pickle.getBoundingClientRect();
+              const center = bounds.left + bounds.width / 2;
+              const influence = Math.max(0, 1 - Math.abs(event.clientX - center) / (bounds.width * 1.55));
+              pickle.style.setProperty("--pickle-scale", String(1 + influence * 0.55));
+              pickle.style.setProperty("--pickle-lift", `${-influence * 1.65}rem`);
+            });
+          });
+          pickleBox.addEventListener("pointerleave", resetPickles);
+        });
+
         document.querySelectorAll("[data-download-platform]").forEach((downloadButton) => {
           if (!(downloadButton instanceof HTMLElement)) return;
           downloadButton.addEventListener("click", () => {
