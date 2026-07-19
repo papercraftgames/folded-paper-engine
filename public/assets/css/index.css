@@ -1253,6 +1253,10 @@ body {
     margin: 0 0 0.85rem;
     color: var(--ink);
     font-weight: 800;
+
+    &.donation-card-title {
+        margin: 0 0 0.5em 0;
+    }
 }
 
 .download-support-actions {
