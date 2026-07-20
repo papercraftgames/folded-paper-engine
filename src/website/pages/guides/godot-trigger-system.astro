@@ -5,110 +5,259 @@ import GuideFigure from "../../components/GuideFigure.astro";
 
 <LearningGuideLayout
   title="How to Extend FPE Triggers in Godot"
-  description="Understand and extend Blender-authored FPE triggers with Godot Area3D, collision layers, signals, participant filters, and custom systems."
-  summary="A Blender-authored trigger becomes an invisible Godot region that converts a physics overlap into a meaningful game event. The useful abstraction is not “the player entered an Area3D”—it is “the greenhouse door should unlock.”"
+  description="Listen for Blender-authored FPE trigger events in GDScript, inspect the trigger and initiator, dispatch custom events, and add reusable event handlers without replacing FPE's trigger system."
+  summary="FPE already turns a Blender trigger into a working Godot TrackingArea3D and dispatches its named events. Extend that system by listening to FPEEventManager in stable Godot code—not by rebuilding the Area3D or editing the imported scene."
   relatedSlugs={[
     "interactive-objects-godot",
     "dialogue-triggers-godot",
     "create-triggers-in-blender-for-godot",
   ]}
   godotSource={{
-    label: "Area3D class reference",
-    href: "https://docs.godotengine.org/en/stable/classes/class_area3d.html",
+    label: "Using signals",
+    href: "https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html",
   }}
+  fpeHeading="The real FPE extension point"
 >
   <div class="guide-summary">
-    <strong>Recommended shape:</strong>
-    <code>Area3D</code> + <code>CollisionShape3D</code> detects the overlap; a small
-    trigger script filters the body and emits a semantic signal; another object decides
-    what happens.
+    <strong>The complete path:</strong> Blender Trigger Event → generated <code
+      >TrackingArea3D</code
+    > → trigger group and activation-type checks → <code>FPEEvent</code> → <code
+      >FPEEventManager</code
+    > → Blender Scene Event commands and your Godot listeners.
   </div>
+
+  <h2>Do not rebuild the trigger in Godot</h2>
+  <p>
+    A Blender-authored FPE trigger is not merely a mesh waiting for you to add an
+    <code>Area3D</code>. During import, FPE creates a <code>TrackingArea3D</code>,
+    builds its collision shape, watches for entering and exiting physics bodies,
+    handles player interaction triggers, checks the trigger groups on both
+    participants, and dispatches the configured event.
+  </p>
+  <p>
+    Keep authoring the volume, activation type, participant groups, and event name
+    in Blender. Add GDScript when the named event must affect a custom Godot system
+    such as quests, achievements, analytics, save state, procedural rules, or UI.
+  </p>
   <GuideFigure
     src="/assets/images/guides/blender/trigger-invisible-checkboxes.png"
     alt="An invisible FPE trigger volume selected in Blender"
-    caption="Author trigger geometry where you can see the level. Keep it invisible when it exists only to detect gameplay."
+    caption="The Blender object defines the trigger's location and shape. FPE creates the runtime tracking area for it in Godot."
   />
-  <h2>When should you use a trigger?</h2><p>
-    Triggers are ideal for doors, checkpoints, music regions, tutorials,
-    hazards, conversations, and scene transitions. Use a direct interaction
-    system when the player must deliberately point at or select an object.
+
+  <h2>Give Godot a stable event contract</h2>
+  <p>
+    In Blender's <strong>Trigger Events</strong> panel, choose when the event fires
+    and give it a clear name such as <code>OPEN_WORKSHOP_DOOR</code>. The activation
+    type is important: Enter, Exit, and Interaction are different events, even
+    when they are attached to the same trigger object.
+  </p>
+  <p>
+    Trigger groups decide whether the participant is allowed to activate the
+    trigger. FPE performs that check before it dispatches anything, so a Godot
+    listener receives events that have already passed the Blender-authored filter.
   </p>
   <GuideFigure
     src="/assets/images/guides/blender/trigger-events-panel.png"
-    alt="Trigger Events panel dispatching OPEN_WORKSHOP_DOOR"
-    caption="A trigger dispatches a stable event name; Godot listeners decide what that event means at runtime."
+    alt="Trigger Events panel dispatching OPEN_WORKSHOP_DOOR for a player interaction"
+    caption="This trigger dispatches OPEN_WORKSHOP_DOOR only for the configured activation type and compatible participant group."
   />
-  <h2>The traditional Godot workflow</h2><ol>
-    <li>
-      Add an <code>Area3D</code> and a simple <code>CollisionShape3D</code>.
-    </li><li>
-      Put triggers and eligible bodies on intentional collision layers and
-      masks.
-    </li><li>
-      Connect <code>body_entered</code> and, if needed, <code>body_exited</code
-      >.
-    </li><li>
-      Filter by a stable group such as <code>player</code>, not a fragile node
-      path.
-    </li><li>
-      Emit a named signal or call a dedicated event bus. Keep the consequence
-      outside the detector.
-    </li>
-  </ol>
-  <pre><code>signal triggered(event_id: StringName, participant: Node3D)
 
-@export var event_id: StringName
-@export var participant_group: StringName = &amp;"player"
-@export var one_shot := true
-var spent := false
+  <h2>Listen from GDScript</h2>
+  <p>
+    Connect to <code>FPEEventManager.GLOBAL_INSTANCE.fpe_event</code> in <code
+      >_ready()</code
+    >. Disconnect in <code>_exit_tree()</code> so replacing a scene or removing the
+    listener cannot leave an obsolete callback connected.
+  </p>
+  <pre><code>extends Node
 
-func _on_body_entered(body: Node3D) -&gt; void:
-    if spent or not body.is_in_group(participant_group):
+const OPEN_WORKSHOP_DOOR := "OPEN_WORKSHOP_DOOR"
+
+func _ready() -&gt; void:
+    var event_manager := FPEEventManager.GLOBAL_INSTANCE
+    if not event_manager.fpe_event.is_connected(_on_fpe_event):
+        event_manager.fpe_event.connect(_on_fpe_event)
+
+func _exit_tree() -&gt; void:
+    var event_manager := FPEEventManager.GLOBAL_INSTANCE
+    if event_manager \
+    and event_manager.fpe_event.is_connected(_on_fpe_event):
+        event_manager.fpe_event.disconnect(_on_fpe_event)
+
+func _on_fpe_event(event: FPEEvent) -&gt; void:
+    if event.type != OPEN_WORKSHOP_DOOR:
         return
-    spent = one_shot
-    triggered.emit(event_id, body)</code></pre>
+
+    _record_door_opened(event.owner, event.initiator)
+
+func _record_door_opened(trigger: Node, initiator: Node) -&gt; void:
+    print(initiator.name, " opened ", trigger.name)</code></pre>
+
+  <h2>Choose the listener's lifetime deliberately</h2>
+  <p>
+    Put game-wide listeners in an Autoload or beside the <code
+      >FoldedPaperEngine</code
+    > node in your stable Godot shell. That is appropriate for save state,
+    achievements, quest progression, and other systems that must survive level
+    replacement. A listener that belongs only to one ordinary Godot scene can
+    remain on that scene and use the same connection pattern.
+  </p>
+  <p>
+    Do not attach persistent listeners beneath the FPE stage or to a generated
+    imported node. FPE replaces generated level content during loading, and edits
+    made directly inside an imported scene are not a durable extension point.
+  </p>
+
+  <h2>Understand what the event contains</h2>
+  <ul>
+    <li><code>event.type</code> is the event name authored in Blender.</li>
+    <li><code>event.owner</code> is the trigger that dispatched the event.</li>
+    <li><code>event.initiator</code> is the player, character, or physics object that activated it.</li>
+    <li>
+      <code>event.data</code> contains <code>owner_data</code> and <code
+        >initiator_data</code
+      > for FPE-authored trigger events. These dictionaries contain the imported
+      Blender/FPE data for each participant.
+    </li>
+  </ul>
+  <pre><code>func _on_fpe_event(event: FPEEvent) -&gt; void:
+    if event.type != "ENTERED_GREENHOUSE":
+        return
+
+    var owner_data: Dictionary = &#123;&#125;
+    var initiator_data: Dictionary = &#123;&#125;
+
+    if event.data is Dictionary:
+        owner_data = event.data.get("owner_data", &#123;&#125;)
+        initiator_data = event.data.get("initiator_data", &#123;&#125;)
+
+    print("Trigger: ", event.owner.name)
+    print("Activated by: ", event.initiator.name)
+    print("Trigger metadata: ", owner_data)
+    print("Initiator metadata: ", initiator_data)</code></pre>
+  <p>
+    Prefer the direct node references when the object is still loaded. Use stable
+    names, IDs, and plain values from the metadata when information must survive a
+    level unload or be written into a save file.
+  </p>
+
+  <h2>Let Blender commands and Godot code cooperate</h2>
+  <p>
+    A matching Blender <strong>Scene Event</strong> registers an FPE event handler
+    for the same event name. When the trigger fires, that handler can play an
+    animation, switch cameras, play a speaker, load a level, or run other authored
+    commands. Your GDScript listener receives the same <code>FPEEvent</code>; adding
+    it does not replace or block the Scene Event.
+  </p>
+  <p>
+    Use that deliberately. Blender can open the animated door while Godot records
+    <code>workshop_door_open = true</code> in durable game state. Avoid implementing
+    the same consequence in both places, or it may run twice.
+  </p>
   <GuideFigure
     src="/assets/images/guides/blender/scene-events-panel.png"
     alt="Scene Events panel using the OPEN_WORKSHOP_DOOR event name"
-    caption="The same semantic event can be connected to authored scene behavior without naming a particular Godot method."
+    caption="The Scene Event can run authored FPE commands while a Godot listener handles custom systems such as save state or achievements."
   />
-  <h2>Name what happened, not the code that should run</h2><p>
-    Use plain, recognizable event names such as <code>ENTERED_GREENHOUSE</code> or
-    <code>STARTED_MIRA_DIALOGUE</code>. In Blender, enter that name on the
-    Trigger Event and create the matching Scene Event. In Godot, other systems
-    can listen for or respond to the same named event without knowing which
-    physics area detected the player. That lets animation, audio, UI, and
-    save-state code cooperate while the trigger remains easy for an artist to
-    understand. Decide explicitly whether activation is one-shot, repeatable,
-    reversible on exit, or filtered to a participant.
+
+  <h2>Dispatch an FPE event from your own Godot code</h2>
+  <p>
+    Custom Godot systems can enter the same event system. Supply a meaningful type,
+    the node responsible for the event, the initiating node, and any plain data
+    your listeners need.
   </p>
-  <h2>Common mistakes</h2><ul>
+  <pre><code>func complete_workshop_quest(player: Node) -&gt; void:
+    var event := FPEEvent.new(
+        "WORKSHOP_QUEST_COMPLETED",
+        self,
+        player,
+        &#123; "reward_kind": "brass_key", "quantity": 1 &#125;,
+    )
+
+    FPEEventManager.dispatch_event(event)</code></pre>
+  <p>
+    If Blender has a Scene Event named <code>WORKSHOP_QUEST_COMPLETED</code>, its
+    commands can respond too. This is useful when engineering logic determines
+    <em>that</em> something happened while artists should still control the camera,
+    audio, animation, or level response.
+  </p>
+
+  <h2>Use EventHandler for reusable integrations</h2>
+  <p>
+    Connecting to <code>fpe_event</code> is the clearest choice for most game code.
+    For a reusable integration that should register for one event type, subclass
+    <code>EventHandler</code> and keep the same handler instance so it can be removed
+    later.
+  </p>
+  <pre><code># workshop_door_handler.gd
+class_name WorkshopDoorHandler extends EventHandler
+
+func handle_event(event: FPEEvent) -&gt; void:
+    print("Door event from ", event.owner.name)
+
+# event_bridge.gd
+extends Node
+
+var door_handler := WorkshopDoorHandler.new()
+
+func _ready() -&gt; void:
+    FPEEventManager.add_event_handler(
+        "OPEN_WORKSHOP_DOOR",
+        door_handler,
+    )
+
+func _exit_tree() -&gt; void:
+    FPEEventManager.remove_event_handler(
+        "OPEN_WORKSHOP_DOOR",
+        door_handler,
+    )</code></pre>
+  <p>
+    This is the same handler mechanism FPE uses internally to connect Blender
+    Scene Event commands to named events. Use it for packaged systems; use the
+    global signal when a normal Godot node simply needs to observe several events.
+  </p>
+
+  <h2>Debug the real event path</h2>
+  <ul>
     <li>
-      <strong>Collision masks that see everything:</strong> broad masks create accidental
-      activations and extra physics work.
-    </li><li>
-      <strong>Mesh-shaped trigger volumes:</strong> boxes and capsules are easier
-      to author and cheaper to query.
-    </li><li>
-      <strong>Running a large cutscene inside the callback:</strong> dispatch an
-      event and let a coordinator own the sequence.
-    </li><li>
-      <strong>Repeat firing:</strong> disable one-shot triggers before awaiting animations
-      or scene loads.
+      If nothing fires, confirm the trigger's activation type and event name in
+      Blender first.
+    </li>
+    <li>
+      Confirm that the trigger and initiator have compatible FPE trigger groups.
+      A mismatched contract prevents dispatch before your listener runs.
+    </li>
+    <li>
+      Log <code>event.type</code>, <code>event.owner</code>, and <code
+        >event.initiator</code
+      > at one global listener to prove whether dispatch occurred.
+    </li>
+    <li>
+      Check for spelling differences between Trigger Events, Scene Events, and
+      GDScript constants.
+    </li>
+    <li>
+      Do not add a second <code>Area3D</code> merely because you cannot find one in
+      the imported file. <code>TrackingArea3D</code> is created by FPE at runtime.
     </li>
   </ul>
+
   <Fragment slot="fpe"
     ><p>
-      Place and scale the trigger object in Blender, check <strong
-        >Trigger</strong
-      >, choose Enter or Exit, and name the Scene Event. FPE imports it as an
-      invisible <code>TrackingArea3D</code> with a simple collider. Scene Event commands
-      can then play audio or animations, load levels, switch cameras, start conversations,
-      or dispatch another event—without welding those actions to the overlap detector.
+      FPE owns the repeatable mechanics: it turns the Blender volume into a
+      <code>TrackingArea3D</code>, filters participants, and dispatches <code
+        >FPEEvent</code
+      > objects. Your Godot code extends the result through <code
+        >FPEEventManager</code
+      > while Blender Scene Events remain free to control authored animation,
+      audio, cameras, conversations, and level commands.
     </p><p>
       <a href="/docs/fpe-triggers-commands.html"
-        >Read the triggers and commands reference</a
-      >.
+        >Review triggers and commands</a
+      >, <a href="/docs/fpe-animation-and-events.html"
+        >review animation and event behavior</a
+      >, or <a href="/godot-api-docs.html">browse the generated FPE Godot API</a>.
     </p></Fragment
   >
 </LearningGuideLayout>
