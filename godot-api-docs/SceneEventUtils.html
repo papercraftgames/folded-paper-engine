@@ -1,0 +1,111 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QM9RJ9QDWL"></script><script type="application/javascript">
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+      gtag('config', 'G-QM9RJ9QDWL');
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".pickle-box img").forEach((p, i) => {
+          p.addEventListener("mouseenter", () => {
+            gtag('event', 'pickle_hover', {
+              pickle_index: i + 1,
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll(".pickle-box").forEach((pickleBox) => {
+          const pickles = Array.from(pickleBox.querySelectorAll("img"));
+          const resetPickles = () => pickles.forEach((pickle) => {
+            pickle.style.removeProperty("--pickle-scale");
+            pickle.style.removeProperty("--pickle-lift");
+          });
+
+          pickleBox.addEventListener("pointermove", (event) => {
+            pickles.forEach((pickle) => {
+              const bounds = pickle.getBoundingClientRect();
+              const center = bounds.left + bounds.width / 2;
+              const influence = Math.max(0, 1 - Math.abs(event.clientX - center) / (bounds.width * 1.55));
+              pickle.style.setProperty("--pickle-scale", String(1 + influence * 0.55));
+              pickle.style.setProperty("--pickle-lift", `${-influence * 1.65}rem`);
+            });
+          });
+          pickleBox.addEventListener("pointerleave", resetPickles);
+        });
+
+        document.querySelectorAll("[data-download-platform]").forEach((downloadButton) => {
+          if (!(downloadButton instanceof HTMLElement)) return;
+          downloadButton.addEventListener("click", () => {
+            gtag('event', 'download_fpe', {
+              event_category: 'download',
+              platform: downloadButton.dataset.downloadPlatform,
+              version: downloadButton.dataset.downloadVersion || 'unknown',
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll('a[href^="http"]').forEach((link) => {
+          if (!(link instanceof HTMLAnchorElement)) return;
+          if (link.hostname !== window.location.hostname) link.addEventListener('click', () => {
+            gtag('event', 'outbound_click', {
+              destination_host: link.hostname,
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll('[data-guide-title]').forEach((link) => {
+          if (!(link instanceof HTMLElement)) return;
+          link.addEventListener('click', () => gtag('event', 'guide_open', {
+            guide_title: link.dataset.guideTitle,
+            source_path: window.location.pathname
+          }));
+        });
+      });
+    </script><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Reference documentation for SceneEventUtils in the Folded Paper Engine Godot addon API, including class details, methods, properties, signals, and constants."><meta name="robots" content="noindex, follow, max-image-preview:large"><meta name="author" content="Papercraft Games"><meta property="og:site_name" content="Folded Paper Engine"><meta property="og:type" content="website"><meta property="og:title" content="SceneEventUtils | Folded Paper Engine Godot API Reference"><meta property="og:description" content="Reference documentation for SceneEventUtils in the Folded Paper Engine Godot addon API, including class details, methods, properties, signals, and constants."><meta property="og:url" content="https://foldedpaperengine.com/godot-api-docs/SceneEventUtils.html"><meta property="og:image" content="https://foldedpaperengine.com/assets/images/godot-feature-splash.png"><meta property="og:image:alt" content="SceneEventUtils"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="SceneEventUtils | Folded Paper Engine Godot API Reference"><meta name="twitter:description" content="Reference documentation for SceneEventUtils in the Folded Paper Engine Godot addon API, including class details, methods, properties, signals, and constants."><meta name="twitter:image" content="https://foldedpaperengine.com/assets/images/godot-feature-splash.png"><title>SceneEventUtils | Folded Paper Engine Godot API Reference</title><link rel="canonical" href="https://foldedpaperengine.com/godot-api-docs/SceneEventUtils.html"><link rel="sitemap" href="/sitemap-index.xml"><link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/svg+xml" href="/icons/favicon.svg"><link rel="shortcut icon" href="/icons/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-title" content="Folded Paper Engine"><link rel="manifest" href="/icons/site.webmanifest"><script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebSite","name":"Folded Paper Engine","url":"https://foldedpaperengine.com","description":"Reference documentation for SceneEventUtils in the Folded Paper Engine Godot addon API, including class details, methods, properties, signals, and constants."},{"@context":"https://schema.org","@type":"Organization","name":"Papercraft Games","url":"https://papercraft.games","sameAs":["https://github.com/papercraftgames/folded-paper-engine","https://www.youtube.com/@PapercraftGamesOfficial","https://bsky.app/profile/papercraftgames.bsky.social","https://www.facebook.com/profile.php?id=61584265860990","https://www.reddit.com/user/papercraftgames"]},{"@context":"https://schema.org","@type":"WebPage","name":"SceneEventUtils","url":"https://foldedpaperengine.com/godot-api-docs/SceneEventUtils.html","description":"Reference documentation for SceneEventUtils in the Folded Paper Engine Godot addon API, including class details, methods, properties, signals, and constants.","image":"https://foldedpaperengine.com/assets/images/godot-feature-splash.png","isPartOf":{"@type":"WebSite","name":"Folded Paper Engine","url":"https://foldedpaperengine.com"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://foldedpaperengine.com"},{"@type":"ListItem","position":2,"name":"Godot Api Docs","item":"https://foldedpaperengine.com/godot-api-docs"},{"@type":"ListItem","position":3,"name":"SceneEventUtils","item":"https://foldedpaperengine.com/godot-api-docs/SceneEventUtils"}]}]</script><link rel="stylesheet" href="/assets/css/index.css"> <link rel="stylesheet" href="/assets/css/docs.css"> <link rel="stylesheet" href="/assets/css/api-docs.css">  </head> <body> <header class="header"> <a href="/"> <img class="logo" src="/assets/images/logo.png" alt="Folded Paper Engine logo"> </a> <nav class="header-nav" aria-label="Primary navigation"> <a href="/guides.html">Guides</a> <a href="/blender-panel-docs.html">Blender</a> <a href="/godot-feature-docs.html">Godot</a> <a href="/godot-api-docs.html">API</a> <a href="/youtube-tutorials.html">Tutorials</a> </nav> <div class="spacer"></div> <a class="button" href="/#download">
+Download
+<img class="dl-icon" src="/assets/images/dl-icon.png" alt="Download"> </a> <a class="button gold header-support-button" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=header&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer">
+Support FPE
+<img class="button-icon" src="/assets/images/mug-icon.png" alt=""> </a> </header> <main> <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0;"> SceneEventUtils </h1>   <nav class="section section-breadcrumbs" aria-label="Breadcrumb"> <a href="/">Home</a> <span>/</span> <a href="/godot-api-docs.html">Godot API Docs</a>  <span>/</span> <span aria-current="page">SceneEventUtils</span>  </nav> <section class="web-splash"> <div class="web-splash-inner base-background"> <img class="web-splash-img" src="/assets/images/godot-feature-splash.png" alt="Godot Feature Splash"> </div> </section> <section class="section top-section"> <header class="no-margin"> <div class="section-title">
+Godot Addon API Docs
+<div class="section-subtitle"> SceneEventUtils </div> </div> </header> <br> <br> <main>  <article class="api-doc-article"> <div class="api-doc-body"><div class="api-grid">
+  <aside class="api-aside">
+    <div class="api-card">
+      <div><strong>Class:</strong> SceneEventUtils</div>
+      <div class="small">Inherits: FeatureConfig</div>
+      <hr class="small"/><div>
+	</div>
+    </div>
+  </aside>
+  <section class="api-main">
+    <div class="api-card">
+	</div>
+    
+    <div class="api-card"><h2>Methods</h2><ul class="api-list"><li>
+          <div><code class="code">void process_scene_events(bool unload = false)</code></div>
+          <div class="small">
+			</div>
+        </li></ul></div>
+    
+    <div class="api-card"><h2>Constants / Enums</h2><ul class="api-list"><li>
+      <code class="code">SCENE_LOAD_EVENTS = "SceneLoadEvents"</code>
+      
+    </li><li>
+      <code class="code">SCENE_UNLOAD_EVENTS = "SceneUnloadEvents"</code>
+      
+    </li></ul></div>
+  </section>
+</div></div> </article>  </main> </section>  </main> <footer class="footer"> <a href="https://papercraft.games" target="_blank" rel="noopener noreferrer"> <img class="papercraft-logo" src="/assets/images/papercraft-games-logo.png" alt="Papercraft Games"> </a> <nav class="footer-nav" aria-label="Explore Folded Paper Engine"> <a href="/">Home</a> <a href="/blender-panel-docs.html">Blender Panels</a> <a href="/godot-feature-docs.html">Godot Features</a> <a href="/godot-api-docs.html">Godot API Docs</a> <a href="/guides.html">Guides and FPE Reference</a> <a href="/youtube-tutorials.html">Tutorials</a> </nav> <nav class="footer-nav footer-concepts" aria-label="Core Concepts"> <a href="/#instant-game-mechanics">Instant Game Mechanics</a> <a href="/blender-panel-docs.html">Blender Game Logic Panels</a> <a href="/godot-feature-docs.html">Godot Game Mechanics</a> <a href="/youtube-tutorials.html">Blender to Godot Tutorials</a> <a href="/demo.html">Playable Demo</a> </nav> <section class="footer-support" aria-labelledby="footer-support-title"> <h2 id="footer-support-title">Support Folded Paper Engine</h2> <p>Using FPE? Support ongoing development, documentation, and showcase projects.</p> <div class="footer-support-links"> <a class="button gold medium" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="button-icon" src="/assets/images/mug-icon.png" alt="">
+Ko-fi
+</a> <a class="button blue medium" href="https://github.com/sponsors/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="button-icon" src="/assets/images/github-logo.png" alt="">
+GitHub Sponsors
+</a> <a class="footer-support-text-link" href="https://github.com/papercraftgames/folded-paper-engine" target="_blank" rel="noopener noreferrer">
+GitHub Repo
+</a> </div> </section> <div class="social"> <a href="https://github.com/papercraftgames/folded-paper-engine" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/github-logo.png" alt="GitHub"> </a> <a href="https://www.youtube.com/@PapercraftGamesOfficial" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/youtube-logo.png" alt="YouTube"> </a> <a href="https://bsky.app/profile/papercraftgames.bsky.social" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/bluesky-logo.png" alt="Bluesky"> </a> <a href="https://www.facebook.com/profile.php?id=61584265860990" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/facebook-logo.png" alt="Facebook"> </a> <a href="https://www.reddit.com/user/papercraftgames" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/reddit-logo.png" alt="Reddit"> </a> <a href="https://discord.gg/gdGk2tBevz" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/discord-logo.png" alt="Discord"> </a> <a href="https://papercraft-games.itch.io/folded-paper-engine" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/itch-io-logo.png" alt="Itch.io"> </a> </div> </footer> <footer class="pickle-footer"> <div>© 2026 Folded Paper Engine. All rights reserved.</div> <a class="button gold medium" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="sponsor-icon" src="/assets/images/mug-icon.png" alt="">
+Support FPE
+</a> <div class="pickle-box"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> </div> </footer> <script src="/support-widget.js"></script> </body> </html>

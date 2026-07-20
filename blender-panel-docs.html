@@ -1,0 +1,310 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QM9RJ9QDWL"></script><script type="application/javascript">
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+      gtag('config', 'G-QM9RJ9QDWL');
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".pickle-box img").forEach((p, i) => {
+          p.addEventListener("mouseenter", () => {
+            gtag('event', 'pickle_hover', {
+              pickle_index: i + 1,
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll(".pickle-box").forEach((pickleBox) => {
+          const pickles = Array.from(pickleBox.querySelectorAll("img"));
+          const resetPickles = () => pickles.forEach((pickle) => {
+            pickle.style.removeProperty("--pickle-scale");
+            pickle.style.removeProperty("--pickle-lift");
+          });
+
+          pickleBox.addEventListener("pointermove", (event) => {
+            pickles.forEach((pickle) => {
+              const bounds = pickle.getBoundingClientRect();
+              const center = bounds.left + bounds.width / 2;
+              const influence = Math.max(0, 1 - Math.abs(event.clientX - center) / (bounds.width * 1.55));
+              pickle.style.setProperty("--pickle-scale", String(1 + influence * 0.55));
+              pickle.style.setProperty("--pickle-lift", `${-influence * 1.65}rem`);
+            });
+          });
+          pickleBox.addEventListener("pointerleave", resetPickles);
+        });
+
+        document.querySelectorAll("[data-download-platform]").forEach((downloadButton) => {
+          if (!(downloadButton instanceof HTMLElement)) return;
+          downloadButton.addEventListener("click", () => {
+            gtag('event', 'download_fpe', {
+              event_category: 'download',
+              platform: downloadButton.dataset.downloadPlatform,
+              version: downloadButton.dataset.downloadVersion || 'unknown',
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll('a[href^="http"]').forEach((link) => {
+          if (!(link instanceof HTMLAnchorElement)) return;
+          if (link.hostname !== window.location.hostname) link.addEventListener('click', () => {
+            gtag('event', 'outbound_click', {
+              destination_host: link.hostname,
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll('[data-guide-title]').forEach((link) => {
+          if (!(link instanceof HTMLElement)) return;
+          link.addEventListener('click', () => gtag('event', 'guide_open', {
+            guide_title: link.dataset.guideTitle,
+            source_path: window.location.pathname
+          }));
+        });
+      });
+    </script><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Use Folded Paper Engine's Blender game logic panels to tag players, triggers, physics objects, speakers, inventory items, scene settings, animation events, and Godot-ready gameplay metadata."><meta name="robots" content="index, follow, max-image-preview:large"><meta name="author" content="Papercraft Games"><meta property="og:site_name" content="Folded Paper Engine"><meta property="og:type" content="website"><meta property="og:title" content="Blender Game Logic Panels | Folded Paper Engine Documentation"><meta property="og:description" content="Use Folded Paper Engine's Blender game logic panels to tag players, triggers, physics objects, speakers, inventory items, scene settings, animation events, and Godot-ready gameplay metadata."><meta property="og:url" content="https://foldedpaperengine.com/blender-panel-docs.html"><meta property="og:image" content="https://foldedpaperengine.com/assets/images/blender-panel-splash.png"><meta property="og:image:alt" content="Blender Game Logic Panels"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Blender Game Logic Panels | Folded Paper Engine Documentation"><meta name="twitter:description" content="Use Folded Paper Engine's Blender game logic panels to tag players, triggers, physics objects, speakers, inventory items, scene settings, animation events, and Godot-ready gameplay metadata."><meta name="twitter:image" content="https://foldedpaperengine.com/assets/images/blender-panel-splash.png"><title>Blender Game Logic Panels | Folded Paper Engine Documentation</title><link rel="canonical" href="https://foldedpaperengine.com/blender-panel-docs.html"><link rel="sitemap" href="/sitemap-index.xml"><link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/svg+xml" href="/icons/favicon.svg"><link rel="shortcut icon" href="/icons/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-title" content="Folded Paper Engine"><link rel="manifest" href="/icons/site.webmanifest"><script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebSite","name":"Folded Paper Engine","url":"https://foldedpaperengine.com","description":"Use Folded Paper Engine's Blender game logic panels to tag players, triggers, physics objects, speakers, inventory items, scene settings, animation events, and Godot-ready gameplay metadata."},{"@context":"https://schema.org","@type":"Organization","name":"Papercraft Games","url":"https://papercraft.games","sameAs":["https://github.com/papercraftgames/folded-paper-engine","https://www.youtube.com/@PapercraftGamesOfficial","https://bsky.app/profile/papercraftgames.bsky.social","https://www.facebook.com/profile.php?id=61584265860990","https://www.reddit.com/user/papercraftgames"]},{"@context":"https://schema.org","@type":"WebPage","name":"Blender Game Logic Panels","url":"https://foldedpaperengine.com/blender-panel-docs.html","description":"Use Folded Paper Engine's Blender game logic panels to tag players, triggers, physics objects, speakers, inventory items, scene settings, animation events, and Godot-ready gameplay metadata.","image":"https://foldedpaperengine.com/assets/images/blender-panel-splash.png","isPartOf":{"@type":"WebSite","name":"Folded Paper Engine","url":"https://foldedpaperengine.com"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://foldedpaperengine.com"},{"@type":"ListItem","position":2,"name":"Blender Game Logic Panels","item":"https://foldedpaperengine.com/blender-panel-docs"}]}]</script><link rel="stylesheet" href="/assets/css/index.css"> <link rel="stylesheet" href="/assets/css/docs.css"> </head> <body> <header class="header"> <a href="/"> <img class="logo" src="/assets/images/logo.png" alt="Folded Paper Engine logo"> </a> <nav class="header-nav" aria-label="Primary navigation"> <a href="/guides.html">Guides</a> <a href="/blender-panel-docs.html">Blender</a> <a href="/godot-feature-docs.html">Godot</a> <a href="/godot-api-docs.html">API</a> <a href="/youtube-tutorials.html">Tutorials</a> </nav> <div class="spacer"></div> <a class="button" href="/#download">
+Download
+<img class="dl-icon" src="/assets/images/dl-icon.png" alt="Download"> </a> <a class="button gold header-support-button" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=header&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer">
+Support FPE
+<img class="button-icon" src="/assets/images/mug-icon.png" alt=""> </a> </header> <main> <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0;"> Blender Game Logic Panels </h1>   <section class="web-splash"> <div class="web-splash-inner base-background"> <img class="web-splash-img" src="/assets/images/blender-panel-splash.png" alt="Blender Panel Splash"> </div> </section> <section class="section top-section"> <header> <div class="section-title">
+Blender Quick Start Guide
+</div> </header> <main> <p>
+These Blender game logic panels let you define gameplay metadata before export, so Godot can turn tagged
+                objects into runtime game mechanics.
+</p> <h3>Install the Blender Addon to get started:</h3> <ol> <li>Go to <code>Edit &gt; Preferences &gt; Add-ons</code> and click the down arrow
+<code>ˇ</code> in the upper right.
+</li> <li>Click <code>Install from Disk...</code> and select the <code>Folded Paper Engine</code> Blender
+                    addon zip file.
+</li> <li>Click <code>Install from Disk</code>.</li> <li>Restart Blender.</li> </ol> <h3>Create some ground to stand on:</h3> <ol> <li>Once back in your Blender file, add a Mesh Cube to the scene.</li> <li>Make it a static body for Godot by adding <code>-col</code> to the end of the name.</li> <li>This is already supported by Godot. See all of the options: <a href="https://docs.godotengine.org/en/4.5/tutorials/assets_pipeline/importing_3d_scenes/node_type_customization.html" target="_blank" rel="noopener">Godot node type customization</a>.
+</li> </ol> <h3>Make a basic Player object with Folded Paper Engine:</h3> <ol> <li>Create a new mesh object (a sphere is fine).</li> <li>Select the sphere and press <code>N</code> to open the viewport properties panel.</li> <li>Go to the <code>Item</code> tab.</li> <li>
+Under Folded Paper Engine in the <code>Item</code> tab, check <code>Player</code>.
+<strong>IMPORTANT:</strong> A player should be about <code>1 meter</code> tall.
+</li> <li><strong>CONGRATS!</strong> You now have a player!</li> </ol> <h3>Export a GLB/GLTF for use with Godot:</h3> <ol> <li>Go to <code>File &gt; Export</code> and choose <code>glTF</code>.</li> <li>Check <code>Remember Export Settings</code>. (You'll thank me later 😊)</li> <li>Click the down arrow <code>ˇ</code> next to <code>Include</code> and check the box that says <code>Custom
+                    Properties</code>.
+</li> <li>Optionally, check the boxes for <code>Cameras</code> and <code>Punctual Lights</code> if exporting
+                    cameras and lights.
+</li> <li>Name the file and choose a location inside your Godot project folder.</li> <li>Click <code>Export</code>.</li> <li>Your file is now ready to be used by Folded Paper Engine in Godot. See the Godot setup <a href="/godot-feature-docs.html">here</a>.
+</li> </ol> </main> </section> <section class="section content-section"> <header> <div class="section-title">
+Blender Panels
+</div> </header> <main><!--${ENGINE_FEATURE_DOCS}--> <div id="Scene" class="panel"><h3>Scene</h3>
+<ul>
+<li>Sky Color: (Color) Select the sky color for the scene.</li>
+<li>Background Music: (Files) Select the background music for the scene.</li>
+<li>Background Music Volume: (Float) The volume of the background music in decibels.</li>
+<li>Gravity: (Float) The gravity of the scene in meters per second squared.</li>
+<li>Scene Load Events: (Collection of <a href="#Event%20Property%20Group">Event Property Group</a>) Execute commands when the scene is loaded.</li>
+<li>Scene Unload Events: (Collection of <a href="#Event%20Property%20Group">Event Property Group</a>) Execute commands when the scene is unloaded.</li>
+</ul>
+</div>
+
+<div id="Folded Paper Engine" class="panel"><h3>Folded Paper Engine</h3>
+<ul>
+<li>Player: (Boolean) Create a player. IMPORTANT: A player should be about 1 meter tall.</li>
+<li>Character: (Boolean) Create a character.</li>
+<li>Physics: (Boolean) Apply physics to this object.</li>
+<li>Invisible: (Boolean) Set to true to make the object invisible.</li>
+<li>Water: (Boolean) Set to true to make the object a water plane.</li>
+<li>Sprite Animate: (Float) Set the sprite animation speed. All child node will be cycled through to create a sprite animation.</li>
+<li>Trigger: (Boolean) Set to true to trigger the configured commands (from the command palette) on interaction.</li>
+<li>Speaker: (Boolean) Make this item a 3D speaker.</li>
+<li>UI Element: (Boolean) Make this item a UI element.</li>
+<li>Sub Scene: (Boolean) Load a sub scene in this item.</li>
+<li>Holdable: (Boolean) Make this item holdable.</li>
+<li>Groups: (String) CSV: The groups for this item. Used in your own custom code.</li>
+<li>Script Path: (File) Set the script for this item. WARNING: Only use this if you know what you are doing, this will overwrite any existing script/functionality.</li>
+</ul>
+</div>
+
+<div id="Scene Events" class="panel"><h3>Scene Events</h3>
+<ul>
+<li>Scene Events: (Collection of <a href="#Scene%20Event%20Property%20Group">Scene Event Property Group</a>) Execute commands when a scene event occurs.</li>
+</ul>
+</div>
+
+<div id="Trigger Events" class="panel"><h3>Trigger Events</h3>
+<ul>
+<li>Trigger Groups: (String) The trigger groups for this item.</li>
+<li>Trigger Events: (Collection of <a href="#Trigger%20Event%20Property%20Group">Trigger Event Property Group</a>) The Scene Events that will be triggered when this item is a trigger.</li>
+</ul>
+</div>
+
+<div id="Inventory Item" class="panel"><h3>Inventory Item</h3>
+<ul>
+<li>Inventory Item Kind: (String) The Inventory Item Kind.</li>
+<li>Inventory Item Quantity: (Integer) The Inventory Item Quantity.</li>
+</ul>
+</div>
+
+<div id="Speaker Settings" class="panel"><h3>Speaker Settings</h3>
+<ul>
+<li>Speaker File: (File) Path to the audio file for this speaker.</li>
+<li>Speaker Loop: (Boolean) Loop the speaker audio.</li>
+<li>Speaker Volume: (Float) Volume of the speaker in decibels.</li>
+<li>Speaker Max Distance: (Float) Maximum distance for the speaker to be heard.</li>
+<li>Speaker Autoplay: (Boolean) Autoplay the speaker audio immediately.</li>
+</ul>
+</div>
+
+<div id="Character" class="panel"><h3>Character</h3>
+<ul>
+<li>Walk Speed Multiplier: (Float) A multiplier for the character&#39;s walk speed.</li>
+<li>Run Speed Multiplier: (Float) A multiplier for the character&#39;s run speed (Which is already affected by the Walk Speed Multiplier).</li>
+<li>Jump Force Multiplier: (Float) A multiplier for the character&#39;s jump force.</li>
+<li>Idle Animation: (String) The name of the idle animation.</li>
+<li>Walk Animation: (String) The name of the walk animation.</li>
+<li>Run Animation: (String) The name of the run animation.</li>
+<li>Jump Animation: (String) The name of the jump animation.</li>
+<li>Talk Animation: (String) The name of the talk animation.</li>
+<li>Wandering Bounds: (Node) The object representing the area where the character can wander.</li>
+<li>Face Motion Direction: (Boolean) Face the motion direction.</li>
+</ul>
+</div>
+
+<div id="Physics" class="panel"><h3>Physics</h3>
+<ul>
+<li>Mass: (Float) Set the collision object mass.</li>
+<li>Friction: (Float) Set the collision object friction.</li>
+<li>Bounciness: (Float) Set the collision object bounciness.</li>
+<li>Continuous Collision Detection: (Boolean) Enable continuous collision detection.</li>
+</ul>
+</div>
+
+<div id="Folded Paper Engine (Animation)" class="panel"><h3>Folded Paper Engine (Animation)</h3>
+<ul>
+<li>Autoplay: (Boolean) Set to true to play this animation automatically.</li>
+<li>Loop: (Boolean) Set to true to loop this animation.</li>
+</ul>
+</div>
+
+<div id="Folded Paper Engine (Frame Events)" class="panel"><h3>Folded Paper Engine (Frame Events)</h3>
+<ul>
+<li>Frame Events: (Collection of <a href="#Frame%20Event%20Property%20Group">Frame Event Property Group</a>) Frames that trigger events.</li>
+</ul>
+</div>
+
+<div id="Folded Paper Engine (Material)" class="panel"><h3>Folded Paper Engine (Material)</h3>
+<ul>
+<li>Render Priority: (Integer) Set the render priority for this material.</li>
+<li>Reflective: (Float) Set the reflectivity of this material.</li>
+<li>Replace With Material: (File) Replace this material with the specified material.</li>
+</ul>
+</div>
+
+<div id="UI Element" class="panel"><h3>UI Element</h3>
+<ul>
+<li>UI Cursor: (Boolean) Make this item a UI cursor.</li>
+<li>UI Cursor Depth: (Float) Set the UI cursor depth.</li>
+<li>UI Cursor Select Animation: (String) The name of the UI cursor select animation.</li>
+<li>UI Cursor Look At Camera: (Boolean) Make the UI cursor always look at the camera.</li>
+<li>UI Option: (Boolean) Make this item a UI option.</li>
+<li>UI Option Command Delay: (Float) Set the UI option command delay in milliseconds.</li>
+</ul>
+</div>
+
+<div id="Sub Scene" class="panel"><h3>Sub Scene</h3>
+<ul>
+<li>Scene File: (File) Path to the scene file for this sub scene.</li>
+<li>Auto Load: (Boolean) Automatically load the sub scene when the parent scene loads.</li>
+<li>Pause: (Boolean) Pause the parent scene when the sub scene is loaded.</li>
+<li>Resume On Unload: (Boolean) Resume the parent scene when the sub scene is unloaded.</li>
+<li>Unload Delay: (Float) Delay in milliseconds before unloading the sub scene.</li>
+</ul>
+</div>
+
+<div id="Player Controls" class="panel"><h3>Player Controls</h3>
+<ul>
+<li>Third Person: (Boolean) Enable full third person controls.</li>
+<li>First Person: (Boolean) Enable first person controls.</li>
+<li>Can Hold Items: (Boolean) Enable holding items.</li>
+<li>Hold Zone Distance: (Float) The distance from the player to the area where items can/will be held.</li>
+<li>Hold Zone Size: (Float) The size of the area where items can/will be held.</li>
+<li>Hold Zone Scene: (File) A scene to load into the player&#39;s hold zone. The parent of this scene will be a <code>HoldZone</code> with holdable item related signals.</li>
+<li>Standard Camera Height: (Float) The standard height of the camera.</li>
+<li>Standard Camera Distance: (Float) The standard distance of the camera.</li>
+</ul>
+</div>
+
+<div id="Activity Property Group" class="property-group"><h3>Activity Property Group</h3>
+<ul>
+<li>Activity Type: (Enum) The type of activity.</li>
+</ul>
+</div>
+
+<div id="Event Property Group" class="property-group"><h3>Event Property Group</h3>
+<ul>
+<li>Event Name: (String) The name of the event.</li>
+</ul>
+</div>
+
+<div id="Commands Property Group" class="property-group"><h3>Commands Property Group</h3>
+<ul>
+<li>Dispatch Event: (String) The name of the event to dispatch.</li>
+<li>Load Level: (File) Load a level on trigger.</li>
+<li>Animations: (String) CSV: Play animations on trigger.</li>
+<li>Stop Animations: (String) CSV: Stop animations on trigger.</li>
+<li>Speaker Trigger: (String) True to play this item as a speaker when intersecting with it. Or the name of a specific speaker to play.</li>
+<li>Speaker Trigger Self: (Boolean) Play this item as a speaker when intersecting with it.</li>
+<li>Activate Camera: (Node) Activate the selected camera.</li>
+<li>Reactivate Player Camera: (Boolean) Reactivate the player&#39;s camera.</li>
+<li>Deactivate Player Controls: (Boolean) Deactivate the player&#39;s controls.</li>
+<li>Reactivate Player Controls: (Boolean) Reactivate the player&#39;s controls.</li>
+<li>Load Sub Scene: (Node) Load a specific sub scene by item name.</li>
+<li>Unload Sub Scene: (Node) Unload a specific sub scene by item name.</li>
+<li>Unload This Sub Scene: (Boolean) Unload this scene as a sub scene.</li>
+<li>Start Conversation: (Files) Start one of the specified conversations. The conversation is selected by the names of the characters involved and the required characters list in the conversation.</li>
+<li>Pause Specific Activities: (Collection of <a href="#Activity%20Property%20Group">Activity Property Group</a>) Pause the specified game activities.</li>
+<li>Resume Specific Activities: (Collection of <a href="#Activity%20Property%20Group">Activity Property Group</a>) Resume the specified game activities.</li>
+<li>Delete By Group: (String) Delete items in the specified group.</li>
+</ul>
+</div>
+
+<div id="Scene Event Property Group" class="property-group"><h3>Scene Event Property Group</h3>
+<ul>
+<li>Event Name: (String) The name of the event.</li>
+<li>Commands: (Object of <a href="#Commands%20Property%20Group">Commands Property Group</a>) The commands to execute when the event occurs.</li>
+</ul>
+</div>
+
+<div id="Trigger Event Property Group" class="property-group"><h3>Trigger Event Property Group</h3>
+<ul>
+<li>Trigger Type: (Enum) The type of trigger (When/why the event is triggered).</li>
+<li>Event Name: (String) The name of the event.</li>
+</ul>
+</div>
+
+<div id="Frame Event Property Group" class="property-group"><h3>Frame Event Property Group</h3>
+<ul>
+<li>Event Name: (String) The name of the event.</li>
+</ul>
+</div></main> </section> <section class="section content-section last"> <header> <div class="section-title">
+Type Legend
+</div> </header> <main><!--${ENGINE_FEATURE_LEGEND}--> <ul>
+<li>String: <code>Hi there!</code></li>
+<li>Integer: <code>1</code>, <code>2</code>, <code>3</code>, ...</li>
+<li>Float: <code>1.0</code>, <code>2.0</code>, <code>3.0</code>, ...</li>
+<li>Boolean: <code>true</code> or <code>false</code></li>
+<li>Node: <code>MyCube</code></li>
+<li>File: <code>res://...</code></li>
+<li>Files: <code>res://...</code>,<code>res://...</code>,<code>res://...</code></li>
+<li>Image: <code>res://.../texture.png</code></li>
+<li>Images: <code>res://.../texture.png</code>,<code>res://.../texture.png</code>,<code>res://.../texture.png</code></li>
+<li>Collection: Multiple items</li>
+<li>Object: An item with a set of settings and values</li>
+<li>Enum: <code>One</code>, <code>Two</code> or <code>Three</code></li>
+<li>Color: <code>#FFFFFFFF</code></li>
+<li>CSV: <code>One,Two,Three</code></li>
+</ul>
+</main> </section>  </main> <footer class="footer"> <a href="https://papercraft.games" target="_blank" rel="noopener noreferrer"> <img class="papercraft-logo" src="/assets/images/papercraft-games-logo.png" alt="Papercraft Games"> </a> <nav class="footer-nav" aria-label="Explore Folded Paper Engine"> <a href="/">Home</a> <a href="/blender-panel-docs.html">Blender Panels</a> <a href="/godot-feature-docs.html">Godot Features</a> <a href="/godot-api-docs.html">Godot API Docs</a> <a href="/guides.html">Guides and FPE Reference</a> <a href="/youtube-tutorials.html">Tutorials</a> </nav> <nav class="footer-nav footer-concepts" aria-label="Core Concepts"> <a href="/#instant-game-mechanics">Instant Game Mechanics</a> <a href="/blender-panel-docs.html">Blender Game Logic Panels</a> <a href="/godot-feature-docs.html">Godot Game Mechanics</a> <a href="/youtube-tutorials.html">Blender to Godot Tutorials</a> <a href="/demo.html">Playable Demo</a> </nav> <section class="footer-support" aria-labelledby="footer-support-title"> <h2 id="footer-support-title">Support Folded Paper Engine</h2> <p>Using FPE? Support ongoing development, documentation, and showcase projects.</p> <div class="footer-support-links"> <a class="button gold medium" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="button-icon" src="/assets/images/mug-icon.png" alt="">
+Ko-fi
+</a> <a class="button blue medium" href="https://github.com/sponsors/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="button-icon" src="/assets/images/github-logo.png" alt="">
+GitHub Sponsors
+</a> <a class="footer-support-text-link" href="https://github.com/papercraftgames/folded-paper-engine" target="_blank" rel="noopener noreferrer">
+GitHub Repo
+</a> </div> </section> <div class="social"> <a href="https://github.com/papercraftgames/folded-paper-engine" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/github-logo.png" alt="GitHub"> </a> <a href="https://www.youtube.com/@PapercraftGamesOfficial" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/youtube-logo.png" alt="YouTube"> </a> <a href="https://bsky.app/profile/papercraftgames.bsky.social" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/bluesky-logo.png" alt="Bluesky"> </a> <a href="https://www.facebook.com/profile.php?id=61584265860990" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/facebook-logo.png" alt="Facebook"> </a> <a href="https://www.reddit.com/user/papercraftgames" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/reddit-logo.png" alt="Reddit"> </a> <a href="https://discord.gg/gdGk2tBevz" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/discord-logo.png" alt="Discord"> </a> <a href="https://papercraft-games.itch.io/folded-paper-engine" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/itch-io-logo.png" alt="Itch.io"> </a> </div> </footer> <footer class="pickle-footer"> <div>© 2026 Folded Paper Engine. All rights reserved.</div> <a class="button gold medium" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="sponsor-icon" src="/assets/images/mug-icon.png" alt="">
+Support FPE
+</a> <div class="pickle-box"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> </div> </footer> <script src="/support-widget.js"></script> </body> </html>

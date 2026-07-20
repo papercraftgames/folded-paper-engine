@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QM9RJ9QDWL"></script><script type="application/javascript">
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+      gtag('config', 'G-QM9RJ9QDWL');
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".pickle-box img").forEach((p, i) => {
+          p.addEventListener("mouseenter", () => {
+            gtag('event', 'pickle_hover', {
+              pickle_index: i + 1,
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll(".pickle-box").forEach((pickleBox) => {
+          const pickles = Array.from(pickleBox.querySelectorAll("img"));
+          const resetPickles = () => pickles.forEach((pickle) => {
+            pickle.style.removeProperty("--pickle-scale");
+            pickle.style.removeProperty("--pickle-lift");
+          });
+
+          pickleBox.addEventListener("pointermove", (event) => {
+            pickles.forEach((pickle) => {
+              const bounds = pickle.getBoundingClientRect();
+              const center = bounds.left + bounds.width / 2;
+              const influence = Math.max(0, 1 - Math.abs(event.clientX - center) / (bounds.width * 1.55));
+              pickle.style.setProperty("--pickle-scale", String(1 + influence * 0.55));
+              pickle.style.setProperty("--pickle-lift", `${-influence * 1.65}rem`);
+            });
+          });
+          pickleBox.addEventListener("pointerleave", resetPickles);
+        });
+
+        document.querySelectorAll("[data-download-platform]").forEach((downloadButton) => {
+          if (!(downloadButton instanceof HTMLElement)) return;
+          downloadButton.addEventListener("click", () => {
+            gtag('event', 'download_fpe', {
+              event_category: 'download',
+              platform: downloadButton.dataset.downloadPlatform,
+              version: downloadButton.dataset.downloadVersion || 'unknown',
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll('a[href^="http"]').forEach((link) => {
+          if (!(link instanceof HTMLAnchorElement)) return;
+          if (link.hostname !== window.location.hostname) link.addEventListener('click', () => {
+            gtag('event', 'outbound_click', {
+              destination_host: link.hostname,
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll('[data-guide-title]').forEach((link) => {
+          if (!(link instanceof HTMLElement)) return;
+          link.addEventListener('click', () => gtag('event', 'guide_open', {
+            guide_title: link.dataset.guideTitle,
+            source_path: window.location.pathname
+          }));
+        });
+      });
+    </script><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Build and export a correctly scaled, collidable Blender level, add an FPE player, and prove the complete playable Blender-to-Godot workflow."><meta name="robots" content="index, follow, max-image-preview:large"><meta name="author" content="Papercraft Games"><meta property="og:site_name" content="Folded Paper Engine"><meta property="og:type" content="website"><meta property="og:title" content="How to Make a Playable Godot Level in Blender | Folded Paper Engine"><meta property="og:description" content="Build and export a correctly scaled, collidable Blender level, add an FPE player, and prove the complete playable Blender-to-Godot workflow."><meta property="og:url" content="https://foldedpaperengine.com/guides/build-levels-in-blender-for-godot.html"><meta property="og:image" content="https://foldedpaperengine.com/assets/images/web-splash.png"><meta property="og:image:alt" content="How to Make a Playable Godot Level in Blender"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="How to Make a Playable Godot Level in Blender | Folded Paper Engine"><meta name="twitter:description" content="Build and export a correctly scaled, collidable Blender level, add an FPE player, and prove the complete playable Blender-to-Godot workflow."><meta name="twitter:image" content="https://foldedpaperengine.com/assets/images/web-splash.png"><title>How to Make a Playable Godot Level in Blender | Folded Paper Engine</title><link rel="canonical" href="https://foldedpaperengine.com/guides/build-levels-in-blender-for-godot.html"><link rel="sitemap" href="/sitemap-index.xml"><link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/svg+xml" href="/icons/favicon.svg"><link rel="shortcut icon" href="/icons/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-title" content="Folded Paper Engine"><link rel="manifest" href="/icons/site.webmanifest"><script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebSite","name":"Folded Paper Engine","url":"https://foldedpaperengine.com","description":"Build and export a correctly scaled, collidable Blender level, add an FPE player, and prove the complete playable Blender-to-Godot workflow."},{"@context":"https://schema.org","@type":"Organization","name":"Papercraft Games","url":"https://papercraft.games","sameAs":["https://github.com/papercraftgames/folded-paper-engine","https://www.youtube.com/@PapercraftGamesOfficial","https://bsky.app/profile/papercraftgames.bsky.social","https://www.facebook.com/profile.php?id=61584265860990","https://www.reddit.com/user/papercraftgames"]},{"@context":"https://schema.org","@type":"WebPage","name":"How to Make a Playable Godot Level in Blender","url":"https://foldedpaperengine.com/guides/build-levels-in-blender-for-godot.html","description":"Build and export a correctly scaled, collidable Blender level, add an FPE player, and prove the complete playable Blender-to-Godot workflow.","image":"https://foldedpaperengine.com/assets/images/web-splash.png","isPartOf":{"@type":"WebSite","name":"Folded Paper Engine","url":"https://foldedpaperengine.com"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://foldedpaperengine.com"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://foldedpaperengine.com/guides"},{"@type":"ListItem","position":3,"name":"How to Make a Playable Godot Level in Blender","item":"https://foldedpaperengine.com/guides/build-levels-in-blender-for-godot"}]},{"@context":"https://schema.org","@type":"TechArticle","headline":"How to Make a Playable Godot Level in Blender","description":"Build and export a correctly scaled, collidable Blender level, add an FPE player, and prove the complete playable Blender-to-Godot workflow.","author":{"@type":"Organization","name":"Papercraft Games"},"publisher":{"@type":"Organization","name":"Papercraft Games"},"mainEntityOfPage":"https://foldedpaperengine.com/guides/build-levels-in-blender-for-godot.html","proficiencyLevel":"Beginner to intermediate"}]</script><link rel="stylesheet" href="/assets/css/index.css"> <link rel="stylesheet" href="/assets/css/docs.css"> <link rel="stylesheet" href="/assets/css/guide.css"> <link rel="stylesheet" href="/assets/css/learning-guides.css"> </head> <body> <header class="header"> <a href="/"> <img class="logo" src="/assets/images/logo.png" alt="Folded Paper Engine logo"> </a> <nav class="header-nav" aria-label="Primary navigation"> <a href="/guides.html">Guides</a> <a href="/blender-panel-docs.html">Blender</a> <a href="/godot-feature-docs.html">Godot</a> <a href="/godot-api-docs.html">API</a> <a href="/youtube-tutorials.html">Tutorials</a> </nav> <div class="spacer"></div> <a class="button" href="/#download">
+Download
+<img class="dl-icon" src="/assets/images/dl-icon.png" alt="Download"> </a> <a class="button gold header-support-button" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=header&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer">
+Support FPE
+<img class="button-icon" src="/assets/images/mug-icon.png" alt=""> </a> </header> <main> <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0;"> How to Make a Playable Godot Level in Blender </h1>     <article class="learning-guide"> <header class="learning-guide-hero"><nav aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/guides.html">Guides</a></nav><h1>How to Make a Playable Godot Level in Blender</h1><p>Do not begin with a giant dream level. Begin with one charming room you can walk around. That tiny success proves that your art, collision, player, metadata, export, and Godot runtime all understand one another.</p></header> <div class="learning-guide-body"> <aside class="guide-summary"><strong>New to FPE?</strong> First install the <a href="/blender-panel-docs.html">FPE Blender addon</a> and the <a href="/godot-feature-docs.html">FPE Godot addon</a>. Prefer video? Watch <a href="https://www.youtube.com/watch?v=41J92UUPx5M&list=PLM1XlwxBilobr6XVs-7H6O_mMXAiHZEcz" target="_blank" rel="noopener noreferrer">Set Up Blender</a>, then <a href="https://www.youtube.com/watch?v=YRTf65f2L3g&list=PLM1XlwxBilobr6XVs-7H6O_mMXAiHZEcz" target="_blank" rel="noopener noreferrer">Set Up Godot</a>.</aside>  <div class="guide-summary"> <strong>Before decorating:</strong> give the ground collision with Godot's <code>-col</code> name suffix, select the player marker, and check <strong>Player</strong> in
+    Blender's <strong>Item → Folded Paper Engine</strong> panel. Those two steps
+    turn a room you can see into a level you can stand in and play.
+</div> <figure class="guide-figure guide-figure-panel"> <a href="/assets/images/guides/blender/player-marker-checkbox.png" target="_blank" aria-label="Open full-size screenshot: Blender Item sidebar with the FPE Player checkbox enabled on a selected marker"> <img src="/assets/images/guides/blender/player-marker-checkbox.png" alt="Blender Item sidebar with the FPE Player checkbox enabled on a selected marker" loading="lazy" decoding="async"> </a> <figcaption>In Blender, select the marker and enable Player under Item → Folded Paper Engine.</figcaption> </figure> <h2>Establish the coordinate contract</h2><p>
+Godot uses Y up and forward along negative Z for cameras; glTF defines
+    consistent asset orientation between tools. Work at real scale, apply
+    transforms where appropriate, and verify one known-size object before
+    building a whole map. For oriented assets, test forward direction early
+    rather than repairing every character later.
+</p> <h2>A practical level workflow</h2><ol> <li>
+In Blender, block the walkable spaces with simple geometry and test scale
+      in Godot immediately.
+</li><li>
+Name the floor mesh with the <code>-col</code> suffix so Godot imports a visible
+      mesh with static collision. Watch <a href="https://www.youtube.com/watch?v=MNUCt67IlXE&list=PLM1XlwxBilobr6XVs-7H6O_mMXAiHZEcz" target="_blank" rel="noopener noreferrer">Collision (Walls &amp; Floors)</a> for the complete walkthrough.
+</li><li>
+Add a simple player marker, then check <strong>Player</strong> in Blender's
+      FPE panel. The <a href="/guides/create-player-in-blender-for-godot.html">player guide</a> and <a href="https://www.youtube.com/watch?v=JlcHwvsJcNU&list=PLM1XlwxBilobr6XVs-7H6O_mMXAiHZEcz" target="_blank" rel="noopener noreferrer">Player video</a> show every setting.
+</li><li>
+Choose stable, readable names for rooms, entrances, spawn points, and
+      interactive props.
+</li><li>
+Apply or deliberately preserve transforms before export. Be consistent
+      across reusable assets.
+</li><li>
+Export GLB with <strong>Custom Properties</strong> enabled. Follow the <a href="https://www.youtube.com/watch?v=hDyJ5Th2-84&list=PLM1XlwxBilobr6XVs-7H6O_mMXAiHZEcz" target="_blank" rel="noopener noreferrer">FPE Export video</a> if this is your first trip into Godot.
+</li><li>
+Re-export often. The workflow only becomes trustworthy by surviving
+      ordinary iteration.
+</li> </ol> <figure class="guide-figure guide-figure-wide"> <a href="/assets/images/guides/blender/gltf-custom-properties-export.png" target="_blank" aria-label="Open full-size screenshot: Blender glTF export dialog with Include expanded and Custom Properties enabled"> <img src="/assets/images/guides/blender/gltf-custom-properties-export.png" alt="Blender glTF export dialog with Include expanded and Custom Properties enabled" loading="lazy" decoding="async"> </a> <figcaption>Before exporting GLB, expand Include and enable Custom Properties so FPE&#39;s authored settings travel with the scene.</figcaption> </figure> <figure class="guide-figure guide-figure-wide"> <a href="/assets/images/guides/godot/cookie-beans-runtime.png" target="_blank" aria-label="Open full-size screenshot: The FPE Cookie Beans demo running inside the Godot editor"> <img src="/assets/images/guides/godot/cookie-beans-runtime.png" alt="The FPE Cookie Beans demo running inside the Godot editor" loading="lazy" decoding="async"> </a> <figcaption>The practical test: run the imported level in Godot and verify that the player can stand and move in the scene.</figcaption> </figure> <h2>Decide what belongs where</h2><ul> <li> <strong>Blender:</strong> geometry, transforms, materials, cameras, lights,
+      animation, placement, and authored gameplay annotations.
+</li><li> <strong>Godot:</strong> game-wide managers, UI, save state, unique scripts,
+      platform integration, and runtime-only effects.
+</li><li> <strong>Shared contract:</strong> stable IDs, event names, item kinds, scene
+      paths, and feature types.
+</li> </ul> <h2>Common mistakes</h2><ul> <li>
+Making manual edits inside an imported scene that disappear on reimport.
+</li><li>
+Using one giant level file when rooms have natural streaming or ownership
+      boundaries.
+</li><li>
+Exporting unapplied negative scales or unpredictable triangulation.
+</li><li>Letting filenames and cross-scene IDs drift independently.</li> </ul>   <aside class="fpe-path"><h2>What FPE adds to the level</h2><p>
+FPE makes Blender the authoring surface for common level mechanics as well
+      as placement. Add triggers, speakers, players, inventory items, holdable
+      props, scene settings, sub-scenes, and frame events through Blender
+      panels. Export standard GLB and load it beneath one <code>FoldedPaperEngine</code> node. Whole-level and sub-scene commands keep re-exportable content separate
+      from your stable Godot shell.
+</p><p> <a href="/docs/fpe-subscenes-and-levels.html">Read the sub-scenes and level loading guide</a>.
+</p><div class="guide-actions"><a class="button small" href="/#download">Download FPE</a><a href="/guides.html">Browse all FPE guides and references</a></div></aside> <p class="source-note">Godot reference: <a href="https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/model_export_considerations.html" target="_blank" rel="noopener noreferrer">Model export considerations</a></p> <nav class="related-guides" aria-labelledby="related-guides-title"><h2 id="related-guides-title">Keep building</h2><ul><li><a href="/guides/create-player-in-blender-for-godot.html">How to Add a Player in Blender for Godot</a></li><li><a href="/guides/blender-to-godot-gameplay-import.html">How FPE Turns Blender Properties into Godot Gameplay</a></li><li><a href="/guides/instant-game-mechanics.html">What Are Instant Game Mechanics?</a></li></ul></nav> </div> </article>   </main> <footer class="footer"> <a href="https://papercraft.games" target="_blank" rel="noopener noreferrer"> <img class="papercraft-logo" src="/assets/images/papercraft-games-logo.png" alt="Papercraft Games"> </a> <nav class="footer-nav" aria-label="Explore Folded Paper Engine"> <a href="/">Home</a> <a href="/blender-panel-docs.html">Blender Panels</a> <a href="/godot-feature-docs.html">Godot Features</a> <a href="/godot-api-docs.html">Godot API Docs</a> <a href="/guides.html">Guides and FPE Reference</a> <a href="/youtube-tutorials.html">Tutorials</a> </nav> <nav class="footer-nav footer-concepts" aria-label="Core Concepts"> <a href="/#instant-game-mechanics">Instant Game Mechanics</a> <a href="/blender-panel-docs.html">Blender Game Logic Panels</a> <a href="/godot-feature-docs.html">Godot Game Mechanics</a> <a href="/youtube-tutorials.html">Blender to Godot Tutorials</a> <a href="/demo.html">Playable Demo</a> </nav> <section class="footer-support" aria-labelledby="footer-support-title"> <h2 id="footer-support-title">Support Folded Paper Engine</h2> <p>Using FPE? Support ongoing development, documentation, and showcase projects.</p> <div class="footer-support-links"> <a class="button gold medium" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="button-icon" src="/assets/images/mug-icon.png" alt="">
+Ko-fi
+</a> <a class="button blue medium" href="https://github.com/sponsors/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="button-icon" src="/assets/images/github-logo.png" alt="">
+GitHub Sponsors
+</a> <a class="footer-support-text-link" href="https://github.com/papercraftgames/folded-paper-engine" target="_blank" rel="noopener noreferrer">
+GitHub Repo
+</a> </div> </section> <div class="social"> <a href="https://github.com/papercraftgames/folded-paper-engine" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/github-logo.png" alt="GitHub"> </a> <a href="https://www.youtube.com/@PapercraftGamesOfficial" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/youtube-logo.png" alt="YouTube"> </a> <a href="https://bsky.app/profile/papercraftgames.bsky.social" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/bluesky-logo.png" alt="Bluesky"> </a> <a href="https://www.facebook.com/profile.php?id=61584265860990" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/facebook-logo.png" alt="Facebook"> </a> <a href="https://www.reddit.com/user/papercraftgames" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/reddit-logo.png" alt="Reddit"> </a> <a href="https://discord.gg/gdGk2tBevz" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/discord-logo.png" alt="Discord"> </a> <a href="https://papercraft-games.itch.io/folded-paper-engine" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/itch-io-logo.png" alt="Itch.io"> </a> </div> </footer> <footer class="pickle-footer"> <div>© 2026 Folded Paper Engine. All rights reserved.</div> <a class="button gold medium" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="sponsor-icon" src="/assets/images/mug-icon.png" alt="">
+Support FPE
+</a> <div class="pickle-box"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> </div> </footer> <script src="/support-widget.js"></script> </body> </html>

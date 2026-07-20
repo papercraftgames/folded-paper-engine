@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QM9RJ9QDWL"></script><script type="application/javascript">
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+      gtag('config', 'G-QM9RJ9QDWL');
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".pickle-box img").forEach((p, i) => {
+          p.addEventListener("mouseenter", () => {
+            gtag('event', 'pickle_hover', {
+              pickle_index: i + 1,
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll(".pickle-box").forEach((pickleBox) => {
+          const pickles = Array.from(pickleBox.querySelectorAll("img"));
+          const resetPickles = () => pickles.forEach((pickle) => {
+            pickle.style.removeProperty("--pickle-scale");
+            pickle.style.removeProperty("--pickle-lift");
+          });
+
+          pickleBox.addEventListener("pointermove", (event) => {
+            pickles.forEach((pickle) => {
+              const bounds = pickle.getBoundingClientRect();
+              const center = bounds.left + bounds.width / 2;
+              const influence = Math.max(0, 1 - Math.abs(event.clientX - center) / (bounds.width * 1.55));
+              pickle.style.setProperty("--pickle-scale", String(1 + influence * 0.55));
+              pickle.style.setProperty("--pickle-lift", `${-influence * 1.65}rem`);
+            });
+          });
+          pickleBox.addEventListener("pointerleave", resetPickles);
+        });
+
+        document.querySelectorAll("[data-download-platform]").forEach((downloadButton) => {
+          if (!(downloadButton instanceof HTMLElement)) return;
+          downloadButton.addEventListener("click", () => {
+            gtag('event', 'download_fpe', {
+              event_category: 'download',
+              platform: downloadButton.dataset.downloadPlatform,
+              version: downloadButton.dataset.downloadVersion || 'unknown',
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll('a[href^="http"]').forEach((link) => {
+          if (!(link instanceof HTMLAnchorElement)) return;
+          if (link.hostname !== window.location.hostname) link.addEventListener('click', () => {
+            gtag('event', 'outbound_click', {
+              destination_host: link.hostname,
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll('[data-guide-title]').forEach((link) => {
+          if (!(link instanceof HTMLElement)) return;
+          link.addEventListener('click', () => gtag('event', 'guide_open', {
+            guide_title: link.dataset.guideTitle,
+            source_path: window.location.pathname
+          }));
+        });
+      });
+    </script><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Use Folded Paper Engine sub-scenes and level loading for doors, hubs, streamed interiors, fade transitions, and GLB-based scene changes in Godot."><meta name="robots" content="index, follow, max-image-preview:large"><meta name="author" content="Papercraft Games"><meta property="og:site_name" content="Folded Paper Engine"><meta property="og:type" content="website"><meta property="og:title" content="Sub Scenes and Level Loading | Folded Paper Engine Documentation"><meta property="og:description" content="Use Folded Paper Engine sub-scenes and level loading for doors, hubs, streamed interiors, fade transitions, and GLB-based scene changes in Godot."><meta property="og:url" content="https://foldedpaperengine.com/docs/fpe-subscenes-and-levels.html"><meta property="og:image" content="https://foldedpaperengine.com/docs/thumbs/sub-scene.png"><meta property="og:image:alt" content="Sub Scenes and Level Loading"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Sub Scenes and Level Loading | Folded Paper Engine Documentation"><meta name="twitter:description" content="Use Folded Paper Engine sub-scenes and level loading for doors, hubs, streamed interiors, fade transitions, and GLB-based scene changes in Godot."><meta name="twitter:image" content="https://foldedpaperengine.com/docs/thumbs/sub-scene.png"><title>Sub Scenes and Level Loading | Folded Paper Engine Documentation</title><link rel="canonical" href="https://foldedpaperengine.com/docs/fpe-subscenes-and-levels.html"><link rel="sitemap" href="/sitemap-index.xml"><link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/svg+xml" href="/icons/favicon.svg"><link rel="shortcut icon" href="/icons/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-title" content="Folded Paper Engine"><link rel="manifest" href="/icons/site.webmanifest"><script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebSite","name":"Folded Paper Engine","url":"https://foldedpaperengine.com","description":"Use Folded Paper Engine sub-scenes and level loading for doors, hubs, streamed interiors, fade transitions, and GLB-based scene changes in Godot."},{"@context":"https://schema.org","@type":"Organization","name":"Papercraft Games","url":"https://papercraft.games","sameAs":["https://github.com/papercraftgames/folded-paper-engine","https://www.youtube.com/@PapercraftGamesOfficial","https://bsky.app/profile/papercraftgames.bsky.social","https://www.facebook.com/profile.php?id=61584265860990","https://www.reddit.com/user/papercraftgames"]},{"@context":"https://schema.org","@type":"WebPage","name":"Sub Scenes and Level Loading","url":"https://foldedpaperengine.com/docs/fpe-subscenes-and-levels.html","description":"Use Folded Paper Engine sub-scenes and level loading for doors, hubs, streamed interiors, fade transitions, and GLB-based scene changes in Godot.","image":"https://foldedpaperengine.com/docs/thumbs/sub-scene.png","isPartOf":{"@type":"WebSite","name":"Folded Paper Engine","url":"https://foldedpaperengine.com"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://foldedpaperengine.com"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://foldedpaperengine.com/docs"},{"@type":"ListItem","position":3,"name":"Sub Scenes and Level Loading","item":"https://foldedpaperengine.com/docs/fpe-subscenes-and-levels"}]}]</script><link rel="stylesheet" href="/assets/css/index.css"> <link rel="stylesheet" href="/assets/css/docs.css"> <link rel="stylesheet" href="/assets/css/guide.css">  </head> <body> <header class="header"> <a href="/"> <img class="logo" src="/assets/images/logo.png" alt="Folded Paper Engine logo"> </a> <nav class="header-nav" aria-label="Primary navigation"> <a href="/guides.html">Guides</a> <a href="/blender-panel-docs.html">Blender</a> <a href="/godot-feature-docs.html">Godot</a> <a href="/godot-api-docs.html">API</a> <a href="/youtube-tutorials.html">Tutorials</a> </nav> <div class="spacer"></div> <a class="button" href="/#download">
+Download
+<img class="dl-icon" src="/assets/images/dl-icon.png" alt="Download"> </a> <a class="button gold header-support-button" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=header&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer">
+Support FPE
+<img class="button-icon" src="/assets/images/mug-icon.png" alt=""> </a> </header> <main> <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0;"> Sub Scenes and Level Loading </h1>   <nav class="section section-breadcrumbs" aria-label="Breadcrumb"> <a href="/">Home</a> <span>/</span> <a href="/guides.html">Guides</a><span>/</span> <span aria-current="page">Sub Scenes and Level Loading</span> </nav> <section class="section top-section"> <header> <div class="section-title">
+Sub Scenes and Level Loading
+<div class="section-subtitle">Friendly recipes for doors, hubs, and streamed interiors</div> </div> </header> <div class="section-body"> <h2>Proper Usage</h2> <ul> <li>Keep a root <strong>Folded Paper Engine</strong> node active and load sub-scenes under it so feature registration stays stable.</li> </ul> <h2>One-Click Whole Level Transitions</h2> <ol> <li>Place a trigger near your doorway or portal. Follow the <a href="/guides/create-triggers-in-blender-for-godot.html">Blender trigger guide</a> or <a href="https://www.youtube.com/watch?v=yGIMhpo312M&list=PLM1XlwxBilobr6XVs-7H6O_mMXAiHZEcz" target="_blank" rel="noopener noreferrer">Triggers video tutorial</a> if you have not made one yet.</li> <li>Add a <strong>Load Level</strong> command and point it at the next GLB path (relative to your project).</li> <li>When fired, FPE unloads the current level, clears global registries (speakers, cameras, animations), and loads the new GLB cleanly.</li> <li>Tip: pair with a quick fade or loading screen sub-scene so the player sees a smooth handoff.</li> </ol> <h2>Quick Fade Recipe (Advanced)</h2> <ul> <li>Create a simple full-screen 2D color-rect in Godot (black or dark gray works well) and animate its opacity.</li> <li>Export it as a sub-scene and trigger <strong>Load Sub Scene</strong> to show the fade, then run <strong>Load Level</strong>. When the new level is ready, remove the fade scene or animate the fade back down by loading another sub-scene.</li> <li>This keeps the player from seeing mid-load pops.</li> </ul> <h2>Adding a Sub Scene Host in Blender</h2> <ol> <li>Select the mesh that should act as the placeholder (e.g., a building doorway or elevator cage).</li> <li>Open the FPE panel and check <strong>Sub Scene</strong>.</li> <li>Provide the <strong>File Path</strong> to the GLB you want to stream in. You should name the sub-scene appropriately so commands can easily target it later.</li> <li>Decide if the host should <strong>Auto Load</strong> on start. If unchecked, load it later with a Scene Event.</li> <li>Export to GLB. In Godot, the host replaces its mesh with the streamed content while keeping its transform.</li> </ol> <h2>Commands for Streaming</h2> <ul> <li><strong>Load Sub Scene</strong>: Load a sub-scene by name. Great for stepping inside a house while keeping the street loaded.</li> <li><strong>Unload Sub Scene</strong>: Unload a named sub-scene and optionally wait a few seconds (with <strong>Unload Delay</strong>) to finish fades/audio/etc.</li> <li><strong>Unload This Sub Scene</strong>: From inside a sub-scene, call this to close yourself (handy on an exit trigger inside the streamed area).</li> </ul> <div class="callouts"> <div class="callout"> <div class="callout-title">Cleanup tips</div> <div class="callout-body"> <ul> <li>Delete or move (with animations) trigger objects tied to loading areas so they don't fire twice if the player re-enters quickly.</li> <li>Move reusable fades or HUD overlays into a shared sub-scene instead of duplicating them in every level.</li> <li>For large hubs, unload distant interiors as soon as the exit trigger fires to keep memory predictable.</li> </ul> </div> </div> </div> <h2>Pause Control During Transitions</h2> <ul> <li>Sub scene hosts can pause parent activities while the child is loaded. That keeps NPCs or physics from running while the player is away.</li> <li>Use <strong>Deactivate Player Controls</strong> plus a camera cut to hide loading, then <strong>Reactivate Player Controls</strong> when returning.</li> </ul> <h2>Design Templates</h2> <ul> <li><strong>Interior door:</strong> Trigger on the doorframe → <code>Load Sub Scene</code> for the interior → on the interior exit trigger, run <code>Unload This Sub Scene</code> and, if you disabled it, <code>Reactivate Player Camera</code>.</li> <li><strong>Hub world with portals:</strong> Each portal trigger runs <code>Load Level</code> to another GLB. Keep a shared UI scene loaded to show tips during transitions.</li> <li><strong>Elevator cutscene:</strong> Trigger → <code>Deactivate Player Controls</code> → play lift animation with frame events → <code>Load Level</code> to the next floor.</li> </ul> <h2>Checks if Something Feels Broken</h2> <ul> <li>Verify paths: GLB paths are relative to the project. Typos silently skip loading.</li> <li>Apply transforms before export so the sub-scene spawns at the expected size and position.</li> <li>If old sounds or cameras keep playing after a load, make sure you are using <strong>Load Level</strong> and <i>not a custom script</i> so the engine is able to do typical cleanup work.</li> </ul> </div> </section>  <aside class="docs-support-banner" aria-label="Support Folded Paper Engine"> <p>Using FPE? Support ongoing development, documentation, and showcase projects.</p> <div class="docs-support-actions"> <a class="button gold medium" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="button-icon" src="/assets/images/mug-icon.png" alt="">
+Support FPE
+</a> <a class="button blue medium" href="https://github.com/sponsors/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="button-icon" src="/assets/images/github-logo.png" alt="">
+Sponsor on GitHub
+</a> </div> </aside> </main> <footer class="footer"> <a href="https://papercraft.games" target="_blank" rel="noopener noreferrer"> <img class="papercraft-logo" src="/assets/images/papercraft-games-logo.png" alt="Papercraft Games"> </a> <nav class="footer-nav" aria-label="Explore Folded Paper Engine"> <a href="/">Home</a> <a href="/blender-panel-docs.html">Blender Panels</a> <a href="/godot-feature-docs.html">Godot Features</a> <a href="/godot-api-docs.html">Godot API Docs</a> <a href="/guides.html">Guides and FPE Reference</a> <a href="/youtube-tutorials.html">Tutorials</a> </nav> <nav class="footer-nav footer-concepts" aria-label="Core Concepts"> <a href="/#instant-game-mechanics">Instant Game Mechanics</a> <a href="/blender-panel-docs.html">Blender Game Logic Panels</a> <a href="/godot-feature-docs.html">Godot Game Mechanics</a> <a href="/youtube-tutorials.html">Blender to Godot Tutorials</a> <a href="/demo.html">Playable Demo</a> </nav> <section class="footer-support" aria-labelledby="footer-support-title"> <h2 id="footer-support-title">Support Folded Paper Engine</h2> <p>Using FPE? Support ongoing development, documentation, and showcase projects.</p> <div class="footer-support-links"> <a class="button gold medium" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="button-icon" src="/assets/images/mug-icon.png" alt="">
+Ko-fi
+</a> <a class="button blue medium" href="https://github.com/sponsors/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="button-icon" src="/assets/images/github-logo.png" alt="">
+GitHub Sponsors
+</a> <a class="footer-support-text-link" href="https://github.com/papercraftgames/folded-paper-engine" target="_blank" rel="noopener noreferrer">
+GitHub Repo
+</a> </div> </section> <div class="social"> <a href="https://github.com/papercraftgames/folded-paper-engine" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/github-logo.png" alt="GitHub"> </a> <a href="https://www.youtube.com/@PapercraftGamesOfficial" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/youtube-logo.png" alt="YouTube"> </a> <a href="https://bsky.app/profile/papercraftgames.bsky.social" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/bluesky-logo.png" alt="Bluesky"> </a> <a href="https://www.facebook.com/profile.php?id=61584265860990" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/facebook-logo.png" alt="Facebook"> </a> <a href="https://www.reddit.com/user/papercraftgames" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/reddit-logo.png" alt="Reddit"> </a> <a href="https://discord.gg/gdGk2tBevz" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/discord-logo.png" alt="Discord"> </a> <a href="https://papercraft-games.itch.io/folded-paper-engine" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/itch-io-logo.png" alt="Itch.io"> </a> </div> </footer> <footer class="pickle-footer"> <div>© 2026 Folded Paper Engine. All rights reserved.</div> <a class="button gold medium" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="sponsor-icon" src="/assets/images/mug-icon.png" alt="">
+Support FPE
+</a> <div class="pickle-box"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> </div> </footer> <script src="/support-widget.js"></script> </body> </html>

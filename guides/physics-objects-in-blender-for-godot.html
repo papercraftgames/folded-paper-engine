@@ -1,0 +1,130 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QM9RJ9QDWL"></script><script type="application/javascript">
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+      gtag('config', 'G-QM9RJ9QDWL');
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".pickle-box img").forEach((p, i) => {
+          p.addEventListener("mouseenter", () => {
+            gtag('event', 'pickle_hover', {
+              pickle_index: i + 1,
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll(".pickle-box").forEach((pickleBox) => {
+          const pickles = Array.from(pickleBox.querySelectorAll("img"));
+          const resetPickles = () => pickles.forEach((pickle) => {
+            pickle.style.removeProperty("--pickle-scale");
+            pickle.style.removeProperty("--pickle-lift");
+          });
+
+          pickleBox.addEventListener("pointermove", (event) => {
+            pickles.forEach((pickle) => {
+              const bounds = pickle.getBoundingClientRect();
+              const center = bounds.left + bounds.width / 2;
+              const influence = Math.max(0, 1 - Math.abs(event.clientX - center) / (bounds.width * 1.55));
+              pickle.style.setProperty("--pickle-scale", String(1 + influence * 0.55));
+              pickle.style.setProperty("--pickle-lift", `${-influence * 1.65}rem`);
+            });
+          });
+          pickleBox.addEventListener("pointerleave", resetPickles);
+        });
+
+        document.querySelectorAll("[data-download-platform]").forEach((downloadButton) => {
+          if (!(downloadButton instanceof HTMLElement)) return;
+          downloadButton.addEventListener("click", () => {
+            gtag('event', 'download_fpe', {
+              event_category: 'download',
+              platform: downloadButton.dataset.downloadPlatform,
+              version: downloadButton.dataset.downloadVersion || 'unknown',
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll('a[href^="http"]').forEach((link) => {
+          if (!(link instanceof HTMLAnchorElement)) return;
+          if (link.hostname !== window.location.hostname) link.addEventListener('click', () => {
+            gtag('event', 'outbound_click', {
+              destination_host: link.hostname,
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll('[data-guide-title]').forEach((link) => {
+          if (!(link instanceof HTMLElement)) return;
+          link.addEventListener('click', () => gtag('event', 'guide_open', {
+            guide_title: link.dataset.guideTitle,
+            source_path: window.location.pathname
+          }));
+        });
+      });
+    </script><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Configure Blender objects for Godot physics with FPE mass, friction, bounciness, collision, and continuous collision detection settings."><meta name="robots" content="index, follow, max-image-preview:large"><meta name="author" content="Papercraft Games"><meta property="og:site_name" content="Folded Paper Engine"><meta property="og:type" content="website"><meta property="og:title" content="How to Add Physics Objects in Blender for Godot | Folded Paper Engine"><meta property="og:description" content="Configure Blender objects for Godot physics with FPE mass, friction, bounciness, collision, and continuous collision detection settings."><meta property="og:url" content="https://foldedpaperengine.com/guides/physics-objects-in-blender-for-godot.html"><meta property="og:image" content="https://foldedpaperengine.com/assets/images/web-splash.png"><meta property="og:image:alt" content="How to Add Physics Objects in Blender for Godot"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="How to Add Physics Objects in Blender for Godot | Folded Paper Engine"><meta name="twitter:description" content="Configure Blender objects for Godot physics with FPE mass, friction, bounciness, collision, and continuous collision detection settings."><meta name="twitter:image" content="https://foldedpaperengine.com/assets/images/web-splash.png"><title>How to Add Physics Objects in Blender for Godot | Folded Paper Engine</title><link rel="canonical" href="https://foldedpaperengine.com/guides/physics-objects-in-blender-for-godot.html"><link rel="sitemap" href="/sitemap-index.xml"><link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/svg+xml" href="/icons/favicon.svg"><link rel="shortcut icon" href="/icons/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-title" content="Folded Paper Engine"><link rel="manifest" href="/icons/site.webmanifest"><script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebSite","name":"Folded Paper Engine","url":"https://foldedpaperengine.com","description":"Configure Blender objects for Godot physics with FPE mass, friction, bounciness, collision, and continuous collision detection settings."},{"@context":"https://schema.org","@type":"Organization","name":"Papercraft Games","url":"https://papercraft.games","sameAs":["https://github.com/papercraftgames/folded-paper-engine","https://www.youtube.com/@PapercraftGamesOfficial","https://bsky.app/profile/papercraftgames.bsky.social","https://www.facebook.com/profile.php?id=61584265860990","https://www.reddit.com/user/papercraftgames"]},{"@context":"https://schema.org","@type":"WebPage","name":"How to Add Physics Objects in Blender for Godot","url":"https://foldedpaperengine.com/guides/physics-objects-in-blender-for-godot.html","description":"Configure Blender objects for Godot physics with FPE mass, friction, bounciness, collision, and continuous collision detection settings.","image":"https://foldedpaperengine.com/assets/images/web-splash.png","isPartOf":{"@type":"WebSite","name":"Folded Paper Engine","url":"https://foldedpaperengine.com"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://foldedpaperengine.com"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://foldedpaperengine.com/guides"},{"@type":"ListItem","position":3,"name":"How to Add Physics Objects in Blender for Godot","item":"https://foldedpaperengine.com/guides/physics-objects-in-blender-for-godot"}]},{"@context":"https://schema.org","@type":"TechArticle","headline":"How to Add Physics Objects in Blender for Godot","description":"Configure Blender objects for Godot physics with FPE mass, friction, bounciness, collision, and continuous collision detection settings.","author":{"@type":"Organization","name":"Papercraft Games"},"publisher":{"@type":"Organization","name":"Papercraft Games"},"mainEntityOfPage":"https://foldedpaperengine.com/guides/physics-objects-in-blender-for-godot.html","proficiencyLevel":"Beginner to intermediate"}]</script><link rel="stylesheet" href="/assets/css/index.css"> <link rel="stylesheet" href="/assets/css/docs.css"> <link rel="stylesheet" href="/assets/css/guide.css"> <link rel="stylesheet" href="/assets/css/learning-guides.css"> </head> <body> <header class="header"> <a href="/"> <img class="logo" src="/assets/images/logo.png" alt="Folded Paper Engine logo"> </a> <nav class="header-nav" aria-label="Primary navigation"> <a href="/guides.html">Guides</a> <a href="/blender-panel-docs.html">Blender</a> <a href="/godot-feature-docs.html">Godot</a> <a href="/godot-api-docs.html">API</a> <a href="/youtube-tutorials.html">Tutorials</a> </nav> <div class="spacer"></div> <a class="button" href="/#download">
+Download
+<img class="dl-icon" src="/assets/images/dl-icon.png" alt="Download"> </a> <a class="button gold header-support-button" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=header&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer">
+Support FPE
+<img class="button-icon" src="/assets/images/mug-icon.png" alt=""> </a> </header> <main> <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0;"> How to Add Physics Objects in Blender for Godot </h1>     <article class="learning-guide"> <header class="learning-guide-hero"><nav aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/guides.html">Guides</a></nav><h1>How to Add Physics Objects in Blender for Godot</h1><p>Physics is where a pretty prop starts feeling like part of the world. A mug should settle, a rubber ball should bounce, and a heavy crate should resist being shoved. Author those material expectations beside the object itself.</p></header> <div class="learning-guide-body"> <aside class="guide-summary"><strong>New to FPE?</strong> First install the <a href="/blender-panel-docs.html">FPE Blender addon</a> and the <a href="/godot-feature-docs.html">FPE Godot addon</a>. Prefer video? Watch <a href="https://www.youtube.com/watch?v=41J92UUPx5M&list=PLM1XlwxBilobr6XVs-7H6O_mMXAiHZEcz" target="_blank" rel="noopener noreferrer">Set Up Blender</a>, then <a href="https://www.youtube.com/watch?v=YRTf65f2L3g&list=PLM1XlwxBilobr6XVs-7H6O_mMXAiHZEcz" target="_blank" rel="noopener noreferrer">Set Up Godot</a>.</aside>  <div class="guide-summary"> <strong>You will make:</strong> a Blender prop that imports as a physical Godot
+    object with intentional weight, grip, bounce, and collision behavior.
+</div> <figure class="guide-figure guide-figure-wide"> <a href="/assets/images/guides/blender/physics-object-checkbox.png" target="_blank" aria-label="Open full-size screenshot: Teacup-rigid selected in Blender with the FPE Physics checkbox enabled"> <img src="/assets/images/guides/blender/physics-object-checkbox.png" alt="Teacup-rigid selected in Blender with the FPE Physics checkbox enabled" loading="lazy" decoding="async"> </a> <figcaption>Keep Godot&#39;s supported -rigid name suffix and enable Physics in FPE when you also need authored body settings.</figcaption> </figure> <h2>First, make it a physics body</h2><p>
+The FPE <strong>Physics</strong> checkbox does not turn an ordinary mesh into
+    a rigid body. Godot's standard glTF importer decides the node and collider type
+    from the Blender object name.
+</p><ol> <li>
+Work at real-world scale, apply scale, and set the origin where rotation
+      and balance make sense.
+</li><li>
+For a movable prop, add <code>-rigid</code> to the Blender object name—for
+      example, <code>Teacup-rigid</code>. Godot imports it as a <code>RigidBody3D</code> with collision.
+</li><li>
+For immovable level geometry, use <code>-col</code> for a visible mesh with
+      static collision. Godot also supports <code>-convcol</code>, <code>-colonly</code>, and <code>-convcolonly</code> for other collider needs.
+</li><li>
+Only after choosing the body type, open Blender's <strong>Item → Folded Paper Engine</strong> panel and check <strong>Physics</strong>. That exposes the FPE material
+      and motion settings applied to the imported physics body.
+</li> </ol> <figure class="guide-figure guide-figure-wide"> <a href="/assets/images/guides/blender/physics-settings-panel.png" target="_blank" aria-label="Open full-size screenshot: FPE Physics panel showing mass friction bounce and continuous collision detection"> <img src="/assets/images/guides/blender/physics-settings-panel.png" alt="FPE Physics panel showing mass friction bounce and continuous collision detection" loading="lazy" decoding="async"> </a> <figcaption>Tune physical behavior in Blender: this light teacup uses modest friction, very little bounce, and continuous collision detection.</figcaption> </figure> <h2>Describe how the prop should feel</h2><ul> <li> <strong>Mass:</strong> controls inertia. Start with a plausible value and compare
+      related props rather than chasing perfect simulation.
+</li><li> <strong>Friction:</strong> increase it for grippy crates and reduce it for
+      slippery objects.
+</li><li> <strong>Bounciness:</strong> keep ordinary furniture low; raise it deliberately
+      for balls or playful props.
+</li><li> <strong>Continuous Collision Detection:</strong> enable it for small or fast
+      objects that could otherwise pass through thin colliders.
+</li> </ul> <h2>Export a tiny physics test</h2><ol> <li>Place the prop above a collidable floor.</li><li>
+Export with <strong>Custom Properties</strong> enabled.
+</li><li>Load the GLB through FPE and let the object fall.</li><li>
+Check resting orientation, sliding, bounce, tunneling, and scale.
+</li><li>
+Change one property at a time in Blender and re-export until the result
+      communicates the material you imagined.
+</li> </ol> <h2>Common problems</h2><ul> <li> <strong>Explodes or spins wildly:</strong> inspect overlapping collision, origin
+      placement, scale, and spawn position.
+</li><li> <strong>Falls through the floor:</strong> verify both objects have collision;
+      use continuous detection only when speed or size justifies it.
+</li><li> <strong>Everything feels weightless:</strong> check scale first, then compare
+      mass and damping in Godot.
+</li><li> <strong>Imported edits disappear:</strong> fix authored physics in Blender
+      or a stable extension, not inside the generated scene.
+</li> </ul>   <aside class="fpe-path"><h2>What FPE creates in Godot</h2><p>
+Godot's standard name suffix creates the physics body and collision. FPE
+      then applies the Blender-authored mass and continuous collision detection
+      to rigid bodies, plus friction and bounciness to supported physics bodies.
+      You can combine a <code>-rigid</code> prop with <strong>Holdable</strong> for
+      first-person carrying.
+</p><p> <a href="https://docs.godotengine.org/en/4.5/tutorials/assets_pipeline/importing_3d_scenes/node_type_customization.html" target="_blank" rel="noopener noreferrer">Read Godot's official import-suffix reference</a> and the <a href="/docs/fpe-physics-and-colliders.html">FPE physics and collider reference</a>.
+</p><div class="guide-actions"><a class="button small" href="/#download">Download FPE</a><a href="/guides.html">Browse all FPE guides and references</a></div></aside>  <nav class="related-guides" aria-labelledby="related-guides-title"><h2 id="related-guides-title">Keep building</h2><ul><li><a href="/guides/holdable-items-godot.html">How to Create Inventory Pickups and Holdable Items in Blender</a></li><li><a href="/guides/build-levels-in-blender-for-godot.html">How to Make a Playable Godot Level in Blender</a></li><li><a href="/guides/interactive-objects-godot.html">How to Add Custom Interactions to FPE Objects in Godot</a></li></ul></nav> </div> </article>   </main> <footer class="footer"> <a href="https://papercraft.games" target="_blank" rel="noopener noreferrer"> <img class="papercraft-logo" src="/assets/images/papercraft-games-logo.png" alt="Papercraft Games"> </a> <nav class="footer-nav" aria-label="Explore Folded Paper Engine"> <a href="/">Home</a> <a href="/blender-panel-docs.html">Blender Panels</a> <a href="/godot-feature-docs.html">Godot Features</a> <a href="/godot-api-docs.html">Godot API Docs</a> <a href="/guides.html">Guides and FPE Reference</a> <a href="/youtube-tutorials.html">Tutorials</a> </nav> <nav class="footer-nav footer-concepts" aria-label="Core Concepts"> <a href="/#instant-game-mechanics">Instant Game Mechanics</a> <a href="/blender-panel-docs.html">Blender Game Logic Panels</a> <a href="/godot-feature-docs.html">Godot Game Mechanics</a> <a href="/youtube-tutorials.html">Blender to Godot Tutorials</a> <a href="/demo.html">Playable Demo</a> </nav> <section class="footer-support" aria-labelledby="footer-support-title"> <h2 id="footer-support-title">Support Folded Paper Engine</h2> <p>Using FPE? Support ongoing development, documentation, and showcase projects.</p> <div class="footer-support-links"> <a class="button gold medium" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="button-icon" src="/assets/images/mug-icon.png" alt="">
+Ko-fi
+</a> <a class="button blue medium" href="https://github.com/sponsors/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="button-icon" src="/assets/images/github-logo.png" alt="">
+GitHub Sponsors
+</a> <a class="footer-support-text-link" href="https://github.com/papercraftgames/folded-paper-engine" target="_blank" rel="noopener noreferrer">
+GitHub Repo
+</a> </div> </section> <div class="social"> <a href="https://github.com/papercraftgames/folded-paper-engine" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/github-logo.png" alt="GitHub"> </a> <a href="https://www.youtube.com/@PapercraftGamesOfficial" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/youtube-logo.png" alt="YouTube"> </a> <a href="https://bsky.app/profile/papercraftgames.bsky.social" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/bluesky-logo.png" alt="Bluesky"> </a> <a href="https://www.facebook.com/profile.php?id=61584265860990" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/facebook-logo.png" alt="Facebook"> </a> <a href="https://www.reddit.com/user/papercraftgames" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/reddit-logo.png" alt="Reddit"> </a> <a href="https://discord.gg/gdGk2tBevz" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/discord-logo.png" alt="Discord"> </a> <a href="https://papercraft-games.itch.io/folded-paper-engine" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/itch-io-logo.png" alt="Itch.io"> </a> </div> </footer> <footer class="pickle-footer"> <div>© 2026 Folded Paper Engine. All rights reserved.</div> <a class="button gold medium" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="sponsor-icon" src="/assets/images/mug-icon.png" alt="">
+Support FPE
+</a> <div class="pickle-box"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> </div> </footer> <script src="/support-widget.js"></script> </body> </html>

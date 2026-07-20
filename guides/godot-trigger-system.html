@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QM9RJ9QDWL"></script><script type="application/javascript">
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+      gtag('config', 'G-QM9RJ9QDWL');
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".pickle-box img").forEach((p, i) => {
+          p.addEventListener("mouseenter", () => {
+            gtag('event', 'pickle_hover', {
+              pickle_index: i + 1,
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll(".pickle-box").forEach((pickleBox) => {
+          const pickles = Array.from(pickleBox.querySelectorAll("img"));
+          const resetPickles = () => pickles.forEach((pickle) => {
+            pickle.style.removeProperty("--pickle-scale");
+            pickle.style.removeProperty("--pickle-lift");
+          });
+
+          pickleBox.addEventListener("pointermove", (event) => {
+            pickles.forEach((pickle) => {
+              const bounds = pickle.getBoundingClientRect();
+              const center = bounds.left + bounds.width / 2;
+              const influence = Math.max(0, 1 - Math.abs(event.clientX - center) / (bounds.width * 1.55));
+              pickle.style.setProperty("--pickle-scale", String(1 + influence * 0.55));
+              pickle.style.setProperty("--pickle-lift", `${-influence * 1.65}rem`);
+            });
+          });
+          pickleBox.addEventListener("pointerleave", resetPickles);
+        });
+
+        document.querySelectorAll("[data-download-platform]").forEach((downloadButton) => {
+          if (!(downloadButton instanceof HTMLElement)) return;
+          downloadButton.addEventListener("click", () => {
+            gtag('event', 'download_fpe', {
+              event_category: 'download',
+              platform: downloadButton.dataset.downloadPlatform,
+              version: downloadButton.dataset.downloadVersion || 'unknown',
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll('a[href^="http"]').forEach((link) => {
+          if (!(link instanceof HTMLAnchorElement)) return;
+          if (link.hostname !== window.location.hostname) link.addEventListener('click', () => {
+            gtag('event', 'outbound_click', {
+              destination_host: link.hostname,
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll('[data-guide-title]').forEach((link) => {
+          if (!(link instanceof HTMLElement)) return;
+          link.addEventListener('click', () => gtag('event', 'guide_open', {
+            guide_title: link.dataset.guideTitle,
+            source_path: window.location.pathname
+          }));
+        });
+      });
+    </script><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Listen for Blender-authored FPE trigger events in GDScript, inspect the trigger and initiator, dispatch custom events, and add reusable event handlers without replacing FPE's trigger system."><meta name="robots" content="index, follow, max-image-preview:large"><meta name="author" content="Papercraft Games"><meta property="og:site_name" content="Folded Paper Engine"><meta property="og:type" content="website"><meta property="og:title" content="How to Extend FPE Triggers in Godot | Folded Paper Engine"><meta property="og:description" content="Listen for Blender-authored FPE trigger events in GDScript, inspect the trigger and initiator, dispatch custom events, and add reusable event handlers without replacing FPE's trigger system."><meta property="og:url" content="https://foldedpaperengine.com/guides/godot-trigger-system.html"><meta property="og:image" content="https://foldedpaperengine.com/assets/images/web-splash.png"><meta property="og:image:alt" content="How to Extend FPE Triggers in Godot"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="How to Extend FPE Triggers in Godot | Folded Paper Engine"><meta name="twitter:description" content="Listen for Blender-authored FPE trigger events in GDScript, inspect the trigger and initiator, dispatch custom events, and add reusable event handlers without replacing FPE's trigger system."><meta name="twitter:image" content="https://foldedpaperengine.com/assets/images/web-splash.png"><title>How to Extend FPE Triggers in Godot | Folded Paper Engine</title><link rel="canonical" href="https://foldedpaperengine.com/guides/godot-trigger-system.html"><link rel="sitemap" href="/sitemap-index.xml"><link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/svg+xml" href="/icons/favicon.svg"><link rel="shortcut icon" href="/icons/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-title" content="Folded Paper Engine"><link rel="manifest" href="/icons/site.webmanifest"><script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebSite","name":"Folded Paper Engine","url":"https://foldedpaperengine.com","description":"Listen for Blender-authored FPE trigger events in GDScript, inspect the trigger and initiator, dispatch custom events, and add reusable event handlers without replacing FPE's trigger system."},{"@context":"https://schema.org","@type":"Organization","name":"Papercraft Games","url":"https://papercraft.games","sameAs":["https://github.com/papercraftgames/folded-paper-engine","https://www.youtube.com/@PapercraftGamesOfficial","https://bsky.app/profile/papercraftgames.bsky.social","https://www.facebook.com/profile.php?id=61584265860990","https://www.reddit.com/user/papercraftgames"]},{"@context":"https://schema.org","@type":"WebPage","name":"How to Extend FPE Triggers in Godot","url":"https://foldedpaperengine.com/guides/godot-trigger-system.html","description":"Listen for Blender-authored FPE trigger events in GDScript, inspect the trigger and initiator, dispatch custom events, and add reusable event handlers without replacing FPE's trigger system.","image":"https://foldedpaperengine.com/assets/images/web-splash.png","isPartOf":{"@type":"WebSite","name":"Folded Paper Engine","url":"https://foldedpaperengine.com"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://foldedpaperengine.com"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://foldedpaperengine.com/guides"},{"@type":"ListItem","position":3,"name":"How to Extend FPE Triggers in Godot","item":"https://foldedpaperengine.com/guides/godot-trigger-system"}]},{"@context":"https://schema.org","@type":"TechArticle","headline":"How to Extend FPE Triggers in Godot","description":"Listen for Blender-authored FPE trigger events in GDScript, inspect the trigger and initiator, dispatch custom events, and add reusable event handlers without replacing FPE's trigger system.","author":{"@type":"Organization","name":"Papercraft Games"},"publisher":{"@type":"Organization","name":"Papercraft Games"},"mainEntityOfPage":"https://foldedpaperengine.com/guides/godot-trigger-system.html","proficiencyLevel":"Beginner to intermediate"}]</script><link rel="stylesheet" href="/assets/css/index.css"> <link rel="stylesheet" href="/assets/css/docs.css"> <link rel="stylesheet" href="/assets/css/guide.css"> <link rel="stylesheet" href="/assets/css/learning-guides.css"> </head> <body> <header class="header"> <a href="/"> <img class="logo" src="/assets/images/logo.png" alt="Folded Paper Engine logo"> </a> <nav class="header-nav" aria-label="Primary navigation"> <a href="/guides.html">Guides</a> <a href="/blender-panel-docs.html">Blender</a> <a href="/godot-feature-docs.html">Godot</a> <a href="/godot-api-docs.html">API</a> <a href="/youtube-tutorials.html">Tutorials</a> </nav> <div class="spacer"></div> <a class="button" href="/#download">
+Download
+<img class="dl-icon" src="/assets/images/dl-icon.png" alt="Download"> </a> <a class="button gold header-support-button" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=header&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer">
+Support FPE
+<img class="button-icon" src="/assets/images/mug-icon.png" alt=""> </a> </header> <main> <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0;"> How to Extend FPE Triggers in Godot </h1>     <article class="learning-guide"> <header class="learning-guide-hero"><nav aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/guides.html">Guides</a></nav><h1>How to Extend FPE Triggers in Godot</h1><p>FPE already turns a Blender trigger into a working Godot TrackingArea3D and dispatches its named events. Extend that system by listening to FPEEventManager in stable Godot code—not by rebuilding the Area3D or editing the imported scene.</p></header> <div class="learning-guide-body">   <div class="guide-summary"> <strong>The complete path:</strong> Blender Trigger Event → generated <code>TrackingArea3D</code> → trigger group and activation-type checks → <code>FPEEvent</code> → <code>FPEEventManager</code> → Blender Scene Event commands and your Godot listeners.
+</div> <h2>Do not rebuild the trigger in Godot</h2> <p>
+A Blender-authored FPE trigger is not merely a mesh waiting for you to add an
+<code>Area3D</code>. During import, FPE creates a <code>TrackingArea3D</code>,
+    builds its collision shape, watches for entering and exiting physics bodies,
+    handles player interaction triggers, checks the trigger groups on both
+    participants, and dispatches the configured event.
+</p> <p>
+Keep authoring the volume, activation type, participant groups, and event name
+    in Blender. Add GDScript when the named event must affect a custom Godot system
+    such as quests, achievements, analytics, save state, procedural rules, or UI.
+</p> <figure class="guide-figure guide-figure-wide"> <a href="/assets/images/guides/blender/trigger-invisible-checkboxes.png" target="_blank" aria-label="Open full-size screenshot: An invisible FPE trigger volume selected in Blender"> <img src="/assets/images/guides/blender/trigger-invisible-checkboxes.png" alt="An invisible FPE trigger volume selected in Blender" loading="lazy" decoding="async"> </a> <figcaption>The Blender object defines the trigger&#39;s location and shape. FPE creates the runtime tracking area for it in Godot.</figcaption> </figure> <h2>Give Godot a stable event contract</h2> <p>
+In Blender's <strong>Trigger Events</strong> panel, choose when the event fires
+    and give it a clear name such as <code>OPEN_WORKSHOP_DOOR</code>. The activation
+    type is important: Enter, Exit, and Interaction are different events, even
+    when they are attached to the same trigger object.
+</p> <p>
+Trigger groups decide whether the participant is allowed to activate the
+    trigger. FPE performs that check before it dispatches anything, so a Godot
+    listener receives events that have already passed the Blender-authored filter.
+</p> <figure class="guide-figure guide-figure-wide"> <a href="/assets/images/guides/blender/trigger-events-panel.png" target="_blank" aria-label="Open full-size screenshot: Trigger Events panel dispatching OPEN_WORKSHOP_DOOR for a player interaction"> <img src="/assets/images/guides/blender/trigger-events-panel.png" alt="Trigger Events panel dispatching OPEN_WORKSHOP_DOOR for a player interaction" loading="lazy" decoding="async"> </a> <figcaption>This trigger dispatches OPEN_WORKSHOP_DOOR only for the configured activation type and compatible participant group.</figcaption> </figure> <h2>Listen from GDScript</h2> <p>
+Connect to <code>FPEEventManager.GLOBAL_INSTANCE.fpe_event</code> in <code>_ready()</code>. Disconnect in <code>_exit_tree()</code> so replacing a scene or removing the
+    listener cannot leave an obsolete callback connected.
+</p> <pre><code>extends Node
+
+const OPEN_WORKSHOP_DOOR := "OPEN_WORKSHOP_DOOR"
+
+func _ready() -&gt; void:
+    var event_manager := FPEEventManager.GLOBAL_INSTANCE
+    if not event_manager.fpe_event.is_connected(_on_fpe_event):
+        event_manager.fpe_event.connect(_on_fpe_event)
+
+func _exit_tree() -&gt; void:
+    var event_manager := FPEEventManager.GLOBAL_INSTANCE
+    if event_manager \
+    and event_manager.fpe_event.is_connected(_on_fpe_event):
+        event_manager.fpe_event.disconnect(_on_fpe_event)
+
+func _on_fpe_event(event: FPEEvent) -&gt; void:
+    if event.type != OPEN_WORKSHOP_DOOR:
+        return
+
+    _record_door_opened(event.owner, event.initiator)
+
+func _record_door_opened(trigger: Node, initiator: Node) -&gt; void:
+    print(initiator.name, " opened ", trigger.name)</code></pre> <h2>Choose the listener's lifetime deliberately</h2> <p>
+Put game-wide listeners in an Autoload or beside the <code>FoldedPaperEngine</code> node in your stable Godot shell. That is appropriate for save state,
+    achievements, quest progression, and other systems that must survive level
+    replacement. A listener that belongs only to one ordinary Godot scene can
+    remain on that scene and use the same connection pattern.
+</p> <p>
+Do not attach persistent listeners beneath the FPE stage or to a generated
+    imported node. FPE replaces generated level content during loading, and edits
+    made directly inside an imported scene are not a durable extension point.
+</p> <h2>Understand what the event contains</h2> <ul> <li><code>event.type</code> is the event name authored in Blender.</li> <li><code>event.owner</code> is the trigger that dispatched the event.</li> <li><code>event.initiator</code> is the player, character, or physics object that activated it.</li> <li> <code>event.data</code> contains <code>owner_data</code> and <code>initiator_data</code> for FPE-authored trigger events. These dictionaries contain the imported
+      Blender/FPE data for each participant.
+</li> </ul> <pre><code>func _on_fpe_event(event: FPEEvent) -&gt; void:
+    if event.type != "ENTERED_GREENHOUSE":
+        return
+
+    var owner_data: Dictionary = &#123;&#125;
+    var initiator_data: Dictionary = &#123;&#125;
+
+    if event.data is Dictionary:
+        owner_data = event.data.get("owner_data", &#123;&#125;)
+        initiator_data = event.data.get("initiator_data", &#123;&#125;)
+
+    print("Trigger: ", event.owner.name)
+    print("Activated by: ", event.initiator.name)
+    print("Trigger metadata: ", owner_data)
+    print("Initiator metadata: ", initiator_data)</code></pre> <p>
+Prefer the direct node references when the object is still loaded. Use stable
+    names, IDs, and plain values from the metadata when information must survive a
+    level unload or be written into a save file.
+</p> <h2>Let Blender commands and Godot code cooperate</h2> <p>
+A matching Blender <strong>Scene Event</strong> registers an FPE event handler
+    for the same event name. When the trigger fires, that handler can play an
+    animation, switch cameras, play a speaker, load a level, or run other authored
+    commands. Your GDScript listener receives the same <code>FPEEvent</code>; adding
+    it does not replace or block the Scene Event.
+</p> <p>
+Use that deliberately. Blender can open the animated door while Godot records
+<code>workshop_door_open = true</code> in durable game state. Avoid implementing
+    the same consequence in both places, or it may run twice.
+</p> <figure class="guide-figure guide-figure-wide"> <a href="/assets/images/guides/blender/scene-events-panel.png" target="_blank" aria-label="Open full-size screenshot: Scene Events panel using the OPEN_WORKSHOP_DOOR event name"> <img src="/assets/images/guides/blender/scene-events-panel.png" alt="Scene Events panel using the OPEN_WORKSHOP_DOOR event name" loading="lazy" decoding="async"> </a> <figcaption>The Scene Event can run authored FPE commands while a Godot listener handles custom systems such as save state or achievements.</figcaption> </figure> <h2>Dispatch an FPE event from your own Godot code</h2> <p>
+Custom Godot systems can enter the same event system. Supply a meaningful type,
+    the node responsible for the event, the initiating node, and any plain data
+    your listeners need.
+</p> <pre><code>func complete_workshop_quest(player: Node) -&gt; void:
+    var event := FPEEvent.new(
+        "WORKSHOP_QUEST_COMPLETED",
+        self,
+        player,
+        &#123; "reward_kind": "brass_key", "quantity": 1 &#125;,
+    )
+
+    FPEEventManager.dispatch_event(event)</code></pre> <p>
+If Blender has a Scene Event named <code>WORKSHOP_QUEST_COMPLETED</code>, its
+    commands can respond too. This is useful when engineering logic determines
+<em>that</em> something happened while artists should still control the camera,
+    audio, animation, or level response.
+</p> <h2>Use EventHandler for reusable integrations</h2> <p>
+Connecting to <code>fpe_event</code> is the clearest choice for most game code.
+    For a reusable integration that should register for one event type, subclass
+<code>EventHandler</code> and keep the same handler instance so it can be removed
+    later.
+</p> <pre><code># workshop_door_handler.gd
+class_name WorkshopDoorHandler extends EventHandler
+
+func handle_event(event: FPEEvent) -&gt; void:
+    print("Door event from ", event.owner.name)
+
+# event_bridge.gd
+extends Node
+
+var door_handler := WorkshopDoorHandler.new()
+
+func _ready() -&gt; void:
+    FPEEventManager.add_event_handler(
+        "OPEN_WORKSHOP_DOOR",
+        door_handler,
+    )
+
+func _exit_tree() -&gt; void:
+    FPEEventManager.remove_event_handler(
+        "OPEN_WORKSHOP_DOOR",
+        door_handler,
+    )</code></pre> <p>
+This is the same handler mechanism FPE uses internally to connect Blender
+    Scene Event commands to named events. Use it for packaged systems; use the
+    global signal when a normal Godot node simply needs to observe several events.
+</p> <h2>Debug the real event path</h2> <ul> <li>
+If nothing fires, confirm the trigger's activation type and event name in
+      Blender first.
+</li> <li>
+Confirm that the trigger and initiator have compatible FPE trigger groups.
+      A mismatched contract prevents dispatch before your listener runs.
+</li> <li>
+Log <code>event.type</code>, <code>event.owner</code>, and <code>event.initiator</code> at one global listener to prove whether dispatch occurred.
+</li> <li>
+Check for spelling differences between Trigger Events, Scene Events, and
+      GDScript constants.
+</li> <li>
+Do not add a second <code>Area3D</code> merely because you cannot find one in
+      the imported file. <code>TrackingArea3D</code> is created by FPE at runtime.
+</li> </ul>   <aside class="fpe-path"><h2>The real FPE extension point</h2><p>
+FPE owns the repeatable mechanics: it turns the Blender volume into a
+<code>TrackingArea3D</code>, filters participants, and dispatches <code>FPEEvent</code> objects. Your Godot code extends the result through <code>FPEEventManager</code> while Blender Scene Events remain free to control authored animation,
+      audio, cameras, conversations, and level commands.
+</p><p> <a href="/docs/fpe-triggers-commands.html">Review triggers and commands</a>, <a href="/docs/fpe-animation-and-events.html">review animation and event behavior</a>, or <a href="/godot-api-docs.html">browse the generated FPE Godot API</a>.
+</p><div class="guide-actions"><a class="button small" href="/#download">Download FPE</a><a href="/guides.html">Browse all FPE guides and references</a></div></aside> <p class="source-note">Godot reference: <a href="https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html" target="_blank" rel="noopener noreferrer">Using signals</a></p> <nav class="related-guides" aria-labelledby="related-guides-title"><h2 id="related-guides-title">Keep building</h2><ul><li><a href="/guides/interactive-objects-godot.html">How to Add Custom Interactions to FPE Objects in Godot</a></li><li><a href="/guides/dialogue-triggers-godot.html">How to Connect Blender Triggers to Dialogue in Godot</a></li><li><a href="/guides/create-triggers-in-blender-for-godot.html">How to Create Triggers in Blender for Godot</a></li></ul></nav> </div> </article>   </main> <footer class="footer"> <a href="https://papercraft.games" target="_blank" rel="noopener noreferrer"> <img class="papercraft-logo" src="/assets/images/papercraft-games-logo.png" alt="Papercraft Games"> </a> <nav class="footer-nav" aria-label="Explore Folded Paper Engine"> <a href="/">Home</a> <a href="/blender-panel-docs.html">Blender Panels</a> <a href="/godot-feature-docs.html">Godot Features</a> <a href="/godot-api-docs.html">Godot API Docs</a> <a href="/guides.html">Guides and FPE Reference</a> <a href="/youtube-tutorials.html">Tutorials</a> </nav> <nav class="footer-nav footer-concepts" aria-label="Core Concepts"> <a href="/#instant-game-mechanics">Instant Game Mechanics</a> <a href="/blender-panel-docs.html">Blender Game Logic Panels</a> <a href="/godot-feature-docs.html">Godot Game Mechanics</a> <a href="/youtube-tutorials.html">Blender to Godot Tutorials</a> <a href="/demo.html">Playable Demo</a> </nav> <section class="footer-support" aria-labelledby="footer-support-title"> <h2 id="footer-support-title">Support Folded Paper Engine</h2> <p>Using FPE? Support ongoing development, documentation, and showcase projects.</p> <div class="footer-support-links"> <a class="button gold medium" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="button-icon" src="/assets/images/mug-icon.png" alt="">
+Ko-fi
+</a> <a class="button blue medium" href="https://github.com/sponsors/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="button-icon" src="/assets/images/github-logo.png" alt="">
+GitHub Sponsors
+</a> <a class="footer-support-text-link" href="https://github.com/papercraftgames/folded-paper-engine" target="_blank" rel="noopener noreferrer">
+GitHub Repo
+</a> </div> </section> <div class="social"> <a href="https://github.com/papercraftgames/folded-paper-engine" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/github-logo.png" alt="GitHub"> </a> <a href="https://www.youtube.com/@PapercraftGamesOfficial" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/youtube-logo.png" alt="YouTube"> </a> <a href="https://bsky.app/profile/papercraftgames.bsky.social" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/bluesky-logo.png" alt="Bluesky"> </a> <a href="https://www.facebook.com/profile.php?id=61584265860990" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/facebook-logo.png" alt="Facebook"> </a> <a href="https://www.reddit.com/user/papercraftgames" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/reddit-logo.png" alt="Reddit"> </a> <a href="https://discord.gg/gdGk2tBevz" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/discord-logo.png" alt="Discord"> </a> <a href="https://papercraft-games.itch.io/folded-paper-engine" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/itch-io-logo.png" alt="Itch.io"> </a> </div> </footer> <footer class="pickle-footer"> <div>© 2026 Folded Paper Engine. All rights reserved.</div> <a class="button gold medium" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="sponsor-icon" src="/assets/images/mug-icon.png" alt="">
+Support FPE
+</a> <div class="pickle-box"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> </div> </footer> <script src="/support-widget.js"></script> </body> </html>

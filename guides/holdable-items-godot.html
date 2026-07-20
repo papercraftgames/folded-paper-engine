@@ -1,0 +1,144 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QM9RJ9QDWL"></script><script type="application/javascript">
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+      gtag('config', 'G-QM9RJ9QDWL');
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".pickle-box img").forEach((p, i) => {
+          p.addEventListener("mouseenter", () => {
+            gtag('event', 'pickle_hover', {
+              pickle_index: i + 1,
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll(".pickle-box").forEach((pickleBox) => {
+          const pickles = Array.from(pickleBox.querySelectorAll("img"));
+          const resetPickles = () => pickles.forEach((pickle) => {
+            pickle.style.removeProperty("--pickle-scale");
+            pickle.style.removeProperty("--pickle-lift");
+          });
+
+          pickleBox.addEventListener("pointermove", (event) => {
+            pickles.forEach((pickle) => {
+              const bounds = pickle.getBoundingClientRect();
+              const center = bounds.left + bounds.width / 2;
+              const influence = Math.max(0, 1 - Math.abs(event.clientX - center) / (bounds.width * 1.55));
+              pickle.style.setProperty("--pickle-scale", String(1 + influence * 0.55));
+              pickle.style.setProperty("--pickle-lift", `${-influence * 1.65}rem`);
+            });
+          });
+          pickleBox.addEventListener("pointerleave", resetPickles);
+        });
+
+        document.querySelectorAll("[data-download-platform]").forEach((downloadButton) => {
+          if (!(downloadButton instanceof HTMLElement)) return;
+          downloadButton.addEventListener("click", () => {
+            gtag('event', 'download_fpe', {
+              event_category: 'download',
+              platform: downloadButton.dataset.downloadPlatform,
+              version: downloadButton.dataset.downloadVersion || 'unknown',
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll('a[href^="http"]').forEach((link) => {
+          if (!(link instanceof HTMLAnchorElement)) return;
+          if (link.hostname !== window.location.hostname) link.addEventListener('click', () => {
+            gtag('event', 'outbound_click', {
+              destination_host: link.hostname,
+              source_path: window.location.pathname
+            });
+          });
+        });
+
+        document.querySelectorAll('[data-guide-title]').forEach((link) => {
+          if (!(link instanceof HTMLElement)) return;
+          link.addEventListener('click', () => gtag('event', 'guide_open', {
+            guide_title: link.dataset.guideTitle,
+            source_path: window.location.pathname
+          }));
+        });
+      });
+    </script><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Turn Blender props into stackable FPE inventory pickups or physical holdable Godot objects and understand when to use each."><meta name="robots" content="index, follow, max-image-preview:large"><meta name="author" content="Papercraft Games"><meta property="og:site_name" content="Folded Paper Engine"><meta property="og:type" content="website"><meta property="og:title" content="How to Create Inventory Pickups and Holdable Items in Blender | Folded Paper Engine"><meta property="og:description" content="Turn Blender props into stackable FPE inventory pickups or physical holdable Godot objects and understand when to use each."><meta property="og:url" content="https://foldedpaperengine.com/guides/holdable-items-godot.html"><meta property="og:image" content="https://foldedpaperengine.com/assets/images/web-splash.png"><meta property="og:image:alt" content="How to Create Inventory Pickups and Holdable Items in Blender"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="How to Create Inventory Pickups and Holdable Items in Blender | Folded Paper Engine"><meta name="twitter:description" content="Turn Blender props into stackable FPE inventory pickups or physical holdable Godot objects and understand when to use each."><meta name="twitter:image" content="https://foldedpaperengine.com/assets/images/web-splash.png"><title>How to Create Inventory Pickups and Holdable Items in Blender | Folded Paper Engine</title><link rel="canonical" href="https://foldedpaperengine.com/guides/holdable-items-godot.html"><link rel="sitemap" href="/sitemap-index.xml"><link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/svg+xml" href="/icons/favicon.svg"><link rel="shortcut icon" href="/icons/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-title" content="Folded Paper Engine"><link rel="manifest" href="/icons/site.webmanifest"><script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebSite","name":"Folded Paper Engine","url":"https://foldedpaperengine.com","description":"Turn Blender props into stackable FPE inventory pickups or physical holdable Godot objects and understand when to use each."},{"@context":"https://schema.org","@type":"Organization","name":"Papercraft Games","url":"https://papercraft.games","sameAs":["https://github.com/papercraftgames/folded-paper-engine","https://www.youtube.com/@PapercraftGamesOfficial","https://bsky.app/profile/papercraftgames.bsky.social","https://www.facebook.com/profile.php?id=61584265860990","https://www.reddit.com/user/papercraftgames"]},{"@context":"https://schema.org","@type":"WebPage","name":"How to Create Inventory Pickups and Holdable Items in Blender","url":"https://foldedpaperengine.com/guides/holdable-items-godot.html","description":"Turn Blender props into stackable FPE inventory pickups or physical holdable Godot objects and understand when to use each.","image":"https://foldedpaperengine.com/assets/images/web-splash.png","isPartOf":{"@type":"WebSite","name":"Folded Paper Engine","url":"https://foldedpaperengine.com"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://foldedpaperengine.com"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://foldedpaperengine.com/guides"},{"@type":"ListItem","position":3,"name":"How to Create Inventory Pickups and Holdable Items in Blender","item":"https://foldedpaperengine.com/guides/holdable-items-godot"}]},{"@context":"https://schema.org","@type":"TechArticle","headline":"How to Create Inventory Pickups and Holdable Items in Blender","description":"Turn Blender props into stackable FPE inventory pickups or physical holdable Godot objects and understand when to use each.","author":{"@type":"Organization","name":"Papercraft Games"},"publisher":{"@type":"Organization","name":"Papercraft Games"},"mainEntityOfPage":"https://foldedpaperengine.com/guides/holdable-items-godot.html","proficiencyLevel":"Beginner to intermediate"}]</script><link rel="stylesheet" href="/assets/css/index.css"> <link rel="stylesheet" href="/assets/css/docs.css"> <link rel="stylesheet" href="/assets/css/guide.css"> <link rel="stylesheet" href="/assets/css/learning-guides.css"> </head> <body> <header class="header"> <a href="/"> <img class="logo" src="/assets/images/logo.png" alt="Folded Paper Engine logo"> </a> <nav class="header-nav" aria-label="Primary navigation"> <a href="/guides.html">Guides</a> <a href="/blender-panel-docs.html">Blender</a> <a href="/godot-feature-docs.html">Godot</a> <a href="/godot-api-docs.html">API</a> <a href="/youtube-tutorials.html">Tutorials</a> </nav> <div class="spacer"></div> <a class="button" href="/#download">
+Download
+<img class="dl-icon" src="/assets/images/dl-icon.png" alt="Download"> </a> <a class="button gold header-support-button" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=header&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer">
+Support FPE
+<img class="button-icon" src="/assets/images/mug-icon.png" alt=""> </a> </header> <main> <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0;"> How to Create Inventory Pickups and Holdable Items in Blender </h1>     <article class="learning-guide"> <header class="learning-guide-hero"><nav aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/guides.html">Guides</a></nav><h1>How to Create Inventory Pickups and Holdable Items in Blender</h1><p>An apple in a backpack and a lantern carried in front of the camera are both ‘items,’ but they solve different artistic and gameplay problems. Decide whether the object becomes data or stays a physical part of the world, then author it accordingly in Blender.</p></header> <div class="learning-guide-body"> <aside class="guide-summary"><strong>New to FPE?</strong> First install the <a href="/blender-panel-docs.html">FPE Blender addon</a> and the <a href="/godot-feature-docs.html">FPE Godot addon</a>. Prefer video? Watch <a href="https://www.youtube.com/watch?v=41J92UUPx5M&list=PLM1XlwxBilobr6XVs-7H6O_mMXAiHZEcz" target="_blank" rel="noopener noreferrer">Set Up Blender</a>, then <a href="https://www.youtube.com/watch?v=YRTf65f2L3g&list=PLM1XlwxBilobr6XVs-7H6O_mMXAiHZEcz" target="_blank" rel="noopener noreferrer">Set Up Godot</a>.</aside>  <div class="guide-summary"> <strong>Choose first:</strong> inventory pickups become an item kind plus quantity;
+    holdables remain individual physical props with shape, mass, and orientation.
+</div> <figure class="guide-figure guide-figure-wide"> <a href="/assets/images/guides/blender/inventory-settings-panel.png" target="_blank" aria-label="Open full-size screenshot: FPE Inventory Item panel showing the magic_apple kind and quantity"> <img src="/assets/images/guides/blender/inventory-settings-panel.png" alt="FPE Inventory Item panel showing the magic_apple kind and quantity" loading="lazy" decoding="async"> </a> <figcaption>Inventory items use a stable kind such as magic_apple so Godot can match the imported object to its inventory definition.</figcaption> </figure> <h2>Inventory item or holdable prop?</h2><p>
+Inventory items are abstract records that can stack and survive level
+    changes. Holdables are individual world objects with shape, mass, and
+    orientation. Use a holdable for a crate, lantern, cup, or puzzle piece.
+    Convert it into inventory data only when the design calls for putting that
+    physical object away.
+</p> <figure class="guide-figure guide-figure-wide"> <a href="/assets/images/guides/blender/holdable-object-checkbox.png" target="_blank" aria-label="Open full-size screenshot: Lantern-rigid selected in Blender with Physics and Holdable enabled"> <img src="/assets/images/guides/blender/holdable-object-checkbox.png" alt="Lantern-rigid selected in Blender with Physics and Holdable enabled" loading="lazy" decoding="async"> </a> <figcaption>A prop that remains visible in the world can be both a physics body and Holdable.</figcaption> </figure> <h2>Author the choice in Blender</h2><ol> <li>
+For a stackable pickup, check <strong>Trigger</strong>, then open <strong>Folded Paper Engine → Inventory Item</strong>. Enter an <strong>Inventory Item Kind</strong> ID such as <code>MAGIC_APPLE</code> and a starting quantity.
+</li><li>
+In Godot, add an <code>FPEInventoryConfig</code> node to the game scene. In
+      its <strong>Inventory Kinds</strong> array, create an <code>InventoryItemKind</code> resource whose <strong>id</strong> is exactly <code>MAGIC_APPLE</code>;
+      capitalization and spelling must match Blender. Set its player-facing
+      label, plural label, and stack limit, then set the player inventory size.
+      The <a href="/docs/fpe-inventory-and-holdables.html">inventory reference</a> explains every field, and the <a href="https://www.youtube.com/watch?v=taqB2UVxQUk&list=PLM1XlwxBilobr6XVs-7H6O_mMXAiHZEcz" target="_blank" rel="noopener noreferrer">Inventory Items tutorial</a> shows the complete path.
+</li><li>
+For a physical prop, add <code>-rigid</code> to its Blender object name, then
+      enable <strong>Physics</strong> and <strong>Holdable</strong>. Set mass,
+      friction, and bounciness to match the object.
+</li><li>
+For a first-person carrier, enable <strong>Can Hold Items</strong> under Player
+      Controls and tune <strong>Hold Zone Distance</strong> and <strong>Hold Zone Size</strong>.
+</li><li>
+Export and test the interaction beside walls, in corners, and with a full
+      inventory.
+</li> </ol> <figure class="guide-figure guide-figure-wide"> <a href="/assets/images/guides/blender/holdable-physics-settings.png" target="_blank" aria-label="Open full-size screenshot: Physics settings for a holdable lantern in Blender"> <img src="/assets/images/guides/blender/holdable-physics-settings.png" alt="Physics settings for a holdable lantern in Blender" loading="lazy" decoding="async"> </a> <figcaption>Give a holdable prop believable physics before testing pickup and release behavior in Godot.</figcaption> </figure> <h2>The traditional Godot workflow</h2><ol> <li>
+Make the prop a <code>RigidBody3D</code> with a simple, accurate collision
+      shape.
+</li><li>Use your normal interaction detector to select it.</li><li>
+Add a hold-zone marker in front of the player's camera.
+</li><li>
+While held, apply force or velocity toward the marker instead of assigning <code>global_position</code>.
+</li><li>
+Use a shape cast or the body's contacts to shorten the target distance
+      near walls.
+</li><li>
+On drop, restore the item's ordinary damping, gravity, collision
+      exceptions, and ownership state.
+</li> </ol> <h2>Keep the controller stable</h2><p>
+A spring-like controller works well: velocity follows the position error
+    with damping. Cap maximum force and drop the object if it becomes too
+    distant, trapped, or invalid. Heavy objects can use a weaker spring or be
+    rejected by <code>can_pick_up()</code>. Avoid changing collision layers
+    unless you have a precise reason; the wall collision is what prevents the
+    held item from becoming a camera-mounted battering ram.
+</p> <h2>Common mistakes</h2><ul> <li> <strong>Teleporting every frame:</strong> this bypasses collision and causes
+      clipping or violent corrections.
+</li><li> <strong>Parenting under the camera:</strong> a physics body no longer behaves
+      like a world object.
+</li><li> <strong>Ignoring player collision:</strong> the prop can shove or launch its
+      holder. Use a targeted collision exception while held.
+</li><li> <strong>Losing state on drop:</strong> save and restore any gravity, damping,
+      freeze, or collision values you change.
+</li> </ul>   <aside class="fpe-path"><h2>What FPE creates in Godot</h2><p>
+Enable <strong>Can Hold Items</strong> on the first-person player, choose the
+      Hold Zone distance and size, then mark the <code>-rigid</code> Blender prop
+      as <strong>Holdable</strong>. FPE's Hold Zone keeps the rigid object in
+      front of the camera while respecting other physical objects. The same zone
+      can emit available, unavailable, withdraw, and deposit trigger events for
+      prompts and puzzles.
+</p><p> <a href="https://www.youtube.com/watch?v=izeH6LC6yfs&list=PLM1XlwxBilobr6XVs-7H6O_mMXAiHZEcz" target="_blank" rel="noopener noreferrer">Watch the Holdable Items tutorial</a> or <a href="/docs/fpe-inventory-and-holdables.html">read the inventory and holdables reference</a>.
+</p><div class="guide-actions"><a class="button small" href="/#download">Download FPE</a><a href="/guides.html">Browse all FPE guides and references</a></div></aside> <p class="source-note">Godot reference: <a href="https://docs.godotengine.org/en/stable/classes/class_shapecast3d.html" target="_blank" rel="noopener noreferrer">ShapeCast3D class reference</a></p> <nav class="related-guides" aria-labelledby="related-guides-title"><h2 id="related-guides-title">Keep building</h2><ul><li><a href="/guides/create-player-in-blender-for-godot.html">How to Add a Player in Blender for Godot</a></li><li><a href="/guides/physics-objects-in-blender-for-godot.html">How to Add Physics Objects in Blender for Godot</a></li><li><a href="/guides/godot-inventory-system.html">How to Build and Extend an Inventory System in Godot</a></li></ul></nav> </div> </article>   </main> <footer class="footer"> <a href="https://papercraft.games" target="_blank" rel="noopener noreferrer"> <img class="papercraft-logo" src="/assets/images/papercraft-games-logo.png" alt="Papercraft Games"> </a> <nav class="footer-nav" aria-label="Explore Folded Paper Engine"> <a href="/">Home</a> <a href="/blender-panel-docs.html">Blender Panels</a> <a href="/godot-feature-docs.html">Godot Features</a> <a href="/godot-api-docs.html">Godot API Docs</a> <a href="/guides.html">Guides and FPE Reference</a> <a href="/youtube-tutorials.html">Tutorials</a> </nav> <nav class="footer-nav footer-concepts" aria-label="Core Concepts"> <a href="/#instant-game-mechanics">Instant Game Mechanics</a> <a href="/blender-panel-docs.html">Blender Game Logic Panels</a> <a href="/godot-feature-docs.html">Godot Game Mechanics</a> <a href="/youtube-tutorials.html">Blender to Godot Tutorials</a> <a href="/demo.html">Playable Demo</a> </nav> <section class="footer-support" aria-labelledby="footer-support-title"> <h2 id="footer-support-title">Support Folded Paper Engine</h2> <p>Using FPE? Support ongoing development, documentation, and showcase projects.</p> <div class="footer-support-links"> <a class="button gold medium" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="button-icon" src="/assets/images/mug-icon.png" alt="">
+Ko-fi
+</a> <a class="button blue medium" href="https://github.com/sponsors/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="button-icon" src="/assets/images/github-logo.png" alt="">
+GitHub Sponsors
+</a> <a class="footer-support-text-link" href="https://github.com/papercraftgames/folded-paper-engine" target="_blank" rel="noopener noreferrer">
+GitHub Repo
+</a> </div> </section> <div class="social"> <a href="https://github.com/papercraftgames/folded-paper-engine" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/github-logo.png" alt="GitHub"> </a> <a href="https://www.youtube.com/@PapercraftGamesOfficial" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/youtube-logo.png" alt="YouTube"> </a> <a href="https://bsky.app/profile/papercraftgames.bsky.social" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/bluesky-logo.png" alt="Bluesky"> </a> <a href="https://www.facebook.com/profile.php?id=61584265860990" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/facebook-logo.png" alt="Facebook"> </a> <a href="https://www.reddit.com/user/papercraftgames" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/reddit-logo.png" alt="Reddit"> </a> <a href="https://discord.gg/gdGk2tBevz" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/discord-logo.png" alt="Discord"> </a> <a href="https://papercraft-games.itch.io/folded-paper-engine" target="_blank" rel="noopener noreferrer"> <img src="/assets/images/itch-io-logo.png" alt="Itch.io"> </a> </div> </footer> <footer class="pickle-footer"> <div>© 2026 Folded Paper Engine. All rights reserved.</div> <a class="button gold medium" href="https://ko-fi.com/papercraftgames?utm_source=fpe_site&utm_medium=footer&utm_campaign=fpe_support" target="_blank" rel="noopener noreferrer"> <img class="sponsor-icon" src="/assets/images/mug-icon.png" alt="">
+Support FPE
+</a> <div class="pickle-box"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> <img src="/assets/images/pickle-icon.png" alt="A green pickle"> </div> </footer> <script src="/support-widget.js"></script> </body> </html>
