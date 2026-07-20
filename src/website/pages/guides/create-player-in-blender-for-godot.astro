@@ -1,12 +1,117 @@
 ---
 import LearningGuideLayout from "../../layouts/LearningGuideLayout.astro";
+import GuideFigure from "../../components/GuideFigure.astro";
 ---
-<LearningGuideLayout title="How to Add a Player in Blender for Godot" description="Create a correctly scaled first-person or third-person Godot player from Blender using Folded Paper Engine player and camera controls." summary="Your first magical FPE moment can be wonderfully small: select a Blender object, check Player, export the scene, and walk around your own art in Godot. Start there; polish the controller after the whole trip works." relatedSlugs={["build-levels-in-blender-for-godot","holdable-items-godot","switch-cameras-godot"]} fpeHeading="What FPE creates in Godot">
-    <div class="guide-summary"><strong>You will make:</strong> a simple Blender level containing a player marker that becomes a controllable Godot character with a working camera.</div>
-    <h2>Before you begin</h2><p>Install the <a href="/blender-panel-docs.html">Folded Paper Engine addon for Blender</a> and enable it in Blender Preferences. Then install and enable the separate <a href="/godot-feature-docs.html">Folded Paper Engine plugin for Godot</a>. In Blender, select an object and press <kbd>N</kbd> to open the sidebar; FPE controls live in the <strong>Item</strong> tab. Work at believable scale. The player object should be approximately one meter tall so movement, camera distance, triggers, and holdable props begin from sensible proportions.</p>
-    <h2>Create the player in Blender</h2><ol><li>Add a simple mesh where the player should spawn. A capsule-like placeholder or sphere is fine while you prove the workflow.</li><li>With it selected, open <strong>Item → Folded Paper Engine</strong> and check <strong>Player</strong>.</li><li>Open <strong>Player Controls</strong> and choose <strong>First Person</strong> or <strong>Third Person</strong>. Do not enable both.</li><li>Set <strong>Standard Camera Height</strong> so the view sits naturally relative to the model.</li><li>For third person, adjust <strong>Standard Camera Distance</strong> to frame the character without immediately colliding with nearby walls.</li><li>If a first-person player should carry physical props, enable <strong>Can Hold Items</strong>. Leave hold-zone tuning for the dedicated holdables guide.</li></ol>
-    <h2>Give the player somewhere safe to stand</h2><p>Create a floor mesh and add Godot's <code>-col</code> naming suffix so the imported level has collision. Place the player clearly above the floor rather than intersecting it. Keep this first test scene tiny: one floor, one player, one light, and optionally one camera.</p>
-    <h2>Export and test</h2><ol><li>Export glTF/GLB into the Godot project.</li><li>Enable <strong>Custom Properties</strong>; also export cameras and punctual lights when the scene uses them.</li><li>In Godot, let the GLB reimport, load it through the Folded Paper Engine node, and run the scene.</li><li>Confirm movement, camera height, floor collision, and spawn position before decorating the level.</li></ol>
-    <h2>If it feels wrong</h2><ul><li><strong>The player is enormous or tiny:</strong> fix scale in Blender and apply transforms before tuning movement.</li><li><strong>The player falls forever:</strong> verify the floor exported with collision and the player starts above it.</li><li><strong>No controls:</strong> confirm one control style is enabled and the Godot FPE plugin/root is active.</li><li><strong>Camera is inside the model:</strong> adjust camera height/distance or use a clean placeholder while testing.</li></ul>
-    <Fragment slot="fpe"><p>FPE reads the Player and Player Controls properties carried by the GLB and builds the corresponding runtime player, camera, and optional hold zone. The result is a starting controller—not a creative prison. Engineers can inspect the normal Godot nodes, tune the controls, or replace unique behavior while the artist keeps owning placement and repeated scene setup in Blender.</p><p><a href="/docs/fpe-characters-players-and-cameras.html">Read the player, character, and camera reference</a>.</p></Fragment>
+
+<LearningGuideLayout
+  title="How to Add a Player in Blender for Godot"
+  description="Create a correctly scaled first-person or third-person Godot player from Blender using Folded Paper Engine player and camera controls."
+  summary="Your first magical FPE moment can be wonderfully small: select a Blender object, check Player, export the scene, and walk around your own art in Godot. Start there; polish the controller after the whole trip works."
+  relatedSlugs={[
+    "build-levels-in-blender-for-godot",
+    "holdable-items-godot",
+    "switch-cameras-godot",
+  ]}
+  fpeHeading="What FPE creates in Godot"
+>
+  <div class="guide-summary">
+    <strong>You will make:</strong> a simple Blender level containing a player marker
+    that becomes a controllable Godot character with a working camera.
+  </div>
+  <h2>Before you begin</h2><p>
+    Install the <a href="/blender-panel-docs.html"
+      >Folded Paper Engine addon for Blender</a
+    > and enable it in Blender Preferences. Then install and enable the separate
+    <a href="/godot-feature-docs.html">Folded Paper Engine plugin for Godot</a>.
+    In Blender, select an object and press <kbd>N</kbd> to open the sidebar; FPE
+    controls live in the <strong>Item</strong> tab. Work at believable scale. The
+    player object should be approximately one meter tall so movement, camera distance,
+    triggers, and holdable props begin from sensible proportions.
+  </p>
+  <GuideFigure
+    src="/assets/images/guides/blender/player-marker-checkbox.png"
+    alt="PlayerMarker selected in Blender with Player checked in the FPE Item panel"
+    caption="The Player checkbox is in the Item tab of Blender's sidebar—not in Object Properties."
+    placement="panel"
+  />
+  <h2>Create the player in Blender</h2><ol>
+    <li>
+      Add a simple mesh where the player should spawn. A capsule-like
+      placeholder or sphere is fine while you prove the workflow.
+    </li><li>
+      With it selected, open <strong>Item → Folded Paper Engine</strong> and check
+      <strong>Player</strong>.
+    </li><li>
+      Open <strong>Player Controls</strong> and choose <strong
+        >First Person</strong
+      > or <strong>Third Person</strong>. Do not enable both.
+    </li><li>
+      Set <strong>Standard Camera Height</strong> so the view sits naturally relative
+      to the model.
+    </li><li>
+      For third person, adjust <strong>Standard Camera Distance</strong> to frame
+      the character without immediately colliding with nearby walls.
+    </li><li>
+      If a first-person player should carry physical props, enable <strong
+        >Can Hold Items</strong
+      >. Leave hold-zone tuning for the dedicated holdables guide.
+    </li>
+  </ol>
+  <GuideFigure
+    src="/assets/images/guides/blender/player-controls-panel.png"
+    alt="FPE Player Controls panel open beside a selected player marker in Blender"
+    caption="Player Controls exposes movement mode, camera behavior, hold-zone placement, and the rest of the generated controller setup."
+  />
+  <h2>Give the player somewhere safe to stand</h2><p>
+    Create a floor mesh and add Godot's <code>-col</code> naming suffix so the imported
+    level has collision. Place the player clearly above the floor rather than intersecting
+    it. Keep this first test scene tiny: one floor, one player, one light, and optionally
+    one camera.
+  </p>
+  <h2>Export and test</h2><ol>
+    <li>Export glTF/GLB into the Godot project.</li><li>
+      Enable <strong>Custom Properties</strong>; also export cameras and
+      punctual lights when the scene uses them.
+    </li><li>
+      In Godot, let the GLB reimport, load it through the Folded Paper Engine
+      node, and run the scene.
+    </li><li>
+      Confirm movement, camera height, floor collision, and spawn position
+      before decorating the level.
+    </li>
+  </ol>
+  <GuideFigure
+    src="/assets/images/guides/godot/cookie-beans-runtime.png"
+    alt="Playable FPE demo running in Godot with a character inside the level"
+    caption="Test the controller in the real level early; scale and camera problems are easier to diagnose before the scene is crowded."
+  />
+  <h2>If it feels wrong</h2><ul>
+    <li>
+      <strong>The player is enormous or tiny:</strong> fix scale in Blender and apply
+      transforms before tuning movement.
+    </li><li>
+      <strong>The player falls forever:</strong> verify the floor exported with collision
+      and the player starts above it.
+    </li><li>
+      <strong>No controls:</strong> confirm one control style is enabled and the
+      Godot FPE plugin/root is active.
+    </li><li>
+      <strong>Camera is inside the model:</strong> adjust camera height/distance
+      or use a clean placeholder while testing.
+    </li>
+  </ul>
+  <Fragment slot="fpe"
+    ><p>
+      FPE reads the Player and Player Controls properties carried by the GLB and
+      builds the corresponding runtime player, camera, and optional hold zone.
+      The result is a starting controller—not a creative prison. Engineers can
+      inspect the normal Godot nodes, tune the controls, or replace unique
+      behavior while the artist keeps owning placement and repeated scene setup
+      in Blender.
+    </p><p>
+      <a href="/docs/fpe-characters-players-and-cameras.html"
+        >Read the player, character, and camera reference</a
+      >.
+    </p></Fragment
+  >
 </LearningGuideLayout>

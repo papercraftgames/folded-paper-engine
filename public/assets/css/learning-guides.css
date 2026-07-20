@@ -83,6 +83,38 @@
     color: inherit;
 }
 
+.guide-figure {
+    margin: 1.75rem 0 2.25rem;
+}
+
+.guide-figure a {
+    display: block;
+    overflow: hidden;
+    border: 1px solid #cbd5e1;
+    border-radius: .8rem;
+    background: #252a32;
+    box-shadow: 0 .65rem 1.8rem rgba(23, 32, 51, .16);
+    line-height: 0;
+}
+
+.guide-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.guide-figure figcaption {
+    margin-top: .65rem;
+    color: #596579;
+    font-size: .9rem;
+    line-height: 1.5;
+}
+
+.guide-figure-panel {
+    width: min(100%, 36rem);
+    margin-inline: auto;
+}
+
 .guide-summary, .fpe-path {
     padding: 1.5rem;
     border-radius: 1rem;

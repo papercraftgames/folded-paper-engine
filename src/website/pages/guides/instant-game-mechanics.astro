@@ -1,11 +1,102 @@
 ---
 import LearningGuideLayout from "../../layouts/LearningGuideLayout.astro";
+import GuideFigure from "../../components/GuideFigure.astro";
 ---
-<LearningGuideLayout title="What Are Instant Game Mechanics?" description="Instant Game Mechanics is an FPE workflow for authoring common gameplay in Blender, importing it through glTF, and extending it naturally in Godot." summary="Instant Game Mechanics means that common gameplay setup travels with the level you are already building. You describe intent in Blender, FPE turns it into working Godot behavior, and your code stays focused on the mechanics unique to your game." relatedSlugs={["blender-to-godot-gameplay-import","build-levels-in-blender-for-godot","godot-trigger-system"]} godotSource={{label:"Available 3D formats",href:"https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/available_formats.html"}}>
-    <div class="guide-summary"><strong>It is not a separate game engine or file format.</strong> FPE is a Blender add-on plus a Godot add-on built around standard glTF. It automates repeatable mechanics and leaves ordinary Godot available underneath.</div>
-    <h2>The problem it solves</h2><p>Level work crosses an awkward boundary. A designer places a doorway, pickup, speaker, and NPC in Blender; after export, someone recreates their meaning with areas, collision shapes, scripts, groups, node paths, and inspector settings in Godot. Every layout revision risks repeating that translation.</p><p>Instant Game Mechanics moves the repeatable part into a shared authoring contract. The doorway can already say which event it fires. The pickup can already say which item kind and quantity it represents. The animation can already say when its sound or camera event happens.</p>
-    <h2>How the workflow works</h2><ol><li><strong>Build the scene in Blender.</strong> Model and place the level as usual.</li><li><strong>Describe common behavior.</strong> Use FPE panels to choose players, characters, triggers, speakers, inventory items, holdables, sub-scenes, scene settings, and animation events.</li><li><strong>Export standard glTF.</strong> Custom properties carry the authored intent as extras.</li><li><strong>Load it in Godot.</strong> The FPE node reads the scene and attaches the corresponding runtime features.</li><li><strong>Extend the result.</strong> Add custom scripts, commands, UI, or entirely unique systems in Godot.</li></ol>
-    <h2>Where it fits—and where it does not</h2><p>FPE is strongest where games repeat structural setup: interactive scenes, cozy exploration, narrative spaces, puzzles, pickups, audio cues, camera beats, and level transitions. It does not attempt to express every possible mechanic through checkboxes. A fishing system, procedural economy, or unusual creature AI still belongs in your game code. The value is arriving at that unique work with the ordinary wiring already done.</p>
-    <h2>Why standard glTF matters</h2><ul><li>Your source remains a Blender scene and your interchange remains glTF/GLB.</li><li>The Godot project contains normal nodes and scripts you can inspect.</li><li>Programmers can override generated behavior or add new feature modules.</li><li>Artists and designers can own more iteration without waiting for repetitive scene setup.</li></ul>
-    <Fragment slot="fpe"><p>Start with one small mechanic you already need. Make a trigger play a speaker, turn a prop into an inventory pickup, or add a frame event to a door animation. Once that round trip is comfortable, move a whole level's repeated setup into the Blender scene. FPE can stay a small accelerator or become the backbone of your Blender-to-Godot workflow.</p><p><a href="/guides.html#fpe-reference">Explore every FPE feature reference</a>.</p></Fragment>
+
+<LearningGuideLayout
+  title="What Are Instant Game Mechanics?"
+  description="Instant Game Mechanics is an FPE workflow for authoring common gameplay in Blender, importing it through glTF, and extending it naturally in Godot."
+  summary="Instant Game Mechanics means that common gameplay setup travels with the level you are already building. You describe intent in Blender, FPE turns it into working Godot behavior, and your code stays focused on the mechanics unique to your game."
+  relatedSlugs={[
+    "blender-to-godot-gameplay-import",
+    "build-levels-in-blender-for-godot",
+    "godot-trigger-system",
+  ]}
+  godotSource={{
+    label: "Available 3D formats",
+    href: "https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/available_formats.html",
+  }}
+>
+  <div class="guide-summary">
+    <strong>It is not a separate game engine or file format.</strong> FPE is a Blender
+    add-on plus a Godot add-on built around standard glTF. It automates repeatable
+    mechanics and leaves ordinary Godot available underneath.
+  </div>
+  <GuideFigure
+    src="/assets/images/guides/blender/player-controls-panel.png"
+    alt="Player marker selected in Blender with FPE Player Controls open"
+    caption="An artist can describe a ready-to-test player through the same Blender scene used to compose the level."
+  />
+  <h2>The problem it solves</h2><p>
+    Level work crosses an awkward boundary. A designer places a doorway, pickup,
+    speaker, and NPC in Blender; after export, someone recreates their meaning
+    with areas, collision shapes, scripts, groups, node paths, and inspector
+    settings in Godot. Every layout revision risks repeating that translation.
+  </p><p>
+    Instant Game Mechanics moves the repeatable part into a shared authoring
+    contract. The doorway can already say which event it fires. The pickup can
+    already say which item kind and quantity it represents. The animation can
+    already say when its sound or camera event happens.
+  </p>
+  <GuideFigure
+    src="/assets/images/guides/blender/trigger-events-panel.png"
+    alt="Trigger volume in Blender with its activation and named event configured"
+    caption="Mechanics stay readable in context: select the object, choose the feature, and fill in the settings that belong to it."
+  />
+  <h2>How the workflow works</h2><ol>
+    <li>
+      <strong>Build the scene in Blender.</strong> Model and place the level as usual.
+    </li><li>
+      <strong>Describe common behavior.</strong> Use FPE panels to choose players,
+      characters, triggers, speakers, inventory items, holdables, sub-scenes, scene
+      settings, and animation events.
+    </li><li>
+      <strong>Export standard glTF.</strong> Custom properties carry the authored
+      intent as extras.
+    </li><li>
+      <strong>Load it in Godot.</strong> The FPE node reads the scene and attaches
+      the corresponding runtime features.
+    </li><li>
+      <strong>Extend the result.</strong> Add custom scripts, commands, UI, or entirely
+      unique systems in Godot.
+    </li>
+  </ol>
+  <GuideFigure
+    src="/assets/images/guides/godot/cookie-beans-runtime.png"
+    alt="FPE Cookie Beans demo running as a playable Godot scene"
+    caption="The result is an ordinary Godot game that engineers can continue extending with scenes, resources, and GDScript."
+  />
+  <h2>Where it fits—and where it does not</h2><p>
+    FPE is strongest where games repeat structural setup: interactive scenes,
+    cozy exploration, narrative spaces, puzzles, pickups, audio cues, camera
+    beats, and level transitions. It does not attempt to express every possible
+    mechanic through checkboxes. A fishing system, procedural economy, or
+    unusual creature AI still belongs in your game code. The value is arriving
+    at that unique work with the ordinary wiring already done.
+  </p>
+  <h2>Why standard glTF matters</h2><ul>
+    <li>
+      Your source remains a Blender scene and your interchange remains glTF/GLB.
+    </li><li>
+      The Godot project contains normal nodes and scripts you can inspect.
+    </li><li>
+      Programmers can override generated behavior or add new feature modules.
+    </li><li>
+      Artists and designers can own more iteration without waiting for
+      repetitive scene setup.
+    </li>
+  </ul>
+  <Fragment slot="fpe"
+    ><p>
+      Start with one small mechanic you already need. Make a trigger play a
+      speaker, turn a prop into an inventory pickup, or add a frame event to a
+      door animation. Once that round trip is comfortable, move a whole level's
+      repeated setup into the Blender scene. FPE can stay a small accelerator or
+      become the backbone of your Blender-to-Godot workflow.
+    </p><p>
+      <a href="/guides.html#fpe-reference"
+        >Explore every FPE feature reference</a
+      >.
+    </p></Fragment
+  >
 </LearningGuideLayout>

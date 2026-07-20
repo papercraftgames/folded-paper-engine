@@ -1,17 +1,127 @@
 ---
 import LearningGuideLayout from "../../layouts/LearningGuideLayout.astro";
+import GuideFigure from "../../components/GuideFigure.astro";
 ---
-<LearningGuideLayout title="How to Add 3D Audio and Background Music in Blender" description="Turn Blender objects into positioned FPE speakers and author Godot level music, distance, looping, volume, and event playback." summary="Sound belongs to places and moments artists already understand: the hum lives inside the machine, the birds belong near the garden, and the music belongs to the level. Place that intent beside the art in Blender." relatedSlugs={["create-triggers-in-blender-for-godot","animation-frame-events-godot","world-settings-in-blender-for-godot"]} godotSource={{label:"AudioStreamPlayer3D class reference",href:"https://docs.godotengine.org/en/stable/classes/class_audiostreamplayer3d.html"}} fpeHeading="What FPE creates in Godot">
-    <div class="guide-summary"><strong>You will make:</strong> a Blender object that becomes a positioned Godot speaker, plus optional scene-wide background music.</div>
-    <h2>Turn an object into a speaker</h2><ol><li>Select the mesh or empty where the sound should originate.</li><li>Open <strong>Item → Folded Paper Engine</strong> and check <strong>Speaker</strong>.</li><li>Under <strong>Speaker Settings</strong>, choose the project-relative <strong>Speaker File</strong>.</li><li>Set <strong>Speaker Autoplay</strong> for ambience, <strong>Speaker Loop</strong> for continuous sound, volume in decibels, and <strong>Speaker Max Distance</strong>.</li><li>For music that belongs to the whole level, use <strong>Scene → Background Music</strong> and its volume instead of a positioned speaker.</li><li>Use triggers or frame events when playback should react to the player or animation.</li></ol>
-    <h2>Understand the Godot building blocks</h2>
-    <h2>Set up one positional sound</h2>
-    <ol><li>Add an <code>AudioStreamPlayer3D</code> beneath the object that produces the sound.</li><li>Assign an imported audio stream and preview it before adding gameplay logic.</li><li>Set <strong>Max Distance</strong> and attenuation so the sound fades naturally instead of stopping at an arbitrary wall.</li><li>Route it to a named bus such as <code>SFX</code> or <code>Ambience</code>.</li><li>Enable autoplay only for persistent ambience. Start one-shot effects in response to a signal or gameplay event.</li></ol>
-    <h2>Keep playback event-driven</h2>
-    <p>A door, trigger, or animation should request a sound by meaning—<code>DOOR_OPENED</code> or <code>FOOTSTEP</code>—rather than searching for an audio node by a fragile scene path. The owning object can decide whether to restart, ignore, or vary the sound. Use animation frame events for exact timing and trigger enter/exit events for environmental loops.</p>
-    <h2>Handle music separately</h2>
-    <p>Background music usually belongs to a level or music manager, not a 3D object. Keep one authority responsible for crossfades and duplicate prevention. Decide whether music stops at a level boundary or persists across scenes, and test that decision during rapid transitions.</p>
-    <h2>Debug silent or incorrect audio</h2>
-    <ul><li>Confirm the stream path exists and the file imported successfully.</li><li>Check the player, its bus, and the bus mute/volume controls.</li><li>For 3D sound, confirm a current camera/listener exists and the source is inside its audible distance.</li><li>Check whether autoplay is actually intended or an event never fired.</li><li>When looping, verify the stream or player is configured to loop and that an exit event stops it.</li></ul>
-    <Fragment slot="fpe"><p>Mark a Blender object as a <strong>Speaker</strong>, set its Godot audio path, autoplay, loop, volume, and maximum distance, then export the GLB. FPE creates the positional player and cleans it up with the imported node. For level music, set <strong>Background Music</strong> in Scene Settings. Triggers, frame events, and Scene Event commands can start or stop speakers without object-specific scripts.</p><p><a href="/docs/fpe-audio.html">Read the complete FPE audio reference</a>.</p></Fragment>
+
+<LearningGuideLayout
+  title="How to Add 3D Audio and Background Music in Blender"
+  description="Turn Blender objects into positioned FPE speakers and author Godot level music, distance, looping, volume, and event playback."
+  summary="Sound belongs to places and moments artists already understand: the hum lives inside the machine, the birds belong near the garden, and the music belongs to the level. Place that intent beside the art in Blender."
+  relatedSlugs={[
+    "create-triggers-in-blender-for-godot",
+    "animation-frame-events-godot",
+    "world-settings-in-blender-for-godot",
+  ]}
+  godotSource={{
+    label: "AudioStreamPlayer3D class reference",
+    href: "https://docs.godotengine.org/en/stable/classes/class_audiostreamplayer3d.html",
+  }}
+  fpeHeading="What FPE creates in Godot"
+>
+  <div class="guide-summary">
+    <strong>You will make:</strong> a Blender object that becomes a positioned Godot
+    speaker, plus optional scene-wide background music.
+  </div>
+  <GuideFigure
+    src="/assets/images/guides/blender/speaker-checkbox.png"
+    alt="WorkshopRadio selected in Blender with the Speaker checkbox enabled"
+    caption="Select the sound source and enable Speaker in Blender's FPE Item panel."
+  />
+  <h2>Turn an object into a speaker</h2><ol>
+    <li>Select the mesh or empty where the sound should originate.</li><li>
+      Open <strong>Item → Folded Paper Engine</strong> and check <strong
+        >Speaker</strong
+      >.
+    </li><li>
+      Under <strong>Speaker Settings</strong>, choose the project-relative <strong
+        >Speaker File</strong
+      >.
+    </li><li>
+      Set <strong>Speaker Autoplay</strong> for ambience, <strong
+        >Speaker Loop</strong
+      > for continuous sound, volume in decibels, and <strong
+        >Speaker Max Distance</strong
+      >.
+    </li><li>
+      For music that belongs to the whole level, use <strong
+        >Scene → Background Music</strong
+      > and its volume instead of a positioned speaker.
+    </li><li>
+      Use triggers or frame events when playback should react to the player or
+      animation.
+    </li>
+  </ol>
+  <GuideFigure
+    src="/assets/images/guides/blender/speaker-settings-panel.png"
+    alt="FPE Speaker Settings showing an audio file loop autoplay volume and distance"
+    caption="Speaker Settings keeps the sound file and its spatial playback choices beside the object that emits it."
+  />
+  <h2>Understand the Godot building blocks</h2>
+  <h2>Set up one positional sound</h2>
+  <ol>
+    <li>
+      Add an <code>AudioStreamPlayer3D</code> beneath the object that produces the
+      sound.
+    </li><li>
+      Assign an imported audio stream and preview it before adding gameplay
+      logic.
+    </li><li>
+      Set <strong>Max Distance</strong> and attenuation so the sound fades naturally
+      instead of stopping at an arbitrary wall.
+    </li><li>
+      Route it to a named bus such as <code>SFX</code> or <code>Ambience</code>.
+    </li><li>
+      Enable autoplay only for persistent ambience. Start one-shot effects in
+      response to a signal or gameplay event.
+    </li>
+  </ol>
+  <h2>Keep playback event-driven</h2>
+  <p>
+    A door, trigger, or animation should request a sound by meaning—<code
+      >DOOR_OPENED</code
+    > or <code>FOOTSTEP</code>—rather than searching for an audio node by a
+    fragile scene path. The owning object can decide whether to restart, ignore,
+    or vary the sound. Use animation frame events for exact timing and trigger
+    enter/exit events for environmental loops.
+  </p>
+  <GuideFigure
+    src="/assets/images/guides/blender/scene-settings-panel.png"
+    alt="FPE Scene Settings showing world and background music controls"
+    caption="Background music belongs to the Blender Scene panel; positional sound belongs to a Speaker object."
+  />
+  <h2>Handle music separately</h2>
+  <p>
+    Background music usually belongs to a level or music manager, not a 3D
+    object. Keep one authority responsible for crossfades and duplicate
+    prevention. Decide whether music stops at a level boundary or persists
+    across scenes, and test that decision during rapid transitions.
+  </p>
+  <h2>Debug silent or incorrect audio</h2>
+  <ul>
+    <li>
+      Confirm the stream path exists and the file imported successfully.
+    </li><li>
+      Check the player, its bus, and the bus mute/volume controls.
+    </li><li>
+      For 3D sound, confirm a current camera/listener exists and the source is
+      inside its audible distance.
+    </li><li>
+      Check whether autoplay is actually intended or an event never fired.
+    </li><li>
+      When looping, verify the stream or player is configured to loop and that
+      an exit event stops it.
+    </li>
+  </ul>
+  <Fragment slot="fpe"
+    ><p>
+      Mark a Blender object as a <strong>Speaker</strong>, set its Godot audio
+      path, autoplay, loop, volume, and maximum distance, then export the GLB.
+      FPE creates the positional player and cleans it up with the imported node.
+      For level music, set <strong>Background Music</strong> in Scene Settings. Triggers,
+      frame events, and Scene Event commands can start or stop speakers without object-specific
+      scripts.
+    </p><p>
+      <a href="/docs/fpe-audio.html">Read the complete FPE audio reference</a>.
+    </p></Fragment
+  >
 </LearningGuideLayout>

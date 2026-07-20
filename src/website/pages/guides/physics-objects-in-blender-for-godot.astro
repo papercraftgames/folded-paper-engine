@@ -1,11 +1,114 @@
 ---
 import LearningGuideLayout from "../../layouts/LearningGuideLayout.astro";
+import GuideFigure from "../../components/GuideFigure.astro";
 ---
-<LearningGuideLayout title="How to Add Physics Objects in Blender for Godot" description="Configure Blender objects for Godot physics with FPE mass, friction, bounciness, collision, and continuous collision detection settings." summary="Physics is where a pretty prop starts feeling like part of the world. A mug should settle, a rubber ball should bounce, and a heavy crate should resist being shoved. Author those material expectations beside the object itself." relatedSlugs={["holdable-items-godot","build-levels-in-blender-for-godot","interactive-objects-godot"]} fpeHeading="What FPE creates in Godot">
-    <div class="guide-summary"><strong>You will make:</strong> a Blender prop that imports as a physical Godot object with intentional weight, grip, bounce, and collision behavior.</div>
-    <h2>First, make it a physics body</h2><p>The FPE <strong>Physics</strong> checkbox does not turn an ordinary mesh into a rigid body. Godot's standard glTF importer decides the node and collider type from the Blender object name.</p><ol><li>Work at real-world scale, apply scale, and set the origin where rotation and balance make sense.</li><li>For a movable prop, add <code>-rigid</code> to the Blender object name—for example, <code>Teacup-rigid</code>. Godot imports it as a <code>RigidBody3D</code> with collision.</li><li>For immovable level geometry, use <code>-col</code> for a visible mesh with static collision. Godot also supports <code>-convcol</code>, <code>-colonly</code>, and <code>-convcolonly</code> for other collider needs.</li><li>Only after choosing the body type, open Blender's <strong>Item → Folded Paper Engine</strong> panel and check <strong>Physics</strong>. That exposes the FPE material and motion settings applied to the imported physics body.</li></ol>
-    <h2>Describe how the prop should feel</h2><ul><li><strong>Mass:</strong> controls inertia. Start with a plausible value and compare related props rather than chasing perfect simulation.</li><li><strong>Friction:</strong> increase it for grippy crates and reduce it for slippery objects.</li><li><strong>Bounciness:</strong> keep ordinary furniture low; raise it deliberately for balls or playful props.</li><li><strong>Continuous Collision Detection:</strong> enable it for small or fast objects that could otherwise pass through thin colliders.</li></ul>
-    <h2>Export a tiny physics test</h2><ol><li>Place the prop above a collidable floor.</li><li>Export with <strong>Custom Properties</strong> enabled.</li><li>Load the GLB through FPE and let the object fall.</li><li>Check resting orientation, sliding, bounce, tunneling, and scale.</li><li>Change one property at a time in Blender and re-export until the result communicates the material you imagined.</li></ol>
-    <h2>Common problems</h2><ul><li><strong>Explodes or spins wildly:</strong> inspect overlapping collision, origin placement, scale, and spawn position.</li><li><strong>Falls through the floor:</strong> verify both objects have collision; use continuous detection only when speed or size justifies it.</li><li><strong>Everything feels weightless:</strong> check scale first, then compare mass and damping in Godot.</li><li><strong>Imported edits disappear:</strong> fix authored physics in Blender or a stable extension, not inside the generated scene.</li></ul>
-    <Fragment slot="fpe"><p>Godot's standard name suffix creates the physics body and collision. FPE then applies the Blender-authored mass and continuous collision detection to rigid bodies, plus friction and bounciness to supported physics bodies. You can combine a <code>-rigid</code> prop with <strong>Holdable</strong> for first-person carrying.</p><p><a href="https://docs.godotengine.org/en/4.5/tutorials/assets_pipeline/importing_3d_scenes/node_type_customization.html" target="_blank" rel="noopener noreferrer">Read Godot's official import-suffix reference</a> and the <a href="/docs/fpe-physics-and-colliders.html">FPE physics and collider reference</a>.</p></Fragment>
+
+<LearningGuideLayout
+  title="How to Add Physics Objects in Blender for Godot"
+  description="Configure Blender objects for Godot physics with FPE mass, friction, bounciness, collision, and continuous collision detection settings."
+  summary="Physics is where a pretty prop starts feeling like part of the world. A mug should settle, a rubber ball should bounce, and a heavy crate should resist being shoved. Author those material expectations beside the object itself."
+  relatedSlugs={[
+    "holdable-items-godot",
+    "build-levels-in-blender-for-godot",
+    "interactive-objects-godot",
+  ]}
+  fpeHeading="What FPE creates in Godot"
+>
+  <div class="guide-summary">
+    <strong>You will make:</strong> a Blender prop that imports as a physical Godot
+    object with intentional weight, grip, bounce, and collision behavior.
+  </div>
+  <GuideFigure
+    src="/assets/images/guides/blender/physics-object-checkbox.png"
+    alt="Teacup-rigid selected in Blender with the FPE Physics checkbox enabled"
+    caption="Keep Godot's supported -rigid name suffix and enable Physics in FPE when you also need authored body settings."
+  />
+  <h2>First, make it a physics body</h2><p>
+    The FPE <strong>Physics</strong> checkbox does not turn an ordinary mesh into
+    a rigid body. Godot's standard glTF importer decides the node and collider type
+    from the Blender object name.
+  </p><ol>
+    <li>
+      Work at real-world scale, apply scale, and set the origin where rotation
+      and balance make sense.
+    </li><li>
+      For a movable prop, add <code>-rigid</code> to the Blender object name—for
+      example, <code>Teacup-rigid</code>. Godot imports it as a <code
+        >RigidBody3D</code
+      > with collision.
+    </li><li>
+      For immovable level geometry, use <code>-col</code> for a visible mesh with
+      static collision. Godot also supports <code>-convcol</code>, <code
+        >-colonly</code
+      >, and <code>-convcolonly</code> for other collider needs.
+    </li><li>
+      Only after choosing the body type, open Blender's <strong
+        >Item → Folded Paper Engine</strong
+      > panel and check <strong>Physics</strong>. That exposes the FPE material
+      and motion settings applied to the imported physics body.
+    </li>
+  </ol>
+  <GuideFigure
+    src="/assets/images/guides/blender/physics-settings-panel.png"
+    alt="FPE Physics panel showing mass friction bounce and continuous collision detection"
+    caption="Tune physical behavior in Blender: this light teacup uses modest friction, very little bounce, and continuous collision detection."
+  />
+  <h2>Describe how the prop should feel</h2><ul>
+    <li>
+      <strong>Mass:</strong> controls inertia. Start with a plausible value and compare
+      related props rather than chasing perfect simulation.
+    </li><li>
+      <strong>Friction:</strong> increase it for grippy crates and reduce it for
+      slippery objects.
+    </li><li>
+      <strong>Bounciness:</strong> keep ordinary furniture low; raise it deliberately
+      for balls or playful props.
+    </li><li>
+      <strong>Continuous Collision Detection:</strong> enable it for small or fast
+      objects that could otherwise pass through thin colliders.
+    </li>
+  </ul>
+  <h2>Export a tiny physics test</h2><ol>
+    <li>Place the prop above a collidable floor.</li><li>
+      Export with <strong>Custom Properties</strong> enabled.
+    </li><li>Load the GLB through FPE and let the object fall.</li><li>
+      Check resting orientation, sliding, bounce, tunneling, and scale.
+    </li><li>
+      Change one property at a time in Blender and re-export until the result
+      communicates the material you imagined.
+    </li>
+  </ol>
+  <h2>Common problems</h2><ul>
+    <li>
+      <strong>Explodes or spins wildly:</strong> inspect overlapping collision, origin
+      placement, scale, and spawn position.
+    </li><li>
+      <strong>Falls through the floor:</strong> verify both objects have collision;
+      use continuous detection only when speed or size justifies it.
+    </li><li>
+      <strong>Everything feels weightless:</strong> check scale first, then compare
+      mass and damping in Godot.
+    </li><li>
+      <strong>Imported edits disappear:</strong> fix authored physics in Blender
+      or a stable extension, not inside the generated scene.
+    </li>
+  </ul>
+  <Fragment slot="fpe"
+    ><p>
+      Godot's standard name suffix creates the physics body and collision. FPE
+      then applies the Blender-authored mass and continuous collision detection
+      to rigid bodies, plus friction and bounciness to supported physics bodies.
+      You can combine a <code>-rigid</code> prop with <strong>Holdable</strong> for
+      first-person carrying.
+    </p><p>
+      <a
+        href="https://docs.godotengine.org/en/4.5/tutorials/assets_pipeline/importing_3d_scenes/node_type_customization.html"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Read Godot's official import-suffix reference</a
+      > and the <a href="/docs/fpe-physics-and-colliders.html"
+        >FPE physics and collider reference</a
+      >.
+    </p></Fragment
+  >
 </LearningGuideLayout>
