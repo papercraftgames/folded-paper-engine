@@ -1,11 +1,108 @@
 ---
 import LearningGuideLayout from "../../layouts/LearningGuideLayout.astro";
+import GuideFigure from "../../components/GuideFigure.astro";
 ---
-<LearningGuideLayout title="How FPE Turns Blender Properties into Godot Gameplay" description="Understand how FPE carries artist-authored Blender properties through glTF and turns them into inspectable, extensible Godot mechanics." summary="A 3D scene can carry more than meshes and materials. With a disciplined metadata contract, the same export can describe which objects are triggers, players, speakers, pickups, or level entrances—and Godot can build the repeated setup automatically." relatedSlugs={["build-levels-in-blender-for-godot","blender-godot-import-troubleshooting","instant-game-mechanics"]} godotSource={{label:"Import configuration",href:"https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/import_configuration.html"}}>
-    <div class="guide-summary"><strong>How it works:</strong> author custom properties in Blender, export them as glTF extras, preserve or translate them during Godot import, then let a small runtime factory attach the right nodes and behavior.</div>
-    <h2>Why import gameplay intent?</h2><p>Without an authored contract, every export creates a cleanup list: rebuild trigger areas, assign collision, reconnect audio, mark spawn points, and repeat scene settings. That manual pass is tolerable for one prop and expensive for a changing level. Metadata makes the level itself the source of truth for repeated mechanics.</p>
-    <h2>The native Blender and Godot path</h2><ol><li>Define a small, versioned vocabulary such as <code>gameplay_type</code>, <code>event_id</code>, and <code>item_kind</code>.</li><li>Add those values as Blender custom properties on the scene or object that owns the intent.</li><li>Export glTF 2.0 or GLB with <strong>Custom Properties</strong> enabled.</li><li>In Godot's scene importer, use a <code>GLTFDocumentExtension</code> or editor import plugin to translate extras into node metadata or generated children.</li><li>Keep the runtime transformation deterministic: the same metadata should always produce the same scene structure.</li></ol>
-    <h2>Design a stable contract</h2><p>Prefer domain values over implementation names. <code>gameplay_type = "trigger"</code> survives a refactor from one Area3D subclass to another; <code>godot_class = "TrackingArea3D"</code> leaks the current runtime into your Blender file. Validate unknown fields and versions loudly so a typo does not quietly ship an inert object.</p>
-    <h2>Common mistakes</h2><ul><li><strong>Forgetting Custom Properties:</strong> the geometry arrives, but all authored behavior disappears.</li><li><strong>Editing the generated import:</strong> reimporting can overwrite manual changes. Extend through stable child scenes, scripts, or post-import hooks.</li><li><strong>Using display names as identity:</strong> object names change. Use explicit IDs for cross-object references.</li><li><strong>Moving unique game logic into Blender:</strong> metadata should declare intent; Godot should implement behavior.</li></ul>
-    <Fragment slot="fpe"><p>FPE provides the property vocabulary, Blender panels, glTF extras importer, and Godot runtime factories as one system. Check boxes and fill ordinary fields such as <strong>Sky Color</strong>, <strong>Trigger</strong>, <strong>Inventory Item Kind</strong>, or <strong>Frame Event</strong>; export standard GLB; then point a <code>FoldedPaperEngine</code> node at the file. You can still extend or replace the resulting behavior in Godot because the exchange format remains standard glTF.</p><p><a href="/docs/fpe-pipeline.html">Read the import and runtime reference</a>.</p></Fragment>
+
+<LearningGuideLayout
+  title="How FPE Turns Blender Properties into Godot Gameplay"
+  description="Understand how FPE carries artist-authored Blender properties through glTF and turns them into inspectable, extensible Godot mechanics."
+  summary="A 3D scene can carry more than meshes and materials. With a disciplined metadata contract, the same export can describe which objects are triggers, players, speakers, pickups, or level entrances—and Godot can build the repeated setup automatically."
+  relatedSlugs={[
+    "build-levels-in-blender-for-godot",
+    "blender-godot-import-troubleshooting",
+    "instant-game-mechanics",
+  ]}
+  godotSource={{
+    label: "Import configuration",
+    href: "https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/import_configuration.html",
+  }}
+>
+  <div class="guide-summary">
+    <strong>How it works:</strong> author custom properties in Blender, export them
+    as glTF extras, preserve or translate them during Godot import, then let a small
+    runtime factory attach the right nodes and behavior.
+  </div>
+  <GuideFigure
+    src="/assets/images/guides/blender/trigger-events-panel.png"
+    alt="A selected Blender trigger with authored FPE event settings"
+    caption="FPE records gameplay intent beside the object: this volume identifies its activator, interaction type, and event name."
+  />
+  <h2>Why import gameplay intent?</h2><p>
+    Without an authored contract, every export creates a cleanup list: rebuild
+    trigger areas, assign collision, reconnect audio, mark spawn points, and
+    repeat scene settings. That manual pass is tolerable for one prop and
+    expensive for a changing level. Metadata makes the level itself the source
+    of truth for repeated mechanics.
+  </p>
+  <GuideFigure
+    src="/assets/images/guides/godot/fpe-stage-editor.png"
+    alt="Godot editor showing a Stage scene with the FoldedPaperEngine node"
+    caption="In Godot, the stable Stage scene owns the FoldedPaperEngine node while imported content remains replaceable."
+  />
+  <GuideFigure
+    src="/assets/images/guides/blender/gltf-custom-properties-export.png"
+    alt="Blender glTF export dialog with Custom Properties enabled under Include"
+    caption="Custom Properties is the export switch that carries FPE's authored intent into standard glTF metadata."
+  />
+  <h2>The native Blender and Godot path</h2><ol>
+    <li>
+      Define a small, versioned vocabulary such as <code>gameplay_type</code>, <code
+        >event_id</code
+      >, and <code>item_kind</code>.
+    </li><li>
+      Add those values as Blender custom properties on the scene or object that
+      owns the intent.
+    </li><li>
+      Export glTF 2.0 or GLB with <strong>Custom Properties</strong> enabled.
+    </li><li>
+      In Godot's scene importer, use a <code>GLTFDocumentExtension</code> or editor
+      import plugin to translate extras into node metadata or generated children.
+    </li><li>
+      Keep the runtime transformation deterministic: the same metadata should
+      always produce the same scene structure.
+    </li>
+  </ol>
+  <GuideFigure
+    src="/assets/images/guides/blender/inventory-settings-panel.png"
+    alt="FPE Inventory Item settings using the stable kind magic_apple"
+    caption="Use compact stable identifiers for data that must match in both applications; inventory kind is one concrete example."
+  />
+  <h2>Design a stable contract</h2><p>
+    Prefer domain values over implementation names. <code
+      >gameplay_type = "trigger"</code
+    > survives a refactor from one Area3D subclass to another; <code
+      >godot_class = "TrackingArea3D"</code
+    > leaks the current runtime into your Blender file. Validate unknown fields and
+    versions loudly so a typo does not quietly ship an inert object.
+  </p>
+  <h2>Common mistakes</h2><ul>
+    <li>
+      <strong>Forgetting Custom Properties:</strong> the geometry arrives, but all
+      authored behavior disappears.
+    </li><li>
+      <strong>Editing the generated import:</strong> reimporting can overwrite manual
+      changes. Extend through stable child scenes, scripts, or post-import hooks.
+    </li><li>
+      <strong>Using display names as identity:</strong> object names change. Use
+      explicit IDs for cross-object references.
+    </li><li>
+      <strong>Moving unique game logic into Blender:</strong> metadata should declare
+      intent; Godot should implement behavior.
+    </li>
+  </ul>
+  <Fragment slot="fpe"
+    ><p>
+      FPE provides the property vocabulary, Blender panels, glTF extras
+      importer, and Godot runtime factories as one system. Check boxes and fill
+      ordinary fields such as <strong>Sky Color</strong>, <strong
+        >Trigger</strong
+      >, <strong>Inventory Item Kind</strong>, or <strong>Frame Event</strong>;
+      export standard GLB; then point a <code>FoldedPaperEngine</code> node at the
+      file. You can still extend or replace the resulting behavior in Godot because
+      the exchange format remains standard glTF.
+    </p><p>
+      <a href="/docs/fpe-pipeline.html">Read the import and runtime reference</a
+      >.
+    </p></Fragment
+  >
 </LearningGuideLayout>

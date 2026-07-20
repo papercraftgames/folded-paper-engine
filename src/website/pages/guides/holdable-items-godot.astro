@@ -1,12 +1,141 @@
 ---
 import LearningGuideLayout from "../../layouts/LearningGuideLayout.astro";
+import GuideFigure from "../../components/GuideFigure.astro";
 ---
-<LearningGuideLayout title="How to Create Inventory Pickups and Holdable Items in Blender" description="Turn Blender props into stackable FPE inventory pickups or physical holdable Godot objects and understand when to use each." summary="An apple in a backpack and a lantern carried in front of the camera are both ‘items,’ but they solve different artistic and gameplay problems. Decide whether the object becomes data or stays a physical part of the world, then author it accordingly in Blender." relatedSlugs={["create-player-in-blender-for-godot","physics-objects-in-blender-for-godot","godot-inventory-system"]} godotSource={{label:"ShapeCast3D class reference",href:"https://docs.godotengine.org/en/stable/classes/class_shapecast3d.html"}} fpeHeading="What FPE creates in Godot">
-    <div class="guide-summary"><strong>Choose first:</strong> inventory pickups become an item kind plus quantity; holdables remain individual physical props with shape, mass, and orientation.</div>
-    <h2>Inventory item or holdable prop?</h2><p>Inventory items are abstract records that can stack and survive level changes. Holdables are individual world objects with shape, mass, and orientation. Use a holdable for a crate, lantern, cup, or puzzle piece. Convert it into inventory data only when the design calls for putting that physical object away.</p>
-    <h2>Author the choice in Blender</h2><ol><li>For a stackable pickup, check <strong>Trigger</strong>, then open <strong>Folded Paper Engine → Inventory Item</strong>. Enter an <strong>Inventory Item Kind</strong> ID such as <code>MAGIC_APPLE</code> and a starting quantity.</li><li>In Godot, add an <code>FPEInventoryConfig</code> node to the game scene. In its <strong>Inventory Kinds</strong> array, create an <code>InventoryItemKind</code> resource whose <strong>id</strong> is exactly <code>MAGIC_APPLE</code>; capitalization and spelling must match Blender. Set its player-facing label, plural label, and stack limit, then set the player inventory size. The <a href="/docs/fpe-inventory-and-holdables.html">inventory reference</a> explains every field, and the <a href="https://www.youtube.com/watch?v=taqB2UVxQUk&list=PLM1XlwxBilobr6XVs-7H6O_mMXAiHZEcz" target="_blank" rel="noopener noreferrer">Inventory Items tutorial</a> shows the complete path.</li><li>For a physical prop, add <code>-rigid</code> to its Blender object name, then enable <strong>Physics</strong> and <strong>Holdable</strong>. Set mass, friction, and bounciness to match the object.</li><li>For a first-person carrier, enable <strong>Can Hold Items</strong> under Player Controls and tune <strong>Hold Zone Distance</strong> and <strong>Hold Zone Size</strong>.</li><li>Export and test the interaction beside walls, in corners, and with a full inventory.</li></ol>
-    <h2>The traditional Godot workflow</h2><ol><li>Make the prop a <code>RigidBody3D</code> with a simple, accurate collision shape.</li><li>Use your normal interaction detector to select it.</li><li>Add a hold-zone marker in front of the player's camera.</li><li>While held, apply force or velocity toward the marker instead of assigning <code>global_position</code>.</li><li>Use a shape cast or the body's contacts to shorten the target distance near walls.</li><li>On drop, restore the item's ordinary damping, gravity, collision exceptions, and ownership state.</li></ol>
-    <h2>Keep the controller stable</h2><p>A spring-like controller works well: velocity follows the position error with damping. Cap maximum force and drop the object if it becomes too distant, trapped, or invalid. Heavy objects can use a weaker spring or be rejected by <code>can_pick_up()</code>. Avoid changing collision layers unless you have a precise reason; the wall collision is what prevents the held item from becoming a camera-mounted battering ram.</p>
-    <h2>Common mistakes</h2><ul><li><strong>Teleporting every frame:</strong> this bypasses collision and causes clipping or violent corrections.</li><li><strong>Parenting under the camera:</strong> a physics body no longer behaves like a world object.</li><li><strong>Ignoring player collision:</strong> the prop can shove or launch its holder. Use a targeted collision exception while held.</li><li><strong>Losing state on drop:</strong> save and restore any gravity, damping, freeze, or collision values you change.</li></ul>
-    <Fragment slot="fpe"><p>Enable <strong>Can Hold Items</strong> on the first-person player, choose the Hold Zone distance and size, then mark the <code>-rigid</code> Blender prop as <strong>Holdable</strong>. FPE's Hold Zone keeps the rigid object in front of the camera while respecting other physical objects. The same zone can emit available, unavailable, withdraw, and deposit trigger events for prompts and puzzles.</p><p><a href="https://www.youtube.com/watch?v=izeH6LC6yfs&list=PLM1XlwxBilobr6XVs-7H6O_mMXAiHZEcz" target="_blank" rel="noopener noreferrer">Watch the Holdable Items tutorial</a> or <a href="/docs/fpe-inventory-and-holdables.html">read the inventory and holdables reference</a>.</p></Fragment>
+
+<LearningGuideLayout
+  title="How to Create Inventory Pickups and Holdable Items in Blender"
+  description="Turn Blender props into stackable FPE inventory pickups or physical holdable Godot objects and understand when to use each."
+  summary="An apple in a backpack and a lantern carried in front of the camera are both ‘items,’ but they solve different artistic and gameplay problems. Decide whether the object becomes data or stays a physical part of the world, then author it accordingly in Blender."
+  relatedSlugs={[
+    "create-player-in-blender-for-godot",
+    "physics-objects-in-blender-for-godot",
+    "godot-inventory-system",
+  ]}
+  godotSource={{
+    label: "ShapeCast3D class reference",
+    href: "https://docs.godotengine.org/en/stable/classes/class_shapecast3d.html",
+  }}
+  fpeHeading="What FPE creates in Godot"
+>
+  <div class="guide-summary">
+    <strong>Choose first:</strong> inventory pickups become an item kind plus quantity;
+    holdables remain individual physical props with shape, mass, and orientation.
+  </div>
+  <GuideFigure
+    src="/assets/images/guides/blender/inventory-settings-panel.png"
+    alt="FPE Inventory Item panel showing the magic_apple kind and quantity"
+    caption="Inventory items use a stable kind such as magic_apple so Godot can match the imported object to its inventory definition."
+  />
+  <h2>Inventory item or holdable prop?</h2><p>
+    Inventory items are abstract records that can stack and survive level
+    changes. Holdables are individual world objects with shape, mass, and
+    orientation. Use a holdable for a crate, lantern, cup, or puzzle piece.
+    Convert it into inventory data only when the design calls for putting that
+    physical object away.
+  </p>
+  <GuideFigure
+    src="/assets/images/guides/blender/holdable-object-checkbox.png"
+    alt="Lantern-rigid selected in Blender with Physics and Holdable enabled"
+    caption="A prop that remains visible in the world can be both a physics body and Holdable."
+  />
+  <h2>Author the choice in Blender</h2><ol>
+    <li>
+      For a stackable pickup, check <strong>Trigger</strong>, then open <strong
+        >Folded Paper Engine → Inventory Item</strong
+      >. Enter an <strong>Inventory Item Kind</strong> ID such as <code
+        >MAGIC_APPLE</code
+      > and a starting quantity.
+    </li><li>
+      In Godot, add an <code>FPEInventoryConfig</code> node to the game scene. In
+      its <strong>Inventory Kinds</strong> array, create an <code
+        >InventoryItemKind</code
+      > resource whose <strong>id</strong> is exactly <code>MAGIC_APPLE</code>;
+      capitalization and spelling must match Blender. Set its player-facing
+      label, plural label, and stack limit, then set the player inventory size.
+      The <a href="/docs/fpe-inventory-and-holdables.html"
+        >inventory reference</a
+      > explains every field, and the <a
+        href="https://www.youtube.com/watch?v=taqB2UVxQUk&list=PLM1XlwxBilobr6XVs-7H6O_mMXAiHZEcz"
+        target="_blank"
+        rel="noopener noreferrer">Inventory Items tutorial</a
+      > shows the complete path.
+    </li><li>
+      For a physical prop, add <code>-rigid</code> to its Blender object name, then
+      enable <strong>Physics</strong> and <strong>Holdable</strong>. Set mass,
+      friction, and bounciness to match the object.
+    </li><li>
+      For a first-person carrier, enable <strong>Can Hold Items</strong> under Player
+      Controls and tune <strong>Hold Zone Distance</strong> and <strong
+        >Hold Zone Size</strong
+      >.
+    </li><li>
+      Export and test the interaction beside walls, in corners, and with a full
+      inventory.
+    </li>
+  </ol>
+  <GuideFigure
+    src="/assets/images/guides/blender/holdable-physics-settings.png"
+    alt="Physics settings for a holdable lantern in Blender"
+    caption="Give a holdable prop believable physics before testing pickup and release behavior in Godot."
+  />
+  <h2>The traditional Godot workflow</h2><ol>
+    <li>
+      Make the prop a <code>RigidBody3D</code> with a simple, accurate collision
+      shape.
+    </li><li>Use your normal interaction detector to select it.</li><li>
+      Add a hold-zone marker in front of the player's camera.
+    </li><li>
+      While held, apply force or velocity toward the marker instead of assigning <code
+        >global_position</code
+      >.
+    </li><li>
+      Use a shape cast or the body's contacts to shorten the target distance
+      near walls.
+    </li><li>
+      On drop, restore the item's ordinary damping, gravity, collision
+      exceptions, and ownership state.
+    </li>
+  </ol>
+  <h2>Keep the controller stable</h2><p>
+    A spring-like controller works well: velocity follows the position error
+    with damping. Cap maximum force and drop the object if it becomes too
+    distant, trapped, or invalid. Heavy objects can use a weaker spring or be
+    rejected by <code>can_pick_up()</code>. Avoid changing collision layers
+    unless you have a precise reason; the wall collision is what prevents the
+    held item from becoming a camera-mounted battering ram.
+  </p>
+  <h2>Common mistakes</h2><ul>
+    <li>
+      <strong>Teleporting every frame:</strong> this bypasses collision and causes
+      clipping or violent corrections.
+    </li><li>
+      <strong>Parenting under the camera:</strong> a physics body no longer behaves
+      like a world object.
+    </li><li>
+      <strong>Ignoring player collision:</strong> the prop can shove or launch its
+      holder. Use a targeted collision exception while held.
+    </li><li>
+      <strong>Losing state on drop:</strong> save and restore any gravity, damping,
+      freeze, or collision values you change.
+    </li>
+  </ul>
+  <Fragment slot="fpe"
+    ><p>
+      Enable <strong>Can Hold Items</strong> on the first-person player, choose the
+      Hold Zone distance and size, then mark the <code>-rigid</code> Blender prop
+      as <strong>Holdable</strong>. FPE's Hold Zone keeps the rigid object in
+      front of the camera while respecting other physical objects. The same zone
+      can emit available, unavailable, withdraw, and deposit trigger events for
+      prompts and puzzles.
+    </p><p>
+      <a
+        href="https://www.youtube.com/watch?v=izeH6LC6yfs&list=PLM1XlwxBilobr6XVs-7H6O_mMXAiHZEcz"
+        target="_blank"
+        rel="noopener noreferrer">Watch the Holdable Items tutorial</a
+      > or <a href="/docs/fpe-inventory-and-holdables.html"
+        >read the inventory and holdables reference</a
+      >.
+    </p></Fragment
+  >
 </LearningGuideLayout>

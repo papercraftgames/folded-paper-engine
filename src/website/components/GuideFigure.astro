@@ -1,0 +1,24 @@
+---
+const {
+  src,
+  alt,
+  caption,
+  placement = "wide",
+} = Astro.props as {
+  src: string;
+  alt: string;
+  caption: string;
+  placement?: "wide" | "panel";
+};
+---
+
+<figure class:list={["guide-figure", `guide-figure-${placement}`]}>
+  <a
+    href={src}
+    target="_blank"
+    aria-label={`Open full-size screenshot: ${alt}`}
+  >
+    <img src={src} alt={alt} loading="lazy" decoding="async" />
+  </a>
+  <figcaption>{caption}</figcaption>
+</figure>

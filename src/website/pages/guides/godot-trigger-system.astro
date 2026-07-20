@@ -1,11 +1,61 @@
 ---
 import LearningGuideLayout from "../../layouts/LearningGuideLayout.astro";
+import GuideFigure from "../../components/GuideFigure.astro";
 ---
-<LearningGuideLayout title="How to Extend FPE Triggers in Godot" description="Understand and extend Blender-authored FPE triggers with Godot Area3D, collision layers, signals, participant filters, and custom systems." summary="A Blender-authored trigger becomes an invisible Godot region that converts a physics overlap into a meaningful game event. The useful abstraction is not “the player entered an Area3D”—it is “the greenhouse door should unlock.”" relatedSlugs={["interactive-objects-godot","dialogue-triggers-godot","create-triggers-in-blender-for-godot"]} godotSource={{label:"Area3D class reference",href:"https://docs.godotengine.org/en/stable/classes/class_area3d.html"}}>
-    <div class="guide-summary"><strong>Recommended shape:</strong> <code>Area3D</code> + <code>CollisionShape3D</code> detects the overlap; a small trigger script filters the body and emits a semantic signal; another object decides what happens.</div>
-    <h2>When should you use a trigger?</h2><p>Triggers are ideal for doors, checkpoints, music regions, tutorials, hazards, conversations, and scene transitions. Use a direct interaction system when the player must deliberately point at or select an object.</p>
-    <h2>The traditional Godot workflow</h2><ol><li>Add an <code>Area3D</code> and a simple <code>CollisionShape3D</code>.</li><li>Put triggers and eligible bodies on intentional collision layers and masks.</li><li>Connect <code>body_entered</code> and, if needed, <code>body_exited</code>.</li><li>Filter by a stable group such as <code>player</code>, not a fragile node path.</li><li>Emit a named signal or call a dedicated event bus. Keep the consequence outside the detector.</li></ol>
-    <pre><code>signal triggered(event_id: StringName, participant: Node3D)
+
+<LearningGuideLayout
+  title="How to Extend FPE Triggers in Godot"
+  description="Understand and extend Blender-authored FPE triggers with Godot Area3D, collision layers, signals, participant filters, and custom systems."
+  summary="A Blender-authored trigger becomes an invisible Godot region that converts a physics overlap into a meaningful game event. The useful abstraction is not “the player entered an Area3D”—it is “the greenhouse door should unlock.”"
+  relatedSlugs={[
+    "interactive-objects-godot",
+    "dialogue-triggers-godot",
+    "create-triggers-in-blender-for-godot",
+  ]}
+  godotSource={{
+    label: "Area3D class reference",
+    href: "https://docs.godotengine.org/en/stable/classes/class_area3d.html",
+  }}
+>
+  <div class="guide-summary">
+    <strong>Recommended shape:</strong>
+    <code>Area3D</code> + <code>CollisionShape3D</code> detects the overlap; a small
+    trigger script filters the body and emits a semantic signal; another object decides
+    what happens.
+  </div>
+  <GuideFigure
+    src="/assets/images/guides/blender/trigger-invisible-checkboxes.png"
+    alt="An invisible FPE trigger volume selected in Blender"
+    caption="Author trigger geometry where you can see the level. Keep it invisible when it exists only to detect gameplay."
+  />
+  <h2>When should you use a trigger?</h2><p>
+    Triggers are ideal for doors, checkpoints, music regions, tutorials,
+    hazards, conversations, and scene transitions. Use a direct interaction
+    system when the player must deliberately point at or select an object.
+  </p>
+  <GuideFigure
+    src="/assets/images/guides/blender/trigger-events-panel.png"
+    alt="Trigger Events panel dispatching OPEN_WORKSHOP_DOOR"
+    caption="A trigger dispatches a stable event name; Godot listeners decide what that event means at runtime."
+  />
+  <h2>The traditional Godot workflow</h2><ol>
+    <li>
+      Add an <code>Area3D</code> and a simple <code>CollisionShape3D</code>.
+    </li><li>
+      Put triggers and eligible bodies on intentional collision layers and
+      masks.
+    </li><li>
+      Connect <code>body_entered</code> and, if needed, <code>body_exited</code
+      >.
+    </li><li>
+      Filter by a stable group such as <code>player</code>, not a fragile node
+      path.
+    </li><li>
+      Emit a named signal or call a dedicated event bus. Keep the consequence
+      outside the detector.
+    </li>
+  </ol>
+  <pre><code>signal triggered(event_id: StringName, participant: Node3D)
 
 @export var event_id: StringName
 @export var participant_group: StringName = &amp;"player"
@@ -17,7 +67,48 @@ func _on_body_entered(body: Node3D) -&gt; void:
         return
     spent = one_shot
     triggered.emit(event_id, body)</code></pre>
-    <h2>Name what happened, not the code that should run</h2><p>Use plain, recognizable event names such as <code>ENTERED_GREENHOUSE</code> or <code>STARTED_MIRA_DIALOGUE</code>. In Blender, enter that name on the Trigger Event and create the matching Scene Event. In Godot, other systems can listen for or respond to the same named event without knowing which physics area detected the player. That lets animation, audio, UI, and save-state code cooperate while the trigger remains easy for an artist to understand. Decide explicitly whether activation is one-shot, repeatable, reversible on exit, or filtered to a participant.</p>
-    <h2>Common mistakes</h2><ul><li><strong>Collision masks that see everything:</strong> broad masks create accidental activations and extra physics work.</li><li><strong>Mesh-shaped trigger volumes:</strong> boxes and capsules are easier to author and cheaper to query.</li><li><strong>Running a large cutscene inside the callback:</strong> dispatch an event and let a coordinator own the sequence.</li><li><strong>Repeat firing:</strong> disable one-shot triggers before awaiting animations or scene loads.</li></ul>
-    <Fragment slot="fpe"><p>Place and scale the trigger object in Blender, check <strong>Trigger</strong>, choose Enter or Exit, and name the Scene Event. FPE imports it as an invisible <code>TrackingArea3D</code> with a simple collider. Scene Event commands can then play audio or animations, load levels, switch cameras, start conversations, or dispatch another event—without welding those actions to the overlap detector.</p><p><a href="/docs/fpe-triggers-commands.html">Read the triggers and commands reference</a>.</p></Fragment>
+  <GuideFigure
+    src="/assets/images/guides/blender/scene-events-panel.png"
+    alt="Scene Events panel using the OPEN_WORKSHOP_DOOR event name"
+    caption="The same semantic event can be connected to authored scene behavior without naming a particular Godot method."
+  />
+  <h2>Name what happened, not the code that should run</h2><p>
+    Use plain, recognizable event names such as <code>ENTERED_GREENHOUSE</code> or
+    <code>STARTED_MIRA_DIALOGUE</code>. In Blender, enter that name on the
+    Trigger Event and create the matching Scene Event. In Godot, other systems
+    can listen for or respond to the same named event without knowing which
+    physics area detected the player. That lets animation, audio, UI, and
+    save-state code cooperate while the trigger remains easy for an artist to
+    understand. Decide explicitly whether activation is one-shot, repeatable,
+    reversible on exit, or filtered to a participant.
+  </p>
+  <h2>Common mistakes</h2><ul>
+    <li>
+      <strong>Collision masks that see everything:</strong> broad masks create accidental
+      activations and extra physics work.
+    </li><li>
+      <strong>Mesh-shaped trigger volumes:</strong> boxes and capsules are easier
+      to author and cheaper to query.
+    </li><li>
+      <strong>Running a large cutscene inside the callback:</strong> dispatch an
+      event and let a coordinator own the sequence.
+    </li><li>
+      <strong>Repeat firing:</strong> disable one-shot triggers before awaiting animations
+      or scene loads.
+    </li>
+  </ul>
+  <Fragment slot="fpe"
+    ><p>
+      Place and scale the trigger object in Blender, check <strong
+        >Trigger</strong
+      >, choose Enter or Exit, and name the Scene Event. FPE imports it as an
+      invisible <code>TrackingArea3D</code> with a simple collider. Scene Event commands
+      can then play audio or animations, load levels, switch cameras, start conversations,
+      or dispatch another event—without welding those actions to the overlap detector.
+    </p><p>
+      <a href="/docs/fpe-triggers-commands.html"
+        >Read the triggers and commands reference</a
+      >.
+    </p></Fragment
+  >
 </LearningGuideLayout>

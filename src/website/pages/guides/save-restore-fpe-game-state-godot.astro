@@ -1,24 +1,87 @@
 ---
 import LearningGuideLayout from "../../layouts/LearningGuideLayout.astro";
+import GuideFigure from "../../components/GuideFigure.astro";
 ---
-<LearningGuideLayout title="How to Save and Restore FPE Game State in Godot" description="Build a persistent GDScript save system for Folded Paper Engine levels, including player and character inventories, collected objects, named events, and animation-driven doors." summary="FPE rebuilds a playable level from Blender; your game decides what must survive that rebuild. A small persistent Godot controller can capture durable facts before unload, wait for FPE to create the new runtime, then put inventory and world state back where they belong." relatedSlugs={["godot-inventory-system","animation-frame-events-godot","blender-to-godot-gameplay-import"]} godotSource={{label:"AnimationPlayer seek reference",href:"https://docs.godotengine.org/en/4.5/classes/class_animationplayer.html#class-animationplayer-method-seek"}} fpeHeading="The FPE runtime contract used here">
-    <div class="guide-summary"><strong>You will build:</strong> a Godot save-state controller that lives outside the replaceable FPE level, listens for meaningful FPE events, saves IDs and values instead of nodes, and restores only after FPE has rebuilt its players, inventories, animation players, groups, and feature maps.</div>
 
-    <h2>When should an FPE project use GDScript?</h2>
-    <p>Keep spatial intent and repeated setup in Blender: where the door is, which animation opens it, where a pickup sits, and which named event a trigger dispatches. Add GDScript when a decision must outlive the current imported scene, coordinate several levels, write to disk, enforce game-specific rules, or restore a result without replaying the action that originally caused it.</p>
-    <p>“The workshop door is open,” “Mira owns two keys,” and “this apple was collected” are durable game facts. They belong to the game, not to a temporary node generated from the current GLB.</p>
+<LearningGuideLayout
+  title="How to Save and Restore FPE Game State in Godot"
+  description="Build a persistent GDScript save system for Folded Paper Engine levels, including player and character inventories, collected objects, named events, and animation-driven doors."
+  summary="FPE rebuilds a playable level from Blender; your game decides what must survive that rebuild. A small persistent Godot controller can capture durable facts before unload, wait for FPE to create the new runtime, then put inventory and world state back where they belong."
+  relatedSlugs={[
+    "godot-inventory-system",
+    "animation-frame-events-godot",
+    "blender-to-godot-gameplay-import",
+  ]}
+  godotSource={{
+    label: "AnimationPlayer seek reference",
+    href: "https://docs.godotengine.org/en/4.5/classes/class_animationplayer.html#class-animationplayer-method-seek",
+  }}
+  fpeHeading="The FPE runtime contract used here"
+>
+  <div class="guide-summary">
+    <strong>You will build:</strong> a Godot save-state controller that lives outside
+    the replaceable FPE level, listens for meaningful FPE events, saves IDs and values
+    instead of nodes, and restores only after FPE has rebuilt its players, inventories,
+    animation players, groups, and feature maps.
+  </div>
 
-    <h2>Understand the load boundary</h2>
-    <ul>
-        <li><code>FoldedPaperEngine.add_unload_proceedure()</code> registers work that runs <strong>before</strong> FPE clears the current level. Use it to capture live state. The API currently spells “procedure” as <code>proceedure</code>.</li>
-        <li><code>global_feature_utils_change</code> fires after a global level has been loaded and <code>GLOBAL_FEATURE_UTILS</code> points at its runtime helpers. It also fires with no runtime after unload, so always check for <code>null</code>.</li>
-        <li><code>add_load_proceedure()</code> runs before FPE loads the new scene. It is useful for pre-load work, but it is too early to restore players, inventories, or animation poses.</li>
-        <li>Wait one process frame after <code>global_feature_utils_change</code>. That lets generated nodes run <code>_ready()</code>, lets <code>PlayerControls</code> choose its inventory, and lets FPE finish its deferred animation initialization.</li>
-    </ul>
+  <h2>When should an FPE project use GDScript?</h2>
+  <p>
+    Keep spatial intent and repeated setup in Blender: where the door is, which
+    animation opens it, where a pickup sits, and which named event a trigger
+    dispatches. Add GDScript when a decision must outlive the current imported
+    scene, coordinate several levels, write to disk, enforce game-specific
+    rules, or restore a result without replaying the action that originally
+    caused it.
+  </p>
+  <p>
+    “The workshop door is open,” “Mira owns two keys,” and “this apple was
+    collected” are durable game facts. They belong to the game, not to a
+    temporary node generated from the current GLB.
+  </p>
 
-    <h2>Put the state controller somewhere persistent</h2>
-    <p>Use an Autoload, or place the controller beside—not beneath—the <code>FoldedPaperEngine</code> node in a stable Godot shell. FPE removes children from its own stage during a global level change, so a save controller beneath that node would be deleted with the level.</p>
-    <pre><code>extends Node
+  <GuideFigure
+    src="/assets/images/guides/godot/fpe-stage-editor.png"
+    alt="Godot Stage scene with WorldEnvironment DirectionalLight and FoldedPaperEngine nodes"
+    caption="The Stage scene is the stable shell. Put the persistent state controller above or alongside the FoldedPaperEngine node so it survives loaded-level replacement."
+  />
+  <h2>Understand the load boundary</h2>
+  <ul>
+    <li>
+      <code>FoldedPaperEngine.add_unload_proceedure()</code> registers work that
+      runs <strong>before</strong> FPE clears the current level. Use it to capture
+      live state. The API currently spells “procedure” as <code>proceedure</code
+      >.
+    </li>
+    <li>
+      <code>global_feature_utils_change</code> fires after a global level has been
+      loaded and <code>GLOBAL_FEATURE_UTILS</code> points at its runtime helpers.
+      It also fires with no runtime after unload, so always check for <code
+        >null</code
+      >.
+    </li>
+    <li>
+      <code>add_load_proceedure()</code> runs before FPE loads the new scene. It
+      is useful for pre-load work, but it is too early to restore players, inventories,
+      or animation poses.
+    </li>
+    <li>
+      Wait one process frame after <code>global_feature_utils_change</code>.
+      That lets generated nodes run <code>_ready()</code>, lets <code
+        >PlayerControls</code
+      > choose its inventory, and lets FPE finish its deferred animation initialization.
+    </li>
+  </ul>
+
+  <h2>Put the state controller somewhere persistent</h2>
+  <p>
+    Use an Autoload, or place the controller beside—not beneath—the <code
+      >FoldedPaperEngine</code
+    > node in a stable Godot shell. FPE removes children from its own stage during
+    a global level change, so a save controller beneath that node would be deleted
+    with the level.
+  </p>
+  <pre><code>extends Node
 class_name FPEGameState
 
 @export var fpe: FoldedPaperEngine
@@ -63,9 +126,14 @@ func _capture_before_unload() -&gt; void:
     write_save()
 </code></pre>
 
-    <h2>Save plain data, never runtime references</h2>
-    <p>Node references, <code>AnimationPlayer</code> references, and generated scene paths become invalid when FPE unloads the level. Save stable names from Blender, inventory item-kind IDs, quantities, booleans, numbers, and the level resource path. Add a version number so future releases can migrate old saves.</p>
-    <pre><code>const SAVE_PATH := "user://savegame.json"
+  <h2>Save plain data, never runtime references</h2>
+  <p>
+    Node references, <code>AnimationPlayer</code> references, and generated scene
+    paths become invalid when FPE unloads the level. Save stable names from Blender,
+    inventory item-kind IDs, quantities, booleans, numbers, and the level resource
+    path. Add a version number so future releases can migrate old saves.
+  </p>
+  <pre><code>const SAVE_PATH := "user://savegame.json"
 
 func write_save() -&gt; void:
     var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
@@ -84,8 +152,8 @@ func read_save() -&gt; bool:
     return true
 </code></pre>
 
-    <h2>Get the current FPE runtime</h2>
-    <pre><code>func current_features() -&gt; FeatureUtils:
+  <h2>Get the current FPE runtime</h2>
+  <pre><code>func current_features() -&gt; FeatureUtils:
     return FoldedPaperEngine.GLOBAL_FEATURE_UTILS
 
 func current_root() -&gt; Node:
@@ -97,11 +165,29 @@ func player_at(index: int = 0) -&gt; PlayerControls:
         return null
     return FPEGlobals.PLAYER_LIST[index]
 </code></pre>
-    <p>The active <code>FeatureUtils</code> also exposes <code>ANIMATION_UTILS</code>, <code>AUDIO_UTILS</code>, <code>CAMERA_UTILS</code>, <code>SUB_SCENE_UTILS</code>, and the current <code>FPEGlobals</code> maps. Prefer those runtime-owned references over hard-coded imported node paths.</p>
+  <p>
+    The active <code>FeatureUtils</code> also exposes <code
+      >ANIMATION_UTILS</code
+    >, <code>AUDIO_UTILS</code>, <code>CAMERA_UTILS</code>, <code
+      >SUB_SCENE_UTILS</code
+    >, and the current <code>FPEGlobals</code> maps. Prefer those runtime-owned references
+    over hard-coded imported node paths.
+  </p>
 
-    <h2>Capture inventory without serializing live Resources</h2>
-    <p><code>Inventory</code> can convert itself to a dictionary, but durable saves are safer when they store only slot coordinates, item-kind IDs, and quantities. On restore, resolve each ID through the current <code>InventoryUtils</code> registry. That keeps labels and stack limits current even when the game has changed since the save was written.</p>
-    <pre><code>func capture_inventory(inventory: Inventory) -&gt; Dictionary:
+  <GuideFigure
+    src="/assets/images/guides/blender/inventory-settings-panel.png"
+    alt="Blender Inventory Item settings with the stable kind magic_apple"
+    caption="Persist the stable item kind and quantity—not the live object or Resource reference. The kind is what lets Godot rebuild inventory later."
+  />
+  <h2>Capture inventory without serializing live Resources</h2>
+  <p>
+    <code>Inventory</code> can convert itself to a dictionary, but durable saves
+    are safer when they store only slot coordinates, item-kind IDs, and quantities.
+    On restore, resolve each ID through the current <code>InventoryUtils</code> registry.
+    That keeps labels and stack limits current even when the game has changed since
+    the save was written.
+  </p>
+  <pre><code>func capture_inventory(inventory: Inventory) -&gt; Dictionary:
     var data := &#123;
         "size": inventory.size.to_dict(),
         "slots": [],
@@ -148,10 +234,15 @@ func restore_inventory(controls: CharacterControls, data: Dictionary) -&gt; void
     if controls is PlayerControls:
         InventoryUtils.PLAYER_INVENTORY = restored
 </code></pre>
-    <p>The final assignment matters for players: <code>PlayerControls</code> uses <code>InventoryUtils.PLAYER_INVENTORY</code> to preserve a shared player inventory between FPE levels. Set both references after rebuilding the inventory.</p>
+  <p>
+    The final assignment matters for players: <code>PlayerControls</code> uses <code
+      >InventoryUtils.PLAYER_INVENTORY</code
+    > to preserve a shared player inventory between FPE levels. Set both references
+    after rebuilding the inventory.
+  </p>
 
-    <h2>Restore player and character inventories</h2>
-    <pre><code>func capture_all_inventories() -&gt; void:
+  <h2>Restore player and character inventories</h2>
+  <pre><code>func capture_all_inventories() -&gt; void:
     var player := player_at()
     if player:
         state.player_inventory = capture_inventory(player.inventory)
@@ -181,11 +272,22 @@ func character_from_group(group_name: StringName) -&gt; CharacterControls:
             candidate = candidate.get_parent()
     return null
 </code></pre>
-    <p>In Blender, put a stable value such as <code>save_character_mira</code> in the character object's FPE <strong>Groups</strong> field. FPE applies that group to the authored object; the runtime <code>CharacterControls</code> rig becomes an ancestor, which is why the helper walks upward.</p>
+  <p>
+    In Blender, put a stable value such as <code>save_character_mira</code> in the
+    character object's FPE <strong>Groups</strong> field. FPE applies that group
+    to the authored object; the runtime <code>CharacterControls</code> rig becomes
+    an ancestor, which is why the helper walks upward.
+  </p>
 
-    <h2>Listen to FPE events and store results</h2>
-    <p>Named events are the clean handoff from artist-authored interactions to durable game rules. A Blender trigger can dispatch <code>WORKSHOP_DOOR_OPENED</code>; FPE performs the immediate animation and audio commands, while your persistent controller records the lasting fact.</p>
-    <pre><code>func _on_fpe_event(event: FPEEvent) -&gt; void:
+  <h2>Listen to FPE events and store results</h2>
+  <p>
+    Named events are the clean handoff from artist-authored interactions to
+    durable game rules. A Blender trigger can dispatch <code
+      >WORKSHOP_DOOR_OPENED</code
+    >; FPE performs the immediate animation and audio commands, while your
+    persistent controller records the lasting fact.
+  </p>
+  <pre><code>func _on_fpe_event(event: FPEEvent) -&gt; void:
     match event.type:
         "WORKSHOP_DOOR_OPENED":
             state.flags["workshop_door_open"] = true
@@ -194,11 +296,29 @@ func character_from_group(group_name: StringName) -&gt; CharacterControls:
             state.flags["magic_apple_collected"] = true
             write_save()
 </code></pre>
-    <p>Do not store <code>event.owner</code> or <code>event.initiator</code>. They identify the live participants for immediate logic, but they are freed on unload. Store the event's meaning and stable authored IDs instead.</p>
+  <p>
+    Do not store <code>event.owner</code> or <code>event.initiator</code>. They
+    identify the live participants for immediate logic, but they are freed on
+    unload. Store the event's meaning and stable authored IDs instead.
+  </p>
 
-    <h2>Restore an animation-driven door without replaying it</h2>
-    <p>FPE indexes imported animations by name. Use the current <code>ANIMATION_UTILS</code> to get the correct player, then seek with <code>update = true</code> and <code>update_only = true</code>. Godot applies transform tracks—including the collision object's open position—while skipping method, audio, and nested playback tracks. Pausing immediately also keeps FPE frame events from treating restoration as fresh gameplay.</p>
-    <pre><code>func restore_animation_pose(animation_name: String, time_seconds: float = -1.0) -&gt; void:
+  <GuideFigure
+    src="/assets/images/guides/blender/door-action-timeline.png"
+    alt="Door animation in Blender showing closed and open keyed states"
+    caption="For a saved open door, restore the animation to its authored open frame so the visible mesh and animated collision agree."
+  />
+  <h2>Restore an animation-driven door without replaying it</h2>
+  <p>
+    FPE indexes imported animations by name. Use the current <code
+      >ANIMATION_UTILS</code
+    > to get the correct player, then seek with <code>update = true</code> and <code
+      >update_only = true</code
+    >. Godot applies transform tracks—including the collision object's open
+    position—while skipping method, audio, and nested playback tracks. Pausing
+    immediately also keeps FPE frame events from treating restoration as fresh
+    gameplay.
+  </p>
+  <pre><code>func restore_animation_pose(animation_name: String, time_seconds: float = -1.0) -&gt; void:
     var features := current_features()
     if not features:
         return
@@ -224,10 +344,17 @@ func restore_world_flags() -&gt; void:
         for node in get_tree().get_nodes_in_group("save_magic_apple"):
             node.queue_free()
 </code></pre>
-    <p>Use the exact Blender action name. For a binary door, save <code>open = true</code> and let the current animation length define the final pose. Save seconds only for genuinely continuous state. After restoring collision transforms, wait for <code>get_tree().physics_frame</code> before returning control if the player could already be touching the door.</p>
+  <p>
+    Use the exact Blender action name. For a binary door, save <code
+      >open = true</code
+    > and let the current animation length define the final pose. Save seconds only
+    for genuinely continuous state. After restoring collision transforms, wait for
+    <code>get_tree().physics_frame</code> before returning control if the player
+    could already be touching the door.
+  </p>
 
-    <h2>Order the complete restoration</h2>
-    <pre><code>func _restore_runtime() -&gt; void:
+  <h2>Order the complete restoration</h2>
+  <pre><code>func _restore_runtime() -&gt; void:
     var features := current_features()
     if not features:
         return
@@ -244,27 +371,78 @@ func restore_world_flags() -&gt; void:
 func _capture_runtime() -&gt; void:
     capture_all_inventories()
 </code></pre>
-    <ol>
-        <li>Read and validate the save before requesting the level.</li>
-        <li>Load the saved level through <code>FoldedPaperEngine.global_load_level()</code>.</li>
-        <li>Wait for <code>global_feature_utils_change</code>, then one process frame.</li>
-        <li>Restore inventories and durable world facts.</li>
-        <li>Wait one physics frame after moving collision through animation.</li>
-        <li>Return input only if this restoration operation disabled it.</li>
-    </ol>
+  <ol>
+    <li>Read and validate the save before requesting the level.</li>
+    <li>
+      Load the saved level through <code
+        >FoldedPaperEngine.global_load_level()</code
+      >.
+    </li>
+    <li>
+      Wait for <code>global_feature_utils_change</code>, then one process frame.
+    </li>
+    <li>Restore inventories and durable world facts.</li>
+    <li>Wait one physics frame after moving collision through animation.</li>
+    <li>Return input only if this restoration operation disabled it.</li>
+  </ol>
 
-    <h2>Sub-scenes need an explicit completion hook</h2>
-    <p>The global feature-utils signal covers global level changes. FPE does not currently expose a public “sub-scene loaded” signal. If saved state belongs to a streamed interior, coordinate that load from GDScript through <code>features.SUB_SCENE_UTILS.load_scene(name)</code>, then wait for the authored host's child to enter the tree before restoring its groups and animations. Do not reach into <code>SubSceneHost</code>'s private fields; wrap the operation or add a small public signal to your FPE fork.</p>
+  <h2>Sub-scenes need an explicit completion hook</h2>
+  <p>
+    The global feature-utils signal covers global level changes. FPE does not
+    currently expose a public “sub-scene loaded” signal. If saved state belongs
+    to a streamed interior, coordinate that load from GDScript through <code
+      >features.SUB_SCENE_UTILS.load_scene(name)</code
+    >, then wait for the authored host's child to enter the tree before
+    restoring its groups and animations. Do not reach into <code
+      >SubSceneHost</code
+    >'s private fields; wrap the operation or add a small public signal to your
+    FPE fork.
+  </p>
 
-    <h2>Production rules that prevent painful saves</h2>
-    <ul>
-        <li>Give persistent objects, characters, actions, and event types stable authored names. Renaming one is a save migration.</li>
-        <li>Save facts, not presentation: <code>door_open</code> is stronger than <code>door_animation_time = 1.733</code>.</li>
-        <li>Make restoration idempotent. Applying the same save twice should produce the same world.</li>
-        <li>Keep save mutation in one authority. UI may request a save; it should not own the state.</li>
-        <li>Warn and continue when an old save references a removed item or animation.</li>
-        <li>Test load from the title screen, between levels, after re-exporting Blender art, and while the player is near animated collision.</li>
-    </ul>
+  <h2>Production rules that prevent painful saves</h2>
+  <ul>
+    <li>
+      Give persistent objects, characters, actions, and event types stable
+      authored names. Renaming one is a save migration.
+    </li>
+    <li>
+      Save facts, not presentation: <code>door_open</code> is stronger than <code
+        >door_animation_time = 1.733</code
+      >.
+    </li>
+    <li>
+      Make restoration idempotent. Applying the same save twice should produce
+      the same world.
+    </li>
+    <li>
+      Keep save mutation in one authority. UI may request a save; it should not
+      own the state.
+    </li>
+    <li>
+      Warn and continue when an old save references a removed item or animation.
+    </li>
+    <li>
+      Test load from the title screen, between levels, after re-exporting
+      Blender art, and while the player is near animated collision.
+    </li>
+  </ul>
 
-    <Fragment slot="fpe"><p>This guide uses FPE's real extension surfaces: global load/unload lifecycle hooks, <code>FeatureUtils</code>, <code>FPEGlobals</code>, <code>FPEEventManager</code>, <code>InventoryUtils</code>, <code>PlayerControls</code>, <code>CharacterControls</code>, and <code>AnimationUtils</code>. FPE continues to own repeatable scene construction; your persistent Godot code owns the durable rules that make the project a complete game.</p><p><a href="/godot-api-docs.html">Browse the generated FPE Godot API</a>, <a href="/docs/fpe-inventory-and-holdables.html">review inventory data</a>, and <a href="/docs/fpe-animation-and-events.html">review animation and frame events</a>.</p></Fragment>
+  <Fragment slot="fpe"
+    ><p>
+      This guide uses FPE's real extension surfaces: global load/unload
+      lifecycle hooks, <code>FeatureUtils</code>, <code>FPEGlobals</code>, <code
+        >FPEEventManager</code
+      >, <code>InventoryUtils</code>, <code>PlayerControls</code>, <code
+        >CharacterControls</code
+      >, and <code>AnimationUtils</code>. FPE continues to own repeatable scene
+      construction; your persistent Godot code owns the durable rules that make
+      the project a complete game.
+    </p><p>
+      <a href="/godot-api-docs.html">Browse the generated FPE Godot API</a>, <a
+        href="/docs/fpe-inventory-and-holdables.html">review inventory data</a
+      >, and <a href="/docs/fpe-animation-and-events.html"
+        >review animation and frame events</a
+      >.
+    </p></Fragment
+  >
 </LearningGuideLayout>
