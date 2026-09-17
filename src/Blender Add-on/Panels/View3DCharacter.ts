@@ -53,7 +53,22 @@ export const View3DCharacter: BlenderPanelProps = {
       name: "JumpAnimation",
       label: "Jump Animation",
       type: "string",
-      description: "The name of the jump animation",
+      description:
+        "The initial takeoff animation, played once when the character jumps",
+    },
+    {
+      name: "AirControlAnimation",
+      label: "Air Control Animation",
+      type: "string",
+      description:
+        "The airborne animation, played after takeoff until the character lands",
+    },
+    {
+      name: "LandAnimation",
+      label: "Land Animation",
+      type: "string",
+      description:
+        "The landing animation, played once on ground contact before returning to idle, walk, or run",
     },
     {
       name: "TalkAnimation",
