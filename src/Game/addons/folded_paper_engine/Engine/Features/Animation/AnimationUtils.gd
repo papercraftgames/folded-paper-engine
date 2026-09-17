@@ -2,6 +2,7 @@ class_name AnimationUtils extends FPEGlobalsConfig
 
 var ALL_ANIMATIONS_PAUSED: bool = false
 var PAUSED_ANIMATION_NAMES: Dictionary[String, bool] = {}
+var _paused_blend_times: Dictionary[String, float] = {}
 
 # --- helpers --------------------------------------------------------------
 
@@ -179,22 +180,55 @@ func get_animation_player(anim_name: String) -> AnimationPlayer:
 func is_animation(anim_name: String) -> bool:
 	return FPE_GLOBALS.ANIMATION_PLAYER_MAP.has(anim_name)
 
-func play_animation(anim_name: String) -> void:
+func share_character_animation_player(anim_names: Array[String]) -> void:
+	# Only a character's mutually exclusive clips share a mixer. Scene animations
+	# retain their independent players so doors, props and other characters coexist.
+	var shared_player: AnimationPlayer
+	for anim_name in anim_names:
+		var source := get_animation_player(anim_name)
+		if not is_instance_valid(source):
+			continue
+		if not is_instance_valid(shared_player):
+			shared_player = source
+			if shared_player.get_script() == null:
+				shared_player.set_script(preload("res://addons/folded_paper_engine/Engine/Features/Animation/CharacterAnimationPlayer.gd"))
+			continue
+		if source == shared_player:
+			continue
+		if source.get_node(source.root_node) != shared_player.get_node(shared_player.root_node):
+			continue
+		var animation := source.get_animation(anim_name)
+		var library_name := anim_name.get_slice("/", 0) if "/" in anim_name else ""
+		var clip_name := anim_name.get_slice("/", 1) if "/" in anim_name else anim_name
+		if not shared_player.has_animation_library(library_name):
+			shared_player.add_animation_library(library_name, AnimationLibrary.new())
+		shared_player.get_animation_library(library_name).add_animation(clip_name, animation)
+		source.stop()
+		FPE_GLOBALS.ANIMATION_PLAYER_MAP[anim_name] = shared_player
+
+func play_animation(anim_name: String, blend_time: float = -1.0) -> void:
 	if FPE_GLOBALS.ANIMATION_PLAYER_MAP.has(anim_name):
+		var player: AnimationPlayer = FPE_GLOBALS.ANIMATION_PLAYER_MAP[anim_name]
+		# A shared player can have only one pending/resumable clip.
+		for paused_name in PAUSED_ANIMATION_NAMES.keys():
+			if paused_name != anim_name and get_animation_player(paused_name) == player:
+				PAUSED_ANIMATION_NAMES[paused_name] = false
+				_paused_blend_times.erase(paused_name)
 		if ALL_ANIMATIONS_PAUSED:
 			PAUSED_ANIMATION_NAMES[anim_name] = true
+			_paused_blend_times[anim_name] = blend_time
 		else:
-			var player: AnimationPlayer = FPE_GLOBALS.ANIMATION_PLAYER_MAP[anim_name]
-			
-			player.play(anim_name)
+			player.play(anim_name, blend_time)
 			PAUSED_ANIMATION_NAMES[anim_name] = false
+			_paused_blend_times.erase(anim_name)
 
 func pause_animation(anim_name: String) -> void:
 	if FPE_GLOBALS.ANIMATION_PLAYER_MAP.has(anim_name):
 		var player: AnimationPlayer = FPE_GLOBALS.ANIMATION_PLAYER_MAP[anim_name]
 		
-		player.pause()
-		PAUSED_ANIMATION_NAMES[anim_name] = true
+		if player.assigned_animation == anim_name:
+			player.pause()
+			PAUSED_ANIMATION_NAMES[anim_name] = true
 
 func pause_playing_animations() -> void:
 	ALL_ANIMATIONS_PAUSED = true
@@ -203,7 +237,7 @@ func pause_playing_animations() -> void:
 		if FPE_GLOBALS.ANIMATION_PLAYER_MAP.has(anim_name):
 			var player: AnimationPlayer = FPE_GLOBALS.ANIMATION_PLAYER_MAP[anim_name]
 			
-			if player.is_playing():
+			if player.is_playing() and player.current_animation == anim_name:
 				pause_animation(anim_name)
 
 func resume_paused_animations() -> void:
@@ -211,14 +245,16 @@ func resume_paused_animations() -> void:
 	
 	for anim_name in PAUSED_ANIMATION_NAMES.keys():
 		if PAUSED_ANIMATION_NAMES[anim_name]:
-			play_animation(anim_name)
+			play_animation(anim_name, _paused_blend_times.get(anim_name, -1.0))
 
 func stop_animation(anim_name: String) -> void:
 	if FPE_GLOBALS.ANIMATION_PLAYER_MAP.has(anim_name):
 		var player: AnimationPlayer = FPE_GLOBALS.ANIMATION_PLAYER_MAP[anim_name]
 		
-		player.stop(false)
+		if player.assigned_animation == anim_name:
+			player.stop(false)
 		PAUSED_ANIMATION_NAMES[anim_name] = false
+		_paused_blend_times.erase(anim_name)
 
 func stop_all_animations() -> void:
 	for anim_name in FPE_GLOBALS.ANIMATION_PLAYER_MAP.keys():

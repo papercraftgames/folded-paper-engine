@@ -12,6 +12,19 @@ var CHARACTER_MESH: Node3D
 var CHARACTER_CONFIG: CharacterConfig
 
 var LAST_ANIM_PLAYED: String = ""
+@export_range(0.0, 1.0, 0.01) var animation_blend_time: float = 0.15
+@export_range(0.0, 1.0, 0.01) var landing_initial_weight: float = 0.8
+@export_range(0.01, 0.5, 0.01) var landing_entry_blend_time: float = 0.08
+@export_range(0.01, 1.0, 0.01) var landing_weight_fade_time: float = 0.2
+var _animation_on_floor: bool = false
+var _landing_probe_armed: bool = true
+enum JumpAnimationStage { GROUNDED, TAKEOFF, AIRBORNE, LANDING }
+var _jump_animation_stage: JumpAnimationStage = JumpAnimationStage.GROUNDED
+var _landing_animation_tree: CharacterLandingAnimationTree
+var _landing_locomotion_node: AnimationNodeAnimation
+var _landing_entry_weight: float = 0.0
+var _landing_weight: float = 0.0
+var _landing_locomotion_position: float = -1.0
 
 var LINEAR_VELOCITY_THRESHOLD := 0.0001
 var ROTATION_SNAP_THRESHOLD := 0.01 # radians (~0.057 degrees)
@@ -120,26 +133,245 @@ func approach_velocity_force(target_velocity: Vector3, max_force: float) -> Vect
 
 	return correction
 
-func set_animation(input: Vector2, has_input: bool, running: bool) -> void:
+func _has_character_animation(anim_name: String) -> bool:
+	return not anim_name.is_empty() and FEATURE_UTILS.ANIMATION_UTILS.is_animation(anim_name)
+
+func _character_animation_finished(anim_name: String) -> bool:
+	var utils := FEATURE_UTILS.ANIMATION_UTILS
+	if not _has_character_animation(anim_name):
+		return true
+	# A paused or pending clip is not a finished one-shot.
+	if utils.ALL_ANIMATIONS_PAUSED or utils.PAUSED_ANIMATION_NAMES.get(anim_name, false):
+		return false
+	var player := utils.get_animation_player(anim_name)
+	return player.assigned_animation == anim_name and not player.is_playing()
+
+func _has_animation_ground_probe() -> bool:
+	var up := global_basis.y.normalized()
+	var has_support := false
+	for ray in RAY_CASTERS:
+		if ray.is_colliding() and ray.get_collision_normal().normalized().dot(up) > ground_normal_dot_thresh:
+			has_support = true
+			break
+	if not _landing_probe_armed:
+		# Do not arm again until every probe has cleared the launch surface.
+		_landing_probe_armed = not has_support
+		return false
+	# A probe can still overlap the launch surface for a frame or two. Only let
+	# descending/stationary characters use it as animation ground support.
+	if linear_velocity.dot(up) > 0.1:
+		return false
+	return has_support
+
+func _landing_transition_ready() -> bool:
+	return not is_instance_valid(_landing_animation_tree) or _landing_weight <= 0.0
+
+func _start_landing_blend(land_name: String, locomotion_name: String, previous_name: String) -> bool:
+	_stop_landing_blend()
+	var player := FEATURE_UTILS.ANIMATION_UTILS.get_animation_player(land_name)
+	if not is_instance_valid(player) or not player.has_animation(locomotion_name) or not player.has_animation(previous_name):
+		return false
+	var previous_position := player.current_animation_position if player.assigned_animation == previous_name else 0.0
+	player.get_animation(land_name).loop_mode = Animation.LOOP_NONE
+	player.stop(false)
+	var tree := CharacterLandingAnimationTree.new()
+	tree.name = "LandingAnimationBlend"
+	player.get_parent().add_child(tree)
+	tree.anim_player = tree.get_path_to(player)
+	var animation_root := player.get_node(player.root_node)
+	tree.root_node = tree.get_path_to(animation_root)
+	tree.callback_mode_process = player.callback_mode_process
+	var graph := AnimationNodeBlendTree.new()
+	var locomotion_node := AnimationNodeAnimation.new()
+	locomotion_node.animation = StringName(locomotion_name)
+	var land_node := AnimationNodeAnimation.new()
+	land_node.animation = StringName(land_name)
+	var landing_blend_node := AnimationNodeBlend2.new()
+	landing_blend_node.sync = true
+	var previous_node := AnimationNodeAnimation.new()
+	previous_node.animation = StringName(previous_name)
+	var previous_seek_node := AnimationNodeTimeSeek.new()
+	var entry_blend_node := AnimationNodeBlend2.new()
+	entry_blend_node.sync = true
+	graph.add_node(&"Locomotion", locomotion_node)
+	graph.add_node(&"Land", land_node)
+	graph.add_node(&"LandingBlend", landing_blend_node)
+	graph.add_node(&"Previous", previous_node)
+	graph.add_node(&"PreviousSeek", previous_seek_node)
+	graph.add_node(&"EntryBlend", entry_blend_node)
+	graph.connect_node(&"LandingBlend", 0, &"Locomotion")
+	graph.connect_node(&"LandingBlend", 1, &"Land")
+	graph.connect_node(&"PreviousSeek", 0, &"Previous")
+	graph.connect_node(&"EntryBlend", 0, &"PreviousSeek")
+	graph.connect_node(&"EntryBlend", 1, &"LandingBlend")
+	graph.connect_node(&"output", 0, &"EntryBlend")
+	tree.tree_root = graph
+	_landing_animation_tree = tree
+	_landing_locomotion_node = locomotion_node
+	_landing_entry_weight = 0.0
+	_landing_weight = landing_initial_weight
+	tree.set("parameters/LandingBlend/blend_amount", _landing_weight)
+	tree.set("parameters/EntryBlend/blend_amount", _landing_entry_weight)
+	tree.set("parameters/PreviousSeek/seek_request", previous_position)
+	tree.active = true
+	tree.advance(0.0)
+	return true
+
+func _set_landing_locomotion(anim_name: String) -> void:
+	if is_instance_valid(_landing_locomotion_node) and _landing_locomotion_node.animation != StringName(anim_name):
+		_landing_locomotion_node.animation = StringName(anim_name)
+
+func _update_landing_blend(delta: float) -> void:
+	if not is_instance_valid(_landing_animation_tree):
+		return
+	var paused := FEATURE_UTILS.ANIMATION_UTILS.ALL_ANIMATIONS_PAUSED
+	_landing_animation_tree.active = not paused
+	if paused or _landing_weight <= 0.0:
+		return
+	if _landing_entry_weight < 1.0:
+		_landing_entry_weight = minf(1.0, _landing_entry_weight + delta / landing_entry_blend_time)
+		_landing_animation_tree.set("parameters/EntryBlend/blend_amount", _landing_entry_weight)
+		return
+	_landing_weight = maxf(0.0, _landing_weight - landing_initial_weight * delta / landing_weight_fade_time)
+	_landing_animation_tree.set("parameters/LandingBlend/blend_amount", _landing_weight)
+
+func _stop_landing_blend() -> void:
+	if is_instance_valid(_landing_animation_tree):
+		_landing_locomotion_position = float(_landing_animation_tree.get("parameters/Locomotion/current_position"))
+		_landing_animation_tree.active = false
+		_landing_animation_tree.queue_free()
+	_landing_animation_tree = null
+	_landing_locomotion_node = null
+	_landing_entry_weight = 0.0
+	_landing_weight = 0.0
+
+func _update_jump_animation_stage(jump_started: bool) -> void:
+	var config := CHARACTER_CONFIG.AnimationConfig
+	if jump_started:
+		_jump_animation_stage = JumpAnimationStage.TAKEOFF
+	elif _animation_on_floor:
+		if _jump_animation_stage in [JumpAnimationStage.TAKEOFF, JumpAnimationStage.AIRBORNE]:
+			_jump_animation_stage = JumpAnimationStage.LANDING
+		elif _jump_animation_stage == JumpAnimationStage.LANDING and _landing_transition_ready():
+			_jump_animation_stage = JumpAnimationStage.GROUNDED
+	else:
+		if _jump_animation_stage in [JumpAnimationStage.GROUNDED, JumpAnimationStage.LANDING]:
+			# Falling off a ledge goes straight to Air Control. This also supports
+			# external movement controllers that launch along the rig's local up.
+			var rising := linear_velocity.dot(global_basis.y.normalized()) > 0.1
+			_jump_animation_stage = JumpAnimationStage.TAKEOFF if rising else JumpAnimationStage.AIRBORNE
+		elif _jump_animation_stage == JumpAnimationStage.TAKEOFF and _character_animation_finished(config.Jump):
+			_jump_animation_stage = JumpAnimationStage.AIRBORNE
+	if _jump_animation_stage == JumpAnimationStage.TAKEOFF and not _has_character_animation(config.Jump):
+		_jump_animation_stage = JumpAnimationStage.AIRBORNE
+	if _jump_animation_stage == JumpAnimationStage.LANDING and not _has_character_animation(config.Land):
+		_jump_animation_stage = JumpAnimationStage.GROUNDED
+
+func set_animation(input: Vector2, has_input: bool, running: bool, jump_started: bool = false) -> void:
 	var left: bool = input.x < 0 if input.x != 0 else LEFT
 	var forward: bool = input.y < 0 if input.y != 0 else FORWARD
 	var walking: bool = has_input
-	var jumping: bool = !is_on_floor()
+	# Use solver contact when available, with the same ground probes movement uses
+	# as a fallback so locomotion and animation cannot disagree about landing.
+	if jump_started:
+		_landing_probe_armed = false
+		_animation_on_floor = false
+	else:
+		_animation_on_floor = _animation_on_floor or _has_animation_ground_probe()
+	var jumping: bool = not _animation_on_floor
 	
 	LEFT = left
 	FORWARD = forward
 	
 	if CHARACTER_CONFIG:
 		var anim_name := CHARACTER_CONFIG.get_animation_name(walking, running, jumping)
+		var config := CHARACTER_CONFIG.AnimationConfig
+		var staged_jump := _has_character_animation(config.AirControl) or _has_character_animation(config.Land)
+		var restart := false
+		var loop_mode: int = -1
+		var transition_blend_time := animation_blend_time
+		if staged_jump:
+			var previous_stage := _jump_animation_stage
+			_update_jump_animation_stage(jump_started)
+			anim_name = CHARACTER_CONFIG.get_animation_name(walking, running, false)
+			var locomotion_name := anim_name
+			match _jump_animation_stage:
+				JumpAnimationStage.TAKEOFF:
+					anim_name = config.Jump
+					loop_mode = Animation.LOOP_NONE
+				JumpAnimationStage.AIRBORNE:
+					if _has_character_animation(config.AirControl):
+						anim_name = config.AirControl
+						loop_mode = Animation.LOOP_LINEAR
+					elif _has_character_animation(config.Jump):
+						anim_name = config.Jump
+						loop_mode = Animation.LOOP_NONE
+				JumpAnimationStage.LANDING:
+					anim_name = config.Land
+					loop_mode = Animation.LOOP_NONE
+			if _jump_animation_stage == JumpAnimationStage.LANDING:
+				if previous_stage != JumpAnimationStage.LANDING:
+					_start_landing_blend(config.Land, locomotion_name, LAST_ANIM_PLAYED)
+				else:
+					_set_landing_locomotion(locomotion_name)
+				LAST_ANIM_PLAYED = config.Land
+				return
+			elif previous_stage == JumpAnimationStage.LANDING:
+				_stop_landing_blend()
+				if _jump_animation_stage == JumpAnimationStage.GROUNDED:
+					# The mixer already reached 100% locomotion before handing control
+					# back to AnimationPlayer, so no second transition is necessary.
+					transition_blend_time = 0.0
+				else:
+					_landing_locomotion_position = -1.0
+			else:
+				_landing_locomotion_position = -1.0
+			# New takeoffs/landings restart even if a previous one was interrupted.
+			# With no Air Control clip, keep the final takeoff pose instead.
+			restart = jump_started or (previous_stage != _jump_animation_stage and (
+				_jump_animation_stage in [JumpAnimationStage.TAKEOFF, JumpAnimationStage.LANDING]
+				or (_jump_animation_stage == JumpAnimationStage.AIRBORNE and _has_character_animation(config.AirControl))))
+		var animation_utils := FEATURE_UTILS.ANIMATION_UTILS
+		var next_player := animation_utils.get_animation_player(anim_name)
+		if loop_mode >= 0 and is_instance_valid(next_player):
+			# Scene animation metadata may initialize after the first physics tick.
+			var clip := next_player.get_animation(anim_name)
+			if clip.loop_mode != loop_mode:
+				clip.loop_mode = loop_mode
 		
-		if anim_name != LAST_ANIM_PLAYED:
-			FEATURE_UTILS.ANIMATION_UTILS.stop_animation(LAST_ANIM_PLAYED)
+		if anim_name != LAST_ANIM_PLAYED or restart:
+			var previous_player := animation_utils.get_animation_player(LAST_ANIM_PLAYED)
+			if previous_player != next_player:
+				animation_utils.stop_animation(LAST_ANIM_PLAYED)
+			if is_instance_valid(next_player):
+				if restart and next_player.assigned_animation == anim_name:
+					next_player.seek(0.0)
 			
 			LAST_ANIM_PLAYED = anim_name
 			
-			FEATURE_UTILS.ANIMATION_UTILS.play_animation(anim_name)
+			animation_utils.play_animation(anim_name, transition_blend_time)
+			if transition_blend_time == 0.0 and _landing_locomotion_position >= 0.0 and is_instance_valid(next_player):
+				next_player.seek(_landing_locomotion_position, true)
+				_landing_locomotion_position = -1.0
+
+func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	super._integrate_forces(state)
+	_animation_on_floor = false
+	var up := global_basis.y.normalized()
+	for i in range(state.get_contact_count()):
+		# "Local" identifies this body's contact; the normal is in world space.
+		var normal := state.get_contact_local_normal(i).normalized()
+		if normal.dot(up) > ground_normal_dot_thresh:
+			# The solver may still report the launch contact for a frame after
+			# an impulse. Moving away from that surface is not a landing.
+			var relative_velocity := state.linear_velocity - state.get_contact_collider_velocity_at_position(i)
+			if relative_velocity.dot(normal) > 0.1:
+				continue
+			_animation_on_floor = true
+			break
 
 func _process(delta: float) -> void:
+	_update_landing_blend(delta)
 	if not _DISABLE_FLIP and CHARACTER_MESH:
 		var factor: float = clamp(TURN_SPEED * delta, 0.0, 1.0)
 		
@@ -248,6 +480,10 @@ func move(input: Vector2, run_amount: float, jump_amount: float) -> void:
 			var corrected_jump_force: float = jump_force - vertical_offset
 			
 			apply_impulse(Vector3(0, corrected_jump_force, 0))
+			if corrected_jump_force > 0.0:
+				var jump_started := _animation_on_floor
+				_animation_on_floor = false
+				set_animation(normal_input, has_input, run_amount != 0, jump_started)
 	else:
 		_had_input = false
 
@@ -260,6 +496,7 @@ func fix_character_animation_paths(from_path: String) -> void:
 		
 		if CHARACTER_CONFIG.AnimationConfig is CharacterAnimationConfig:
 			var props := CHARACTER_CONFIG.AnimationConfig.get_property_list()
+			var anim_names: Array[String] = []
 			
 			for p in props:
 				if p.usage & PROPERTY_USAGE_SCRIPT_VARIABLE:
@@ -267,6 +504,8 @@ func fix_character_animation_paths(from_path: String) -> void:
 					
 					if anim_name is String:
 						FEATURE_UTILS.ANIMATION_UTILS.fix_animation_path(anim_name, from_path, to_path, true)
+						anim_names.append(anim_name)
+			FEATURE_UTILS.ANIMATION_UTILS.share_character_animation_player(anim_names)
 
 func setup_character_mesh() -> void:
 	if CHARACTER_MESH:
