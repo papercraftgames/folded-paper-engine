@@ -18,6 +18,8 @@ func _init(data: Dictionary):
 	AnimationConfig.Walk = data.get("WalkAnimation", "")
 	AnimationConfig.Run = data.get("RunAnimation", "")
 	AnimationConfig.Jump = data.get("JumpAnimation", "")
+	AnimationConfig.AirControl = data.get("AirControlAnimation", "")
+	AnimationConfig.Land = data.get("LandAnimation", "")
 	
 	WanderingBounds = data.get("WanderingBounds", "")
 	

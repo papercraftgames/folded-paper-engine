@@ -43,6 +43,9 @@ func _process(_delta: float) -> void:
 		if anim_name in FEATURE_UTILS.FPE_GLOBALS.ANIMATION_PLAYER_MAP:
 			var player := FEATURE_UTILS.FPE_GLOBALS.ANIMATION_PLAYER_MAP[anim_name]
 			
+			if player.assigned_animation != anim_name:
+				_last_checked_frame_by_anim[anim_name] = -1.0
+				continue
 			if not player.is_playing():
 				continue
 			
