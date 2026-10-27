@@ -99,11 +99,23 @@ const supportUrls = {
           });
         });
 
+        document.querySelectorAll('[data-conversion]').forEach((link) => {
+          if (!(link instanceof HTMLAnchorElement)) return;
+          link.addEventListener('click', () => {
+            gtag('event', link.dataset.conversion, {
+              source_path: window.location.pathname,
+              placement: link.dataset.conversionLocation || 'unknown',
+              destination_url: link.href
+            });
+          });
+        });
+
         document.querySelectorAll('a[href^="http"]').forEach((link) => {
           if (!(link instanceof HTMLAnchorElement)) return;
           if (link.hostname !== window.location.hostname) link.addEventListener('click', () => {
             gtag('event', 'outbound_click', {
               destination_host: link.hostname,
+              destination_url: link.href,
               source_path: window.location.pathname
             });
           });
