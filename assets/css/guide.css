@@ -1,0 +1,443 @@
+.section.content-section {
+    background-color: #fff;
+    color: black;
+    text-shadow: none;
+}
+
+.section > .section-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1em;
+    font-family: sans-serif;
+    word-break: break-word;
+    margin-bottom: 4em;
+    font-size: 1.25em;
+    padding-inline: clamp(1.25rem, 4vw, 3rem);
+    background-color: white;
+    width: 100%;
+    max-width: 76rem;
+    min-width: 0;
+    margin-inline: auto;
+    overflow-wrap: anywhere;
+
+    &.doc-tiles {
+        background: none;
+    }
+}
+
+.section > .section-body li,
+.section > .section-body p,
+.section > .section-body code {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+
+.section > .section-body > h2, h3, h4, h5, h6 {
+    font-family: 'ZCOOLKuaiLe-Regular', sans-serif;
+}
+
+.section > .section-body a {
+    color: #e28903;
+    text-decoration: none;
+}
+
+.section > .section-body .property-group {
+    color: #555555;
+}
+
+.section > .section-body .doc-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5em;
+    width: 100%;
+}
+
+.section > .section-body .doc-column {
+    background: #f7f7f7;
+    border-radius: 12px;
+    padding: 1.25em 1.5em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.section > .section-body .doc-column h3 {
+    margin: 0;
+    font-family: 'ZCOOLKuaiLe-Regular', sans-serif;
+}
+
+.section > .section-body .doc-column ul {
+    margin: 0;
+    padding-left: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35em;
+}
+
+.section > .section-body .doc-column li {
+    line-height: 1.4;
+}
+
+.guide-section > .section-body {
+    max-width: 1200px;
+    margin: 0 auto 3em;
+    padding: 0 clamp(1.25rem, 4vw, 3rem);
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.guide-intro {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    line-height: 1.6;
+    color: #1f2a44;
+}
+
+.tutorial-intro {
+    width: 100%;
+    max-width: 76rem;
+    margin: 0 auto 1.5rem;
+    color: #1f2a44;
+    font-family: sans-serif;
+    font-size: 1.15rem;
+    line-height: 1.6;
+}
+
+.doc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5em;
+    list-style: none;
+    padding: 1rem 0;
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 100%;
+}
+
+.doc-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: stretch;
+    padding: 0;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    text-decoration: none;
+    transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+
+    &:hover {
+        & > .doc-card-title {
+            background-size: 300%;
+        }
+    }
+}
+
+.doc-card:hover,
+.doc-card:focus-visible {
+    transform: translateY(-4px);
+    border-color: rgba(226, 137, 3, 0.45);
+    box-shadow: 0 10px 24px rgba(226, 137, 3, 0.16);
+    outline: none;
+}
+
+.doc-card:focus-visible {
+    outline: 3px solid rgba(226, 137, 3, 0.6);
+    outline-offset: 3px;
+}
+
+.doc-card-title {
+    font-size: 1.18em;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0;
+    color: white;
+    background: #555555;
+    background-size: 110%;
+    background-position: center;
+    background-blend-mode: soft-light;
+    height: 8em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 1rem;
+
+    transition: background-size 250ms ease;
+}
+
+.doc-card-body {
+    flex: 1 0 auto;
+    font-size: 1em;
+    color: white;
+    background: linear-gradient(to bottom, var(--button-top-color) 0%, var(--button-bottom-color) 100%);
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+@media (max-width: 599px) {
+    .doc-grid {
+        grid-template-columns: minmax(0, 1fr);
+        justify-items: center;
+    }
+
+    .doc-card {
+        width: min(520px, 100%);
+    }
+}
+
+@media (min-width: 600px) and (max-width: 959px) {
+    .doc-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 960px) and (max-width: 1279px) {
+    .doc-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1280px) {
+    .doc-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+.guide-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.guide-group h2 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #0f172a;
+}
+
+.coverage-map {
+    background: #f8fafc;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.coverage-map h3 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: #111827;
+}
+
+.coverage-map ul {
+    padding-left: 1.2rem;
+    line-height: 1.5;
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
+}
+
+.coverage-map li + li {
+    margin-top: 0.35rem;
+}
+
+/* Full-site polish pass */
+
+.section > .section-body {
+    max-width: 76rem;
+    width: min(100%, 76rem);
+    margin: 0 auto 4em;
+    color: var(--ink);
+}
+
+.guide-section > .section-body,
+.section > .section-body.doc-tiles {
+    background: transparent;
+    align-items: center;
+    padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+.guide-intro {
+    padding: clamp(1.25rem, 4vw, 2rem);
+    border: 1px solid var(--hairline);
+    border-radius: 0.38rem;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: var(--surface-shadow);
+}
+
+.doc-grid {
+    width: 100%;
+    max-width: 76rem;
+    gap: clamp(1.1rem, 2.2vw, 1.6rem);
+    padding: 0;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.doc-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 0;
+    height: 100%;
+    border: 1px solid rgba(37, 49, 58, 0.14);
+    border-radius: 0.42rem;
+    background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 244, 206, 0.72)),
+            #fff;
+    box-shadow: 0 0.7rem 1.55rem rgba(37, 49, 58, 0.11), inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    isolation: isolate;
+    transform-origin: center;
+}
+
+.doc-card:hover,
+.doc-card:focus-visible {
+    transform: translateY(-0.24rem);
+    border-color: rgba(204, 57, 52, 0.4);
+    box-shadow: 0 1rem 2.2rem rgba(37, 49, 58, 0.16), 0 0 0 0.14rem rgba(255, 193, 0, 0.13);
+}
+
+.doc-card-title {
+    position: relative;
+    flex: 0 0 auto;
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+    height: auto;
+    padding: 1rem;
+    color: #fff;
+    background-color: #25313a;
+    background-size: 106%;
+    background-position: center center;
+    overflow: hidden;
+    text-shadow: 0 0.14rem 0.45rem rgba(0, 0, 0, 0.58);
+    transition: background-size 500ms ease-out;
+}
+
+.doc-card-title > * {
+    position: relative;
+    z-index: 1;
+}
+
+.doc-card-title::before {
+    content: none;
+}
+
+.doc-card-body {
+    flex: 1 1 auto;
+    min-height: 6.5rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: var(--ink);
+    background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(255, 244, 206, 0.82)),
+            #fff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 0.98rem;
+    font-weight: 650;
+    line-height: 1.45;
+    border-top: 1px solid rgba(37, 49, 58, 0.08);
+}
+
+.doc-card:hover > .doc-card-title {
+    background-size: 156%;
+}
+
+.doc-card:hover > .doc-card-title::before {
+    left: auto;
+}
+
+.coverage-map,
+.section > .section-body .doc-column {
+    border: 1px solid var(--hairline);
+    border-radius: 0.38rem;
+    background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 244, 206, 0.62)),
+            #fff;
+    box-shadow: 0 0.85rem 2rem rgba(37, 49, 58, 0.1);
+}
+
+.coverage-map h3,
+.guide-group h2,
+.section > .section-body .doc-column h3 {
+    color: var(--ink);
+    font-family: 'ZCOOLKuaiLe-Regular', sans-serif;
+    line-height: 1.08;
+}
+
+.video-box {
+    aspect-ratio: 16 / 9;
+    background: var(--ink);
+}
+
+.video-box iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+@media (max-width: 599px) {
+    .section > .section-body {
+        width: min(100%, 22rem);
+        max-width: 22rem;
+        align-self: flex-start;
+        margin-left: 0;
+        margin-right: 0;
+        padding-inline: 1rem;
+        font-size: 1rem;
+    }
+
+    .section > header {
+        align-self: flex-start;
+        max-width: 22rem;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .section > .section-body ul,
+    .section > .section-body ol {
+        width: 100%;
+        min-width: 0;
+        padding-left: 1.25rem;
+    }
+
+    .doc-grid {
+        width: 100%;
+        gap: 1rem;
+    }
+
+    .doc-card {
+        width: 100%;
+        max-width: 32rem;
+    }
+
+    .doc-card-title {
+        aspect-ratio: 16 / 9;
+        padding: 0.85rem;
+        font-size: 1.05rem;
+    }
+
+    .doc-card-body {
+        min-height: auto;
+        padding: 0.9rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 959px) {
+    .section > .section-body.doc-tiles {
+        padding-inline: clamp(1rem, 4vw, 2rem);
+    }
+
+    .doc-card-body {
+        min-height: 7.25rem;
+    }
+}

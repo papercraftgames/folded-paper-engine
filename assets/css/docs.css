@@ -1,0 +1,119 @@
+
+.section {
+    &.content-section {
+        background-color: #fff;
+        color: black;
+
+        &.last {
+            padding-bottom: 8em;
+        }
+
+        & > header {
+            & > .section-title {
+                color: black;
+                text-shadow: none;
+            }
+        }
+
+        & > main {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            gap: 1em;
+            font-family: sans-serif;
+            word-break: break-word;
+
+            & a {
+                color: #e28903;
+                text-decoration: none;
+            }
+
+            & .property-group {
+                color: #555555;
+            }
+        }
+    }
+
+    & > main {
+        display: block;
+        margin-bottom: 4em;
+        font-family: sans-serif;
+        font-size: 1.25em;
+
+        & > h3 {
+            font-family: 'ZCOOLKuaiLe-Regular', sans-serif;
+        }
+    }
+}
+
+.section.content-section {
+    background:
+            linear-gradient(180deg, rgba(255, 244, 206, 0.44), rgba(255, 255, 255, 0.96) 14rem),
+            #fff;
+    color: var(--ink);
+}
+
+.section.content-section > header > .section-title {
+    color: var(--ink);
+    text-shadow: none;
+}
+
+.section.content-section > main,
+.section > main {
+    max-width: 76rem;
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+    border: 1px solid var(--hairline);
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: var(--surface-shadow);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: clamp(1rem, 1.7vw, 1.16rem);
+    line-height: 1.65;
+}
+
+.section.content-section > main a,
+.section > main a {
+    color: var(--coral);
+    font-weight: 750;
+    text-decoration-color: rgba(204, 57, 52, 0.32);
+    text-underline-offset: 0.2em;
+}
+
+.section.content-section > main h3,
+.section > main h3 {
+    color: var(--ink);
+    font-family: 'ZCOOLKuaiLe-Regular', sans-serif;
+    font-size: clamp(1.45rem, 3vw, 2.2rem);
+    line-height: 1.08;
+}
+
+.section.content-section > main h3:not(:first-child),
+.section > main h3:not(:first-child) {
+    margin-top: 2rem;
+}
+
+.section.content-section > main code,
+.section > main code,
+.section.content-section > main kbd,
+.section > main kbd {
+    padding: 0.12rem 0.38rem;
+    border: 1px solid rgba(37, 49, 58, 0.12);
+    border-radius: 0.35rem;
+    background: #fff4ce;
+    color: #6f3d00;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.92em;
+}
+
+.section.content-section > main ol,
+.section.content-section > main ul,
+.section > main ol,
+.section > main ul {
+    padding-left: 1.35rem;
+}
+
+.section.content-section > main li + li,
+.section > main li + li {
+    margin-top: 0.5rem;
+}
